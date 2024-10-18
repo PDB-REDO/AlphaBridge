@@ -109,9 +109,9 @@ def define_interfaces(in_dir, mode, contact_threshold):
                                                         chain_dict,
                                                         polymer_chain_dict)
     
-    interface_dict, protein_interface_dict = INTERFACE_IDENTIFICATION.extract_interface()   
+    interface_dict, protein_interface_dict, interaction_link_dict = INTERFACE_IDENTIFICATION.extract_interface()   
     
-    interface_df_per_token, interface_df = INTERFACE_IDENTIFICATION.get_interface_info_dataframes(interface_dict)
+    interface_df_per_token, interface_df = INTERFACE_IDENTIFICATION.get_interface_info_dataframes(interface_dict,interaction_link_dict)
     
     ribbon_diagram = RIBBON_DIAGRAM(list_sequence_info,
                    interface_dict,
