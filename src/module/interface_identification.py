@@ -14,6 +14,7 @@ from networkx.algorithms.components.connected import connected_components
 
 from src.module.parsers import MMCIFPARSER
 from src.module.alingment_utils import compare_protein_seq
+from src.module.scoring import calculate_probability_contact_link, calculate_probability_contact_interface, plot_probability_histplot
 
 from Bio.Data import IUPACData
 
@@ -158,8 +159,11 @@ class interface_identification():
                         interaction_link_dict[prot].append(link_data)
                 
                 
-                probability_contact_interface = calculate_probability_contact_interface(matrix_probability_interface)
+                probability_contact_interface, flatten_matrix_probability_interface = calculate_probability_contact_interface(matrix_probability_interface)
                 interface_dict[interface_name]['interface_prob'] = probability_contact_interface
+                
+                print(df_group.prot_1.unique()[0],df_group.prot_2.unique()[0])
+                #plot_probability_histplot(probability_contact_interface,flatten_matrix_probability_interface)
                 
                 
                 for index, protein_involved in enumerate(proteins_involved):
@@ -387,25 +391,6 @@ def map_link2coord(link, binary_prot, entity_region_dict):
     
     coord_link = [list(np.array(link_terminal) + entity_region_dict[accesion_id][0] - 1) for accesion_id, link_terminal in zip(binary_prot, link)]
     return coord_link
-
-def calculate_probability_contact_link(coord_link, contact_probability):
-    matrix_probability_link = contact_probability[np.s_[coord_link[0][0]:coord_link[0][1]+1], np.s_[coord_link[1][0]:coord_link[1][1]+1]]
-    link_probability = np.mean([prob for prob in matrix_probability_link.flatten() if prob >= 0.1])
-    return matrix_probability_link, link_probability
-    
-
-def calculate_probability_contact_interface(matrix_probability_interface):
-    flatten_matrix_probability_interface = []
-    
-    for matrix_probability_link in matrix_probability_interface:
-        link_probability = [prob for prob in matrix_probability_link.flatten() if prob > 0]
-        flatten_matrix_probability_interface += link_probability
-    quantile = np.quantile(flatten_matrix_probability_interface, 0.5)
-    
-    interface_probability = np.mean([prob for prob in flatten_matrix_probability_interface if prob >= quantile])
-    
-    return interface_probability
-
 
 def get_interface_and_link_per_residue(res,accesion_id,interaction_link_dict):
     link_data_list = interaction_link_dict[accesion_id]

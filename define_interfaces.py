@@ -73,7 +73,7 @@ def define_interfaces(in_dir, mode, contact_threshold):
      
         FEATURE_OBJECT = CCM_AF3(in_dir)
         
-        feature_path, structure_path, job_request_path = FEATURE_OBJECT.extract_feature_filepath()
+        feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
         
         list_sequence_info, rec_sequence_list, structure_sequence_list, polymer_chain_dict = FEATURE_OBJECT.extract_sequence_info()
         
