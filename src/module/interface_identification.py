@@ -117,7 +117,7 @@ class interface_identification():
         
         interface_dict = {}
         protein_interface_dict = {}
-        interface_count = 0
+        interface_count = 1
         
         interface_group = contact_df.groupby(['interfaces'])
         
@@ -154,7 +154,7 @@ class interface_identification():
                         if not prot in interaction_link_dict:
                             interaction_link_dict[prot]= []
                         
-                        link_data = (residue_range, interface, link_id, link_probability)
+                        link_data = (residue_range, interface_name, link_id, link_probability)
                         interaction_link_dict[prot].append(link_data)
                 
                 
