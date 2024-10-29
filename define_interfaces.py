@@ -69,6 +69,11 @@ def write_dataframe(df, filename, outdir_path):
 
 def define_interfaces(in_dir, mode, contact_threshold):
     
+    outdir = os.path.join(in_dir, 'AlphaBridge')
+    
+    if not os.path.isdir(outdir):
+        os.makedirs(outdir)
+
     if mode == 'AF3':
      
         FEATURE_OBJECT = CCM_AF3(in_dir)
@@ -90,12 +95,12 @@ def define_interfaces(in_dir, mode, contact_threshold):
     
     
     
-    FEATURE_OBJECT.print_matrix_dict(matrix_dict)
+    #FEATURE_OBJECT.print_matrix_dict(matrix_dict)
     
     coevolutionary_domains, interacting_coevolutionary_domains, entity_region_dict = domain_clustering(matrix_dict,
                                                                                list_sequence_info,
                                                                                alphafold_version=mode,
-                                                                               outdir = in_dir, 
+                                                                               outdir = outdir, 
                                                                                plotting=True).run_domain_clustering()
     
     
@@ -117,11 +122,12 @@ def define_interfaces(in_dir, mode, contact_threshold):
                    interface_dict,
                    protein_interface_dict,
                    plddt_dict,
-                   outdir=in_dir)
+                   outdir=outdir)
     
     ribbon_diagram.plot_ribbon_diagram()
     
-    
+    write_dataframe(interface_df_per_token, 'interface_df_per_token', outdir )
+    write_dataframe(interface_df, 'binding_interfaces', outdir )
     
     
     
@@ -138,9 +144,6 @@ def main():
     contact_threshold = args.contact_threshold
     
     interface_df_per_token, interface_df = define_interfaces(in_dir, mode, contact_threshold)
-    
-    write_dataframe(interface_df_per_token, 'interface_df_per_token', in_dir )
-    write_dataframe(interface_df, 'binding_interfaces', in_dir )
     
     print('finished')
     

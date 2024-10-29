@@ -48,7 +48,7 @@ class domain_clustering():
         elif self.alphafold_version == 'AF3':
             
             graph_resolution = 0.25
-            matrix_cutoff = 25
+            matrix_cutoff = 27
             cmap_confidance =  'Blues_r'
             cmap_contact = "RdPu"
             
@@ -159,7 +159,8 @@ class domain_clustering():
                     
 
 def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0.5, matrix_cutoff = 2.6 ):
-                
+
+              
         weights = 1/matrix_input**pae_power
 
         g = igraph.Graph()
@@ -182,7 +183,6 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
         label_data = np.tile(labels, (2,1))
         
         mask_data = np.tile(interacting_mask_cluster, (2,1))
-        
         list_fasta_name = list_fasta_files[0]
         list_fasta_acclen = list_fasta_files[1]
         list_fasta_centerticks = list_fasta_files[2]
@@ -241,6 +241,48 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
         plt.savefig(f"{outdir}/Confidence-contact_plot.png",dpi=300)
 
 def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
+   
+    matrix_list =  ['pae','confidance_matrix','contact_matrix']
+    cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
+    
+    
+    list_fasta_name = list_fasta_files[0]
+    list_fasta_acclen = list_fasta_files[1]
+    list_fasta_centerticks = list_fasta_files[2]
+    list_fasta_len = list_fasta_files[3]
+    list_fasta_len_names = [f'{length} / 0' if i != len(list_fasta_len)-1 else f'{length}' 
+                for i,length in enumerate(list_fasta_len)]
+    
+    for n, (feature, cmap) in enumerate(zip(matrix_list, cmap_list)):
+        
+        fig, ax = plt.subplots(1,1,figsize=(15, 15))
+        
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.5)
+        matrix = matrix_dict[feature]
+
+        ax.set_xticks(list_fasta_acclen)
+        ax.set_xticklabels('')
+        ax.set_xticks(list_fasta_centerticks,minor=True)
+        ax.set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=15,minor=True) 
+        ax.set_yticks(np.array(list_fasta_acclen)-1)
+        ax.set_yticklabels(list_fasta_len_names, fontsize=15)
+        
+        for i in list_fasta_acclen:
+
+            ax.axvline(i, color = 'black', linewidth = 1)  
+            ax.axhline(i, color = 'black', linewidth = 1)            
+
+
+        img = ax.imshow(matrix , cmap=cmap)
+        
+        fig.colorbar(img, orientation='vertical', cax= cax)
+        plt.subplots_adjust(top = 0.96, bottom=0.1, hspace=0.7, wspace=0.2)
+        plt.show
+        plt.savefig(f"{outdir}/{feature}.png",dpi=300)
+
+
+def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
     N_COL = 3
     N_ROW = 1
     matrix_list =  ['pae','confidance_matrix','contact_matrix']
@@ -268,7 +310,7 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
         axs[n_col].set_xticks(list_fasta_acclen)
         axs[n_col].set_xticklabels('')
         axs[n_col].set_xticks(list_fasta_centerticks,minor=True)
-        axs[n_col].set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
+        axs[n_col].set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=35,minor=True) 
         axs[n_col].set_yticks(np.array(list_fasta_acclen)-1)
         axs[n_col].set_yticklabels(list_fasta_len_names)
         
@@ -283,6 +325,6 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
         fig.colorbar(img, orientation='vertical', cax = cax)
     plt.subplots_adjust(top = 0.96, bottom=0.1, hspace=0.7, wspace=0.2)
     plt.show
-    plt.savefig(f"{outdir}/feature_matrix.png",dpi=300)
+    plt.savefig(f"{outdir}/combination_matrix.png",dpi=300)
     
     
