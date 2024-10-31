@@ -4,12 +4,14 @@ find_interface is a script that using the output provided by Alphafold3, provide
 
 ## Installation
 
-Packages required to run the find_interface script are listed in the conda environment file find_interface_env.yml. Conda environment can be activated with the instruction:
+Packages required to run the find_interface script are listed in the conda environment file environment.yml or requirements.txt 
+
+Conda environment can be activated with the instruction:
 
 ```console
-conda env create -n find_interface --file find_interface_env.yml
+conda env create -f environment.yml
 
-conda activate find_interface
+conda activate AlphaBridge
 ```
 
 ## How to run the script

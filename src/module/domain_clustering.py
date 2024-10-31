@@ -4,9 +4,7 @@ Created on Wed Feb 7 16:53:05 2024
 
 @author: Dan_salv
 """
-import os
 import numpy as np
-import json
 import igraph
 import seaborn as sns
 import matplotlib.pyplot as plt

@@ -1,74 +1,36 @@
-asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1698341106958/work
-biopython @ file:///home/conda/feedstock_root/build_artifacts/biopython_1704895399681/work
-Bottleneck @ file:///croot/bottleneck_1707864210935/work
-Brotli @ file:///croot/brotli-split_1714483155106/work
-certifi @ file:///croot/certifi_1725551672989/work/certifi
-cffi @ file:///croot/cffi_1714483155441/work
-charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
-comm @ file:///home/conda/feedstock_root/build_artifacts/comm_1710320294760/work
-contourpy @ file:///croot/contourpy_1700583582875/work
-cryptography @ file:///croot/cryptography_1714660666131/work
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
-debugpy @ file:///home/conda/feedstock_root/build_artifacts/debugpy_1707444393922/work
-decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1641555617451/work
-distinctipy==1.3.4
-exceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1704921103267/work
-executing @ file:///home/conda/feedstock_root/build_artifacts/executing_1698579936712/work
-fonttools==4.25.0
-idna @ file:///croot/idna_1714398848350/work
-igraph @ file:///home/conda/feedstock_root/build_artifacts/python-igraph_1725394120374/work
-importlib-resources @ file:///croot/importlib_resources-suite_1704281845041/work
-importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1710971335535/work
-ipykernel @ file:///home/conda/feedstock_root/build_artifacts/ipykernel_1708996548741/work
-ipython @ file:///home/conda/feedstock_root/build_artifacts/ipython_1701831663892/work
-jedi @ file:///home/conda/feedstock_root/build_artifacts/jedi_1696326070614/work
-joblib @ file:///croot/joblib_1685113087166/work
-jupyter_client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_client_1710255804825/work
-jupyter_core @ file:///home/conda/feedstock_root/build_artifacts/jupyter_core_1710257447442/work
-kiwisolver @ file:///croot/kiwisolver_1672387140495/work
-matplotlib @ file:///croot/matplotlib-suite_1698692105134/work
-matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1660814786464/work
-mkl-fft @ file:///croot/mkl_fft_1695058164594/work
-mkl-random @ file:///croot/mkl_random_1695059800811/work
+biopython==1.84
+Bottleneck==1.3.7
+contourpy==1.3.0
+cycler==0.12.1
+fonttools==4.54.1
+igraph==0.11.8
+importlib_resources==6.4.5
+joblib==1.4.2
+kiwisolver==1.4.7
+matplotlib==3.9.2
+mkl_fft==1.3.10
+mkl_random==1.2.7
 mkl-service==2.4.0
-munkres==1.1.4
-nest_asyncio @ file:///home/conda/feedstock_root/build_artifacts/nest-asyncio_1705850609492/work
-networkx @ file:///croot/networkx_1717597493534/work
-numexpr @ file:///croot/numexpr_1696515281613/work
-numpy @ file:///croot/numpy_and_numpy_base_1708638617955/work/dist/numpy-1.26.4-cp39-cp39-linux_x86_64.whl#sha256=6094eeedd869502faa0fd0a8c5ad3a70c5779be06ddd1feb7627e5c212fac420
-packaging @ file:///croot/packaging_1710807400464/work
-pandas @ file:///croot/pandas_1709590491089/work/dist/pandas-2.2.1-cp39-cp39-linux_x86_64.whl#sha256=c2fe2574e63acef055e68e1e22d04943804291b7fe3a39b832edfd1b87570954
-parso @ file:///home/conda/feedstock_root/build_artifacts/parso_1638334955874/work
+networkx==3.2.1
+numexpr==2.10.1
+numpy==1.26.4
+packaging==24.1
+pandas==1.4.1
 PDBeCif==1.5
-pexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1706113125309/work
-pickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1602536217715/work
-Pillow @ file:///home/conda/feedstock_root/build_artifacts/pillow_1660332272498/work
-platformdirs @ file:///home/conda/feedstock_root/build_artifacts/platformdirs_1706713388748/work
-prompt-toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1702399386289/work
-psutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1705722404069/work
-ptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1609419310487/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
-pure-eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1642875951954/work
-pyCirclize @ file:///home/conda/feedstock_root/build_artifacts/pycirclize_1711982884144/work
-pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
-Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1700607939962/work
-pyOpenSSL @ file:///croot/pyopenssl_1708380408460/work
-pyparsing @ file:///opt/conda/conda-bld/pyparsing_1661452539315/work
-PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
-pytz @ file:///croot/pytz_1695131579487/work
-pyzmq @ file:///home/conda/feedstock_root/build_artifacts/pyzmq_1701783166972/work
-requests @ file:///croot/requests_1721410876868/work
-scikit-learn @ file:///croot/scikit-learn_1721921875708/work
-scipy @ file:///croot/scipy_1710947333060/work/dist/scipy-1.12.0-cp39-cp39-linux_x86_64.whl#sha256=086bc9ddf320acb93b565ce64bf36f51436fe07a0b6b7fd6a8b38159f6ab34d5
-seaborn @ file:///croot/seaborn_1718302919398/work
-six @ file:///tmp/build/80754af9/six_1644875935023/work
-stack-data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1669632077133/work
-texttable @ file:///tmp/build/80754af9/texttable_1633095311315/work
-threadpoolctl @ file:///croot/threadpoolctl_1719407800858/work
-tornado @ file:///home/conda/feedstock_root/build_artifacts/tornado_1708363103305/work
-traitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1710254411456/work
-typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1708904622550/work
-tzdata @ file:///croot/python-tzdata_1690578112552/work
-urllib3 @ file:///croot/urllib3_1718978550903/work
-wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1704731205417/work
-zipp @ file:///croot/zipp_1704206909481/work
+pillow==11.0.0
+pip==24.2
+pyCirclize==1.7.1
+pyparsing==3.2.0
+python-dateutil==2.8.2
+pytz==2021.3
+scikit-learn==1.5.2
+scipy==1.13.1
+seaborn==0.13.2
+setuptools==75.1.0
+six==1.16.0
+sklearn==0.0
+texttable==1.7.0
+threadpoolctl==3.5.0
+tzdata==2023.3
+wheel==0.44.0
+zipp==3.20.2

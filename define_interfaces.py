@@ -1,8 +1,5 @@
 import os
 import sys
-import json
-import pandas as pd
-import networkx as nx
 
 from src.module.confidance_contact_matrix import CCM_AF3
 from src.module.alingment_utils import compare_protein_seq

@@ -5,11 +5,12 @@ Created on Wed Feb 7 16:53:05 2024
 @author: Dan_salv
 """
 import os
+
 import numpy as np
-import json
-from Bio import SeqIO
-from pathlib import Path
 import pandas as pd
+import json
+from pathlib import Path
+
 import warnings
 warnings.filterwarnings("ignore")
 from Bio.Data import IUPACData
