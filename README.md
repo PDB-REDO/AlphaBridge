@@ -50,8 +50,8 @@ CSV file where all interfaces are listed, along with the involved entities invol
 
 Interface_df_per_token
 
-CSV file with per-token level information (Maarten this is the file you use as an input for creating the ribbon plot)
+CSV file with per-token level information 
 
 matrix_info
 
-Json file with all information used to run this script. (Maarten if you want to recreate the Confidance-contact_plot, you need to use the information stored under the keys 'confidance_matrix' and 'contact_matrix' inside the json file)
+Json file with all information used to run this script. 
