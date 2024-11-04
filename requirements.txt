@@ -28,7 +28,6 @@ scipy>=1.13.1
 seaborn>=0.13.2
 setuptools>=75.1.0
 six>=1.16.0
-sklearn>=0.0
 texttable>=1.7.0
 threadpoolctl>=3.5.0
 tzdata>=2023.3
