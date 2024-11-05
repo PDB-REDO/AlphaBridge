@@ -126,8 +126,8 @@ class FEATURE_MATRIX:
         matrix_dict['pae_plddt'] = pae_plddt
         matrix_dict['symmetric_pae'] = symmetric_pae
         matrix_dict['contact_matrix'] = contact_matrix
-        matrix_dict['confidance_matrix'] = confidance_matrix
-        matrix_dict['masked_confidance_matrix'] = masked_confidance_matrix
+        matrix_dict['confidence_matrix'] = confidance_matrix
+        matrix_dict['masked_confidence_matrix'] = masked_confidance_matrix
         matrix_dict['masked_contact_matrix'] = masked_contact_matrix
         
         return matrix_dict

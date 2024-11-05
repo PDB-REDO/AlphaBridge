@@ -26,8 +26,8 @@ class domain_clustering():
         matrix_dict = self.matrix_dict
         list_fasta_files = self.list_fasta_files
         
-        matrix_input = matrix_dict['confidance_matrix']
-        masked_confidance_matrix = matrix_dict['masked_confidance_matrix']
+        matrix_input = matrix_dict['confidence_matrix']
+        masked_confidance_matrix = matrix_dict['masked_confidence_matrix']
         masked_contact_matrix = matrix_dict['masked_contact_matrix']
         
         
