@@ -240,7 +240,7 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
 
 def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
    
-    matrix_list =  ['pae','confidance_matrix','contact_matrix']
+    matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
     
     
@@ -283,7 +283,7 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
 def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
     N_COL = 3
     N_ROW = 1
-    matrix_list =  ['pae','confidance_matrix','contact_matrix']
+    matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
     
     
