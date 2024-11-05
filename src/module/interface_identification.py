@@ -133,7 +133,7 @@ class interface_identification():
             
             for interface, interface_link in zip(interface_list, interface_link_list):
                 matrix_probability_interface = []
-                link_id = 1
+                link_id = 0
                 
                 interface_name = f'Interface_{interface_count}'
                 interface_count += 1
