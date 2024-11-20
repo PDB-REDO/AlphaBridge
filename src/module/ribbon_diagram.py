@@ -20,10 +20,11 @@ module_dir = os.path.dirname(os.path.realpath(__file__))
 
 class RIBBON_DIAGRAM:
     
-    def __init__(self, list_sequence_info, interface_dict, protein_interface_dict, plddt_dict: dict = {}, conservation_dict: dict = {}, outdir: str = ''):
+    def __init__(self, list_sequence_info, interface_dict, protein_interface_dict,contact_threshold, plddt_dict: dict = {}, conservation_dict: dict = {}, outdir: str = ''):
         self.list_sequence_info = list_sequence_info
         self.interface_dict = interface_dict
         self.protein_interface_dict = protein_interface_dict
+        self.contact_threshold = contact_threshold
         self.plddt_dict = plddt_dict
         self.conservation_dict = conservation_dict
         self.outdir = outdir
@@ -131,7 +132,8 @@ class RIBBON_DIAGRAM:
         
         circos = self.create_ribbon_plot()
         outdir = self.outdir
-        filename = f'{outdir}/ribbon_plot.png'
+        contact_threshold = self.contact_threshold
+        filename = f'{outdir}/{contact_threshold}_ribbon_plot.png'
         
         fig = circos.plotfig()
         plddt_color_list = ['#0053d6','#65cbf3','#ffdb13', '#ff7d45']

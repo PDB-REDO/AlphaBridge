@@ -5,12 +5,11 @@ Created on Wed Feb 7 16:53:05 2024
 @author: Dan_salv
 """
 import os
-
 import numpy as np
-import pandas as pd
 import json
+from Bio import SeqIO
 from pathlib import Path
-
+import pandas as pd
 import warnings
 warnings.filterwarnings("ignore")
 from Bio.Data import IUPACData
@@ -22,7 +21,14 @@ from src.module.alingment_utils import compare_protein_seq
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from Bio.Data import IUPACData
 
+
+protein_letters_1to3 = IUPACData.protein_letters_1to3
+
+upper_protein_letters_1to3 = {k.upper():v.upper() for k,v in protein_letters_1to3.items()}
+
+upper_protein_letters_1to3
 
 
 module_dir = os.path.dirname(os.path.realpath(__file__))
@@ -108,28 +114,31 @@ class FEATURE_MATRIX:
                     plddt_matrix[i][j] = 0
                 else :
                     plddt_matrix[i][j] =  -1 * (((plddt[i] + plddt[j]) / 2) - 100)
-
-
+                    
+                
         pae_plddt = symmetric_pae + plddt_matrix / 3
-
-        pae_plddt[np.where(pae_plddt > 32)] = 32
+        confidance_matrix = pae_plddt.copy()
         
-        return symmetric_pae, pae_plddt, plddt_matrix
+        confidance_matrix[np.where(confidance_matrix > 32)] = 32
+        
+        return symmetric_pae, pae_plddt, confidance_matrix , plddt_matrix
     
-    def get_feature_matrix_dict(self, pae, plddt, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix ):
+    def get_feature_matrix_dict(self, pae, plddt, iptm, chain_pair_iptm ,plddt_matrix, pae_plddt , symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix ):
         
         matrix_dict = {}
         
         matrix_dict['pae'] = pae
         matrix_dict['plddt'] = plddt
+        matrix_dict['iptm'] = iptm
+        matrix_dict['chain_pair_iptm'] = chain_pair_iptm
         matrix_dict['plddt_matrix'] = plddt_matrix
         matrix_dict['pae_plddt'] = pae_plddt
         matrix_dict['symmetric_pae'] = symmetric_pae
         matrix_dict['contact_matrix'] = contact_matrix
-        matrix_dict['confidence_matrix'] = confidance_matrix
-        matrix_dict['masked_confidence_matrix'] = masked_confidance_matrix
+        matrix_dict['confidance_matrix'] = confidance_matrix
+        matrix_dict['masked_confidance_matrix'] = masked_confidance_matrix
         matrix_dict['masked_contact_matrix'] = masked_contact_matrix
-        
+
         return matrix_dict
     
     
@@ -180,8 +189,9 @@ class CCM_AF3(FEATURE_MATRIX):
             feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
             structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
             job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
+            summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
         
-            return feature_path, structure_path, job_request_path
+            return feature_path, structure_path, job_request_path, summary_request_path
     
     def extract_sequences(self, job_request_path):
 
@@ -206,7 +216,7 @@ class CCM_AF3(FEATURE_MATRIX):
     
     def extract_sequence_info(self):
         
-        feature_path, structure_path, job_request_path = self.extract_feature_filepath()
+        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
         
         structure = MMCIFPARSER(structure_path)
         
@@ -268,7 +278,7 @@ class CCM_AF3(FEATURE_MATRIX):
     
         return residue_plddts
         
-    def fix_matrix_size(self, structure,feature_dict):
+    def fix_matrix_size(self, structure,feature_dict, chain_pair_iptm):
         
         pae = np.array(feature_dict['pae'])
         contact_probability = np.array(feature_dict['contact_probs'])
@@ -287,8 +297,10 @@ class CCM_AF3(FEATURE_MATRIX):
         polymer_chain_dict = structure.get_polypeptide_chain_dict()
         
         polypeptide_chain_list = [chain  for chain in polymer_chain_dict if polymer_chain_dict[chain]['entity_type']  in ['polypeptide(L)','polydeoxyribonucleotide', 'polyribonucleotide']] 
-
+        
         non_polypeptide_chain_list = list(set(unique_chains) - set(polypeptide_chain_list))
+        
+        remove_chain_idx = np.isin(unique_chains, non_polypeptide_chain_list)
 
         remove_idx_list = []
 
@@ -296,39 +308,49 @@ class CCM_AF3(FEATURE_MATRIX):
         
             remove_idx_list += chain_index_dict[non_polypeptide_chain]
                 
-        mask = np.ones(pae.shape[0], bool)
+        mask = np.ones(pae.shape[0], bool)        
         mask[remove_idx_list] = 0
+        
+        mask_chain = np.ones(chain_pair_iptm.shape[0], bool)
+        mask_chain[remove_chain_idx] = 0
+          
+        
         
         fix_size_pae = pae[mask,:][:,mask]
         fix_size_contact_probability = contact_probability[mask,:][:,mask]
+        fix_size_chain_pair_iptm = chain_pair_iptm[mask_chain,:][:,mask_chain]
         
-        return fix_size_pae, fix_size_contact_probability
+        return fix_size_pae, fix_size_contact_probability, fix_size_chain_pair_iptm
     
     def get_feature_info(self):                                                                                                                                                                                                                                    
         
         
-        feature_path, structure_path, job_request_path = self.extract_feature_filepath()
+        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
         
         structure = MMCIFPARSER(structure_path)
         
         feature_dict = read_json_file(feature_path)
+        
+        summary_request_dict =  read_json_file(summary_request_path)
 
+        chain_pair_iptm = np.where(np.array(summary_request_dict['chain_pair_iptm'])==None, 0, np.array(summary_request_dict['chain_pair_iptm'])).astype(float) 
+
+        iptm = summary_request_dict['iptm']
+            
         plddt = self.extract_plddt_per_residue(structure)
         
         distance_matrix = self.get_distance_matrix(structure.get_ca_distances())
         
-        pae, contact_probability = self.fix_matrix_size(structure, feature_dict)
+        pae, contact_probability, chain_pair_iptm = self.fix_matrix_size(structure, feature_dict, chain_pair_iptm)
         
-        return distance_matrix, pae, contact_probability, plddt
+        return distance_matrix, pae, contact_probability, plddt, iptm ,chain_pair_iptm
     
     
     def extract_matrix_dict(self):   
         
-        distance_matrix, pae, contact_probability, plddt = self.get_feature_info()
+        distance_matrix, pae, contact_probability, plddt, iptm, chain_pair_iptm = self.get_feature_info()
         
-        symmetric_pae, pae_plddt, plddt_matrix = self.get_pae_plddt_matrix(pae, plddt)
-        
-        confidance_matrix = pae_plddt
+        symmetric_pae, pae_plddt, confidance_matrix, plddt_matrix = self.get_pae_plddt_matrix(pae, plddt)
             
         contact_matrix = contact_probability
         
@@ -338,13 +360,50 @@ class CCM_AF3(FEATURE_MATRIX):
         masked_contact_matrix = np.ma.array(binary_contact, mask=mask_upper)
     
         mask_lower =  np.tri(pae_plddt.shape[0], k=0)
-        masked_confidance_matrix = np.ma.array(pae_plddt, mask=mask_lower)
+        masked_confidance_matrix = np.ma.array(confidance_matrix, mask=mask_lower)
         
-        matrix_dict = self.get_feature_matrix_dict(pae, plddt, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix )
+        matrix_dict = self.get_feature_matrix_dict(pae, plddt, iptm ,chain_pair_iptm, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix )
         
         return matrix_dict
     
+    def extract_chain_info_list(self, chain_dict, plddt_dict):
+        
+        chain_info_list = []
     
+        list_sequence_info, rec_sequence_list, structure_sequence_list, polymer_chain_dict = self.extract_sequence_info()
+        
+        for auth_asym_id, seq in rec_sequence_list:
+            label_asym_id = chain_dict[auth_asym_id]
+            chain_info = {
+                "auth_asym_id": auth_asym_id,
+                "label_asym_id": label_asym_id,
+                "residues" : []
+            }
+            
+            for index, residue in enumerate(seq):
+
+                residue_dict = {
+                    "seq_id": int(),
+                    "comp_id" : str(),
+                    "plddt" : float()
+                }
+
+                if polymer_chain_dict[label_asym_id]['entity_type'] == 'polypeptide(L)':
+                    comp_id = upper_protein_letters_1to3[residue]
+                else:
+                    comp_id = residue
+
+                residue_dict['seq_id'] = index + 1
+                residue_dict['comp_id'] = comp_id
+                residue_dict['plddt'] = plddt_dict[auth_asym_id][index]
+
+                chain_info['residues'].append(residue_dict)
+            chain_info_list.append(chain_info)
+        
+        return chain_info_list
+              
+
+        
     
 
 def read_json_file(json_file):

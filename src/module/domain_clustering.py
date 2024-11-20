@@ -4,10 +4,14 @@ Created on Wed Feb 7 16:53:05 2024
 
 @author: Dan_salv
 """
+import os
+import time
 import numpy as np
+import json
 import igraph
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import itertools
 
@@ -26,8 +30,8 @@ class domain_clustering():
         matrix_dict = self.matrix_dict
         list_fasta_files = self.list_fasta_files
         
-        matrix_input = matrix_dict['confidence_matrix']
-        masked_confidance_matrix = matrix_dict['masked_confidence_matrix']
+        matrix_input = matrix_dict['confidance_matrix']
+        masked_confidance_matrix = matrix_dict['masked_confidance_matrix']
         masked_contact_matrix = matrix_dict['masked_contact_matrix']
         
         
@@ -39,9 +43,9 @@ class domain_clustering():
 
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)\
             
-            interacting_coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
+            coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
             
-            interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,interacting_coevultionary_cluster_dict, self.bool_mask_clusters)
+            interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,coevultionary_cluster_dict, self.bool_mask_clusters)
             
         elif self.alphafold_version == 'AF3':
             
@@ -52,9 +56,9 @@ class domain_clustering():
             
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)
             
-            interacting_coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
+            coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
             
-            interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,interacting_coevultionary_cluster_dict, self.bool_mask_clusters)
+            interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,coevultionary_cluster_dict, self.bool_mask_clusters)
             
             
         if  self.plotting:
@@ -62,14 +66,14 @@ class domain_clustering():
             plot_combination_matrix(coevolutionary_domains,masked_confidance_matrix,masked_contact_matrix,interacting_mask_cluster,list_fasta_files, self.outdir, self.alphafold_version)
             plot_separate_matrix(matrix_dict,list_fasta_files, self.outdir)
         
-        return coevolutionary_domains, interacting_coevultionary_cluster_dict, entity_region_dict
+        return coevolutionary_domains, coevultionary_cluster_dict, entity_region_dict
     
     def get_interacting_coevolutionary_domains(self, coevolutionary_domains):
         
         list_fasta_name, list_fasta_acclen, list_fasta_centerticks, list_fasta_len = tuple(self.list_fasta_files)
         unique_coevolutionary_domains = np.unique(coevolutionary_domains)
         cluster_index_dict = {}
-        interacting_coevultionary_cluster_dict = {}
+        coevultionary_cluster_dict = {}
         entity_region_dict = {}
 
 
@@ -87,12 +91,12 @@ class domain_clustering():
                 
                 group_index_range_list = [(item[0], item[-1])[:len(item)] for item in groups]
                 
-                #build interacting_coevultionary_cluster_dict
-                if not cluster_name in interacting_coevultionary_cluster_dict:
+                #build coevultionary_cluster_dict
+                if not cluster_name in coevultionary_cluster_dict:
                     
                     cluster_group_name = f'cluster_{cluster_name}'
                     
-                    interacting_coevultionary_cluster_dict[cluster_group_name] = {'range_index_list':group_index_range_list, 'overlap_complex':{}}
+                    coevultionary_cluster_dict[cluster_group_name] = {'range_index_list':group_index_range_list, 'overlap_complex':{}}
 
 
                 #find overlapping sequences between all proteins and regions of coevolutionary_domains 
@@ -103,7 +107,7 @@ class domain_clustering():
                     
                     entity_region_dict[protein] = (protein_start,protein_end)
                         
-                    for group_range in interacting_coevultionary_cluster_dict[cluster_group_name]['range_index_list']:
+                    for group_range in coevultionary_cluster_dict[cluster_group_name]['range_index_list']:
                         
                         if len(group_range) == 2: 
                             group_index_start = group_range[0]
@@ -116,14 +120,14 @@ class domain_clustering():
                                 cluster_range = range(group_index_start, group_index_end)
                                 overlapping_range = (max(protein_range[0], cluster_range[0]), min(protein_range[-1], cluster_range[-1])+1)
                                 
-                                if not protein in interacting_coevultionary_cluster_dict[cluster_group_name]['overlap_complex']:
-                                    interacting_coevultionary_cluster_dict[cluster_group_name]['overlap_complex'][protein] = []
+                                if not protein in coevultionary_cluster_dict[cluster_group_name]['overlap_complex']:
+                                    coevultionary_cluster_dict[cluster_group_name]['overlap_complex'][protein] = []
                                 
-                                interacting_coevultionary_cluster_dict[cluster_group_name]['overlap_complex'][protein].append(overlapping_range)
+                                coevultionary_cluster_dict[cluster_group_name]['overlap_complex'][protein].append(overlapping_range)
 
-        return interacting_coevultionary_cluster_dict, entity_region_dict
+        return coevultionary_cluster_dict, entity_region_dict
     
-    def get_interacting_mask_cluster(self, clusters, interacting_coevultionary_cluster_dict ,bool_mask_clusters):
+    def get_interacting_mask_cluster(self, clusters, coevultionary_cluster_dict ,bool_mask_clusters):
         
         if not bool_mask_clusters:
             
@@ -136,12 +140,12 @@ class domain_clustering():
             interacting_mask_cluster = np.full(clusters.shape, True)
         
             interacting_range_list = []
-            for cluster in interacting_coevultionary_cluster_dict:
-                if len(interacting_coevultionary_cluster_dict[cluster]['overlap_complex']) > 1:
+            for cluster in coevultionary_cluster_dict:
+                if len(coevultionary_cluster_dict[cluster]['overlap_complex']) > 1:
                     
-                    for entity in interacting_coevultionary_cluster_dict[cluster]['overlap_complex']:
+                    for entity in coevultionary_cluster_dict[cluster]['overlap_complex']:
                         
-                        for interacting_range in interacting_coevultionary_cluster_dict[cluster]['overlap_complex'][entity]:
+                        for interacting_range in coevultionary_cluster_dict[cluster]['overlap_complex'][entity]:
                             
                             interacting_range_list.append(interacting_range)
         
@@ -177,19 +181,22 @@ def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0
 
 def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_matrix, interacting_mask_cluster ,list_fasta_files, outdir, alphafold_version):
         
+        t0 = time.time()
+        
         labels = np.array(coevolutionary_domains)
         label_data = np.tile(labels, (2,1))
         
         mask_data = np.tile(interacting_mask_cluster, (2,1))
-        list_fasta_name = list_fasta_files[0]
-        list_fasta_acclen = list_fasta_files[1]
-        list_fasta_centerticks = list_fasta_files[2]
-        list_fasta_len = list_fasta_files[3]
-        
+        list_fasta_name, list_fasta_acclen, list_fasta_centerticks , list_fasta_len = tuple(list_fasta_files)
+     
         inv_fasta_acclen = [sum(list_fasta_len) - acclen for acclen in list_fasta_acclen]
         inv_fasta_acclen.insert(0, sum(list_fasta_len) -1 )
 
         list_fasta_len_names = [f'0 / {length}' if i != len(list_fasta_len)-1 else f'{length}' for i,length in enumerate(list_fasta_len)]
+
+        timestamp =  time.time() - t0 
+        #print(f'labels: {timestamp}')
+        t0 = time.time()
         
         fig, ax  = plt.subplots(figsize = (15,15))
         
@@ -236,20 +243,30 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
         
         cax3.tick_params(left = False, bottom =False, labelbottom=True) 
         plt.subplots_adjust(hspace=0.05)
-        plt.savefig(f"{outdir}/Confidence-contact_plot.png",dpi=300)
+
+        timestamp =  time.time() - t0 
+        #print(f'plotting: {timestamp}')
+        t0 = time.time()
+
+        plt.savefig(f"{outdir}/Confidence-contact_plot.png", dpi=fig.dpi)
+        plt.close()
+
+        timestamp =  time.time() - t0 
+        #print(f'saving: {timestamp}')
 
 def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
-   
-    matrix_list =  ['pae','confidence_matrix','contact_matrix']
+    t0 = time.time()
+    matrix_list =  ['pae','confidance_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
-    
-    
-    list_fasta_name = list_fasta_files[0]
-    list_fasta_acclen = list_fasta_files[1]
-    list_fasta_centerticks = list_fasta_files[2]
-    list_fasta_len = list_fasta_files[3]
+        
+    list_fasta_name, list_fasta_acclen, list_fasta_centerticks , list_fasta_len = tuple(list_fasta_files)
+
     list_fasta_len_names = [f'{length} / 0' if i != len(list_fasta_len)-1 else f'{length}' 
                 for i,length in enumerate(list_fasta_len)]
+    
+    timestamp =  time.time() - t0 
+    #print(f'labels: {timestamp}')
+    t0 = time.time()
     
     for n, (feature, cmap) in enumerate(zip(matrix_list, cmap_list)):
         
@@ -262,9 +279,9 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
         ax.set_xticks(list_fasta_acclen)
         ax.set_xticklabels('')
         ax.set_xticks(list_fasta_centerticks,minor=True)
-        ax.set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=15,minor=True) 
+        ax.set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
         ax.set_yticks(np.array(list_fasta_acclen)-1)
-        ax.set_yticklabels(list_fasta_len_names, fontsize=15)
+        ax.set_yticklabels(list_fasta_len_names)
         
         for i in list_fasta_acclen:
 
@@ -276,14 +293,18 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
         
         fig.colorbar(img, orientation='vertical', cax= cax)
         plt.subplots_adjust(top = 0.96, bottom=0.1, hspace=0.7, wspace=0.2)
-        plt.show
-        plt.savefig(f"{outdir}/{feature}.png",dpi=300)
-
+        #plt.show
+        plt.savefig(f"{outdir}/{feature}.png", dpi=fig.dpi)
+        plt.close()
+    
+    timestamp =  time.time() - t0 
+    #print(f'plotting: {timestamp}')
+    t0 = time.time()
 
 def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
     N_COL = 3
     N_ROW = 1
-    matrix_list =  ['pae','confidence_matrix','contact_matrix']
+    matrix_list =  ['pae','confidance_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
     
     
@@ -308,7 +329,7 @@ def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
         axs[n_col].set_xticks(list_fasta_acclen)
         axs[n_col].set_xticklabels('')
         axs[n_col].set_xticks(list_fasta_centerticks,minor=True)
-        axs[n_col].set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=35,minor=True) 
+        axs[n_col].set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
         axs[n_col].set_yticks(np.array(list_fasta_acclen)-1)
         axs[n_col].set_yticklabels(list_fasta_len_names)
         
@@ -323,6 +344,6 @@ def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
         fig.colorbar(img, orientation='vertical', cax = cax)
     plt.subplots_adjust(top = 0.96, bottom=0.1, hspace=0.7, wspace=0.2)
     plt.show
-    plt.savefig(f"{outdir}/combination_matrix.png",dpi=300)
+    plt.savefig(f"{outdir}/feature_matrix.png",dpi=300)
     
     
