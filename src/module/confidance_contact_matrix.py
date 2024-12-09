@@ -190,7 +190,6 @@ class CCM_AF3(FEATURE_MATRIX):
             structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
             job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
             summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
-        
             return feature_path, structure_path, job_request_path, summary_request_path
     
     def extract_sequences(self, job_request_path):
