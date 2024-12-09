@@ -186,9 +186,6 @@ class CCM_AF3(FEATURE_MATRIX):
         
         if self.check_if_path_exist(folder_path):
             
-            print(list(Path(folder_path)))
-            print(list(Path(folder_path).glob("*summary_confidences*.json")))
-            
             feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
             structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
             job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
