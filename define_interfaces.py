@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import networkx as nx
 
-from src.module.confidance_contact_matrix import CCM_AF3
+from src.module.confidence_contact_matrix import CCM_AF3
 from src.module.alingment_utils import compare_protein_seq
 from src.module.domain_clustering import domain_clustering
 from src.module.parsers import MMCIFPARSER, HSSPPARSER, alphafold_msa
@@ -102,7 +102,7 @@ def define_interfaces(in_dir, mode):
     #conservation_dict = FEATURE_OBJECT.get_scores_dict(ALPHAMISSENSE('Q6PCD5').get_pathogenicity_list(), list_sequence_info)
 
     contact_matrix =  matrix_dict['contact_matrix']
-    confidance_matrix = matrix_dict['pae_plddt']
+    confidence_matrix = matrix_dict['pae_plddt']
     iptm = matrix_dict['iptm']
     chain_pair_iptm_matrix = matrix_dict['chain_pair_iptm'] 
 
@@ -126,7 +126,7 @@ def define_interfaces(in_dir, mode):
                                                             list_sequence_info,
                                                             iptm,
                                                             chain_pair_iptm_matrix,
-                                                            confidance_matrix,
+                                                            confidence_matrix,
                                                             contact_matrix,
                                                             contact_threshold,
                                                             chain_dict,

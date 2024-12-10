@@ -117,13 +117,13 @@ class FEATURE_MATRIX:
                     
                 
         pae_plddt = symmetric_pae + plddt_matrix / 3
-        confidance_matrix = pae_plddt.copy()
+        confidence_matrix = pae_plddt.copy()
         
-        confidance_matrix[np.where(confidance_matrix > 32)] = 32
+        confidence_matrix[np.where(confidence_matrix > 32)] = 32
         
-        return symmetric_pae, pae_plddt, confidance_matrix , plddt_matrix
+        return symmetric_pae, pae_plddt, confidence_matrix , plddt_matrix
     
-    def get_feature_matrix_dict(self, pae, plddt, iptm, chain_pair_iptm ,plddt_matrix, pae_plddt , symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix ):
+    def get_feature_matrix_dict(self, pae, plddt, iptm, chain_pair_iptm ,plddt_matrix, pae_plddt , symmetric_pae, contact_matrix, confidence_matrix, masked_confidence_matrix, masked_contact_matrix ):
         
         matrix_dict = {}
         
@@ -135,8 +135,8 @@ class FEATURE_MATRIX:
         matrix_dict['pae_plddt'] = pae_plddt
         matrix_dict['symmetric_pae'] = symmetric_pae
         matrix_dict['contact_matrix'] = contact_matrix
-        matrix_dict['confidance_matrix'] = confidance_matrix
-        matrix_dict['masked_confidance_matrix'] = masked_confidance_matrix
+        matrix_dict['confidence_matrix'] = confidence_matrix
+        matrix_dict['masked_confidence_matrix'] = masked_confidence_matrix
         matrix_dict['masked_contact_matrix'] = masked_contact_matrix
 
         return matrix_dict
@@ -160,7 +160,7 @@ class FEATURE_MATRIX:
     
     def print_matrix_dict(self, matrix_dict):
         
-        excluded_keys = ['pae','plddt','symmetric_pae','pae_plddt','masked_confidance_matrix', 'masked_contact_matrix']
+        excluded_keys = ['pae','plddt','symmetric_pae','pae_plddt','masked_confidence_matrix', 'masked_contact_matrix']
         tmp_matrix = {i:matrix_dict[i] for i in matrix_dict if i not in  excluded_keys}
                    
         if os.path.exists(self.in_dir):
@@ -350,7 +350,7 @@ class CCM_AF3(FEATURE_MATRIX):
         
         distance_matrix, pae, contact_probability, plddt, iptm, chain_pair_iptm = self.get_feature_info()
         
-        symmetric_pae, pae_plddt, confidance_matrix, plddt_matrix = self.get_pae_plddt_matrix(pae, plddt)
+        symmetric_pae, pae_plddt, confidence_matrix, plddt_matrix = self.get_pae_plddt_matrix(pae, plddt)
             
         contact_matrix = contact_probability
         
@@ -360,9 +360,9 @@ class CCM_AF3(FEATURE_MATRIX):
         masked_contact_matrix = np.ma.array(binary_contact, mask=mask_upper)
     
         mask_lower =  np.tri(pae_plddt.shape[0], k=0)
-        masked_confidance_matrix = np.ma.array(confidance_matrix, mask=mask_lower)
+        masked_confidence_matrix = np.ma.array(confidence_matrix, mask=mask_lower)
         
-        matrix_dict = self.get_feature_matrix_dict(pae, plddt, iptm ,chain_pair_iptm, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidance_matrix, masked_confidance_matrix, masked_contact_matrix )
+        matrix_dict = self.get_feature_matrix_dict(pae, plddt, iptm ,chain_pair_iptm, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidence_matrix, masked_confidence_matrix, masked_contact_matrix )
         
         return matrix_dict
     

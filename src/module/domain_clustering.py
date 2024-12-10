@@ -30,15 +30,15 @@ class domain_clustering():
         matrix_dict = self.matrix_dict
         list_fasta_files = self.list_fasta_files
         
-        matrix_input = matrix_dict['confidance_matrix']
-        masked_confidance_matrix = matrix_dict['masked_confidance_matrix']
+        matrix_input = matrix_dict['confidence_matrix']
+        masked_confidence_matrix = matrix_dict['masked_confidence_matrix']
         masked_contact_matrix = matrix_dict['masked_contact_matrix']
         
         
         if self.alphafold_version == 'AF2':
             graph_resolution = 0.5
             matrix_cutoff = 2.6
-            cmap_confidance = 'RdPu_r'
+            cmap_confidence = 'RdPu_r'
             cmap_contact = 'Blues_r'
 
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)\
@@ -51,7 +51,7 @@ class domain_clustering():
             
             graph_resolution = 0.25
             matrix_cutoff = 27
-            cmap_confidance =  'Blues_r'
+            cmap_confidence =  'Blues_r'
             cmap_contact = "RdPu"
             
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)
@@ -63,7 +63,7 @@ class domain_clustering():
             
         if  self.plotting:
             
-            plot_combination_matrix(coevolutionary_domains,masked_confidance_matrix,masked_contact_matrix,interacting_mask_cluster,list_fasta_files, self.outdir, self.alphafold_version)
+            plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,list_fasta_files, self.outdir, self.alphafold_version)
             plot_separate_matrix(matrix_dict,list_fasta_files, self.outdir)
         
         return coevolutionary_domains, coevultionary_cluster_dict, entity_region_dict
@@ -179,7 +179,7 @@ def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0
         return coevolutionary_domains
 
 
-def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_matrix, interacting_mask_cluster ,list_fasta_files, outdir, alphafold_version):
+def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_matrix, interacting_mask_cluster ,list_fasta_files, outdir, alphafold_version):
         
         t0 = time.time()
         
@@ -229,7 +229,7 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
         elif alphafold_version == 'AF3':
             img2 = ax.imshow(contact_matrix, cmap="RdPu")
             
-        img1 = ax.imshow(confidance_matrix, cmap="Blues_r")
+        img1 = ax.imshow(confidence_matrix, cmap="Blues_r")
         
         
         fig.colorbar(img1, orientation='vertical', cax = cax1)
@@ -256,7 +256,7 @@ def plot_combination_matrix(coevolutionary_domains, confidance_matrix, contact_m
 
 def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
     t0 = time.time()
-    matrix_list =  ['pae','confidance_matrix','contact_matrix']
+    matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
         
     list_fasta_name, list_fasta_acclen, list_fasta_centerticks , list_fasta_len = tuple(list_fasta_files)
@@ -304,7 +304,7 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
 def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
     N_COL = 3
     N_ROW = 1
-    matrix_list =  ['pae','confidance_matrix','contact_matrix']
+    matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
     
     

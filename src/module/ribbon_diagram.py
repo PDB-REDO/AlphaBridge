@@ -148,7 +148,7 @@ class RIBBON_DIAGRAM:
             bbox_to_anchor=(1.2, 0.55),
             loc="center",
             fontsize=8,
-            title="Model confidance",
+            title="Model confidence",
             ncol=1,
         )
         
