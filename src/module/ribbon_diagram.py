@@ -278,7 +278,7 @@ class RIBBON_DIAGRAM:
                             
                             interface_range = [1, sectors[auth_asym_id]]
                             
-                            print(interface_range)
+                            #print(interface_range)
                             
                             degree_range = [degrees(sector.x_to_rad(residue_number - 1)) for residue_number in interface_range] 
                             circos.rect(r_lim=(75, 85), deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
