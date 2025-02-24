@@ -103,8 +103,10 @@ def define_interfaces(in_dir, mode):
                                                                                 plotting=True).run_domain_clustering()
     
     
-    elements = np.linspace(0.4, 1, 40).tolist()
-    contact_threshold_list = [round(x, 3) for x in elements]
+    #elements = np.linspace(0.4, 1, 40).tolist()
+    
+    #contact_threshold_list = [round(x, 3) for x in elements]
+    contact_threshold = [0.5, 0.75, 0.9]
     interactions_list = []
     
     
