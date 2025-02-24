@@ -17,10 +17,10 @@ import itertools
 
 class domain_clustering():
     
-    def __init__(self, matrix_dict, list_fasta_files, plotting: bool = True, bool_mask_clusters: bool = True, outdir: str = '' , alphafold_version: str = 'AF2'):
+    def __init__(self, matrix_dict, sequence_info_dict, plotting: bool = True, bool_mask_clusters: bool = True, outdir: str = '' , alphafold_version: str = 'AF2'):
         
         self.matrix_dict = matrix_dict
-        self.list_fasta_files = list_fasta_files
+        self.sequence_info_dict = sequence_info_dict
         self.plotting = plotting
         self.outdir = outdir
         self.alphafold_version = alphafold_version
@@ -28,7 +28,7 @@ class domain_clustering():
         
     def run_domain_clustering(self):
         matrix_dict = self.matrix_dict
-        list_fasta_files = self.list_fasta_files
+        sequence_info_dict = self.sequence_info_dict
         
         matrix_input = matrix_dict['confidence_matrix']
         masked_confidence_matrix = matrix_dict['masked_confidence_matrix']
@@ -62,15 +62,17 @@ class domain_clustering():
             
             
         if  self.plotting:
-            
-            plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,list_fasta_files, self.outdir, self.alphafold_version)
-            plot_separate_matrix(matrix_dict,list_fasta_files, self.outdir)
+            plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,sequence_info_dict, self.outdir, self.alphafold_version)
+            plot_separate_matrix(matrix_dict,sequence_info_dict, self.outdir)
         
         return coevolutionary_domains, coevultionary_cluster_dict, entity_region_dict
     
     def get_interacting_coevolutionary_domains(self, coevolutionary_domains):
         
-        list_fasta_name, list_fasta_acclen, list_fasta_centerticks, list_fasta_len = tuple(self.list_fasta_files)
+        label_asym_list = self.sequence_info_dict['label_asym_id']
+        acclen_list = self.sequence_info_dict['acclen']
+        length_list = self.sequence_info_dict['length']
+        
         unique_coevolutionary_domains = np.unique(coevolutionary_domains)
         cluster_index_dict = {}
         coevultionary_cluster_dict = {}
@@ -100,7 +102,7 @@ class domain_clustering():
 
 
                 #find overlapping sequences between all proteins and regions of coevolutionary_domains 
-                for protein, acclen, fasta_len in zip(list_fasta_name, list_fasta_acclen, list_fasta_len):
+                for protein, acclen, fasta_len in zip(label_asym_list, acclen_list, length_list):
                     
                     protein_start = acclen - fasta_len
                     protein_end = acclen - 1
@@ -179,7 +181,7 @@ def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0
         return coevolutionary_domains
 
 
-def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_matrix, interacting_mask_cluster ,list_fasta_files, outdir, alphafold_version):
+def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_matrix, interacting_mask_cluster ,sequence_info_dict, outdir, alphafold_version):
         
         t0 = time.time()
         
@@ -187,12 +189,17 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         label_data = np.tile(labels, (2,1))
         
         mask_data = np.tile(interacting_mask_cluster, (2,1))
-        list_fasta_name, list_fasta_acclen, list_fasta_centerticks , list_fasta_len = tuple(list_fasta_files)
+        
+        
+        label_asym_list = sequence_info_dict['label_asym_id']
+        acclen_list = sequence_info_dict['acclen']
+        centerticks_list =sequence_info_dict['centerticks']
+        length_list = sequence_info_dict['length']
      
-        inv_fasta_acclen = [sum(list_fasta_len) - acclen for acclen in list_fasta_acclen]
-        inv_fasta_acclen.insert(0, sum(list_fasta_len) -1 )
+        inv_fasta_acclen = [sum(length_list) - acclen for acclen in acclen_list]
+        inv_fasta_acclen.insert(0, sum(length_list) -1 )
 
-        list_fasta_len_names = [f'0 / {length}' if i != len(list_fasta_len)-1 else f'{length}' for i,length in enumerate(list_fasta_len)]
+        length_list_names = [f'0 / {length}' if i != len(length_list)-1 else f'{length}' for i,length in enumerate(length_list)]
 
         timestamp =  time.time() - t0 
         #print(f'labels: {timestamp}')
@@ -200,13 +207,13 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         
         fig, ax  = plt.subplots(figsize = (15,15))
         
-        ax.set_xticks(list_fasta_acclen)
+        ax.set_xticks(acclen_list)
         ax.set_xticklabels('')            
-        ax.set_xticks(list_fasta_centerticks,minor=True)
-        ax.set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True)
+        ax.set_xticks(centerticks_list,minor=True)
+        ax.set_xticklabels(label_asym_list, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True)
         
-        ax.set_yticks(np.array(list_fasta_acclen))
-        ax.set_yticklabels(list_fasta_len_names)
+        ax.set_yticks(np.array(acclen_list))
+        ax.set_yticklabels(length_list_names)
         #ax.plot([0, 1], [0, 1], transform=ax.transAxes) 
         
         divider = make_axes_locatable(ax)
@@ -216,7 +223,7 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         
         sns.heatmap(label_data,mask= mask_data, ax=cax3 ,cbar= False ,cmap = sns.color_palette('tab20b') )
         
-        for acclen in list_fasta_acclen:
+        for acclen in acclen_list:
             
             cax3.axvline(acclen, color = 'white', linewidth = 2)
             ax.axvline(acclen, color = 'black', linewidth = 1)
@@ -238,8 +245,8 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         cax3.set(yticklabels=[])
             
         cax3.set_xticklabels('')            
-        cax3.set_xticks(list_fasta_centerticks,minor=True)
-        cax3.set_xticklabels(list_fasta_name, va = 'center_baseline', fontsize=8,minor=True)
+        cax3.set_xticks(centerticks_list,minor=True)
+        cax3.set_xticklabels(label_asym_list, va = 'center_baseline', fontsize=8,minor=True)
         
         cax3.tick_params(left = False, bottom =False, labelbottom=True) 
         plt.subplots_adjust(hspace=0.05)
@@ -254,15 +261,18 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         timestamp =  time.time() - t0 
         #print(f'saving: {timestamp}')
 
-def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
+def plot_separate_matrix(matrix_dict,sequence_info_dict, outdir):
     t0 = time.time()
     matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
         
-    list_fasta_name, list_fasta_acclen, list_fasta_centerticks , list_fasta_len = tuple(list_fasta_files)
+    label_asym_list = sequence_info_dict['label_asym_id']
+    acclen_list = sequence_info_dict['acclen']
+    centerticks_list =sequence_info_dict['centerticks']
+    length_list = sequence_info_dict['length']
 
-    list_fasta_len_names = [f'{length} / 0' if i != len(list_fasta_len)-1 else f'{length}' 
-                for i,length in enumerate(list_fasta_len)]
+    length_list_names = [f'{length} / 0' if i != len(length_list)-1 else f'{length}' 
+                for i,length in enumerate(length_list)]
     
     timestamp =  time.time() - t0 
     #print(f'labels: {timestamp}')
@@ -276,14 +286,14 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
         cax = divider.append_axes("right", size="5%", pad=0.5)
         matrix = matrix_dict[feature]
 
-        ax.set_xticks(list_fasta_acclen)
+        ax.set_xticks(acclen_list)
         ax.set_xticklabels('')
-        ax.set_xticks(list_fasta_centerticks,minor=True)
-        ax.set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
-        ax.set_yticks(np.array(list_fasta_acclen)-1)
-        ax.set_yticklabels(list_fasta_len_names)
+        ax.set_xticks(centerticks_list,minor=True)
+        ax.set_xticklabels(label_asym_list, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
+        ax.set_yticks(np.array(acclen_list)-1)
+        ax.set_yticklabels(length_list_names)
         
-        for i in list_fasta_acclen:
+        for i in acclen_list:
 
             ax.axvline(i, color = 'black', linewidth = 1)  
             ax.axhline(i, color = 'black', linewidth = 1)            
@@ -301,19 +311,19 @@ def plot_separate_matrix(matrix_dict,list_fasta_files, outdir):
     #print(f'plotting: {timestamp}')
     t0 = time.time()
 
-def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
+def plot_joined_matrix(matrix_dict,sequence_info_dict, outdir):
     N_COL = 3
     N_ROW = 1
     matrix_list =  ['pae','confidence_matrix','contact_matrix']
     cmap_list = ['Greens_r', 'Blues_r', "RdPu"]
     
     
-    list_fasta_name = list_fasta_files[0]
-    list_fasta_acclen = list_fasta_files[1]
-    list_fasta_centerticks = list_fasta_files[2]
-    list_fasta_len = list_fasta_files[3]
-    list_fasta_len_names = [f'{length} / 0' if i != len(list_fasta_len)-1 else f'{length}' 
-                for i,length in enumerate(list_fasta_len)]
+    label_asym_list = sequence_info_dict['label_asym_id']
+    acclen_list = sequence_info_dict['acclen']
+    centerticks_list =sequence_info_dict['centerticks']
+    length_list = sequence_info_dict['length']
+    length_list_names = [f'{length} / 0' if i != len(length_list)-1 else f'{length}' 
+                for i,length in enumerate(length_list)]
     
     
     fig, axs = plt.subplots(N_ROW,N_COL,figsize=(30, 10))
@@ -326,14 +336,14 @@ def plot_joined_matrix(matrix_dict,list_fasta_files, outdir):
         divider = make_axes_locatable(axs[n_col])
         cax = divider.append_axes("right", size="5%", pad=0.5)
         
-        axs[n_col].set_xticks(list_fasta_acclen)
+        axs[n_col].set_xticks(acclen_list)
         axs[n_col].set_xticklabels('')
-        axs[n_col].set_xticks(list_fasta_centerticks,minor=True)
-        axs[n_col].set_xticklabels(list_fasta_name, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
-        axs[n_col].set_yticks(np.array(list_fasta_acclen)-1)
-        axs[n_col].set_yticklabels(list_fasta_len_names)
+        axs[n_col].set_xticks(centerticks_list,minor=True)
+        axs[n_col].set_xticklabels(label_asym_list, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True) 
+        axs[n_col].set_yticks(np.array(acclen_list)-1)
+        axs[n_col].set_yticklabels(length_list_names)
         
-        for i in list_fasta_acclen:
+        for i in acclen_list:
 
             axs[n_col].axvline(i, color = 'black', linewidth = 1)  
             axs[n_col].axhline(i, color = 'black', linewidth = 1)            

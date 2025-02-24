@@ -7,6 +7,7 @@ Created on Wed Feb 7 16:53:05 2024
 import os
 import numpy as np
 import json
+from itertools import groupby
 from Bio import SeqIO
 from pathlib import Path
 import pandas as pd
@@ -15,9 +16,9 @@ warnings.filterwarnings("ignore")
 from Bio.Data import IUPACData
 import errno
 
+from src.module.rec_input import RECORD_AF3, RECORD_SERVER
 from src.module.parsers import PDBPARSER, MMCIFPARSER
 from sklearn.metrics.pairwise import pairwise_distances
-from src.module.alingment_utils import compare_protein_seq
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -180,40 +181,58 @@ class CCM_AF3(FEATURE_MATRIX):
         
         super().__init__(in_dir)
     
+    def check_alphafold_dialect(self):
+        
+        folder_path = self.in_dir
+        
+        job_request_path = list(Path(folder_path).glob( "*_data.json"))
+        
+        if not job_request_path:
+            return False
+        
+        else:
+            request_job = read_json_file(job_request_path[0])
+            
+            if request_job['dialect'] == 'alphafold3':
+                return True
+            else:
+                raise NotImplementedError('Format File not Valid')
+
+    
     def extract_feature_filepath(self):
         
         folder_path = self.in_dir
         
         if self.check_if_path_exist(folder_path):
+        
+            if self.check_alphafold_dialect():
+                
+                feature_path = [file  for file in list(Path(folder_path).glob( "*_confidences.json")) if not'_summary_confidences' in str(file)][0]
+                structure_path = list(Path(folder_path).glob( "*model.cif"))[0]
+                job_request_path = list(Path(folder_path).glob("*data.json"))[0]
+                summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
             
-            feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
-            structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
-            job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
-            summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
-            
+            else:
+        
+                feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
+                structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
+                job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
+                summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
+        
             return feature_path, structure_path, job_request_path, summary_request_path
     
-    def extract_sequences(self, job_request_path):
+    def extract_rec_list(self, job_request_path, structure_sequence_list, feature_dict):
 
-            request_file = json.load(open(job_request_path))[0] 
+        request_file = read_json_file(job_request_path)
+        
+        if self.check_alphafold_dialect():
 
-            chains =(i for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-            known_keys = ["proteinChain", 'ligand' ,"rnaSequence", "ion", "dnaSequence"]
-            seq_types_symbols = {"proteinChain": "", "rnaSequence": "RNA_", "dnaSequence": "DNA_", 'ligand':'ligand_', 'ion':'ion_'}
-
-            rec_list = []
-            
-            for macromolecule in request_file['sequences']:
-                key = list(macromolecule.keys())[0]
-                for item in range(macromolecule[key]['count']):
-                    if key in ['proteinChain', 'dnaSequence', 'rnaSequence']:
-                        seq = Seq(macromolecule[key]['sequence'])
-                        chain_id = seq_types_symbols[key] + next(chains)
-                        rec = SeqRecord(seq, id= chain_id, name = chain_id , description= chain_id)
-                        rec_list.append(rec)
-
-            return rec_list
-    
+            rec_list = RECORD_AF3(request_file, structure_sequence_list, feature_dict).process_record_file()
+        else:
+            rec_list = RECORD_SERVER(request_file, structure_sequence_list, feature_dict).process_record_file()
+                       
+        return rec_list
+                     
     def extract_sequence_info(self):
         
         feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
@@ -223,113 +242,161 @@ class CCM_AF3(FEATURE_MATRIX):
         feature_dict = read_json_file(feature_path)
         
         structure_sequence_list = structure.get_sequence_list()
-        polymer_chain_dict = structure.get_polypeptide_chain_dict()
         
-        tmp_rec_list = self.extract_sequences(job_request_path)
+        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict)
         
-        rec_list = self.reorder_sequences_by_token_list(tmp_rec_list, structure_sequence_list, feature_dict)
-        
-        chain_tuple = self.get_sequence_chain_tuple(rec_list)
-        
-        list_sequence_info = self.fasta_profiles(rec_list)
-        
-        return list_sequence_info, chain_tuple, structure_sequence_list, polymer_chain_dict
-        
+        sequence_info_dict = self.extract_sequence_info_dict(feature_dict, rec_list)
+     
+        return rec_list, sequence_info_dict
     
-    def reorder_sequences_by_token_list(self,tmp_rec_list, structure_sequence_list,feature_dict ):
+    def extract_sequence_info_dict(self, feature_dict, rec_list):
         
-        fasta_sequence_list = self.get_sequence_chain_tuple(tmp_rec_list)
+        label_asym_id_list = []
+        label_asym_id_acclen_list = []
+        label_asym_id_centerticks_list = []
+        label_asym_id_len_list = []
+        num_acc = 0
+
+        token_chain_id = feature_dict['token_chain_ids']
+
+        for rec in rec_list:
+            
+            label_asym_id = rec['label_asym_id']
+            
+            if rec['rec_type'] == 'polymer':
+                entity_length = len(rec['sequence']) 
+            else:
+                entity_length = token_chain_id.count(label_asym_id)
+            
+            label_asym_id_list.append(label_asym_id)
+            
+            num_acc += entity_length
+            if len(label_asym_id_acclen_list) == 0 :
+                center_tick = int((num_acc - 0)/2)
+            else:
+                center_tick = int((num_acc - label_asym_id_acclen_list[-1])/2 + label_asym_id_acclen_list[-1])
+            label_asym_id_centerticks_list.append(center_tick)
+            label_asym_id_acclen_list.append(num_acc)
+            label_asym_id_len_list.append(entity_length)
+
+        sequence_info_dict = {
+            'label_asym_id' : label_asym_id_list,
+            'acclen' : label_asym_id_acclen_list,
+            'centerticks' : label_asym_id_centerticks_list,
+            'length' : label_asym_id_len_list
+        }
+        return sequence_info_dict
         
-        fasta_to_struct = compare_protein_seq(structure_sequence_list, fasta_sequence_list).extract_chain_dict()
-        
-        struct_to_fasta = {v: k for k, v in fasta_to_struct.items()}
-        
-        token_chain_ids = feature_dict['token_chain_ids']
-        unique_chains = np.unique(token_chain_ids)
-        
-        unique_fasta_chains = [struct_to_fasta[unique_chain] for unique_chain in unique_chains if unique_chain in struct_to_fasta]
-                
-        reorder_fasta_sequence_list = [tuple for x in unique_fasta_chains for tuple in fasta_sequence_list if tuple[0] == x]
-        
-        reorder_rec_list = [ SeqRecord(reorder_tuple[1], id= reorder_tuple[0], name = reorder_tuple[0] , description= reorder_tuple[0]) for reorder_tuple in reorder_fasta_sequence_list]
-        
-        return reorder_rec_list
-    
-    def extract_plddt_per_residue(self, structure):
+    def extract_plddt_per_token(self, structure):
+        #will need to be changed again 
         structure_coordinates = structure.get_coordinates()
-        polymer_chain_dict = structure.get_polypeptide_chain_dict()
+        rec_list, sequence_info_dict= self.extract_sequence_info()
         
-        data = []
-
-        for asym_id in structure_coordinates:
-            for seq_id in structure_coordinates[asym_id]:
-                for atom_id in structure_coordinates[asym_id][seq_id]['atom_id']:
-                    
-                    if polymer_chain_dict[asym_id]['entity_type'] in ['polypeptide(L)','polydeoxyribonucleotide', 'polyribonucleotide']:
-                        
-                        plddt = float(structure_coordinates[asym_id][seq_id]['atom_id'][atom_id]['plddt'])
-                        data.append([asym_id ,seq_id,plddt])
+        token_plddt_list = []
+        
+        
+        for rec in rec_list:
+            label_asym_id = rec['label_asym_id']
+            rec_type = rec['rec_type']
+            for seq_id in structure_coordinates[label_asym_id]:
                 
-        plddt_df = pd.DataFrame(data, columns=['asym_id','seq_id','plddt'])               
-
-        plddt_per_residue_df = plddt_df.groupby(by=["asym_id", 'seq_id']).mean().reset_index()
-
-        residue_plddts = plddt_per_residue_df['plddt'].tolist()
+                plddt_atom_list = [float(atom_id['plddt']) for atom_id in structure_coordinates[label_asym_id][seq_id]['atom_id']]
+                
+                if rec_type == 'polymer':
+                    
+                    plddt_value = [np.mean(plddt_atom_list)]
+                    
+                else:
+                    plddt_value = plddt_atom_list
+                
+                token_plddt_list += plddt_value
     
-        return residue_plddts
+        return token_plddt_list
+    
+    def get_plddt_dict(self):
+        #will need to be changed again
+        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
         
-    def fix_matrix_size(self, structure,feature_dict, chain_pair_iptm):
+        structure = MMCIFPARSER(structure_path) 
+        
+        structure_coordinates = structure.get_coordinates()
+        
+        rec_list, sequence_info_dict = self.extract_sequence_info()
+        
+        plddt_dict = {}
+        
+        for rec in rec_list:
+            label_asym_id = rec['label_asym_id']
+            rec_type = rec['rec_type']
+            for seq_id in structure_coordinates[label_asym_id]:
+                
+                plddt_atom_list = [float(atom_id['plddt']) for atom_id in structure_coordinates[label_asym_id][seq_id]['atom_id']]
+                atom_type_list = [atom_id['atom_type'] for atom_id in structure_coordinates[label_asym_id][seq_id]['atom_id']]
+                
+                if not label_asym_id in plddt_dict:
+                    plddt_dict[label_asym_id] = {}
+                if not seq_id in plddt_dict[label_asym_id]:
+                    plddt_dict[label_asym_id][seq_id] = {'plddt': float(),
+                                                         'atom_type_list': []}
+                    
+                
+                if rec_type == 'polymer':
+                    
+                    plddt_dict[label_asym_id][seq_id]['plddt'] = np.mean(plddt_atom_list)
+                    plddt_dict[label_asym_id][seq_id]['atom_type_list'] = atom_type_list
+                else:
+                    plddt_dict[label_asym_id][seq_id]['plddt'] = plddt_atom_list
+                    plddt_dict[label_asym_id][seq_id]['atom_type_list'] = atom_type_list
+                
+
+        return plddt_dict
+    
+    def fix_matrix_size(self, feature_dict, rec_list):
         
         pae = np.array(feature_dict['pae'])
         contact_probability = np.array(feature_dict['contact_probs'])
-        
+
         token_chain_ids = feature_dict['token_chain_ids']
-        unique_chains = np.unique(token_chain_ids)
+        token_res_ids = feature_dict['token_res_ids']
+
         chain_index_dict = {}
-        
-        for chain in unique_chains:
-            ii = [i for i, j in enumerate(token_chain_ids) if j == chain]
-    
-            if not chain in chain_index_dict:
-                chain_index_dict[chain] = ii
+
+        mask = []
+
+        fixed_pae = pae.copy()
+        fixed_contact_probability = contact_probability.copy()
             
-        #get chains that are a polypeptide
-        polymer_chain_dict = structure.get_polypeptide_chain_dict()
-        
-        polypeptide_chain_list = [chain  for chain in polymer_chain_dict if polymer_chain_dict[chain]['entity_type']  in ['polypeptide(L)','polydeoxyribonucleotide', 'polyribonucleotide']] 
-        
-        non_polypeptide_chain_list = list(set(unique_chains) - set(polypeptide_chain_list))
-        
-        remove_chain_idx = np.isin(unique_chains, non_polypeptide_chain_list)
-
-        remove_idx_list = []
-
-        for non_polypeptide_chain in non_polypeptide_chain_list:
-        
-            remove_idx_list += chain_index_dict[non_polypeptide_chain]
+        for rec in rec_list:
+            
+            label_aysm_id = rec['label_asym_id']
+            
+            if rec['macromolecule_type'] == 'proteinChain' and rec['modifications']: 
                 
-        mask = np.ones(pae.shape[0], bool)        
-        mask[remove_idx_list] = 0
-        
-        mask_chain = np.ones(chain_pair_iptm.shape[0], bool)
-        mask_chain[remove_chain_idx] = 0
-          
-        
-        
-        fix_size_pae = pae[mask,:][:,mask]
-        fix_size_contact_probability = contact_probability[mask,:][:,mask]
-        fix_size_chain_pair_iptm = chain_pair_iptm[mask_chain,:][:,mask_chain]
-        
-        return fix_size_pae, fix_size_contact_probability, fix_size_chain_pair_iptm
+                for modification in rec['modifications']:
+                    
+                    ptm_position = modification['ptmPosition']
+                    
+                    mask = np.array([False if token_chain == label_aysm_id and token_res == ptm_position else True 
+                            for token_chain, token_res in zip(token_chain_ids,token_res_ids)])
+                    
+                    fixed_pae = summarize_ptm_matrix(fixed_pae, mask, ptm_position, np.min)
+                    fixed_contact_probability = summarize_ptm_matrix(fixed_contact_probability, mask, ptm_position, np.max)
+                    
+                    token_chain_ids, token_res_ids = fix_token_lists(mask, token_chain_ids, token_res_ids)
+            
+        return fixed_pae, fixed_contact_probability
     
     def get_feature_info(self):                                                                                                                                                                                                                                    
-        
         
         feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
         
         structure = MMCIFPARSER(structure_path)
         
+        structure_sequence_list = structure.get_sequence_list()
+        
         feature_dict = read_json_file(feature_path)
+        
+        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict)
         
         summary_request_dict =  read_json_file(summary_request_path)
 
@@ -337,13 +404,13 @@ class CCM_AF3(FEATURE_MATRIX):
 
         iptm = summary_request_dict['iptm']
             
-        plddt = self.extract_plddt_per_residue(structure)
+        plddt = self.extract_plddt_per_token(structure)
         
         distance_matrix = self.get_distance_matrix(structure.get_ca_distances())
+            
+        pae, contact_probability= self.fix_matrix_size(feature_dict, rec_list)
         
-        pae, contact_probability, chain_pair_iptm = self.fix_matrix_size(structure, feature_dict, chain_pair_iptm)
-        
-        return distance_matrix, pae, contact_probability, plddt, iptm ,chain_pair_iptm
+        return distance_matrix, pae, contact_probability, plddt, iptm , chain_pair_iptm
     
     
     def extract_matrix_dict(self):   
@@ -366,45 +433,78 @@ class CCM_AF3(FEATURE_MATRIX):
         
         return matrix_dict
     
-    def extract_chain_info_list(self, chain_dict, plddt_dict):
+    def extract_chain_info_dict(self):
         
-        chain_info_list = []
-    
-        list_sequence_info, rec_sequence_list, structure_sequence_list, polymer_chain_dict = self.extract_sequence_info()
         
-        for auth_asym_id, seq in rec_sequence_list:
-            label_asym_id = chain_dict[auth_asym_id]
-            chain_info = {
-                "auth_asym_id": auth_asym_id,
-                "label_asym_id": label_asym_id,
-                "residues" : []
-            }
+        rec_list, sequence_info_dict = self.extract_sequence_info()
+        plddt_dict = self.get_plddt_dict()
+        
+        chain_info_dict = {
+            'polymer' : [],
+            'non_polymer' : []
+        }
+        
+        for rec in rec_list:
             
-            for index, residue in enumerate(seq):
-
-                residue_dict = {
-                    "seq_id": int(),
-                    "comp_id" : str(),
+            auth_asym_id = rec['auth_asym_id']
+            label_asym_id = rec['label_asym_id']
+            
+            if rec['rec_type'] == 'polymer':
+                rec['residues'] = []
+                
+                for index, residue in enumerate(rec['sequence']):
+                    seq_id = index + 1
+                    
+                    residue_dict = {
+                        "seq_id": int(),
+                        "comp_id" : str(),
+                        "plddt" : float()
+                    }
+                    
+                    if rec['macromolecule_type'] == 'proteinChain':
+                        
+                        if not rec['modifications']:
+                            comp_id = upper_protein_letters_1to3[residue]
+                        
+                        else:
+                            for modification in rec['modifications']:
+                                
+                                if modification['ptmPosition'] == seq_id:
+                                  
+                                    comp_id = modification['ptmType'].replace('CCD_', '') if modification['ptmType'].startswith('CCD_') else modification['ptmType']
+                                
+                                else:
+                                    comp_id = upper_protein_letters_1to3[residue]
+                                    
+                    else:
+                        comp_id = residue
+                        
+                    residue_dict['seq_id'] = seq_id
+                    residue_dict['comp_id'] = comp_id
+                    residue_dict['plddt'] = plddt_dict[label_asym_id][seq_id]['plddt']
+                    
+                    rec['residues'].append(residue_dict)
+                chain_info_dict['polymer'].append(rec)
+            else:
+                rec['atoms'] = []   
+                for index, (atom_type, atom_plddt) in enumerate(zip(plddt_dict[label_asym_id]['.']['atom_type_list'], plddt_dict[label_asym_id]['.']['plddt'])):
+                    atom_id = index + 1
+                    atom_dict = {
+                    'atom_type': str(),
+                    'atom_id': int(),
                     "plddt" : float()
-                }
-
-                if polymer_chain_dict[label_asym_id]['entity_type'] == 'polypeptide(L)':
-                    comp_id = upper_protein_letters_1to3[residue]
-                else:
-                    comp_id = residue
-
-                residue_dict['seq_id'] = index + 1
-                residue_dict['comp_id'] = comp_id
-                residue_dict['plddt'] = plddt_dict[auth_asym_id][index]
-
-                chain_info['residues'].append(residue_dict)
-            chain_info_list.append(chain_info)
-        
-        return chain_info_list
-              
-
-        
+                    }
+                    
+                    atom_dict['atom_type'] = atom_type
+                    atom_dict['atom_id'] = atom_id
+                    atom_dict['plddt'] = atom_plddt
+                    
+                    
+                    rec['atoms'].append(atom_dict)
+                chain_info_dict['non_polymer'].append(rec)
     
+        return chain_info_dict, sequence_info_dict
+              
 
 def read_json_file(json_file):
     
@@ -414,3 +514,41 @@ def read_json_file(json_file):
         
     return file
 
+        
+def summarize_ptm_matrix(matrix, mask, ptm_position, func):
+    #column array
+    scored_array = matrix[:, ~mask]
+    #row array
+    aligned_array = matrix[~mask]
+    #matrix without ptm token
+    no_ptm_matrix = matrix[mask,:][:,mask]
+    
+    #ptm expanded metric
+    inside_values = [index for index, value in enumerate(mask) if not value]
+    
+    ptm_value = func(matrix[~mask,:][:,~mask])
+    
+    #get the minimum maximum value from each matrix array
+    scored_values = func(scored_array, axis=1)
+    aligned_values = func(aligned_array, axis=0)
+    
+    #remove ptm_expanded_values
+    scored_values = np.delete(scored_values, inside_values)
+    aligned_values = np.delete(aligned_values, inside_values)
+    #remove ptm value to match dimesnsion array
+    aligned_values =  np.insert(aligned_values, ptm_position -1,  ptm_value)
+    #add ptm token as a residue
+    added_column_matrix = np.insert(no_ptm_matrix, ptm_position -1, scored_values, axis=1)
+
+    ptm_matrix = np.insert(added_column_matrix, ptm_position -1, aligned_values, axis=0)
+    
+    return ptm_matrix
+
+def fix_token_lists(mask, token_chain_ids, token_res_ids):
+    
+    remove_ptm_index = [index for index, value in enumerate(mask) if not value][1:]
+    
+    token_chain_ids =  np.delete(token_chain_ids, remove_ptm_index)
+    token_res_ids =  np.delete(token_res_ids, remove_ptm_index)
+    
+    return token_chain_ids, token_res_ids

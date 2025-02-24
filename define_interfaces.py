@@ -3,6 +3,7 @@ import sys
 import json
 import pandas as pd
 import networkx as nx
+import numpy as np
 
 from src.module.confidence_contact_matrix import CCM_AF3
 from src.module.alingment_utils import compare_protein_seq
@@ -83,72 +84,76 @@ def define_interfaces(in_dir, mode):
             FEATURE_OBJECT = CCM_AF3(in_dir)
             
             feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
-            
-            list_sequence_info, rec_sequence_list, structure_sequence_list, polymer_chain_dict = FEATURE_OBJECT.extract_sequence_info()
+            chain_info_dict, sequence_info_dict = FEATURE_OBJECT.extract_chain_info_dict()
             
     else:
         raise  NotImplementedError("Output from AF2 or ColabFold not implemented yet")
-
-
-
-    chain_dict = compare_protein_seq(structure_sequence_list, rec_sequence_list).extract_chain_dict()
-
+    
     matrix_dict = FEATURE_OBJECT.extract_matrix_dict()
-
-    plddt_dict = FEATURE_OBJECT.get_scores_dict(matrix_dict['plddt'], list_sequence_info)
-
-    chain_info_list = FEATURE_OBJECT.extract_chain_info_list(chain_dict, plddt_dict)
-
-    #conservation_dict = FEATURE_OBJECT.get_scores_dict(ALPHAMISSENSE('Q6PCD5').get_pathogenicity_list(), list_sequence_info)
-
     contact_matrix =  matrix_dict['contact_matrix']
-    confidence_matrix = matrix_dict['pae_plddt']
+    confidance_matrix = matrix_dict['pae_plddt']
     iptm = matrix_dict['iptm']
     chain_pair_iptm_matrix = matrix_dict['chain_pair_iptm'] 
 
 
     coevolutionary_domains, coevolutionary_cluster_dict, entity_region_dict = domain_clustering(matrix_dict,
-                                                                                list_sequence_info,
+                                                                                sequence_info_dict,
                                                                                 alphafold_version=mode,
                                                                                 outdir = outdir, 
                                                                                 plotting=True).run_domain_clustering()
-
-
-
-    contact_threshold_list = [0.5, 0.75, 0.9]
+    
+    
+    elements = np.linspace(0.4, 1, 40).tolist()
+    contact_threshold_list = [round(x, 3) for x in elements]
     interactions_list = []
+    
+    
     for contact_threshold in contact_threshold_list:
-        
+
         INTERFACE_IDENTIFICATION = interface_identification(coevolutionary_cluster_dict, 
                                                             entity_region_dict,
-                                                            plddt_dict,
-                                                            rec_sequence_list,
-                                                            list_sequence_info,
+                                                            chain_info_dict,
+                                                            sequence_info_dict,
                                                             iptm,
                                                             chain_pair_iptm_matrix,
-                                                            confidence_matrix,
+                                                            confidance_matrix,
                                                             contact_matrix,
-                                                            contact_threshold,
-                                                            chain_dict,
-                                                            polymer_chain_dict)
+                                                            contact_threshold)
 
-        
-        
         interactions_dict= INTERFACE_IDENTIFICATION.extract_interfaces()
         interactions_list.append(interactions_dict)
+    
+        biomolecule_interface_dict= INTERFACE_IDENTIFICATION.map_info_interfaces(interactions_dict)
+    
+        #interface_info_df = INTERFACE_IDENTIFICATION.get_interface_info_dataframes(interactions_dict)
+    
+    
+        ribbon_diagram = RIBBON_DIAGRAM(
+                        interactions_dict,
+                        biomolecule_interface_dict,
+                        chain_info_dict,
+                        contact_threshold,
+                        outdir=outdir,
+                        boolean_modified_non_poly_length= True)
+        ribbon_diagram.plot_ribbon_diagram()
+        
 
-    structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_list)
+
+    structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_dict)
+
+    #structure_info_df = INTERFACE_IDENTIFICATION.get_structure_info_dataframes(structure_score_dict)
 
     alphabridge_dict = {
         "structure": [structure_score_dict],
         "interactions" : interactions_list
     }
-    
-    
+
+
     with open(f"{outdir}/alphabridge_data.json", "w") as file:
         file.write(json.dumps(alphabridge_dict, indent=4))
-        
     
+    #write_dataframe(structure_info_df, 'structure_scores', outdir )
+        
 
 def main():
     args = parse_args()

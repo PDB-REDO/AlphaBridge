@@ -32,13 +32,6 @@ from Bio.Data import IUPACData
 
 
 
-protein_letters_3to1_extended = IUPACData.protein_letters_3to1_extended
-
-upper_protein_letters_3to1 = {k.upper():v.upper() for k,v in protein_letters_3to1_extended.items()}
-
-
-
-
 DeletionMatrix = Sequence[Sequence[int]]
 
 
@@ -130,19 +123,16 @@ class MMCIFPARSER:
             columns = zip(atom_type_list, label_seq_id_list, label_asym_id_list, label_comp_id_list ,label_atom_id_list ,Cartn_x_list,Cartn_y_list,Cartn_z_list,occupancy_list,plddt_list)
 
             for atom_type, label_seq_id, label_asym_id, label_comp_id, label_atom_id ,Cartn_x, Cartn_y, Cartn_z, occupancy, plddt in columns:
-
-                if atom_type == 'ATOM':
-                 
-                    if not label_asym_id in coordinates_dict:
-                        coordinates_dict[label_asym_id] = {}
-                    if not label_seq_id in coordinates_dict[label_asym_id]:
-                        coordinates_dict[label_asym_id][label_seq_id] = {'comp_id':label_comp_id, 'atom_id':{}}
-                    if not atom_type in coordinates_dict[label_asym_id][label_seq_id]['atom_id']:
-                        coordinates_dict[label_asym_id][label_seq_id]['atom_id'][label_atom_id] = {'coordinates': [], 'plddt': float()}
+ 
+                if not label_asym_id in coordinates_dict:
+                    coordinates_dict[label_asym_id] = {}
+                if not label_seq_id in coordinates_dict[label_asym_id]:
+                    coordinates_dict[label_asym_id][label_seq_id] = {'comp_id':label_comp_id, 'atom_id':[]}
                 
-                    coordinates_dict[label_asym_id][label_seq_id]['atom_id'][label_atom_id]['coordinates'] = [Cartn_x, Cartn_y, Cartn_z]
-                    coordinates_dict[label_asym_id][label_seq_id]['atom_id'][label_atom_id]['plddt'] = plddt
-            
+                coordinates_dict[label_asym_id][label_seq_id]['atom_id'].append({'atom_type' : label_atom_id,
+                                                                                 'coordinates': [Cartn_x, Cartn_y, Cartn_z], 
+                                                                                 'plddt': plddt})
+                
             return coordinates_dict
     def get_ca_distances(self):
         
@@ -215,9 +205,17 @@ class MMCIFPARSER:
                 
             else:
                 ENTITY_NON_POLY = structure[accesion_id]['_pdbx_nonpoly_scheme']
-                entity_id_list =  ENTITY_POLY['entity_id'] + ENTITY_NON_POLY['entity_id']
-                pdbx_strand_id_list = ENTITY_POLY['pdbx_strand_id'] + ENTITY_NON_POLY['asym_id']
-                type_list =ENTITY_POLY['type'] + ['non_polymer'] * len(ENTITY_NON_POLY['entity_id'])
+                
+                entity_poly_list =  [ENTITY_POLY['entity_id']] if isinstance(ENTITY_POLY['entity_id'] , str) else ENTITY_POLY['entity_id'] 
+                pdbx_strand_poly_list = [ENTITY_POLY['pdbx_strand_id']] if isinstance(ENTITY_POLY['pdbx_strand_id'] , str) else ENTITY_POLY['pdbx_strand_id']
+                type_poly_list = [ENTITY_POLY['type']] if isinstance(ENTITY_POLY['type'] , str) else ENTITY_POLY['type']
+
+                entity_non_poly_list =  [ENTITY_NON_POLY['entity_id']] if isinstance(ENTITY_NON_POLY['entity_id'] , str) else ENTITY_NON_POLY['entity_id'] 
+                pdb_strand_non_poly_list = [ENTITY_NON_POLY['pdb_strand_id']] if isinstance(ENTITY_NON_POLY['pdb_strand_id'] , str) else ENTITY_NON_POLY['pdb_strand_id']
+                
+                entity_id_list =  entity_poly_list + entity_non_poly_list
+                pdbx_strand_id_list = pdbx_strand_poly_list + pdb_strand_non_poly_list
+                type_list = type_poly_list + ['non_polymer'] * len(entity_non_poly_list)
                 
             for entity_id, strand_id, entity_type in zip(entity_id_list,pdbx_strand_id_list,type_list):
                 if not strand_id in entity_dict:
@@ -231,8 +229,10 @@ class MMCIFPARSER:
     def get_sequence_list(self):
         full_path = self.filepath
 
-        structure = CifFileReader().read(full_path, only = ["_pdbx_poly_seq_scheme"])
+        structure = CifFileReader().read(full_path, only = ["_pdbx_poly_seq_scheme", '_pdbx_nonpoly_scheme'])
         polypeptide_chain_dict = self.get_polypeptide_chain_dict()
+        upper_protein_letters_3to1_extended = self.get_3_to_1_protein_letters_dict()
+        
         if not structure:
 
                     raise FileNotFoundError
@@ -245,35 +245,71 @@ class MMCIFPARSER:
             
             accesion_id = list(structure.keys())[0]
 
-
+            
+            seq_list = []
             seq_dict = {}
             asym_id_list = poly_seq['asym_id']
-
             mon_id_list = poly_seq['mon_id']
+        
+            if '_pdbx_nonpoly_scheme' in structure[accesion_id]:
 
+                ENTITY_NON_POLY = structure[accesion_id]['_pdbx_nonpoly_scheme']
+                
+                pdb_strand_non_poly_list = [ENTITY_NON_POLY['pdb_strand_id']] if isinstance(ENTITY_NON_POLY['pdb_strand_id'] , str) else ENTITY_NON_POLY['pdb_strand_id']    
+                non_poly_mon_id_list = [ENTITY_NON_POLY['mon_id']] if isinstance(ENTITY_NON_POLY['mon_id'] , str) else ENTITY_NON_POLY['mon_id']
+
+                for non_poly_asym_id, non_poly_mon_id in zip(pdb_strand_non_poly_list, non_poly_mon_id_list):
+                    
+                    if not non_poly_asym_id in seq_dict:
+                        seq_dict[non_poly_asym_id] = {
+                        'record': str(),
+                        'type' : 'non_polymer'
+                    }
+                
+                    
+                    seq_dict[non_poly_asym_id]['record'] = non_poly_mon_id
+                    
             for asym_id, mon_id in zip(asym_id_list,mon_id_list):
 
                 if not asym_id in seq_dict:
 
-                    seq_dict[asym_id] = ''
+                    seq_dict[asym_id] = {
+                        'record': str(),
+                        'type' : 'polymer'
+                    }
                 
                 if polypeptide_chain_dict[asym_id]['entity_type'] == 'polypeptide(L)':
                 
-                    seq_dict[asym_id] += upper_protein_letters_3to1[mon_id]
+                    seq_dict[asym_id]['record'] += upper_protein_letters_3to1_extended[mon_id]
                     
                 elif polypeptide_chain_dict[asym_id]['entity_type'] == 'polydeoxyribonucleotide':
                     
-                    seq_dict[asym_id] += mon_id[1]
+                    seq_dict[asym_id]['record'] += mon_id[1]
                 
                 elif polypeptide_chain_dict[asym_id]['entity_type'] == 'polyribonucleotide':
                     
-                    seq_dict[asym_id] += mon_id
-
-            seq_tuple = [(chain, Seq(sequence)) for chain, sequence in seq_dict.items()]
+                    seq_dict[asym_id]['record'] += mon_id
+                    
+            seq_tuple = [ (label_asym_id, macromolecule_dict['record']) for label_asym_id, macromolecule_dict in seq_dict.items() ]
             
 
         return seq_tuple
+    
+    def get_3_to_1_protein_letters_dict(self):
+        
+        file_path = 'src/pdb-redo-data.cif'
+        
+        protein_letters_3to1_extended = IUPACData.protein_letters_3to1_extended
+        
+        non_canonical_aa_3to1_list = CifFileReader().read(file_path, only = ['_monomer'])['PDB_REDO_DAT']['_monomer']
 
+        non_canonical_aa_3to1 = {name_3: name_1 for name_3, name_1 in zip(non_canonical_aa_3to1_list['name_3'],non_canonical_aa_3to1_list['name_1'])}
+
+        upper_protein_letters_3to1 = {k.upper():v.upper() for k,v in protein_letters_3to1_extended.items()}
+        
+        upper_protein_letters_3to1_extended = {**upper_protein_letters_3to1, **non_canonical_aa_3to1}
+        
+        return upper_protein_letters_3to1_extended
 
 class PDBPARSER:
         
