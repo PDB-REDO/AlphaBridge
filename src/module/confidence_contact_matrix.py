@@ -370,10 +370,10 @@ class CCM_AF3(FEATURE_MATRIX):
             
             label_aysm_id = rec['label_asym_id']
             
-            if rec['macromolecule_type'] == 'proteinChain' and rec['modifications']: 
+            if rec['macromolecule_type'] == 'protein' and rec['modifications']: 
                 
                 for modification in rec['modifications']:
-                    
+                            
                     ptm_position = modification['ptmPosition']
                     
                     mask = np.array([False if token_chain == label_aysm_id and token_res == ptm_position else True 
@@ -461,7 +461,7 @@ class CCM_AF3(FEATURE_MATRIX):
                         "plddt" : float()
                     }
                     
-                    if rec['macromolecule_type'] == 'proteinChain':
+                    if rec['macromolecule_type'] == 'protein':
                         
                         if not rec['modifications']:
                             comp_id = upper_protein_letters_1to3[residue]

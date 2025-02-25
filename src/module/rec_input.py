@@ -222,8 +222,7 @@ class PROTEIN(POLYMER):
                 glycans_list = record['glycans']
                 
                 modification_info['glycans'] = glycans_list
-                
-        
+            
         return modification_info
             
             
