@@ -297,7 +297,9 @@ class MMCIFPARSER:
     
     def get_3_to_1_protein_letters_dict(self):
         
-        file_path = 'src/pdb-redo-data.cif'
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
+        file_path = os.path.join(parent_dir, 'pdb-redo-data.cif')
         
         protein_letters_3to1_extended = IUPACData.protein_letters_3to1_extended
         

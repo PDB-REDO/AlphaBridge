@@ -193,4 +193,3 @@ dependencies:
       - scikit-image==0.22.0
       - texttable==1.7.0
       - tifffile==2024.2.12
-prefix: /mnt/home/d.alvarez/.conda/envs/d.alvarez

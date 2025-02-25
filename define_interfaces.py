@@ -137,7 +137,7 @@ def define_interfaces(in_dir, mode):
                         contact_threshold,
                         outdir=outdir,
                         boolean_modified_non_poly_length= True)
-        ribbon_diagram.plot_ribbon_diagram()
+        #ribbon_diagram.plot_ribbon_diagram()
         
 
 
