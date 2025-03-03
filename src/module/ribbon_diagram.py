@@ -11,7 +11,6 @@ from matplotlib.patches import Patch
 from matplotlib.colors import rgb2hex
 from matplotlib import colormaps
 import matplotlib.pyplot as plt
-import distinctipy
 import time
 import numpy as np
 
