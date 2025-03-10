@@ -5,6 +5,7 @@ Created on Wed Feb 7 16:53:05 2024
 @author: Dan_salv
 """
 import os
+from src.module.confidence_contact_matrix import get_monomer_info_dict
 from pycirclize import Circos
 from math import degrees
 from matplotlib.patches import Patch
@@ -62,95 +63,6 @@ class RIBBON_DIAGRAM:
                             
         return monomer_name_len_dict, poly_type_dict 
     
-    def get_modified_monomer_info_dict(self):
-        
-        chain_info_dict = self.chain_info_dict
-        
-        total_token_nr = 0
-        ligand_nr = 0
-        ion_nr = 0
-        glycan_nr = 0
-        
-        total_ligand_token = 0
-        total_ion_token = 0
-        total_glycan_token = 0
-        
-        ion_degree = 5
-        ligand_degree = 10
-        glycan_degree = 10
-
-        poly_bolean = False
-
-        monomer_name_len_dict = {}
-        poly_type_dict = {}
-        
-        for entity_type, rec_list in chain_info_dict.items():
-        
-                    for rec in rec_list:
-                    
-                        auth_asym_id = rec['auth_asym_id']
-                        if not auth_asym_id in monomer_name_len_dict:
-                            monomer_name_len_dict[auth_asym_id] = int()
-                            poly_type_dict[auth_asym_id] = str()
-                        
-                        poly_type_dict[auth_asym_id] = rec['macromolecule_type']
-        
-                        if entity_type == 'polymer':
-                        
-                            entity_length = len(rec['residues'])
-                            monomer_name_len_dict[auth_asym_id] = entity_length
-                        else:
-                            entity_length = len(rec['atoms'])
-                            poly_bolean = True
-                            
-                            monomer_name_len_dict[auth_asym_id] = None
-        
-                            if rec['macromolecule_type'] == 'ligand':
-                                ligand_nr +=1
-                                total_ligand_token += entity_length
-                                
-                            elif rec['macromolecule_type'] == 'ion':
-                                ion_nr += 1
-                                total_ion_token += entity_length
-                            elif rec['macromolecule_type'] == 'glycan':
-                                glycan_nr += 1
-                                total_glycan_token += entity_length
-        
-                        total_token_nr += entity_length
-        
-
-        if poly_bolean:
-
-            non_poly_section = (ligand_degree * ligand_nr)  + (ion_degree * ion_nr) + (glycan_degree * glycan_nr)
-            
-            non_poly_section_cut_off = 30
-
-            if non_poly_section > non_poly_section_cut_off:
-               
-                non_poly_entity_length = (non_poly_section_cut_off * total_token_nr) // 360
-                 
-                ligand_length = non_poly_entity_length // (ligand_nr + 1/2 * ion_nr + glycan_nr)
-                ion_length = ligand_length // 2
-                glycan_length = ligand_length
-       
-            else:
-
-                ligand_length = (ligand_degree * total_token_nr) // 360
-                ion_length = (ion_degree * total_token_nr) // 360
-                glycan_length = (glycan_degree * total_token_nr) // 360
-                
-
-            for auth_asym_id, type in poly_type_dict.items():
-                
-                if type == 'ligand':
-                    monomer_name_len_dict[auth_asym_id] = int(ligand_length)
-                elif type == 'ion':
-                    monomer_name_len_dict[auth_asym_id] = int(ion_length)
-                elif type == 'glycan':
-                    monomer_name_len_dict[auth_asym_id] = int(glycan_length)
-                    
-                            
-        return monomer_name_len_dict, poly_type_dict   
     
     def get_plddt_dict(self):
         plddt_dict = {}
@@ -190,7 +102,9 @@ class RIBBON_DIAGRAM:
         if not self.boolean_modified_non_poly_length:
             sectors, poly_type_dict =  self.get_monomer_info_dict()
         else:
-            sectors, poly_type_dict =  self.get_modified_monomer_info_dict()
+            monomer_info_dict, poly_type_dict =  get_monomer_info_dict(chain_info_dict)
+        
+            sectors = {key: value['entity_length']  for key, value in monomer_info_dict.items()}
         
         interfaces_list = [interface['interface_id'] for interface in interactions_dict['interfaces']]
         
@@ -229,7 +143,7 @@ class RIBBON_DIAGRAM:
             
             plddt_list = plddt_dict[auth_asym_id]
             
-            if poly_type_dict[auth_asym_id] in ['ligand' , 'ion', 'glycan'] and self.boolean_modified_non_poly_length:
+            if poly_type_dict[auth_asym_id] in ['Ligand' , 'Ion', 'Glycan'] and self.boolean_modified_non_poly_length:
                 
                 plddt_value = np.mean(plddt_list)
                 
@@ -273,7 +187,7 @@ class RIBBON_DIAGRAM:
                     
                     if interface_id in biomolecule_interface_dict[label_asym_id]:
                         #check if label_asym id is a ligand or an ion, and boolean_modified_non_poly_length
-                        if poly_type in ['ligand' , 'ion', 'glycan'] and self.boolean_modified_non_poly_length:
+                        if poly_type in ['Ligand' , 'Ion', 'Glycan'] and self.boolean_modified_non_poly_length:
                             
                             interface_range = [1, sectors[auth_asym_id]]
                             
@@ -400,7 +314,7 @@ def extract_bridge(interaction, label2auth,monomer_length_dict,poly_type_dict, b
     label_asym_id = interaction['asym_id'] 
     auth_asym_id = label2auth[label_asym_id] 
     
-    if poly_type_dict[auth_asym_id] in ['ligand', 'ion', 'glycan'] and boolean_modified_non_poly_length:
+    if poly_type_dict[auth_asym_id] in ['Ligand', 'Ion', 'Glycan'] and boolean_modified_non_poly_length:
         
         start = 0
         end = monomer_length_dict[auth_asym_id] - 1

@@ -167,6 +167,7 @@ class POLYMER():
             'rec_type' : 'polymer',
             'macromolecule_type'  : self.id,
             'sequence' : sequence,
+            'entity_degree' : int(),
             'modifications' : [],
             'auth_asym_id' : str(),
             'label_asym_id' : str()
@@ -188,6 +189,7 @@ class PROTEIN(POLYMER):
             'rec_type' : 'non_polymer',
             'macromolecule_type'  : 'glycan',
             'non_poly_entity' : glycan,
+            'entity_degree' : int(),
             'position': position,
             'auth_asym_id' : str(),
             'label_asym_id' : str()
@@ -304,6 +306,7 @@ class NON_POLYMER():
             'rec_type' : 'non_polymer',
             'macromolecule_type': self.macromolecule_type,
             'non_poly_entity' : self.non_poly_entity,
+            'entity_degree' : int(),
             'auth_asym_id' : str(),
             'label_asym_id' : str()
         }

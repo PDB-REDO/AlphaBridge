@@ -85,6 +85,7 @@ def define_interfaces(in_dir, mode):
             
             feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
             chain_info_dict, sequence_info_dict = FEATURE_OBJECT.extract_chain_info_dict()
+            job_id_name = FEATURE_OBJECT.extract_job_id_name(job_request_path)
             
     else:
         raise  NotImplementedError("Output from AF2 or ColabFold not implemented yet")
@@ -141,7 +142,7 @@ def define_interfaces(in_dir, mode):
         
 
 
-    structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_dict)
+    structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_dict, job_id_name)
 
     #structure_info_df = INTERFACE_IDENTIFICATION.get_structure_info_dataframes(structure_score_dict)
 

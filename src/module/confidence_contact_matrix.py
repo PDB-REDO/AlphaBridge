@@ -232,7 +232,22 @@ class CCM_AF3(FEATURE_MATRIX):
             rec_list = RECORD_SERVER(request_file, structure_sequence_list, feature_dict).process_record_file()
                        
         return rec_list
-                     
+    
+    def extract_job_id_name(self, job_request_path):
+        
+        request_file = read_json_file(job_request_path)
+        
+        if self.check_alphafold_dialect():
+            
+            job_id_name = job_id_name = request_file['name']
+        
+        else:
+            
+            job_id_name = request_file[0]['name']
+        
+        return job_id_name
+            
+        
     def extract_sequence_info(self):
         
         feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
@@ -444,10 +459,24 @@ class CCM_AF3(FEATURE_MATRIX):
             'non_polymer' : []
         }
         
+        macromolecule_name_dict = {
+            'protein':'Protein',
+            'dna':'DNA',
+            'rna':'RNA',
+            'glycan': 'Glycan',
+            'ligand':'Ligand',
+            'ion': 'Ion'
+        }
+        
         for rec in rec_list:
             
             auth_asym_id = rec['auth_asym_id']
             label_asym_id = rec['label_asym_id']
+            
+            
+            record_name = macromolecule_name_dict[rec['macromolecule_type']] 
+            
+            rec['macromolecule_type'] = record_name
             
             if rec['rec_type'] == 'polymer':
                 rec['residues'] = []
@@ -461,7 +490,7 @@ class CCM_AF3(FEATURE_MATRIX):
                         "plddt" : float()
                     }
                     
-                    if rec['macromolecule_type'] == 'protein':
+                    if rec['macromolecule_type'] == 'Protein':
                         
                         if not rec['modifications']:
                             comp_id = upper_protein_letters_1to3[residue]
@@ -502,6 +531,19 @@ class CCM_AF3(FEATURE_MATRIX):
                     
                     rec['atoms'].append(atom_dict)
                 chain_info_dict['non_polymer'].append(rec)
+            
+            #section_degree part
+        monomer_name_len_dict, poly_type_dict = get_monomer_info_dict(chain_info_dict)
+        
+        for entity_type, rec_list in chain_info_dict.items():
+
+            for rec in rec_list:
+            
+                auth_asym_id = rec['auth_asym_id']
+                entity_degree =  monomer_name_len_dict[auth_asym_id]['entity_degree']
+                rec['entity_degree'] = entity_degree
+        
+            
     
         return chain_info_dict, sequence_info_dict
               
@@ -552,3 +594,98 @@ def fix_token_lists(mask, token_chain_ids, token_res_ids):
     token_res_ids =  np.delete(token_res_ids, remove_ptm_index)
     
     return token_chain_ids, token_res_ids
+
+def get_monomer_info_dict(chain_info_dict):
+    
+    chain_info_dict = chain_info_dict
+    
+    total_token_nr = 0
+    ligand_nr = 0
+    ion_nr = 0
+    glycan_nr = 0
+    
+    total_ligand_token = 0
+    total_ion_token = 0
+    total_glycan_token = 0
+    
+    ion_degree = 5
+    ligand_degree = 10
+    glycan_degree = 10
+
+    poly_bolean = False
+
+    monomer_name_len_dict = {}
+    poly_type_dict = {}
+    
+    for entity_type, rec_list in chain_info_dict.items():
+    
+                for rec in rec_list:
+                
+                    auth_asym_id = rec['auth_asym_id']
+                    if not auth_asym_id in monomer_name_len_dict:
+                        monomer_name_len_dict[auth_asym_id] = {'entity_length' : int(), 'entity_degree':int()}
+                        poly_type_dict[auth_asym_id] = str()
+                    
+                    poly_type_dict[auth_asym_id] = rec['macromolecule_type']
+    
+                    if entity_type == 'polymer':
+                    
+                        entity_length = len(rec['residues'])
+                        monomer_name_len_dict[auth_asym_id]['entity_length'] = entity_length
+                    else:
+                        entity_length = len(rec['atoms'])
+                        poly_bolean = True
+                        
+                        monomer_name_len_dict[auth_asym_id]['entity_length'] = None
+    
+                        if rec['macromolecule_type'] == 'Ligand':
+                            ligand_nr +=1
+                            total_ligand_token += entity_length
+                            
+                        elif rec['macromolecule_type'] == 'Ion':
+                            ion_nr += 1
+                            total_ion_token += entity_length
+                        elif rec['macromolecule_type'] == 'Glycan':
+                            glycan_nr += 1
+                            total_glycan_token += entity_length
+    
+                    total_token_nr += entity_length
+    
+
+    if poly_bolean:
+
+        non_poly_section = (ligand_degree * ligand_nr)  + (ion_degree * ion_nr) + (glycan_degree * glycan_nr)
+        
+        non_poly_section_cut_off = 30
+
+        if non_poly_section > non_poly_section_cut_off:
+            
+            non_poly_entity_length = (non_poly_section_cut_off * total_token_nr) // 360
+                
+            ligand_length = non_poly_entity_length // (ligand_nr + 1/2 * ion_nr + glycan_nr)
+            ion_length = ligand_length // 2
+            glycan_length = ligand_length
+    
+        else:
+
+            ligand_length = (ligand_degree * total_token_nr) // 360
+            ion_length = (ion_degree * total_token_nr) // 360
+            glycan_length = (glycan_degree * total_token_nr) // 360
+            
+
+        for auth_asym_id, type in poly_type_dict.items():
+            
+            if type == 'Ligand':
+                monomer_name_len_dict[auth_asym_id]['entity_length'] = int(ligand_length)
+            elif type == 'Ion':
+                monomer_name_len_dict[auth_asym_id]['entity_length'] = int(ion_length)
+            elif type == 'Glycan':
+                monomer_name_len_dict[auth_asym_id]['entity_length'] = int(glycan_length)
+        
+
+    entity_sum_length = sum([value['entity_length'] for key, value in monomer_name_len_dict.items()])
+
+    for key, value in monomer_name_len_dict.items():
+        monomer_name_len_dict[key]['entity_degree'] = (value['entity_length'] * 360) / entity_sum_length
+                   
+    return monomer_name_len_dict, poly_type_dict   

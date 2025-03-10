@@ -89,6 +89,7 @@ class interface_identification():
                             distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             
+                            
                             #dont consider non polymer chains in the calculation for general scores
                             #bolean value True if there is non_polymer in the binary interactoin
                             non_poly_bool = bool( {protA,protB} & set(non_polymer_chains_set))
@@ -132,6 +133,10 @@ class interface_identification():
         sequence_info_dict = self.sequence_info_dict
         
         label_asym_id_list = sequence_info_dict['label_asym_id'] 
+        chain_info_dict = self.chain_info_dict
+
+        macromolecule_type_dict = {macromolecule['label_asym_id']: macromolecule['macromolecule_type'] for rec_type, rec_list in chain_info_dict.items() for macromolecule in rec_list }
+
         
         interface_dict = {} 
         
@@ -139,6 +144,8 @@ class interface_identification():
             'cut-off' : self.threshold,
             'interfaces' : []
         }
+        
+        combination_dict_count = {}
 
         interface_count = 0
         interface_group = contact_df.groupby(['interfaces'])
@@ -156,10 +163,18 @@ class interface_identification():
 
                 
                 for interface, interface_link in zip(interface_list, interface_link_list):
-
-                    interface_name = f'interface {interface_count}'
-                    interface_id = f'I{interface_count}'
+                    
+                    interface_type = (macromolecule_type_dict[biomolecule_1],macromolecule_type_dict[biomolecule_2])
+                    
+                    if not interface_type in combination_dict_count:
+                        combination_dict_count[interface_type] = 0
+                    
+                    combination_dict_count[interface_type] += 1
+                    
                     interface_count += 1
+                    interface_name = f'{macromolecule_type_dict[biomolecule_1]}-{macromolecule_type_dict[biomolecule_2]} [{combination_dict_count[interface_type]}]'
+                    interface_id = f'I{interface_count}'
+                    
                     link_count = 0
 
                     matrix_probability_interface = []
@@ -360,13 +375,15 @@ class interface_identification():
         
         return structure_df
     
-    def get_structure_score_dict(self, chain_info_dict):
+    def get_structure_score_dict(self, chain_info_dict, job_id_name):
 
         contact_df, probability_structure_list, pmc_structure_list = self.extract_contacts()
         iptm = self.iptm 
 
+        
 
         scores_structure_dict = {
+            'job_id':job_id_name,
             'PDE':float(),
             'PMC':float(),
             'iptm': float(),
@@ -431,7 +448,7 @@ def map_residue_range(protein_region, submatrix_range, iteraction_range):
     delta_index = submatrix_range[0] - protein_region[0]
    
     start = iteraction_range.start + delta_index + 1
-    end = iteraction_range.stop  +  delta_index 
+    end = iteraction_range.stop  +  delta_index + 1
     
     return start, end
 
@@ -441,7 +458,7 @@ def fix_intervals(overlap_list):
     for i in range(1, len(overlap_list)):
         delta = overlap_list[i][0] - overlap_list[i-1][1]
         
-        if delta <= 2:
+        if delta <= 3:
             overlap_list[index][1] = max(overlap_list[index][1], overlap_list[i][1])
             
         else:
