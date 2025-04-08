@@ -14,6 +14,7 @@ from networkx.algorithms.components.connected import connected_components
 
 from src.module.parsers import MMCIFPARSER
 from src.module.alingment_utils import compare_protein_seq
+import src.module.scoring as scoring
 
 from Bio.Data import IUPACData
 
@@ -28,44 +29,52 @@ upper_protein_letters_1to3
 class interface_identification():
     
     def __init__(self,
-                 interacting_coevolutionary_domains, 
-                 entity_region_dict, 
-                 plddt_dict, 
-                 rec_sequence_list, 
-                 list_sequence_info, 
+                 coevolutionary_cluster_dict, 
+                 entity_region_dict,
+                 chain_info_dict,
+                 sequence_info_dict,
+                 iptm,
+                 chain_pair_iptm_matrix,
+                 confidence_matrix, 
                  contact_matrix,
-                 threshold, 
-                 chain_dict, 
-                 polymer_chain_dict):
+                 threshold):
         
-        self.interacting_coevolutionary_domains = interacting_coevolutionary_domains
+        self.coevolutionary_cluster_dict = coevolutionary_cluster_dict
         self.entity_region_dict = entity_region_dict 
-        self.plddt_dict = plddt_dict
-        self.rec_sequence_list = rec_sequence_list
-        self.list_sequence_info = list_sequence_info
+        #self.plddt_dict = plddt_dict
+        self.chain_info_dict = chain_info_dict
+        self.sequence_info_dict = sequence_info_dict
+        self.iptm = iptm
+        self.chain_pair_iptm_matrix = chain_pair_iptm_matrix
+        self.confidence_matrix = confidence_matrix
         self.contact_matrix  = contact_matrix
         self.threshold = threshold
-        self.chain_dict = chain_dict
-        self.polymer_chain_dict = polymer_chain_dict
+        #self.chain_dict = chain_dict
+        #self.polymer_chain_dict = polymer_chain_dict
         
         
     def extract_contacts(self):
         data = []
         
-        interacting_coevolutionary_domains = self.interacting_coevolutionary_domains
+        coevolutionary_cluster_dict = self.coevolutionary_cluster_dict
         contact_matrix = self.contact_matrix
+        confidence_matrix = self.confidence_matrix
         entity_region_dict = self.entity_region_dict
+        chain_info_dict = self.chain_info_dict
         
+        probability_structure_list = []
+        pmc_structure_list = []
+        non_polymer_chains_set = {non_polymer['label_asym_id'] for non_polymer in chain_info_dict['non_polymer']}
         
-        cluster_group_name_list = list(interacting_coevolutionary_domains.keys())
+        cluster_group_name_list = list(coevolutionary_cluster_dict.keys())
 
         for cluster_group_name in cluster_group_name_list:
             
-            overlap_cluster = interacting_coevolutionary_domains[cluster_group_name]['overlap_complex']
+            overlap_cluster = coevolutionary_cluster_dict[cluster_group_name]['overlap_complex']
             proteins_interacting_list = list(overlap_cluster.keys())
             if len(proteins_interacting_list) >= 2:
                 complex_combinations = list(unique_combinations(proteins_interacting_list, 2))
-
+                #print(complex_combinations)
 
                 for protA, protB in complex_combinations:
                     
@@ -76,7 +85,20 @@ class interface_identification():
                     for protA_range in protA_range_list:
                         for protB_range in protB_range_list:
                             
+                             
                             distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            
+                            
+                            #dont consider non polymer chains in the calculation for general scores
+                            #bolean value True if there is non_polymer in the binary interactoin
+                            non_poly_bool = bool( {protA,protB} & set(non_polymer_chains_set))
+                            
+                            #if the non_poly_boolis false, then consider it for the general structure score
+                            if not non_poly_bool:
+                                probability_structure_list.append(distance_submatrix)
+                                pmc_structure_list.append(confidence_submatrix)
+                            
                             interfaces, interface_range_list = find_interfaces(distance_submatrix, self.threshold)
                             
                             if not len(interface_range_list) == 0:
@@ -98,95 +120,290 @@ class interface_identification():
         contact_df = contact_df.reindex(
             columns = ['cluster_group_name','interfaces','prot_1', 'start_1', 'end_1', 'prot_2', 'start_2', 'end_2'])
         
-        return contact_df
+        return contact_df, probability_structure_list, pmc_structure_list
     
-    
-    def extract_interface(self):
+    def extract_interfaces(self):
         
-        contact_df = self.extract_contacts()
+        contact_df, probability_structure_list, pmc_structure_list = self.extract_contacts()
+        
+        entity_region_dict = self.entity_region_dict
+        confidence_matrix = self.confidence_matrix
+        contact_matrix = self.contact_matrix
+        chain_pair_iptm_matrix = self.chain_pair_iptm_matrix 
+        sequence_info_dict = self.sequence_info_dict
+        
+        label_asym_id_list = sequence_info_dict['label_asym_id'] 
+        chain_info_dict = self.chain_info_dict
+
+        macromolecule_type_dict = {macromolecule['label_asym_id']: macromolecule['macromolecule_type'] for rec_type, rec_list in chain_info_dict.items() for macromolecule in rec_list }
+
+        
+        interface_dict = {} 
+        
+        interactions_dict = {
+            'cut-off' : self.threshold,
+            'interfaces' : []
+        }
+        
+        combination_dict_count = {}
+
+        interface_count = 0
+        interface_group = contact_df.groupby(['interfaces'])
+        
+        if not contact_df.empty:
+            for _, df_group in interface_group:
+
+                ranges_prot_1 = mergeIntervals([list(range_tuple) for range_tuple in zip(df_group.start_1, df_group.end_1)])
+                ranges_prot_2 = mergeIntervals([list(range_tuple) for range_tuple in zip(df_group.start_2, df_group.end_2)])
+                
+                interface_list, interface_link_list = merge_split_interfaces(ranges_prot_1,ranges_prot_2,df_group)
+            
+                biomolecule_1 = df_group.prot_1.unique()[0]
+                biomolecule_2 = df_group.prot_2.unique()[0]
+
+                
+                for interface, interface_link in zip(interface_list, interface_link_list):
+                    
+                    interface_type = (macromolecule_type_dict[biomolecule_1],macromolecule_type_dict[biomolecule_2])
+                    
+                    if not interface_type in combination_dict_count:
+                        combination_dict_count[interface_type] = 0
+                    
+                    combination_dict_count[interface_type] += 1
+                    
+                    interface_count += 1
+                    interface_name = f'{macromolecule_type_dict[biomolecule_1]}-{macromolecule_type_dict[biomolecule_2]} [{combination_dict_count[interface_type]}]'
+                    interface_id = f'I{interface_count}'
+                    
+                    link_count = 0
+
+                    matrix_probability_interface = []
+                    matrix_pmc_interface = []
+
+                    interface_dict = {
+                        "interface_id": interface_id,
+                        "interface_name": interface_name,
+                        "PDE": float(),
+                        "PMC":  float(),
+                        "contact_iptm_score": float() ,
+                        "ABi_score": float() ,
+                        'links' : []
+                            }
+                    
+                    for link in interface_link:
+                        
+                        link_biomolecule_1, link_biomolecule_2 = link
+                        link_count +=1
+                        link_id = f'L{link_count}'
+                        
+                        link_dict = {
+                        "link_id": link_id,
+                        "PDE": float(),
+                        "first": { 
+                            "asym_id": biomolecule_1, 
+                            'link_range': {
+                                'start':link_biomolecule_1[0],
+                                'end':link_biomolecule_1[1],
+                            }},
+                        "second": { 
+                            "asym_id": biomolecule_2, 
+                            'link_range':{
+                                'start':link_biomolecule_2[0],
+                                'end':link_biomolecule_2[1],
+                            }}   
+                        }
+                        
+                        coord_link = map_link2coord(link, [biomolecule_1, biomolecule_2], entity_region_dict)
+                        matrix_probability_link, link_probability = scoring.calculate_probability_contact_link(coord_link,contact_matrix)
+                        matrix_pmc_link, pmc_link = scoring.calculate_pmc_link(coord_link, confidence_matrix)
+
+                        matrix_probability_interface.append(matrix_probability_link)
+                        matrix_pmc_interface.append(matrix_pmc_link)
+                        
+                        link_dict['PDE'] = link_probability
+                        interface_dict['links'].append(link_dict)
+                    
+                    chain_pair_iptm = get_chain_pair_iptm_value(biomolecule_1, biomolecule_2, chain_pair_iptm_matrix, label_asym_id_list)
+                    probability_contact_interface, contact_nr ,flatten_matrix_probability_interface = scoring.calculate_probability_contact_interface(matrix_probability_interface)
+                    pmc_interface , flatten_matrix_pmc_interface = scoring.calculate_pmc_interface(matrix_pmc_interface)
+                    interface_score_iptm, interface_score_pmc = scoring.calculate_interface_scores(probability_contact_interface, pmc_interface, chain_pair_iptm)
+                    
+                    interface_dict['PDE'] = probability_contact_interface
+                    interface_dict['PMC'] = pmc_interface
+                    interface_dict['contact_iptm_score'] = interface_score_iptm
+                    interface_dict['ABi_score'] = interface_score_pmc
+                    interactions_dict['interfaces'].append(interface_dict)
+                    
+            
+        return interactions_dict
+    
+    def map_info_interfaces(self, interactions_dict):
+        
+        biomolecule_interface_dict = {}
+        for interface in interactions_dict['interfaces']:
+            interface_id = interface['interface_id']
+            for link in interface['links']:
+                for index, biomolecule_involved in enumerate(['first', 'second']):
+                    asym_id = link[biomolecule_involved]['asym_id']
+                    
+                    #print(asym_id, link[biomolecule_involved]['link_range']['start'], link[biomolecule_involved]['link_range']['end'])
+                    link_range = (link[biomolecule_involved]['link_range']['start'], link[biomolecule_involved]['link_range']['end'])
+                    if asym_id not in biomolecule_interface_dict:
+                        biomolecule_interface_dict[asym_id] = {}
+                    if interface_id not in biomolecule_interface_dict[asym_id]:
+                        biomolecule_interface_dict[asym_id][interface_id] = set()
+                    biomolecule_interface_dict[asym_id][interface_id].add(link_range)
+        
+        biomolecule_interface_dict = convert_sets_to_lists(biomolecule_interface_dict)
+            
+       
+        return biomolecule_interface_dict
+    
+
+    '''def map_info_interfaces(self, interactions_dict):
+        
+        contact_df, probability_structure_list, pmc_structure_list = self.extract_contacts()
         chain_dict = self.chain_dict
         entity_region_dict = self.entity_region_dict
         rec_sequence_list = self.rec_sequence_list
+        confidence_matrix = self.confidence_matrix
         contact_matrix = self.contact_matrix
+        
+        iptm = self.iptm 
+        chain_pair_iptm_matrix = self.chain_pair_iptm_matrix 
+        sequence_names = self.sequence_info_dict[0]
+        
         
         interaction_link_dict = {}
         for fasta_name, seq in rec_sequence_list:
             if not fasta_name in interaction_link_dict:
                 interaction_link_dict[fasta_name] = []
-            
+                
         
         interface_dict = {}
         protein_interface_dict = {}
         interface_count = 1
-        
         interface_group = contact_df.groupby(['interfaces'])
         
         
-        for _, df_group in interface_group:
-            
-            ranges_prot_1 = mergeIntervals([list(range_tuple) for range_tuple in zip(df_group.start_1, df_group.end_1)])
-            ranges_prot_2 = mergeIntervals([list(range_tuple) for range_tuple in zip(df_group.start_2, df_group.end_2)])
-            
-            interface_list, interface_link_list = merge_split_interfaces(ranges_prot_1,ranges_prot_2,df_group)
-            
-            proteins_involved = [df_group.prot_1.unique()[0],df_group.prot_2.unique()[0]]
-            
-            for interface, interface_link in zip(interface_list, interface_link_list):
-                matrix_probability_interface = []
-                link_id = 0
                 
-                interface_name = f'Interface_{interface_count}'
-                interface_count += 1
-                
-                if not interface_name in interface_dict:
-                    interface_dict[interface_name] = {'prot_1':{'accesion_id':df_group.prot_1.unique()[0], 'chain' : chain_dict[df_group.prot_1.unique()[0]], 'interface_range':interface[0]},
-                                                'prot_2':{'accesion_id':df_group.prot_2.unique()[0], 'chain' : chain_dict[df_group.prot_2.unique()[0]], 'interface_range':interface[1]},
-                                                'links':interface_link,
-                                                'interface_prob': float()}
+        for interface, interface_link in zip(interface_list, interface_link_list):
+            matrix_probability_interface = []
+            matrix_pmc_interface = []
+            link_count = 0
+            
+            interface_name = f'interface {interface_count}'
+            interface_id = f'I{interface_count}'
+            interface_count += 1
+            
+            if not interface_name in interface_dict:
+                interface_dict[interface_name] = {'prot_1':{'accesion_id':biomolecule_1, 'chain' : chain_dict[biomolecule_1], 'interface_range':interface[0]},
+                                            'prot_2':{'accesion_id':biomolecule_2, 'chain' : chain_dict[biomolecule_2], 'interface_range':interface[1]},
+                                            'links':interface_link,
+                                            'interface_id' : interface_id,
+                                            'interface_prob': float(),
+                                            'interface_pmc':float(),
+                                            'interface_score_iptm':float(),
+                                            'interface_score_pmc':float()}
 
-                for link in interface_link:
-                    link_id +=1
-                    coord_link = map_link2coord(link, proteins_involved, entity_region_dict)
-                    matrix_probability_link, link_probability = calculate_probability_contact_link(coord_link,contact_matrix)
-                    matrix_probability_interface.append(matrix_probability_link)
+            for link in interface_link:
+                link_count +=1
+                link_id = f'L{link_count}'
+                
+                coord_link = map_link2coord(link, proteins_involved, entity_region_dict)
+                matrix_probability_link, link_probability = scoring.calculate_probability_contact_link(coord_link,contact_matrix)
+                matrix_pmc_link, pmc_link = scoring.calculate_pmc_link(coord_link, confidence_matrix)
+                
+                matrix_probability_interface.append(matrix_probability_link)
+                matrix_pmc_interface.append(matrix_pmc_link)
+                
+                for residue_range, prot in zip(link,proteins_involved):
+                    if not prot in interaction_link_dict:
+                        interaction_link_dict[prot]= []
                     
-                    for residue_range, prot in zip(link,proteins_involved):
-                        if not prot in interaction_link_dict:
-                            interaction_link_dict[prot]= []
-                        
-                        link_data = (residue_range, interface_name, link_id, link_probability)
-                        interaction_link_dict[prot].append(link_data)
-                
-                
-                probability_contact_interface = calculate_probability_contact_interface(matrix_probability_interface)
-                interface_dict[interface_name]['interface_prob'] = probability_contact_interface
-                
-                
-                for index, protein_involved in enumerate(proteins_involved):
-                    if not protein_involved in protein_interface_dict:
-                        protein_interface_dict[protein_involved] = {}
-                    if not interface_name in protein_interface_dict[protein_involved]:
-                        protein_interface_dict[protein_involved][interface_name] = {'interface_range':interface[index]}
-                
-        return interface_dict, protein_interface_dict, interaction_link_dict
+                    link_data = (residue_range, interface_name, link_count, link_id, link_probability)
+                    interaction_link_dict[prot].append(link_data)
+            
+            chain_pair_iptm = get_chain_pair_iptm_value(biomolecule_1, biomolecule_2, chain_pair_iptm_matrix, sequence_names)
+            
+            probability_contact_interface, contact_nr ,flatten_matrix_probability_interface = scoring.calculate_probability_contact_interface(matrix_probability_interface)
+            pmc_interface , flatten_matrix_pmc_interface = scoring.calculate_pmc_interface(matrix_pmc_interface)
+            interface_score_iptm, interface_score_pmc = scoring.calculate_interface_scores(probability_contact_interface, pmc_interface, chain_pair_iptm)
+            
+            interface_dict[interface_name]['interface_prob'] = probability_contact_interface
+            interface_dict[interface_name]['interface_pmc'] = pmc_interface
+            interface_dict[interface_name]['interface_score_iptm'] =interface_score_iptm
+            interface_dict[interface_name]['interface_score_pmc'] = interface_score_pmc
+            #scoring.plot_probability_histplot(probability_contact_interface,flatten_matrix_probability_interface)
+            
+            for index, protein_involved in enumerate(proteins_involved):
+                if not protein_involved in protein_interface_dict:
+                    protein_interface_dict[protein_involved] = {}
+                if not interface_name in protein_interface_dict[protein_involved]:
+                    protein_interface_dict[protein_involved][interface_name] = {'interface_range':interface[index]}
+            
+            
+        
+        return interface_dict, protein_interface_dict, interaction_link_dict'''
+    
          
         
-    def get_interface_info_dataframes(self, interface_dict, interaction_link_dict):
+    def get_interface_info_dataframes(self, interactions_dict):
         
-        rec_sequence_list = self.rec_sequence_list
-        list_sequence_info = self.list_sequence_info
-        chain_dict = self.chain_dict
+        '''rec_sequence_list = self.rec_sequence_list
+        sequence_info_dict = self.sequence_info_dict
+        
         polymer_chain_dict = self.polymer_chain_dict
         
-        plddt_dict = self.plddt_dict
+        plddt_dict = self.plddt_dict'''
+        auth2label = self.chain_dict
+        #interface_df_per_token = get_interface_df_per_token(rec_sequence_list, sequence_info_dict, chain_dict, polymer_chain_dict, interaction_link_dict, plddt_dict)
+        interface_df = get_interface_df(interactions_dict, auth2label)
         
-        interface_df_per_token = get_interface_df_per_token(rec_sequence_list, list_sequence_info, chain_dict, polymer_chain_dict, interaction_link_dict, plddt_dict)
-        interface_df = get_interface_df(interface_dict)
+        return interface_df
+    
+    def get_structure_info_dataframes(self, scores_structure_dict):
         
-        return interface_df_per_token, interface_df
+        PDE = scores_structure_dict['PDE'] 
+        PMC =scores_structure_dict['PMC']  
+        IPTM = scores_structure_dict['iptm']  
+        CONTACT_IPTM = scores_structure_dict['contact_iptm'] 
+        AB = scores_structure_dict['AB_score'] 
+        data = [[PDE, PMC, IPTM, CONTACT_IPTM, AB]]
+        
+        structure_df = pd.DataFrame(data=data, columns=['PDE','PMC', 'IPTM', 'contact_iptm', 'AB' ])
+        
+        return structure_df
+    
+    def get_structure_score_dict(self, chain_info_dict, job_id_name):
 
+        contact_df, probability_structure_list, pmc_structure_list = self.extract_contacts()
+        iptm = self.iptm 
 
         
+
+        scores_structure_dict = {
+            'job_id':job_id_name,
+            'PDE':float(),
+            'PMC':float(),
+            'iptm': float(),
+            'contact_iptm':float(),
+            'AB_score':float(),
+            'chains': chain_info_dict
+            }
+        
+        probability_contact_structure, pmc_structure, structure_score_iptm, structure_score_pmc = scoring.calculate_scores_stucture(probability_structure_list, pmc_structure_list, iptm)
+            
+        scores_structure_dict['PMC'] = pmc_structure
+        scores_structure_dict['PDE'] = probability_contact_structure
+        scores_structure_dict['iptm'] = iptm
+        scores_structure_dict['contact_iptm'] = structure_score_iptm
+        scores_structure_dict['AB_score'] = structure_score_pmc
+        
+
+        #structure_scores_df = get_structure_scores_df(scores_structure_dict)
+        return scores_structure_dict
+
 
 def repeat_chain(values, counts):
     return chain.from_iterable(map(repeat, values, counts))
@@ -231,7 +448,7 @@ def map_residue_range(protein_region, submatrix_range, iteraction_range):
     delta_index = submatrix_range[0] - protein_region[0]
    
     start = iteraction_range.start + delta_index + 1
-    end = iteraction_range.stop  +  delta_index 
+    end = iteraction_range.stop  +  delta_index + 1
     
     return start, end
 
@@ -241,7 +458,7 @@ def fix_intervals(overlap_list):
     for i in range(1, len(overlap_list)):
         delta = overlap_list[i][0] - overlap_list[i-1][1]
         
-        if delta <= 2:
+        if delta <= 3:
             overlap_list[index][1] = max(overlap_list[index][1], overlap_list[i][1])
             
         else:
@@ -348,7 +565,7 @@ def interface2links(unclustered_matrix, index_interface, ranges_prot_1,ranges_pr
     for link_index in links_index:
         if link_index[0] in index_interface[0] and link_index[1] in index_interface[1]:
             
-            link = [ranges_prot_1[link_index[0]], ranges_prot_2[link_index[1]]]
+            link = (ranges_prot_1[link_index[0]], ranges_prot_2[link_index[1]])
             interface_links.append(link)
     
     
@@ -388,35 +605,16 @@ def map_link2coord(link, binary_prot, entity_region_dict):
     coord_link = [list(np.array(link_terminal) + entity_region_dict[accesion_id][0] - 1) for accesion_id, link_terminal in zip(binary_prot, link)]
     return coord_link
 
-def calculate_probability_contact_link(coord_link, contact_probability):
-    matrix_probability_link = contact_probability[np.s_[coord_link[0][0]:coord_link[0][1]+1], np.s_[coord_link[1][0]:coord_link[1][1]+1]]
-    link_probability = np.mean([prob for prob in matrix_probability_link.flatten() if prob >= 0.1])
-    return matrix_probability_link, link_probability
-    
-
-def calculate_probability_contact_interface(matrix_probability_interface):
-    flatten_matrix_probability_interface = []
-    
-    for matrix_probability_link in matrix_probability_interface:
-        link_probability = [prob for prob in matrix_probability_link.flatten() if prob > 0]
-        flatten_matrix_probability_interface += link_probability
-    quantile = np.quantile(flatten_matrix_probability_interface, 0.5)
-    
-    interface_probability = np.mean([prob for prob in flatten_matrix_probability_interface if prob >= quantile])
-    
-    return interface_probability
-
-
 def get_interface_and_link_per_residue(res,accesion_id,interaction_link_dict):
     link_data_list = interaction_link_dict[accesion_id]
     
     link_interface_list = []
-    
-    for residue_range, interface, link, link_probability in link_data_list:
+
+    for residue_range, interface, link_count, link_id, link_probability in link_data_list:
         
         if residue_range[0] <= res <= residue_range[1]:
             
-            link_interface = (interface, int(link),link_probability)
+            link_interface = (interface, int(link_count),link_probability)
             
             link_interface_list.append(link_interface)
     
@@ -426,9 +624,9 @@ def get_interface_and_link_per_residue(res,accesion_id,interaction_link_dict):
     return link_interface_list
 
 
-def get_interface_df_per_token(rec_sequence_list, list_sequence_info, chain_dict, polymer_chain_dict, interaction_link_dict, plddt_dict):
+def get_interface_df_per_token(rec_sequence_list, sequence_info_dict, chain_dict, polymer_chain_dict, interaction_link_dict, plddt_dict):
             
-        list_fasta_name, list_fasta_acclen, list_fasta_centerticks, list_fasta_len = tuple(list_sequence_info)
+        list_fasta_name, list_fasta_acclen, list_fasta_centerticks, list_fasta_len = tuple(sequence_info_dict)
         fasta_sequence_dict = {}
         
         for fasta_name, seq in rec_sequence_list:
@@ -454,7 +652,7 @@ def get_interface_df_per_token(rec_sequence_list, list_sequence_info, chain_dict
                 
                 interface_link_list = get_interface_and_link_per_residue(res + 1,fasta_name,interaction_link_dict)
                 
-                for interface_nr, link_id,link_probability in interface_link_list:
+                for interface_nr,link_id,link_probability in interface_link_list:
                     
                     row = [fasta_name, chain_dict[fasta_name] ,res + 1, comp_id,interface_nr,link_id,pldtt,link_probability]
                 
@@ -464,30 +662,59 @@ def get_interface_df_per_token(rec_sequence_list, list_sequence_info, chain_dict
         
         return interface_df_per_token
 
-
-
-def get_interface_df(interface_dict):
-
-    interaction_link_data = []
-    for interface in interface_dict:
-        links =  interface_dict[interface]['links']
-        for link in links:
-            
+def get_interface_df(interactions_dict, auth2label):
+    interface_data = []
+    label2auth = dict(zip(auth2label.values(), auth2label.keys())) 
+    for interface_info in interactions_dict['interfaces']:
+        id = interface_info['interface_id']
+        interface_name = interface_info['interface_name']
         
-            
-            link_prot_1 = link[0]
-            link_prot_2 =  link[1]
-            
-            
+        label_asym_id_1 = interface_info['links'][0]['first']['asym_id']
+        label_asym_id_2 = interface_info['links'][0]['second']['asym_id']
+        
+        auth_asym_id_1 = label2auth[label_asym_id_1]
+        auth_asym_id_2 = label2auth[label_asym_id_2]
+        
 
-            accesion_id_1 = interface_dict[interface]['prot_1']['accesion_id']
-            accesion_id_2 = interface_dict[interface]['prot_2']['accesion_id']
-                    
+        PDEi = interface_info['PDE']
+        PMCi = interface_info['PMC']
+        contact_iptm_i = interface_info['contact_iptm_score']
+        AB_i =  interface_info['ABi_score']
                 
-            row = [interface, accesion_id_1,link_prot_1[0], link_prot_1[1],accesion_id_2,link_prot_2[0], link_prot_2[1]]
-        
-            interaction_link_data.append(row)  
+        row = [id ,interface_name, label_asym_id_1,label_asym_id_2, auth_asym_id_1, auth_asym_id_2, PDEi,PMCi,contact_iptm_i, AB_i]
     
-    interface_info_df = pd.DataFrame(data=interaction_link_data, columns=['interface','prot_1','start_1','end_1','prot_2','start_2','end_2'])
+        interface_data.append(row)  
+
+    interface_info_df = pd.DataFrame(data=interface_data, columns=['id','interface','label_asym_id_1','label_asym_id_2', 'auth_asym_id_1' ,'auth_asym_id_2','PDEi', 'PMC', 'contact_iptm_i', 'AB_i'])
     
     return interface_info_df
+
+def get_structure_scores_df(scores_structure_dict):
+
+    pmc_structure = scores_structure_dict['pmc'] 
+    probability_contact_structure = scores_structure_dict['probability_contact'] 
+    iptm = scores_structure_dict['iptm'] 
+    structure_score_iptm  = scores_structure_dict['score_iptm'] 
+    structure_score_pmc =  scores_structure_dict['score_pmc'] 
+
+    row = [[probability_contact_structure, pmc_structure , iptm, structure_score_iptm, structure_score_pmc]]
+    structure_scores_df = pd.DataFrame(data=row, columns=['probability_contact', 'PMC', 'iptm', 'contact_iptm_score', 'contact_pmc_score'])
+
+    return structure_scores_df
+
+def get_chain_pair_iptm_value(biomolecule_1, biomolecule_2,chain_pair_iptm_matrix, sequence_names):
+    
+    sequence_names_index_dict = { name:index  for index,name in enumerate(sequence_names)}
+    
+    return chain_pair_iptm_matrix[sequence_names_index_dict[biomolecule_1]][sequence_names_index_dict[biomolecule_2]]
+
+def convert_sets_to_lists(data):
+    if isinstance(data, dict):  # If the input is a dictionary
+        return {key: convert_sets_to_lists(value) for key, value in data.items()}
+    elif isinstance(data, set):  # If the input is a set
+        return list(data)
+    else:  # For all other types, return as is
+        return data
+
+    
+    
