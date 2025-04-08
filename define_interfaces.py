@@ -11,7 +11,7 @@ from src.module.domain_clustering import domain_clustering
 from src.module.parsers import MMCIFPARSER, HSSPPARSER, alphafold_msa
 #from src.module.conservation_score import CONSERVATION_SCORE
 from src.module.interface_identification import interface_identification
-#from src.module.ribbon_diagram import RIBBON_DIAGRAM
+from src.module.ribbon_diagram import RIBBON_DIAGRAM
 
 import argparse 
 
@@ -131,14 +131,14 @@ def define_interfaces(in_dir, mode):
         #interface_info_df = INTERFACE_IDENTIFICATION.get_interface_info_dataframes(interactions_dict)
     
     
-        # ribbon_diagram = RIBBON_DIAGRAM(
-        #                 interactions_dict,
-        #                 biomolecule_interface_dict,
-        #                 chain_info_dict,
-        #                 contact_threshold,
-        #                 outdir=outdir,
-        #                 boolean_modified_non_poly_length= True)
-        #ribbon_diagram.plot_ribbon_diagram()
+        ribbon_diagram = RIBBON_DIAGRAM(
+                         interactions_dict,
+                         biomolecule_interface_dict,
+                         chain_info_dict,
+                         contact_threshold,
+                         outdir=outdir,
+                         boolean_modified_non_poly_length= True)
+        ribbon_diagram.plot_ribbon_diagram()
         
 
 
