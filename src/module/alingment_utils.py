@@ -50,40 +50,34 @@ class compare_protein_seq:
         structure_list = self.structure_list
         fasta_list = self.fasta_list
         
-        chain_dict = {}
+        
+        auth_dict = {chain:sequence for chain, sequence in fasta_list}
+        label_dict = {chain:sequence for chain, sequence in structure_list}
+
+        mapping = defaultdict(lambda: {'auth_dict_keys': [], 'label_dict_keys': []})
+        
+        for key, value in auth_dict.items():
+            mapping[value]['auth_dict_keys'].append(key)
         
         
-        struct_dict = defaultdict(str)
-        fasta_dict = defaultdict(str)
-
-        chain_dict = {}
-
-        for struct, fasta in zip(structure_list,fasta_list):
- 
-            struct_chain, struct_seq = struct
-            fasta_chain, fasta_seq = fasta
-            
-            if not str(struct_seq) in struct_dict:
-                struct_dict[str(struct_seq)] = []
-            
-            if not str(fasta_seq) in fasta_dict:
-                fasta_dict[str(fasta_seq)] = []
-            
-            struct_dict[str(struct_seq)].append(struct_chain)
-            fasta_dict[str(fasta_seq)].append(fasta_chain)
-
-
-
-        key_seq_union = set().union(*[struct_dict,fasta_dict])
-
-
-        for key_seq  in key_seq_union:
-            
-            for struct_chain, fasta_chain in zip(struct_dict[key_seq], fasta_dict[key_seq]):
+        for key, value in label_dict.items():
+            mapping[value]['label_dict_keys'].append(key)
+        
+        auth2label = {}
+        
+        for key, map_dict in mapping.items():
+    
+            for auth_key, label_key in zip(map_dict['auth_dict_keys'], map_dict['label_dict_keys']):
                 
-                chain_dict[fasta_chain] = struct_chain
+                if not auth_key in auth2label:
+                    
+                    auth2label[auth_key] = str()
                 
-        return chain_dict
+                auth2label[auth_key] = label_key
+            
+            
+                
+        return auth2label
 
 class msa_folder:
     
