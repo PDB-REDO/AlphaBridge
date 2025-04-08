@@ -1,0 +1,3777 @@
+# This file contains essential data for PDB REDO:
+# - A list of all chiral atoms that can be fixed by CHIRON 
+# - All the residues that cannot be fixed by CHIRON
+# - A list of residues that have coupled chiral atoms
+# - A list of residues with atoms for which fixing is mutually exclusive
+# - An exclude list for ligand validation
+# - A list of LINKs that should be removed
+# - A list of LINKs that should have their counterparts swapped
+# - A list of LINKs that get a Refmac LINKid assigned
+# - A list of residues that should not be subjected to the O1-fix for glycosidic linkages
+# - A list of compounds with carbohydrate substructures that should not be renamed
+# - A list of compounds that are each others epimers around a particular atom 
+# - A list of compounds that can be translated to their parent cannonical amino acid in fasta files
+# - A list of residues that can be added to the parent chain's TLS group
+
+data_PDB_REDO_DAT
+# 
+loop_
+_res_atom.id 
+_res_atom.name 
+_res_atom.swaps 
+100 '001 C10' ' F10 F11                                                        ' 
+101 '002 C13' ' C20 C21                                                        ' 
+11  '003 C8 ' ' C9  C10                                                        ' 
+12  '006 C51' ' C52 C53                                                        ' 
+1   '017 S8 ' ' O9  O10                                                        ' 
+1A  '017 C13' ' C14 C15                                                        ' 
+101 '01A CBP' ' CDP CEP                                                        ' 
+13  '032 S28' ' O29 O30                                                        ' 
+13  '047 C15' ' C17 C29 C20 C26                                                ' 
+100 '059 C28' ' C29 C30                                                        ' 
+13  '065 S8 ' ' O9  O10                                                        ' 
+14  '065 C13' ' C14 C15                                                        ' 
+19  '07J N31' ' C32 C38 C33 C37                                                ' 
+20  '07J N34' ' C32 C38 C33 C37                                                ' 
+13  '08TBE  ' ' F1  F2                                                         ' 
+17  '097 C1 ' ' C2  C3                                                         ' 
+23  '0BD C12' ' C15 C16                                                        ' 
+24  '0BD C22' ' C13 C14                                                        ' 
+21  '0CO C25' ' C26 C27                                                        ' 
+24  '0G2 CAS' ' CAY CAZ CBB CBC                                                ' 
+16  '0JA C34' ' C35 C36                                                        ' 
+101 '0JZ C28' ' C29 C30                                                        ' 
+101 '0JZ C31' ' C32 C33                                                        ' 
+101 '0LI C19' ' F1  F2                                                         ' 
+28  '0NB S08' ' O09 O10                                                        ' 
+26  '0NH S8 ' ' O9  O10                                                        ' 
+30  '0PJ CG ' ' CD1 CD2                                                        ' 
+31  '0PJ CG1' 'CD11CD21                                                        ' 
+100 '0VV S12' ' O14 O15                                                        ' 
+101 '0WF C14' ' C13 C15                                                        ' 
+101 '0WF N5 ' ' C13 C15                                                        ' 
+101 '0XM CBF' ' CBG CBH CBR CBI CBQ CBJ CBP CBK CBO CBL CBN CBM                ' 
+23  '10U C17' ' C18 C21 C19 C20                                                ' 
+116 '116 C15' ' C16 C17                                                        ' 
+12  '11D N11' ' C12 C13                                                        ' 
+12A '11D S14' ' O15 O16                                                        ' 
+100 '11P C1 ' ' P1  P4  O8  O5  O9  O7  O6  O10                                ' 
+32  '11U C16' ' C17 C21 C18 C20                                                ' 
+16  '12U C49' ' C48 C50 C47 C51 C46 C52                                        ' 
+101 '13A S16' ' O20 O21                                                        ' 
+14  '144 N  ' ' C2  C3  O2  O3                                                 ' 
+101 '152 N5 ' ' C5A C5B                                                        ' 
+15  '155 C40' ' C41 C45                                                        ' 
+2   '165 C12' ' C13 C17 C14 C16                                                ' 
+2A  '165 S8 ' ' O37 O36                                                        ' 
+27  '16U C11' ' C12 C18                                                        ' 
+101 '178 C2A' ' C2B C2G                                                        ' 
+100 '17A C28' ' C29 C30                                                        ' 
+100 '17A S32' ' O33 O32                                                        ' 
+19  '180 S3 ' ' O4  O5                                                         ' 
+19  '180 C12' ' C13 C16 C14 C15                                                ' 
+34  '184 C19' ' C25 C26                                                        ' 
+29  '189 C17' ' C16 C18                                                        ' 
+30  '189 S10' ' O14 O15                                                        ' 
+101 '18Y C25' ' O16 O26 C28 C27                                                ' 
+101 '190 C27' ' C28 C29                                                        ' 
+100 '198 S14' ' O14 O15                                                        ' 
+100 '198 C7 ' ' F7A F7B                                                        ' 
+25  '1A2 C7 ' ' C11 C15 C12 C14                                                ' 
+17  '1AC CA ' ' CB  CG                                                         ' 
+26  '1AH C42' ' C43 C44                                                        ' 
+101 '1BY C1 ' ' P1  P2  O1  O6  O2  O4  O3  O5                                 ' 
+101 '1C2 S1 ' ' O4  O5                                                         ' 
+101 '1CN S3 ' ' O3  O4                                                         ' 
+31  '1CS S7 ' ' O7A O7B                                                        ' 
+43  '1CY C6 ' ' C9  C10                                                        ' 
+101 '1DB S  ' ' O2  O3                                                         ' 
+100 '1EP C8 ' ' C9  C10                                                        ' 
+101 '1FA C24' ' F25 F27                                                        ' 
+101 '1G5 S36' ' O37 O38                                                        ' 
+101 '1GZ CBY' ' CAB CAC                                                        ' 
+101 '1HE CBY' ' CAB CAC                                                        ' 
+36  '1IG C14' ' C20 C21                                                        ' 
+101 '1IQ C8 ' ' C9  C10                                                        ' 
+101 '1LG S21' ' O24 O25                                                        ' 
+20  '1N1 N5 ' ' C17 C18 C16 C19                                                ' 
+14  '1N1 N6 ' ' C17 C18 C16 C19                                                ' 
+101 '1N7 S1 ' ' O6  O7                                                         ' 
+25  '1OH C2 ' ' C3  C5                                                         ' 
+101 '1PS S1 ' ' O2  O3                                                         ' 
+101 '1TB S7 ' ' O7A O7B                                                        ' 
+17  '1TP P2 ' ' O22 O23                                                        ' 
+17  '1UN C13' ' C14 C15                                                        ' 
+100 '1VR CG ' ' CD1 CD2                                                        ' 
+32  '206 S16' ' O20 O21                                                        ' 
+100 '20E C25' ' C26 C27                                                        ' 
+101 '20M C27' ' C25 C29 C26 C28                                                ' 
+101 '20M N24' ' C25 C29 C26 C28                                                ' 
+101 '20M N30' ' C31 C34 C32 C33                                                ' 
+101 '20N C14' ' C15 C16                                                        ' 
+3   '211 N1 ' ' C1  C3  C2  C4  O1  O2                                         ' 
+100 '213 C52' ' C53 C54                                                        ' 
+100 '214 C52' ' C53 C54                                                        ' 
+101 '21F S15' ' O18 O19                                                        ' 
+101 '21R C04' ' C05 C23 C06 C22                                                ' 
+42  '21U C12' ' C13 C18                                                        ' 
+35  '224 C5 ' ' O1  O2  C7  C6                                                 ' 
+100 '227 S22' ' O26 O27                                                        ' 
+18  '22B C1 ' ' C16 C17                                                        ' 
+18  '22B C23' ' C24 C25                                                        ' 
+18  '22B C47' ' C48 C49                                                        ' 
+100 '235 C28' ' C29 C30                                                        ' 
+100 '235 S32' ' O33 O32                                                        ' 
+38  '23I S2 ' ' O23 O24                                                        ' 
+39  '23I C42' ' C43 C44                                                        ' 
+44  '247 CAH' ' F1  F2                                                         ' 
+66  '254 C19' ' C25 C26                                                        ' 
+26  '255 S31' ' O25 O26                                                        ' 
+100 '25D C26' ' C27 C31 C28 C30                                                ' 
+101 '274 N4 ' ' C24 C25 C27 C26                                                ' 
+101 '274 N5 ' ' C24 C25 C27 C26                                                ' 
+26  '276 C43' ' F45 F46                                                        ' 
+50  '281 C28' ' C29 C30                                                        ' 
+51  '281 S32' ' O32 O33                                                        ' 
+101 '28W CG ' ' CD1 CD2                                                        ' 
+35  '294 C27' ' F28 F29                                                        ' 
+100 '296 C11' ' F1  F2                                                         ' 
+101 '2AA N5 ' ' C12 C13                                                        ' 
+101 '2AA S1 ' " O3' O4'                                                        " 
+37  '2AH C48' ' C49 C50                                                        ' 
+68  '2AN S  ' ' O1  O2                                                         ' 
+101 '2AZ C4 ' ' C1  C6                                                         ' 
+41  '2B4 C8 ' ' C9  C12 O10 O13 O11 O14                                        ' 
+100 '2CS C2 ' ' C1  C6                                                         ' 
+101 '2DD S1 ' ' O6  O7                                                         ' 
+100 '2H0 C24' ' C25 C26                                                        ' 
+100 '2H0 C29' ' C30 C31                                                        ' 
+48  '2MC CBP' ' CDP CEP                                                        ' 
+49  '2MC P3B' ' O8A O9A                                                        ' 
+35  '2MM N  ' ' CN1 CN2                                                        ' 
+72  '2OB C25' ' C26 C27                                                        ' 
+40  '2OH C2 ' ' C3  C5                                                         ' 
+27  '2PG P  ' ' O3P O4P                                                        ' 
+34  '2S8 CBA' ' CAB CAC                                                        ' 
+45  '2T1 C12' ' F1  F2                                                         ' 
+24  '303 C40' ' C42 C46                                                        ' 
+38  '313 S5 ' ' C6  C7                                                         ' 
+43  '315 S49' ' O50 O51                                                        ' 
+44  '317 S40' ' O41 O42                                                        ' 
+101 '31F S  ' ' OAB OAD                                                        ' 
+84  '325 S24' ' O25 O27                                                        ' 
+101 '335 C17' ' F18 F19                                                        ' 
+43  '337 C10' ' C12 C13                                                        ' 
+101 '33Z C28' ' C29 C30                                                        ' 
+101 '343 C28' ' C29 C30                                                        ' 
+79  '349 S30' ' O31 O32                                                        ' 
+56  '34N S2 ' ' O3  O4                                                         ' 
+46  '352 C1 ' ' C2  C21                                                        ' 
+73  '359 S1 ' ' O3  O4                                                         ' 
+23  '385 S24' ' C34 C35                                                        ' 
+24  '385 C30' ' O28 O29                                                        ' 
+101 '394 C13' ' C20 C21                                                        ' 
+101 '3AA P2B' ' O2X O3X                                                        ' 
+101 '3AG P2 ' ' O6  O7                                                         ' 
+19  '3BC C29' ' C30 C31                                                        ' 
+101 '3CB S1 ' ' O3  O4                                                         ' 
+100 '3CS C33' ' C31 C32                                                        ' 
+101 '3CZ S1 ' ' O1  O2                                                         ' 
+101 '3DP NAQ' ' CAB CAC                                                        ' 
+101 '3FC C23' ' F24 F25                                                        ' 
+101 '3FC C27' ' C28 C29                                                        ' 
+30  '3HG C3 ' ' C2  C4  C1  C5  O1  O5  O3  O4                                 ' 
+101 '3IH C9 ' ' C10 C11                                                        ' 
+101 '3IH C15' ' C16 C17                                                        ' 
+79  '3PG P  ' ' O3P O4P                                                        ' 
+101 '3PI P3 ' ' O32 O33                                                        ' 
+101 '3PI P5 ' ' O52 O53                                                        ' 
+21  '3PX CB2' ' CB3 CB4                                                        ' 
+23  '3TL C12' ' CG1 CG2                                                        ' 
+34  '3TL C62' ' CG5 CG6                                                        ' 
+67  '3TN CBA' ' CAB CAC                                                        ' 
+101 '3TP S34' ' O35 O36                                                        ' 
+55  '406 C7 ' ' F8  F9                                                         ' 
+56  '406 N17' ' C18 C19                                                        ' 
+101 '40S C02' ' C03 C06 C04 C07 O05 O08                                        ' 
+70  '417 C39' ' F40 F41                                                        ' 
+95  '419 C28' ' C29 C35 C30 C36 C31 C37 C32 C38 C33 C39 C34 C40                ' 
+23  '420 S8 ' ' O9  O10                                                        ' 
+101 '444 C33' ' C34 C38 F36 F39 F35 F41 F37 F40                                ' 
+35  '448 C41' ' F27 F28                                                        ' 
+101 '44B C19' ' F21 F22                                                        ' 
+101 '44B C33' ' C34 C38 F36 F40 F37 F41 F35 F39                                ' 
+101 '44B C34' ' F36 F37                                                        ' 
+101 '44B C38' ' F39 F40                                                        ' 
+79  '44U C17' ' C18 C24 C19 C29 C20 C28 C21 C27 C22 C26 C23 C25                ' 
+43  '45U C44' ' C45 C49 C47 C48                                                ' 
+53  '4AH C48' ' C49 C50                                                        ' 
+92  '4BB CAY' ' CAB CAC                                                        ' 
+93  '4CA CBP' ' CDP CEP                                                        ' 
+66  '4CO CBP' ' CDP CEP                                                        ' 
+34  '4IP P1 ' ' O2P O3P                                                        ' 
+34  '4IP P3 ' ' O5P O6P                                                        ' 
+34  '4IP P4 ' ' O7P O8P                                                        ' 
+34  '4IP P5 ' ' OPF OPH                                                        ' 
+61  '4MB S11' ' O13 O14                                                        ' 
+85  '4MC N4 ' ' C40 C49 C39 C48                                                ' 
+85  '4MC N3 ' ' C40 C49 C39 C48                                                ' 
+50  '4MD S1A' ' O1F O1G                                                        ' 
+51  '4MD S1B' ' O1H O1I                                                        ' 
+113 '4MM NAL' ' CAC CAD                                                        ' 
+101 '4MS C24' ' C18 C19                                                        ' 
+101 '4NH C2 ' ' C1  C17                                                        ' 
+101 '4NH S2 ' ' O1  O2                                                         ' 
+89  '4NS S  ' ' O2  O3                                                         ' 
+18  '4NZ S  ' ' O1  O2                                                         ' 
+101 '4PT P3 ' ' O10 O11                                                        ' 
+101 '4PT P4 ' ' OP5 OP6                                                        ' 
+101 '4PT P5 ' ' OP7 OP8                                                        ' 
+101 '4QC C10' ' F   F1                                                         ' 
+101 '4SP C11' ' C12 C16 C13 C15                                                ' 
+83  '4TN CBB' ' CAB CAC                                                        ' 
+18  '4U7 C9 ' ' F1  F2                                                         ' 
+101 '4ZN C03' ' C02 C04                                                        ' 
+51  '50U C44' ' C45 C49 C46 C48                                                ' 
+100 '528 C28' ' C29 C30                                                        ' 
+60  '52H CBB' ' CAB CAC                                                        ' 
+61  '52H SBE' ' OAF OAG                                                        ' 
+62  '53H S1 ' ' O1A O2A                                                        ' 
+63  '54H CB ' ' CG1 CG2                                                        ' 
+64  '54H SBD' ' OAF OAG                                                        ' 
+16  '55V C1J' ' C1K C1X                                                        ' 
+137 '564 C19' ' C25 C26                                                        ' 
+104 '566 C3 ' ' C2  C4  C1  C5                                                 ' 
+99  '567 S1 ' ' O3  O4                                                         ' 
+101 '595 C12' ' C13 C14                                                        ' 
+101 '595 C42' ' C29 C30 C36 C31 C37 C32 C38 C33 C39 C34 C40 C35                ' 
+101 '598 C29' ' C30 C34 C31 C33                                                ' 
+101 '598 N32' ' C30 C34 C31 C33                                                ' 
+101 '5AS S  ' ' O2S O3S                                                        ' 
+101 '5CA S  ' ' O1S O2S                                                        ' 
+104 '5CH S21' ' O23 O24                                                        ' 
+101 '5CY C2 ' ' C1  C3                                                         ' 
+101 '5FE C13' ' F2  F3                                                         ' 
+101 '5FP C13' ' F2  F3                                                         ' 
+101 '5FP C23' ' C24 C39                                                        ' 
+31  '5HA C2 ' ' C1  C3                                                         ' 
+54  '5HI C6 ' ' C12 C13                                                        ' 
+114 '5IG C14' ' C20 C21                                                        ' 
+82  '5IP P1 ' ' O21 O31                                                        ' 
+129 '5IP P2 ' ' O22 O42                                                        ' 
+101 '5PI S1 ' ' O3  O4                                                         ' 
+101 '5QC C10' ' F1  F2                                                         ' 
+95  '5TN CBC' ' CAB CAC                                                        ' 
+100 '600 C52' ' F53 F54                                                        ' 
+101 '612 CF ' ' CH  CI                                                         ' 
+616 '616 S1 ' ' O1  O2                                                         ' 
+616 '616 N49' ' C48 C50 C47 C45                                                ' 
+101 '618 C17' ' C19 C20                                                        ' 
+125 '61X C23' ' F2  F3                                                         ' 
+126 '61X S1 ' ' O1  O2                                                         ' 
+93  '626 N19' ' C20 C24 C21 C23                                                ' 
+93  '626 N22' ' C20 C24 C21 C23                                                ' 
+36  '627 N17' ' C18 C22 C19 C21                                                ' 
+36  '627 N20' ' C18 C22 C19 C21                                                ' 
+153 '646 SBF' ' OAD OAE                                                        ' 
+100 '655 C2B' ' C1B C3B C4B C5B                                                ' 
+101 '665 C3 ' ' C2  C4  C1  C5                                                 ' 
+16  '695 S1 ' ' O1  O2                                                         ' 
+100 '698 C37' ' C40 C44                                                        ' 
+100 '698 C51' ' C7  C8                                                         ' 
+101 '6CP C11' ' C12 C16 C13 C15                                                ' 
+87  '6FL CG ' ' CD1 CD2 FAC FAF FAE FAH FAD FAG                                ' 
+58  '6HI C6 ' ' C4  C13                                                        ' 
+101 '6PL N  ' ' C6  C7                                                         ' 
+90  '701 S1 ' ' O1  O2                                                         ' 
+105 '715 C42' ' F43 F44                                                        ' 
+124 '721 C1 ' ' P1  P2  O3  O6  O1  O5  O2  O4                                 ' 
+101 '736 S1 ' ' O1  O2                                                         ' 
+101 '746 C33' ' C38 C42                                                        ' 
+101 '757 C48' ' C49 C50                                                        ' 
+101 '757 S23' ' O25 O26                                                        ' 
+100 '7A8 N12' ' C14 C15                                                        ' 
+96  '7CP N1W' ' C1K C1J C1M C1L                                                ' 
+100 '7MR CAP' ' FAF FAQ                                                        ' 
+101 '7T9 C2 ' ' C1  C3                                                         ' 
+145 '7YG N2 ' ' C1  C3                                                         ' 
+147 '825 C45' ' F46 F47                                                        ' 
+100 '864 C26' ' C27 C28                                                        ' 
+59  '882 C6 ' ' C13 C14                                                        ' 
+101 '885 S1 ' ' O1  O2                                                         ' 
+101 '888 C35' ' C7  C38                                                        ' 
+26  '894 S1 ' ' O1  O2                                                         ' 
+89  '895 S1 ' ' O1  O2                                                         ' 
+164 '896 C22' ' C23 C24                                                        ' 
+36  '897 C3 ' ' C25 C26                                                        ' 
+37  '897 C22' ' C23 C24                                                        ' 
+63  '8HI C23' ' C24 C25                                                        ' 
+106 '8MR SAN' ' OAS OAD                                                        ' 
+101 '8NC S1 ' ' O19 O20                                                        ' 
+103 '905 S1 ' ' O3  O4                                                         ' 
+103 '915 S15' ' O22 O23                                                        ' 
+3   '919 C79' ' C81 C83                                                        ' 
+101 '935 C20' ' F21 F22                                                        ' 
+107 '93A S16' ' O20 O21                                                        ' 
+101 '93N C20' ' F21 F23                                                        ' 
+101 '957 C15' ' C16 C17                                                        ' 
+101 '961 C13' ' C20 C21                                                        ' 
+100 '983 C28' ' C29 C30                                                        ' 
+110 '984 C55' ' C56 C57                                                        ' 
+100 '991 C2B' ' C1B C3B C5B C4B                                                ' 
+158 '99B C20' ' C21 C22                                                        ' 
+101 '9IN C18' ' C19 C20                                                        ' 
+101 '9RA C19' ' C27 C31                                                        ' 
+101 '9RA C22' ' C35 C39                                                        ' 
+50  'A00 C28' ' C29 C30 C31 C40 C32 C39 C33 C38 C34 C37 C35 C36                ' 
+91  'A11 C9 ' ' C10 C14 C11 C13                                                ' 
+86  'A17 C20' ' C21 C22                                                        ' 
+101 'A1A C42' ' C42 C44                                                        ' 
+101 'A23 P  ' ' OP2 OP3                                                        ' 
+150 "A24 N4'" ' C3B C5B C2B C6B                                                ' 
+101 'A26 C11' ' F12 F13                                                        ' 
+111 'A33 C3 ' ' C2  C4  C1  C5  O11 O51 O12 O52                                ' 
+39  'A4C ND4' ' CD0 CD9                                                        ' 
+177 'A58 C2 ' ' C3  C7  C4  C6                                                 ' 
+177 'A58 C5 ' ' C3  C7  C4  C6                                                 ' 
+100 'A5A S  ' ' O1S O2S                                                        ' 
+42  'A80 C1 ' ' C20 C21                                                        ' 
+139 'A83 S  ' ' O1  O2                                                         ' 
+24  'A8S C12' ' C14 C15                                                        ' 
+91  'A96 C36' ' F37 F38                                                        ' 
+101 'AAH P13' ' O15 O16                                                        ' 
+190 'AAS S1 ' ' O1  O2                                                         ' 
+113 'AAX S27' ' O28 O29                                                        ' 
+101 'AAZ S3 ' ' O4  O5                                                         ' 
+102 'AB2 S1 ' ' O2  O3                                                         ' 
+103 'AB2 C9 ' ' C10 C11                                                        ' 
+113 'AB3 C14' ' C19 C21                                                        ' 
+101 'AB4 S1 ' ' O8  O9                                                         ' 
+58  'ABJ C14' ' C19 C20                                                        ' 
+18  'ACH N1 ' ' C8  C9                                                         ' 
+18  'ACJ C1 ' ' F1  F2                                                         ' 
+3   'ACO CBP' ' CDP CEP                                                        ' 
+158 'ACO P3B' ' O8A O9A                                                        ' 
+101 'ACP PG ' ' O2G O3G                                                        ' 
+175 'ACV C32' ' C33 C37                                                        ' 
+111 'ACW C32' ' C33 C40                                                        ' 
+101 'AD4 C56' ' C54 C55                                                        ' 
+56  'ADX SB ' ' O1B O2B                                                        ' 
+101 'AEN S  ' ' O1S O2S                                                        ' 
+4   'AES S  ' ' O1S O2S                                                        ' 
+101 'AFI C13' ' C12 C14 C11 C15                                                ' 
+101 'AFJ C20' ' C22 C26                                                        ' 
+101 'AFJ C69' ' C71 C75                                                        ' 
+26  'AG7 C78' ' C81 C82                                                        ' 
+138 'AGS PG ' ' O2G O3G                                                        ' 
+101 'AHD C8 ' ' P9  P14 O11 O17 O12 O16 O10 O15                                ' 
+33  'AIB CA ' ' CB1 CB2                                                        ' 
+34  'AIC C6 ' ' C1  C16                                                        ' 
+154 'AIJ N29' ' C30 C33 C31 C32                                                ' 
+155 'AIT N29' ' C30 C33 C31 C32                                                ' 
+69  'AIX C6 ' ' C1  C16                                                        ' 
+101 'AJ7 N20' ' C21 C25 C22 C24                                                ' 
+119 'AJA C14' ' C17 C18                                                        ' 
+119 'AJA C19' ' C24 C25                                                        ' 
+99  'AK1 C23' ' F25 F26                                                        ' 
+146 'AKY N11' ' C51 C52                                                        ' 
+100 'ALC CG ' ' CD1 CD2 CE1 CE2                                                ' 
+100 'AMM CG ' ' CD1 CD2                                                        ' 
+100 'AMY C23' ' C24 C25                                                        ' 
+101 'AO2 C5 ' ' C1  C5  C2  C4                                                 ' 
+136 'AO5 C1 ' ' C2  C3                                                         ' 
+157 'AP8 N2 ' ' C50 C51                                                        ' 
+158 'AP8 N3 ' ' C58 C59                                                        ' 
+101 'AP9 C9 ' ' C10 C11                                                        ' 
+101 'AP9 C13' ' C14 C16                                                        ' 
+152 'ASG S  ' ' OSB OSC                                                        ' 
+101 'AT1 C3 ' ' C9  C10                                                        ' 
+104 'AT2 C9 ' ' C10 C14 C11 C13                                                ' 
+101 'AT3 N1 ' ' C8  C9                                                         ' 
+100 'ATF C3B' ' O2G O3G                                                        ' 
+101 'ATR PB ' ' O2B O3B                                                        ' 
+101 "ATR P2'" ' O2P O3P                                                        ' 
+101 'ATX C6 ' ' C7  C8                                                         ' 
+99  'AVE C30' ' F31 F33                                                        ' 
+150 'AVR C10' ' C11 C12                                                        ' 
+40  'AZM S1 ' ' O1  O2                                                         ' 
+114 'B08 CBA' ' PBB PBC OAD OAF OAE OAB OAA OAG                                ' 
+101 'B11 C10' ' C11 C15 C12 C14                                                ' 
+101 'B11 N13' ' C11 C15 C12 C14                                                ' 
+26  'B12 C12' ' C46 C47                                                        ' 
+224 'B15 S  ' ' O1  O2                                                         ' 
+101 'B17 S  ' ' O1  O2                                                         ' 
+119 'B19 S1 ' ' O7  O8                                                         ' 
+116 'B22 S  ' ' O1  O2                                                         ' 
+116 'B28 CBA' ' PBB PBC OAE OAF OAD OAB OAA OAG                                ' 
+115 'B29 CBB' ' PBC PBD OAD OAF OAE OAB OAA OAG                                ' 
+172 'B30 S  ' ' O1  O2                                                         ' 
+191 'B34 C21' ' C18 C19                                                        ' 
+41  'B36 CBG' ' CAR CAQ CAT CAS                                                ' 
+39  'B37 C21' ' C24 C28 C25 C27                                                ' 
+51  'B3L CD ' ' CE1 CE2                                                        ' 
+6   'B3P C8 ' ' C9  C10 O1  O2                                                 ' 
+14  'B3P C4 ' ' C6  C5  O5  O4                                                 ' 
+100 'B3V S1 ' ' O1  O2                                                         ' 
+100 'B3V N2 ' ' C16 C20 C17 C19                                                ' 
+100 'B3W N17' ' C11 C16 C12 C20                                                ' 
+219 'B49 N4 ' ' C39 C40 C42 C41                                                ' 
+101 'B5U N29' ' C30 C34 C31 C33                                                ' 
+101 'B5U N32' ' C30 C34 C31 C33                                                ' 
+30  'B65 SAY' ' OAE OAF                                                        ' 
+104 'B67 C7 ' ' F2  F3                                                         ' 
+101 'B69 SBB' ' OAF OAG                                                        ' 
+101 'B70 SAX' ' OAD OAF                                                        ' 
+123 'B75 SBK' ' OAC OAD                                                        ' 
+124 'B75 CBH' ' PBI PBJ OAF OAH OAG OAB OAA OAI                                ' 
+145 'BAH C9 ' ' O91 O92                                                        ' 
+100 'BAT C10' ' C11 C12                                                        ' 
+101 'BAV C66' ' C68 C72                                                        ' 
+230 'BAX C7 ' ' F8  F9                                                         ' 
+189 'BB2 C16' ' C17 C18                                                        ' 
+58  'BCA CBP' ' CDP CEP                                                        ' 
+101 'BCH N14' ' C11 C13                                                        ' 
+40  'BCL C18' ' C19 C20                                                        ' 
+34  'BCN N1 ' ' C3  C5  C4  C6  O4  O6                                         ' 
+103 'BCO C9 ' ' C13 C14                                                        ' 
+101 'BCR C1 ' ' C31 C32                                                        ' 
+101 'BCR C30' ' C39 C40                                                        ' 
+141 'BCV C32' ' C33 C37                                                        ' 
+158 'BCZ C24' ' C36 C37 C39 C38                                                ' 
+75  'BDC ND2' ' CD7 CD8                                                        ' 
+217 'BDQ C6 ' ' C7  C8                                                         ' 
+218 'BDV C6 ' ' C7  C8                                                         ' 
+31  'BE0 N1 ' ' CB1 CB2 CC1 CC2                                                ' 
+100 'BE8 S12' ' O13 O14                                                        ' 
+100 'BEE C38' ' C39 C40                                                        ' 
+101 'BEFBE  ' ' F1  F2                                                         ' 
+175 'BES C14' ' C15 C16                                                        ' 
+119 'BET N  ' ' C1  C2                                                         ' 
+217 'BG3 S1 ' ' O2  O3                                                         ' 
+154 'BG6 P  ' ' O1P O2P                                                        ' 
+101 'BGT CT ' ' C2  C3                                                         ' 
+71  'BH1 C18' ' C19 C20                                                        ' 
+100 'BHB N18' ' C19 C20                                                        ' 
+101 'BHI P5 ' ' O2  O4                                                         ' 
+177 'BHT S39' ' O43 O44                                                        ' 
+101 'BI1 NBC' ' CBE CBD                                                        ' 
+143 'BIV C25' ' C26 C27                                                        ' 
+144 'BIV C30' ' C32 C33                                                        ' 
+227 'BJ1 SAV' ' OAG OAI                                                        ' 
+101 'BL1 SAX' ' OAV OAW                                                        ' 
+101 'BLD C25' ' C26 C27                                                        ' 
+232 'BLG S  ' ' OS1 OS2                                                        ' 
+163 'BLM S53' ' C54 C55                                                        ' 
+101 'BMU C16' ' C17 C18                                                        ' 
+101 'BN6 C5 ' ' C6  C7                                                         ' 
+101 'BN6 C23' ' C24 C25                                                        ' 
+111 'BNT CAD' ' CAA CAC                                                        ' 
+146 'BO1 S1 ' ' O1  O2                                                         ' 
+21  'BOC CT ' ' C1  C2                                                         ' 
+101 'BP2 C8 ' ' C9  C10                                                        ' 
+218 'BRX C1 ' 'BR1 BR2                                                         ' 
+101 'BRZ C15' ' C16 C17                                                        ' 
+101 'BRZ C20' ' C22 C23                                                        ' 
+220 'BS1 N1 ' ' C17 C16                                                        ' 
+221 'BS1 C1 ' ' C5  C4  C19 C18 C23 C24 C26 C25 C21 C22 C9  C10 C15 C14        ' 
+183 'BS2 NBE' ' CBB CBC CAP CAQ                                                ' 
+101 'BSF SAP' ' OAA OAB                                                        ' 
+100 'BSG SAS' ' OAB OAC                                                        ' 
+273 'BSI S15' ' O28 O29                                                        ' 
+22  'BTB C2 ' ' C3  C4  O3  O4                                                 ' 
+22A 'BTB N  ' ' C5  C7  C6  C8  O6  O8                                         ' 
+40  'BTM N  ' ' C2  C4  C3  C5                                                 ' 
+137 'BUI N6 ' ' C13 C14                                                        ' 
+100 'BUJ N6 ' ' C10 C11                                                        ' 
+101 'BZ1 S1 ' ' O3  O4                                                         ' 
+118 'BZN C25' ' C26 C27                                                        ' 
+119 'BZN S17' ' O28 O29                                                        ' 
+100 'C0M N29' ' C30 C34 C31 C33                                                ' 
+61  'C15 S1 ' ' O1S O2S                                                        ' 
+90  'C1L N19' ' C20 C24 C21 C23                                                ' 
+37  'C1P C6 ' ' C7  C8                                                         ' 
+101 'C28 S14' ' O21 O25                                                        ' 
+101 'C33 C25' ' C26 C27                                                        ' 
+172 'C3M S14' ' O15 O16                                                        ' 
+101 'C3O C25' ' C26 C27                                                        ' 
+41  'C3S C63' ' C65 C69                                                        ' 
+42  'C3S S1 ' ' O2  O4                                                         ' 
+101 'C44 C6 ' ' C1  C2                                                         ' 
+101 'C44 S41' ' O52 O53                                                        ' 
+174 'C4M S12' ' O13 O14                                                        ' 
+100 'C5D C25' ' C26 C27 F19 F29 F21 F30 F11 F28                                ' 
+100 'C5D C26' ' F28 F29                                                        ' 
+100 'C5D C27' ' F11 F19                                                        ' 
+176 'C5M S12' ' O13 O14                                                        ' 
+100 'C62 S2 ' ' O3  O4                                                         ' 
+150 'C71 C1 ' ' C27 C30 C28 C29                                                ' 
+150 'C71 S19' ' O32 O33                                                        ' 
+179 'C7M S9 ' ' O10 O11                                                        ' 
+100 'C85 S2 ' ' O3  O4                                                         ' 
+88  'C94 S2 ' ' O3  O4                                                         ' 
+88  'C94 C24' ' F26 F27                                                        ' 
+71  'CAA CBP' ' CDP CEP                                                        ' 
+177 'CAI C3C' ' C4C C5C                                                        ' 
+274 'CAM C7 ' ' C8  C9                                                         ' 
+168 'CAO CBP' ' CDP CEP                                                        ' 
+274 'CASAS  ' ' CE1 CE2                                                        ' 
+100 'CAU C20' ' C21 C22                                                        ' 
+101 'CAZ C18' ' C19 C20                                                        ' 
+174 'CB4 C18' ' C19 C20                                                        ' 
+101 'CB9 CAZ' ' CAA CAB                                                        ' 
+101 'CBC S1 ' ' O38 O39                                                        ' 
+179 'CBD SA ' ' O1A O2A                                                        ' 
+179 'CBD SD ' ' O1D O2D                                                        ' 
+101 'CBQ C1 ' ' P1  P2  O1  O6  O2  O4  O3  O5                                 ' 
+101 'CBY C12' ' C46 C47                                                        ' 
+241 'CCK C46' ' C48 C51                                                        ' 
+101 'CCQ N5 ' ' C5B C5C                                                        ' 
+101 'CCV C12' ' C13 C14 O3  O4                                                 ' 
+101 'CCX C17' ' C16 C19 C18 C21                                                ' 
+101 'CCX N20' ' C16 C19 C18 C21                                                ' 
+101 'CDP PB ' ' O2B O3B                                                        ' 
+200 'CEL C4 ' ' F2  F3                                                         ' 
+201 'CEL S1 ' ' O1  O2                                                         ' 
+268 'CF3 C15' ' F1  F3                                                         ' 
+231 'CGT S19' ' O21 O20                                                        ' 
+70  'CGU CG ' ' CD1 CD2OE12OE22OE11OE21                                        ' 
+144 'CHG C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'CHH N1 ' ' C9  C10                                                        ' 
+101 'CHL C18' ' C19 C20                                                        ' 
+22  'CHT N1 ' ' C6  C7                                                         ' 
+99  'CII C15' ' C16 C17                                                        ' 
+227 'CIO C15' ' C16 C19 C17 C18                                                ' 
+25  'CIQ CBG' ' CAB CAC                                                        ' 
+26  'CIQ CBH' ' CAO CAP CAT CAU                                                ' 
+27  'CIQ NBK' ' CAO CAP CAT CAU                                                ' 
+138 'CIS S  ' ' O8  O9                                                         ' 
+26  'CIT C3 ' ' C4  C2  C5  C1  O3  O1  O4  O2                                 ' 
+101 'CIU C3 ' ' C2  C4  C1  C5                                                 ' 
+279 'CKP P  ' ' O1P O2P                                                        ' 
+46  'CL1 C18' ' C19 C20                                                        ' 
+95  'CLM C1 ' 'CL1 CL2                                                         ' 
+33  'CLR C25' ' C26 C27                                                        ' 
+101 'CM3 N30' ' C31 C35 C32 C34                                                ' 
+101 'CM5 C6 ' ' C7  C11 C8  C10                                                ' 
+251 'CM6 S1 ' ' O2  O3                                                         ' 
+97  'CM8 S08' ' O09 O10                                                        ' 
+98  'CM8 C41' ' F42 F43                                                        ' 
+227 'CMF C16' ' C17 C18 C20 C19                                                ' 
+101 'CMG C10' ' C11 C15 C12 C14                                                ' 
+101 'CNC C12' ' C46 C47                                                        ' 
+241 'CNL C8 ' ' C9  C10                                                        ' 
+180 'CO6 CBP' ' CDP CEP                                                        ' 
+138 'CO7 C12' ' C13 C14                                                        ' 
+25  'COA CBP' ' CDP CEP                                                        ' 
+37  'COA P3B' ' O9A O8A                                                        ' 
+50  'COB C12' ' C46 C47                                                        ' 
+101 'COD C29' ' C30 C31                                                        ' 
+101 'COI C4 ' ' C5  C6                                                         ' 
+101 'COK CBP' ' CDP CEP                                                        ' 
+101 'COK P3B' ' O7A O9A                                                        ' 
+69  'COM S2 ' ' O1S O2S                                                        ' 
+301 'CONCO  ' ' N2  N3                                                         ' 
+100 'COO C11' ' C14 C15                                                        ' 
+192 'COS CBP' ' CDP CEP                                                        ' 
+101 'COZ CBP' ' CDP CEP                                                        ' 
+101 'COZ P3B' ' O8A O9A                                                        ' 
+101 'CP0 N2 ' ' C22 C26 C36 C25                                                ' 
+101 'CP0 N3 ' ' C29 C35 C34 C27                                                ' 
+101 'CP0 C24' ' C22 C26 C36 C25                                                ' 
+101 'CPD N6 ' ' C27 C28                                                        ' 
+101 'CPJ C3 ' ' C2  C4  O1  O5                                                 ' 
+101 'CPJ C6 ' ' C2  C4  O1  O5                                                 ' 
+101 'CPK C3 ' ' C2  C4  O1  O5                                                 ' 
+101 'CPK C6 ' ' C2  C4  O1  O5                                                 ' 
+101 'CPK C23' ' C24 C28 O25 O27                                                ' 
+101 'CPK C26' ' C24 C28 O25 O27                                                ' 
+39  'CPS N2 ' ' C28 C29                                                        ' 
+40  'CPS S  ' ' O1S O3S                                                        ' 
+323 'CQA N3 ' ' C17 C19 C18 C20                                                ' 
+100 'CR3 C2B' ' C1B C3B C5B C4B                                                ' 
+101 'CRJ C10' ' F29 F30                                                        ' 
+101 'CRJ S14' ' O27 O28                                                        ' 
+101 'CRL C8 ' ' C10 C13 C11 C12                                                ' 
+101 'CRL S1 ' ' C10 C13 C11 C12                                                ' 
+173 'CRV C15' ' C18 C19                                                        ' 
+174 'CRV S11' ' O32 O33                                                        ' 
+308 'CSN S1 ' ' O2  O3                                                         ' 
+324 'CSU S  ' ' OD1 OD3                                                        ' 
+109 'CSW SG ' ' OD1 OD2                                                        ' 
+101 'CT1 C20' ' C21 C22                                                        ' 
+53  'CT7 S1 ' ' O2  O3                                                         ' 
+101 'CT9 C1 ' ' C3  C5  C2  C6                                                 ' 
+101 'CT9 C4 ' ' C3  C5  C2  C6                                                 ' 
+100 'CT9 C20' ' C21 C22                                                        ' 
+101 'CTC N4 ' " C4' C4D                                                        " 
+101 'CTJ C18' ' C19 C20                                                        ' 
+100 'CVM C6 ' ' C7  C11 C8  C10                                                ' 
+27  'CXN C5 ' ' C51 C52                                                        ' 
+50  'CXS S  ' ' O1  O2                                                         ' 
+51  'CXS C4 ' ' C5  C9  C6  C8                                                 ' 
+101 'CXT C24' ' C37 C38 O23 O25 O22 O24                                        ' 
+100 'CXX N2 ' ' C18 C19                                                        ' 
+101 'CY6 C15' ' C16 C17                                                        ' 
+82  'CYI C4 ' ' C3  C5  C2  C6                                                 ' 
+101 'CY7 NBU' ' CAB CAC                                                        ' 
+87  'D18 C8 ' ' C9  C10                                                        ' 
+87  "D18 C8'" " C9' CAX                                                        " 
+87  'D19 C8 ' ' C9  C10                                                        ' 
+87  "D19 C8'" " C9' CAX                                                        " 
+101 'D23 C19' ' C20 C21                                                        ' 
+101 'D2V C1W' ' C1B C1C                                                        ' 
+347 'D30 C32' ' F34 F35                                                        ' 
+101 'D31 C3 ' ' C6  C10 C7  C9                                                 ' 
+101 'D31 N8 ' ' C6  C10 C7  C9                                                 ' 
+168 'D3E C21' ' F23 F24                                                        ' 
+101 'D42 N3 ' ' C2  C4  C1  C5                                                 ' 
+101 'D42 N6 ' ' C2  C4  C1  C5                                                 ' 
+169 'D4N C2 ' ' F1  F4                                                         ' 
+170 'D4N S14' ' O15 O16                                                        ' 
+101 'D5X C3 ' " O3  O3'                                                        " 
+100 'D72 C14' ' F21 F22                                                        ' 
+100 'D72 C18' ' C19 C20                                                        ' 
+101 'D7G C3 ' ' C4  C5                                                         ' 
+297 'DA4 S2 ' ' O3  O4                                                         ' 
+89  'DA6 ND2' ' CD7 CD8                                                        ' 
+175 'DAI C10' ' C12 C15 C6  C14 C7  C19 C8  C18 C9  C17 C11 C16                ' 
+175 'DAI C13' ' C12 C15 C6  C14 C7  C19 C8  C18 C9  C17 C11 C16                ' 
+101 'DAK CP8' ' CPA CPB                                                        ' 
+101 'DAX ND2' ' CD7 CD8                                                        ' 
+223 'DB8 NBI' ' CAS CAR CAQ CAP                                                ' 
+223 'DB8 NBH' ' CAS CAR CAQ CAP                                                ' 
+213 'DCA CBP' ' CDP CEP                                                        ' 
+101 'DCC CPB' ' CP7 CP8                                                        ' 
+360 'DCJ N5 ' ' C13 C14                                                        ' 
+124 'DCL CG ' ' CD1 CD2                                                        ' 
+101 'DDQ N1 ' ' CM1 CM2                                                        ' 
+347 'DDZ CB ' ' OG1 OG2                                                        ' 
+100 'DED N12' ' C13 C14                                                        ' 
+281 'DET N  ' ' CM1 CM2                                                        ' 
+101 'DFA C11' ' C3  C10 C4  C12 C5  C13 C6  C14 C1  C15 C2  C16                ' 
+101 'DFE CAI' ' FAB FAC                                                        ' 
+113 'DFP C1 ' ' C2  C3                                                         ' 
+113 "DFP C1'" " C2' C3'                                                        " 
+269 'DGT PG ' ' O1G O2G                                                        ' 
+100 'DH9 C27' ' C28 C29                                                        ' 
+101 'DHM C1 ' ' C8  C9                                                         ' 
+301 'DI9 CAC' ' CAB CAL CAJ CAK                                                ' 
+101 "DIX C1'" " C2' C5' C3' C4'                                                " 
+118 'DKI SBB' ' OAC OAD                                                        ' 
+71  'DLE CG ' ' CD1 CD2                                                        ' 
+258 'DLN C19' ' C20 C21                                                        ' 
+352 'DLP N  ' ' C6  C7                                                         ' 
+12  'DMS S  ' ' C1  C2                                                         ' 
+340 'DMX N8 ' ' C12 C13                                                        ' 
+341 'DMX S11' ' O15 O16                                                        ' 
+100 'DN1 C8 ' ' C6  C7                                                         ' 
+100 'DN1 C14' ' F15 F16                                                        ' 
+302 'DN3 N22' ' C23 C24                                                        ' 
+217 'DN6 C7 ' ' F22 F23                                                        ' 
+265 'DOZ N2 ' ' C6  C8                                                         ' 
+132 'DPW N  ' ' C2  C3                                                         ' 
+101 'DR0 NAD' ' CAC CAK                                                        ' 
+101 'DR6 CAV' ' CAB CBA                                                        ' 
+335 'DR7 CB ' ' CAE CG2                                                        ' 
+336 'DR7 CBY' ' CAF CAH                                                        ' 
+385 'DR8 NAC' ' CAK CAA                                                        ' 
+101 "DRA N3'" " C7' C8'                                                        " 
+167 'DRR CB ' ' CG1 CG2                                                        ' 
+101 'DRS CAX' ' CAA CAB                                                        ' 
+358 'DSO S36' ' O35 O37                                                        ' 
+101 'DT1 C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'DT2 C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'DT2 S1 ' ' O2  O3                                                         ' 
+101 'DT4 S1 ' ' O2  O3                                                         ' 
+101 'DT4 C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'DT4 C4 ' ' C2  C6  C3  C5                                                 ' 
+101 'DT5 S1 ' ' O2  O3                                                         ' 
+101 'DT5 C1 ' ' C2  C6  C3  C5                                                 ' 
+73  'DVA CB ' ' CG1 CG2                                                        ' 
+101 'DVC C4 ' ' O4  O41                                                        ' 
+324 'DVP CAV' ' CAI CAU CAH CAT                                                ' 
+315 'DXP P  ' ' O1P O2P                                                        ' 
+274 'DXQ NBF' ' CAB CAC                                                        ' 
+182 'DY6 S2 ' ' O6  O7                                                         ' 
+329 'DYY SAF' ' OAB OAS                                                        ' 
+330 'DYY SAW' ' OAJ OBD                                                        ' 
+101 'DZ8 C94' ' C95 C96                                                        ' 
+304 'E18 N18' ' C19 C20                                                        ' 
+305 'E18 S19' ' O20 O22                                                        ' 
+101 'E40 C67' ' C68 C69                                                        ' 
+76  'E64 C8 ' ' C9  C10                                                        ' 
+159 'E67 NAY' ' CAZ CBA                                                        ' 
+195 'E6C C13' ' C14 C15                                                        ' 
+180 'E7B C31' ' C32 C33                                                        ' 
+93  'E97 N35' ' C43 C44                                                        ' 
+100 'EBW N1 ' ' C20 C21                                                        ' 
+100 'EBW N2 ' ' C25 C26                                                        ' 
+100 'ECH C1 ' ' C31 C32                                                        ' 
+100 'ECH C30' ' C39 C40                                                        ' 
+13  'EDT N3 ' ' C2  C4  C1  C5  O17 O20 O18 O19                                ' 
+13A 'EDT N8 ' ' C9  C11 C10 C12 O16 O14 O15 O13                                ' 
+101 'EFZ C13' ' F2  F3                                                         ' 
+322 'EIP P4 ' ' O1  O2                                                         ' 
+101 'ELY NZ ' ' CH1 CH2 CT1 CT2                                                ' 
+101 'EML C15' ' C18 C20                                                        ' 
+101 'ENB C20' ' C21 C22                                                        ' 
+101 'ENT C12' ' C14 C15                                                        ' 
+101 'ENT S1 ' ' O4  O5                                                         ' 
+101 'EPD C13' ' C29 C30                                                        ' 
+101 'EP  C59' ' C60 C64                                                        ' 
+9   'EPE N1 ' ' C2  C6  C3  C5                                                 ' 
+10  'EPE N4 ' ' C2  C6  C3  C5                                                 ' 
+11  'EPE S  ' ' O1S O2S                                                        ' 
+171 'ERY N1 ' ' C28 C29                                                        ' 
+407 'ESH C18' ' C41 C42                                                        ' 
+158 'ET1 S15' ' O22 O23                                                        ' 
+101 'ETM N1 ' ' C3  C4                                                         ' 
+101 'ETP S1 ' ' O3  O4                                                         ' 
+101 'ETS S8 ' ' O16 O17                                                        ' 
+101 'ETS S10' ' O11 O12                                                        ' 
+371 'EY5 N1 ' ' C28 C29                                                        ' 
+204 'EYK CAL' ' CAB CAC                                                        ' 
+314 'EZL S1 ' ' O1  O2                                                         ' 
+170 'F19 S11' ' O12 O13                                                        ' 
+174 'F1N C31' ' C32 C33                                                        ' 
+186 'F3F CAU' ' FAW FAX                                                        ' 
+167 'F6F C8 ' ' F9  F10                                                        ' 
+172 'F9F C8 ' ' F9F F10                                                        ' 
+382 "FAB C3'" " C4' C5'                                                        " 
+101 'FAL N25' ' C26 C27                                                        ' 
+414 'FAP N27' ' C28 C29                                                        ' 
+376 'FB2 S07' ' O08 O09                                                        ' 
+101 'FBI S1 ' ' O1S O2S                                                        ' 
+101 'FBI C91' ' C92 C93                                                        ' 
+101 'FBL N25' ' C26 C27                                                        ' 
+101 'FBQ C22' ' F23 F24                                                        ' 
+414 'FCP N27' ' C28 C29                                                        ' 
+101 'FD5 SBJ' ' OBN OBO                                                        ' 
+101 'FF3 C3 ' ' F1  F2                                                         ' 
+101 'FF3 S2 ' ' O1  O2                                                         ' 
+101 'FHP PA ' ' O2A O3A                                                        ' 
+23  'FLC CB ' ' CA  CG  CAC CGC OA1 OG1 OA2 OG2                                ' 
+211 "FLF C7'" ' F1  F2                                                         ' 
+101 'FLQ C10' ' C9  C11 C8  C12 C7  C13 C6  C1  O3  O1  C5  C2  C4  C3         ' 
+292 'FMN P  ' ' O2P O3P                                                        ' 
+101 'FNS S  ' ' O2S O3S                                                        ' 
+101 'FPE P1 ' ' O3  O4                                                         ' 
+100 'FQP CM2' ' F1  F2                                                         ' 
+236 'FRA C12' ' C13 C17 C14 C16                                                ' 
+236 'FRA C15' ' C13 C17 C14 C16                                                ' 
+101 'FRE CBP' ' CCP CDP                                                        ' 
+101 'FRJ S33' ' O35 O36                                                        ' 
+141 'FRS C6 ' ' F8  F9                                                         ' 
+143 'FRV S14' ' O29 O30                                                        ' 
+83  'FSC C44' ' C46 C47                                                        ' 
+100 'FSG P  ' ' O2  O3                                                         ' 
+101 'FTP CM2' ' F1  F2                                                         ' 
+101 'FTS C13' ' F1  F2                                                         ' 
+101 'FUN S1 ' ' O1  O2                                                         ' 
+190 'FXA S7 ' ' O32 O33                                                        ' 
+101 'FXI S1 ' ' O3  O4                                                         ' 
+255 'G0G S8 ' ' O10 O41                                                        ' 
+255 'G0G S9 ' ' O11 O40                                                        ' 
+101 'G1L C20' ' F22 F23                                                        ' 
+430 'G1P P  ' ' O2P O3P                                                        ' 
+100 'G2G C14' ' C15 C16                                                        ' 
+60  'G39 C8 ' ' C9  C81 C91 C82                                                ' 
+312 'G3G S8 ' ' O10 O41                                                        ' 
+351 'G3H P  ' ' O3P O4P                                                        ' 
+142 'G3P P  ' ' O3P O4P                                                        ' 
+312 'G4G S8 ' ' O10 O41                                                        ' 
+313 'G4G S9 ' ' O11 O40                                                        ' 
+100 'G5K N15' ' C16 C20 C17 C19                                                ' 
+345 'G6H CBK' ' FBL FBM                                                        ' 
+100 'G6K N15' ' C16 C20 C17 C19                                                ' 
+101 'G6P P  ' ' O1P O2P                                                        ' 
+100 'G80 C23' ' C24 C26 C25 C27                                                ' 
+349 'G98 C13' ' C14 C15                                                        ' 
+433 'G9D N11' ' CAH CAI CAF CAG                                                ' 
+372 'G9F N11' ' CAA CAB                                                        ' 
+421 "GA2 C2'" " C3' C4' O3' O4'                                                " 
+71  'GA9 C12' ' C13 C19 C14 C20 C15 C21BR1 BR2  C16 C22 O3  O4  C17 C23 C18 C24' 
+101 'GAR P15' ' O17 O18                                                        ' 
+182 'GBN C1R' ' C2R C6R C3R C5R                                                ' 
+101 'GCA CF ' ' CH  CI                                                         ' 
+403 'GD7 C6 ' ' C2  C3                                                         ' 
+160 'GD9 S2 ' ' O1  O2                                                         ' 
+101 'GDP PB ' ' O2B O3B                                                        ' 
+319 "GEO C2'" ' F1  F2                                                         ' 
+101 'GEQ N1C' ' C2C C6C C3C C5C                                                ' 
+310 'GFF C3B' ' F1B F2B                                                        ' 
+118 'GG3 C8 ' ' P9  P14 O12 O16 O11 O15 O10 O17                                ' 
+100 'GG4 C18' ' C21 C22                                                        ' 
+127 'GG6 P  ' ' O4  O5                                                         ' 
+195 'GGT C16' ' O9  O10 C32 C33                                                ' 
+370 'GGV C37' ' C38 C39                                                        ' 
+371 'GGX C37' ' C38 C39                                                        ' 
+346 'GIL C16' ' C19 C20                                                        ' 
+347 'GIL C27' ' C28 C30                                                        ' 
+101 'GLE C32' ' F31 F32                                                        ' 
+399 'GLL C2 ' " N1  N1' C1  C1' O1  O1' N2  N2'                                " 
+400 'GLL C3 ' " N1  N1' C1  C1' O1  O1' N2  N2'                                " 
+220 'GM6 CAH' ' CAI CAJ                                                        ' 
+5   'GOL C2 ' ' C3  C1  O3  O1                                                 ' 
+100 'GP1 P4B' ' O7B O9B                                                        ' 
+100 'GP4 P4A' ' O7A O9A                                                        ' 
+313 'GRL C34' ' C35 C36                                                        ' 
+164 'GRL S31' ' O32 O33                                                        ' 
+101 'GS5 S4 ' ' O8  O9                                                         ' 
+207 'GS7 S  ' ' O2  O3                                                         ' 
+257 'GSJ S1 ' ' O1  O2                                                         ' 
+101 'GSK S1 ' ' O1  O2                                                         ' 
+250 'GSU S  ' ' O1S O2S                                                        ' 
+259 'GSZ CAN' ' CAZ CBA                                                        ' 
+100 'GTS SG2' ' O1S O2S                                                        ' 
+101 'GU0 S2 ' ' O23 O24                                                        ' 
+101 'GU0 S3 ' ' O26 O27                                                        ' 
+101 'GU0 S6 ' ' O29 O30                                                        ' 
+101 'GU3 S2 ' ' O54 O55                                                        ' 
+101 'GU4 S2 ' ' O11 O12                                                        ' 
+101 'GU4 S3 ' ' O27 O28                                                        ' 
+101 'GU4 S4 ' ' O25 O26                                                        ' 
+101 'GU4 S6 ' ' O22 O23                                                        ' 
+101 'GU6 S2 ' ' O14 O15                                                        ' 
+101 'GU6 S3 ' ' O16 O17                                                        ' 
+101 'GU6 S6 ' ' O20 O21                                                        ' 
+281 'GUI N22' ' C23 C27 C24 C26                                                ' 
+281 'GUI N25' ' C23 C27 C24 C26                                                ' 
+281 'GUI S36' ' O40 O41                                                        ' 
+281 'GUI C37' ' C38 C39                                                        ' 
+100 'GVM C5 ' ' C5A C5B                                                        ' 
+203 'GWE C14' ' F1  F2                                                         ' 
+204 'GWE S1 ' ' O4  O5                                                         ' 
+206 'GWI S  ' ' O4  O5                                                         ' 
+206 'GWJ S  ' ' O4  O5                                                         ' 
+383 'H01 S1 ' ' O1  O2                                                         ' 
+101 'H1N SAY' ' OAU OBE                                                        ' 
+101 'H1N NAI' ' CAJ CAK CAL CAV                                                ' 
+272 'H1S S16' ' O21 O22                                                        ' 
+273 'H1S S20' ' O28 O29                                                        ' 
+64  'H52 S5 ' ' O1  O2                                                         ' 
+101 'H64 C95' ' C96 C97                                                        ' 
+425 'H7J C15' ' C26 C27                                                        ' 
+101 'H8H N2 ' ' C3  C38 C4  C37                                                ' 
+101 'H8H N5 ' ' C3  C38 C4  C37                                                ' 
+89  'HA1 C14' ' F15 F16                                                        ' 
+408 'HAI C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'HBB C17' ' C18 C19                                                        ' 
+101 'HBB S32' ' O33 O34                                                        ' 
+101 'HBH S32' ' O33 O34                                                        ' 
+314 'HBQ C12' ' C13 C14                                                        ' 
+101 'HC5 NAN' ' CAJ CAT                                                        ' 
+479 'HC7 NBF' ' CAA CAB                                                        ' 
+6   'HC9 C25' ' C26 C27                                                        ' 
+101 'HFS S1 ' ' O2  O3                                                         ' 
+101 'HFT C11' ' C12 C13                                                        ' 
+101 'HG1 CAU' ' CAO CAP CAJ CAK                                                ' 
+101 'HIE C23' ' F1  F2                                                         ' 
+101 'HLT C2 ' ' F2  F3                                                         ' 
+100 'HM4 C11' ' C12 C13                                                        ' 
+101 'HMS P1 ' ' O2  O3                                                         ' 
+470 'HN5 C17' ' C19 C20                                                        ' 
+101 'HP8 S  ' ' OS1 OS2                                                        ' 
+101 'HQL C5 ' ' C4  C15 C3  C16 C2  C17 C1  C18 C22 C19 C21 C20                ' 
+101 'HQL C6 ' ' C7  C14 C8  C13                                                ' 
+101 'HQL N1 ' ' C7  C14 C8  C13                                                ' 
+101 'HR1 C6 ' ' C13 C14                                                        ' 
+101 'HRI CF1' ' CI1 CI2                                                        ' 
+168 'HS1 S1 ' ' O1  O2                                                         ' 
+171 'HS3 S1 ' ' O1  O2                                                         ' 
+172 'HS5 S1 ' ' O4  O5                                                         ' 
+173 'HS6 S1 ' ' O3  O4                                                         ' 
+100 'HSS S  ' ' O2S O3S                                                        ' 
+100 'HSW S1 ' ' O1  O2                                                         ' 
+102 'HT  N5 ' ' C22 C23 C21 C24                                                ' 
+103 'HT  N6 ' ' C22 C23 C21 C24                                                ' 
+100 'HU1 C10' ' C11 C12 C13 C14                                                ' 
+100 'HU1 C4 ' ' C5  C6                                                         ' 
+100 'HU1 C23' ' C24 C25                                                        ' 
+100 'HU1 C31' ' C32 C33                                                        ' 
+100 'HU2 C17' ' C18 C19                                                        ' 
+100 'HU4 C24' ' C25 C26                                                        ' 
+100 'HU4 C10' ' C11 C12 C13 C14                                                ' 
+346 'HU5 C10' ' C12 C13                                                        ' 
+347 'HU5 C21' ' C22 C23                                                        ' 
+348 'HU5 C29' ' C30 C31                                                        ' 
+100 'HUD C10' ' C11 C12                                                        ' 
+100 'HUD C21' ' C22 C23                                                        ' 
+100 'HUD C29' ' C30 C31                                                        ' 
+101 'HWG C45' ' C46 C50                                                        ' 
+101 'HYF C5 ' ' C4  C6                                                         ' 
+101 'HZ1 C41' ' C42 C43                                                        ' 
+120 'HZH C11' ' F1  F3                                                         ' 
+100 'I12 C10' ' C11 C12                                                        ' 
+101 'I12 C16' ' C17 C18                                                        ' 
+145 'I25 N29' ' C30 C31                                                        ' 
+101 "I4B C2'" " C3' C4'                                                        " 
+397 'I5S S16' ' O17 O18                                                        ' 
+292 'I7A S2 ' ' O3  O4                                                         ' 
+487 'I7B S1 ' ' O1  O2                                                         ' 
+488 'I7B S2 ' ' O3  O4                                                         ' 
+101 'I84 S37' ' O45 O46                                                        ' 
+106 'IA  N6 ' ' C20 C23 C21 C22                                                ' 
+106 'IA  N7 ' ' C20 C23 C21 C22                                                ' 
+106 'IB  N6 ' ' C20 C23 C21 C22                                                ' 
+106 'IB  N7 ' ' C20 C23 C21 C22                                                ' 
+101 'IBD NBE' ' CAL CAM CAB CAC                                                ' 
+7   'IBM C12' ' C13 C14                                                        ' 
+118 'IBN C2 ' ' C3  C4                                                         ' 
+413 'IBP C3 ' ' C4  C5                                                         ' 
+81  'IDS S  ' ' O1S O2S                                                        ' 
+317 'IDU S  ' ' O1S O2S                                                        ' 
+101 'IEM C8 ' ' C9  C10                                                        ' 
+100 'IFP CM2' ' F1  F2                                                         ' 
+421 'IFS C82' ' C92C102                                                        ' 
+101 'IGN C52' ' C51 C53 C56 C54                                                ' 
+332 'IH5 C14' ' C16 C18                                                        ' 
+101 'IHE C29' ' C30 C34 C31 C33                                                ' 
+101 'IHE N06' ' C05 C01 C02 C04                                                ' 
+101 'IHE N03' ' C05 C01 C02 C04                                                ' 
+101 'IHI C12' ' C13 C16 C14 C15                                                ' 
+101 'IHJ C16' ' C17 C20 C18 C19                                                ' 
+143 'IHP P1 ' ' O31 O41                                                        ' 
+143 'IHP P2 ' ' O32 O42                                                        ' 
+143 'IHP P3 ' ' O33 O43                                                        ' 
+143 'IHP P4 ' ' O34 O44                                                        ' 
+143 'IHP P5 ' ' O35 O45                                                        ' 
+143 'IHP P6 ' ' O36 O46                                                        ' 
+115 'IHS S1 ' ' O3  O4                                                         ' 
+115 'IHS S2 ' ' O22 O42                                                        ' 
+115 'IHS S3 ' ' O23 O43                                                        ' 
+115 'IHS S4 ' ' O24 O34                                                        ' 
+508 'IHS S5 ' ' O25 O45                                                        ' 
+115 'IHS S6 ' ' O26 O36                                                        ' 
+256 'IHZ CBD' ' FAG FAF                                                        ' 
+101 'IIA C12' ' C13 C17 C14 C16                                                ' 
+101 'IIA N15' ' C13 C17 C14 C16                                                ' 
+101 'IIA C27' ' C28 C32                                                        ' 
+101 'IIB C12' ' C13 C17 C14 C16                                                ' 
+101 'IIB N15' ' C13 C17 C14 C16                                                ' 
+101 'IIB C27' ' C28 C32                                                        ' 
+101 'IID C16' ' C19 C20                                                        ' 
+101 'IID C13' ' C10 C14 C12 C26                                                ' 
+101 'IID N1 ' ' C10 C14 C12 C26                                                ' 
+101 'IIE C12' ' C13 C17 C14 C16                                                ' 
+101 'IIE N15' ' C13 C17 C14 C16                                                ' 
+101 'IIE C27' ' C28 C32                                                        ' 
+415 'ILI C24' ' C25 C26                                                        ' 
+416 'ILI S7 ' ' O8  O9                                                         ' 
+114 'IM1 C1 ' ' C3  C4                                                         ' 
+101 'IN0 C10' ' C24 C25                                                        ' 
+101 'INN C1 ' ' C2  C3                                                         ' 
+101 'INN C6 ' ' C8  C9                                                         ' 
+101 'INZ C10' ' C1  C14 O3  O16 O2  O15                                        ' 
+289 'IOG N34' ' C35 C39 C36 C38                                                ' 
+101 'IOS S  ' ' O2  O3                                                         ' 
+471 'IP1 C32' ' C33 C37                                                        ' 
+101 'IP2 P4 ' ' O42 O43                                                        ' 
+101 'IP2 P5 ' ' O52 O53                                                        ' 
+500 'IPM C5 ' ' C6  C7                                                         ' 
+7   'IPA C2 ' ' C1  C3                                                         ' 
+264 "IPT C1'" " C2' C3'                                                        " 
+101 'IPZ C8 ' ' C9  C10                                                        ' 
+279 'IQB S  ' ' O1  O2                                                         ' 
+294 'IRE NBE' ' CAO CAP CAL CAM                                                ' 
+128 'IVA CB ' ' CG1 CG2                                                        ' 
+101 'IXN S  ' ' O1P O2P                                                        ' 
+101 'IXX N2 ' ' C18 C19                                                        ' 
+293 'IYZ CAV' ' CAJ CAK                                                        ' 
+301 'J60 NAX' ' CAY CAZ CBB CBA                                                ' 
+506 'J6Z S1 ' ' O2  O3                                                         ' 
+84  'JN7 C27' ' C28 C31 C29 C30                                                ' 
+84  'JN8 C27' ' C28 C31 C29 C30                                                ' 
+101 'JNJ N5 ' ' C18 C19                                                        ' 
+49  'JQ1 CBE' ' CAE CAF                                                        ' 
+293 'JTH C42' ' C41 C43                                                        ' 
+101 'JTP C2 ' ' C1  C33                                                        ' 
+101 'JTP C22' ' C23 C27 C24 C26                                                ' 
+101 'JZS C14' ' C15 C16 F2  F5  F1  F4  F3  F6                                 ' 
+467 'JZV CAW' ' FAO FBC                                                        ' 
+465 'JZX S2 ' ' O2  O3                                                         ' 
+466 'JZY S31' ' O32 O33                                                        ' 
+471 'JZZ CAH' ' CAA CAP                                                        ' 
+162 'K03 C22' ' C23 C24                                                        ' 
+55  'K2B C25' ' C26 C27                                                        ' 
+101 'K51 C16' ' C17 C18                                                        ' 
+446 'K88 SAB' ' OAE OAF                                                        ' 
+509 'KAA S1 ' ' O1S O2S                                                        ' 
+231 'KAF CBM' ' OAE OAF                                                        ' 
+97  'KB2 C27' ' C28 C29                                                        ' 
+101 'KEN NE1' ' CA1 CB1                                                        ' 
+101 'KEU C5 ' ' OA1 OA2                                                        ' 
+101 'KEU C6 ' ' F1  F2                                                         ' 
+101 'KGY S1 ' ' O3  O4                                                         ' 
+535 'KH1 C25' ' C26 C27 C29 C28                                                ' 
+100 'KH2 S  ' ' O1  O2                                                         ' 
+286 'KIQ C16' ' F18 F19                                                        ' 
+101 'KIV C3 ' ' C4  C5                                                         ' 
+446 'KLT S1 ' ' O1  O2                                                         ' 
+101 'KN0 CAY' ' FBB FBA                                                        ' 
+100 'KN3 CAW' ' FAX FAY                                                        ' 
+101 'KPC SAE' ' OAB OAD                                                        ' 
+101 'KPL C2 ' ' C1  C3                                                         ' 
+207 'KS5 CAV' ' CAA CAB                                                        ' 
+101 'KT5 C5 ' ' OA1 OA2                                                        ' 
+101 'KT5 C6 ' ' F1  F2                                                         ' 
+476 'KTL SAZ' ' OAI OAK                                                        ' 
+438 'L1A C21' ' C22 C23                                                        ' 
+439 'L1A S2 ' ' O6  O7                                                         ' 
+101 'L1G C10' ' C13 C14 C16 C17                                                ' 
+101 'L1G C19' ' C13 C14 C16 C17                                                ' 
+101 'L35 C14' ' C15 C16                                                        ' 
+101 'L3G N7 ' ' C23 C22 C28 C27                                                ' 
+101 'L3G C10' ' C23 C22 C28 C27                                                ' 
+101 'L3G C19' ' C14 C13 C17 C16                                                ' 
+454 'L3O CG ' ' CD1 CD2                                                        ' 
+413 'L9R N  ' ' C6  C7                                                         ' 
+179 'LBY CT ' ' C2  C3                                                         ' 
+101 'LC6 N52' ' C39 C40                                                        ' 
+101 'LC6 S63' ' O58 O59                                                        ' 
+101 'LCPCL  ' ' O2  O3                                                         ' 
+100 'LE1 CB ' ' C8  C9                                                         ' 
+547 'LEI CB ' ' C8  C9                                                         ' 
+22  'LEU CG ' ' CD1 CD2                                                        ' 
+347 'LI1 C28' ' C29 C30                                                        ' 
+348 'LI1 C58' ' C59 C60                                                        ' 
+101 'LI8 C34' ' C35 C36                                                        ' 
+354 'LI9 C11' ' C21 C20 C18 C19                                                ' 
+101 'LIA S27' ' O29 O30                                                        ' 
+448 'LIC C47' ' C51 C53                                                        ' 
+101 'LIJ C7 ' ' C3  C6  C2  C5  C1  C4                                         ' 
+101 'LIJ S8 ' ' O8A O8B                                                        ' 
+192 'LIP P1 ' ' O8  O9                                                         ' 
+101 'LIQ S8 ' ' O1  O2                                                         ' 
+517 'LIZ C28' ' C29 C30 O11 O12                                                ' 
+100 'LJE C7 ' ' F1  F2                                                         ' 
+157 'LJG C9 ' ' C10 C11                                                        ' 
+158 'LJG S12' ' O20 O21                                                        ' 
+159 'LJG C23' ' C24 C25                                                        ' 
+160 'LJG S26' ' O34 O35                                                        ' 
+159 'LJH S32' ' O40 O41                                                        ' 
+457 'LK1 S11' ' O27 O28                                                        ' 
+295 'LK4 S11' ' O32 O33                                                        ' 
+39  'LLO C11' ' C16 C8                                                         ' 
+391 'LNG C12' ' C13 C14                                                        ' 
+502 'LP3 N  ' ' C6  C7                                                         ' 
+413 'LP6 NZ ' ' CM  CCD C13 CCC                                                ' 
+551 'LQZ N  ' ' CAI CAJ CAA CAB                                                ' 
+101 'LRD SBA' ' OBK OBJ                                                        ' 
+505 'LSA S10' ' O11 O12                                                        ' 
+101 'LTZ C34' ' C35 C36                                                        ' 
+354 'LY4 NBH' ' CBI CBJ                                                        ' 
+496 'LY7 CAV' ' CAA CAB                                                        ' 
+497 'LY7 SAX' ' OAE OAF                                                        ' 
+100 'LYR C17' ' C18 C19                                                        ' 
+175 'M01 C10' ' C11 C15 C12 C14                                                ' 
+176 'M02 CAM' ' CAO CAK C7  CAP                                                ' 
+177 'M02 N6 ' ' CAO CAK C7  CAP                                                ' 
+178 'M05 N1 ' ' C2  C8  C17 C3                                                 ' 
+178 'M05 C5 ' ' C2  C8  C17 C3                                                 ' 
+474 'M0N C9 ' ' P1  P2  O3  O6  O1  O5  O2  O4                                 ' 
+512 'M12 C10' ' C11 C12                                                        ' 
+100 'M1T CAK' ' OAC OAD                                                        ' 
+340 'M25 S  ' ' O1  O2                                                         ' 
+340 'M28 S  ' ' O1  O2                                                         ' 
+340 'M29 S  ' ' O1  O2                                                         ' 
+250 'M2L NZ ' ' CM1 CM2                                                        ' 
+23  'M3L NZ ' ' CM1 CM2                                                        ' 
+516 'M44 C1 ' ' C2  C3                                                         ' 
+517 'M44 C4 ' ' C5  C6                                                         ' 
+100 'M98 C1 ' ' F1  F2                                                         ' 
+100 'M98 C8 ' ' C12 C13                                                        ' 
+100 'M98 C16' ' F5  F6                                                         ' 
+100 'M98 C17' ' F8  F9                                                         ' 
+101 'M99 C1 ' ' F1  F2                                                         ' 
+6   'MA4 C12' ' C22 C62 C32 C52                                                ' 
+391 'MA9 S  ' ' O4  O                                                          ' 
+100 'MAJ S1 ' ' O1  O2                                                         ' 
+553 "MBP C2'" " C12 C3'                                                        " 
+541 'MC3 N  ' ' C6  C7                                                         ' 
+17  'MCA CPA' ' CP8 CP9                                                        ' 
+101 'MEL C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'MER N23' ' C25 C26                                                        ' 
+2   'MES N4 ' ' C3  C5  C2  C6                                                 ' 
+2A  'MES S  ' ' O1S O2S                                                        ' 
+101 'MF3 CE ' ' FZ1 FZ2                                                        ' 
+101 'MFX C06' ' C08 C09                                                        ' 
+101 'MHA N1 ' ' C1  C3  C2  C4  O1  O3  O2  O4                                 ' 
+524 'MHT N1 ' ' C6  C7  C5  C8                                                 ' 
+525 'MHT C4 ' ' C6  C7  C5  C8                                                 ' 
+337 'MIS C1 ' ' C2  C3                                                         ' 
+74  'MIY N7 ' ' C71 CN7                                                        ' 
+101 'MJI C32' ' F31 F32                                                        ' 
+18  'MLC CPA' ' CP8 CP9                                                        ' 
+78  'MLC P3 ' ' O31 O32                                                        ' 
+110 'MLE CG ' ' CD1 CD2                                                        ' 
+101 'MLL CG ' ' CD1 CD2                                                        ' 
+107 'MLU CG ' ' CD1 CD2                                                        ' 
+15  'MLY NZ ' ' CH1 CH2                                                        ' 
+101 'MO9 S8 ' ' O13 O14                                                        ' 
+7   'MPD C2 ' ' C1  CM                                                         ' 
+167 'MPO N1 ' ' C4  C7  C5  C6                                                 ' 
+203 'MPO S1 ' ' O1  O2                                                         ' 
+379 'MPX S7 ' ' O13 O14                                                        ' 
+101 'MPZ N07' ' C04 C06 C03 C05                                                ' 
+101 'MPZ NP2' ' C04 C06 C03 C05                                                ' 
+101 'MQQ SD ' ' O2  O3                                                         ' 
+16  'MRD C2 ' ' C1  CM                                                         ' 
+257 'MRT C34' ' C35 C36                                                        ' 
+101 'MRU P1 ' ' O1P O2P                                                        ' 
+560 'MS4 S2 ' ' O1  O2                                                         ' 
+163 'MST C10' ' C11 C12                                                        ' 
+85  'MTN C1 ' ' C8  C9                                                         ' 
+86  'MTN C5 ' ' C6  C7                                                         ' 
+369 'MUI C13' ' C14 C15                                                        ' 
+101 'MUT S8 ' ' O9  O10                                                        ' 
+100 'MUW S7 ' ' O8  O9                                                         ' 
+100 'MUW C12' ' C13 C14                                                        ' 
+100 'MUW C30' ' C24 C31 C25 C32 C26 C33 C27 C34 C28 C35 C29 C36                ' 
+101 'MV7 S  ' ' O8  O9                                                         ' 
+628 'MVA CB ' ' CG1 CG2                                                        ' 
+430 'MXS C12' ' C13 C14                                                        ' 
+214 'MYA C11' ' C13 C14                                                        ' 
+215 'MYA P3X' ' O7A O8A                                                        ' 
+101 'MYP S1 ' ' O1  O2                                                         ' 
+101 'MYP C23' ' C22 C24 C21 C25                                                ' 
+168 'MZ5 S8 ' ' O9  O10                                                        ' 
+168 'MZ5 C24' ' C25 C26                                                        ' 
+151 'MZ6 S8 ' ' O9  O10                                                        ' 
+151 'MZ7 S8 ' ' O9  O10                                                        ' 
+151 'MZ7 C23' ' C24 C25                                                        ' 
+151 'MZ8 S8 ' ' O9  O10                                                        ' 
+151 'MZ9 S8 ' ' O9  O10                                                        ' 
+100 'N35 C21' ' C16 C17                                                        ' 
+525 'N3H C21' ' C16 C17                                                        ' 
+624 'N8M N2 ' ' CG  CE                                                         ' 
+101 "NAF C2'" " F1' F2'                                                        " 
+301 'NAP P2B' ' O2X O3X                                                        ' 
+376 'NBB S  ' ' O1S O2S                                                        ' 
+533 'NDB SAM' ' OAC OAF                                                        ' 
+534 'NDB NAL' ' CAA CAB                                                        ' 
+101 'NDE P  ' ' O2P O3P                                                        ' 
+101 'NDP P2B' ' O3X O2X                                                        ' 
+101 'NDS S1 ' ' O1  O2                                                         ' 
+439 'NET N1 ' ' C1  C5  C2  C6                                                 ' 
+101 'NFT C19' ' C20 C21                                                        ' 
+541 'NG6 S  ' ' O1S O2S                                                        ' 
+604 'NGH S1 ' ' O2  O3                                                         ' 
+605 'NGH C12' ' C13 C14                                                        ' 
+100 'NGK S  ' ' O1S O3S                                                        ' 
+181 'NGM N1 ' ' C23 C24                                                        ' 
+587 'NGS S  ' ' O7  O9                                                         ' 
+377 'NGY S  ' ' O7  O8                                                         ' 
+8   'NHE S  ' ' O1  O2                                                         ' 
+120 "NHE C1'" " C2' C6' C3' C5'                                                " 
+512 'NHQ C11' ' C13 C14                                                        ' 
+550 'NHX CBD' ' CAA CAB                                                        ' 
+9   'NIF N5 ' ' C11 C8  C10 C9                                                 ' 
+511 'NIS C2 ' ' C1  C4                                                         ' 
+306 'NLH CW ' ' OA  OB                                                         ' 
+100 'NM1 S02' ' O15 O40                                                        ' 
+101 'NM2 N1 ' ' C8  C9                                                         ' 
+101 'NMQBE  ' ' F2  F3                                                         ' 
+356 'NN1 S1 ' ' O2  O4                                                         ' 
+101 'NN2 S10' ' O12 O13                                                        ' 
+101 'NN2 C26' ' C29 C30                                                        ' 
+343 'NN3 C22' ' C23 C24                                                        ' 
+344 'NN3 C4 ' ' C3  C5  C2  C6                                                 ' 
+344 'NN3 C1 ' ' C3  C5  C2  C6                                                 ' 
+294 'NNN C9 ' ' C10 C11                                                        ' 
+293 'NOL C60' ' C62 C66 C63 C65                                                ' 
+294 'NOL C81' ' C83 C85                                                        ' 
+569 'NR3 SAZ' ' OAI OAK                                                        ' 
+570 'NR4 SAZ' ' OAJ OAK                                                        ' 
+101 'NRB N1 ' ' C16 C17                                                        ' 
+325 'NS5 C1 ' ' CM1 CM2                                                        ' 
+101 'NSI C43' ' F46 F47                                                        ' 
+101 'NSI S48' ' O50 O52                                                        ' 
+101 'NSS SBE' ' OAY OAX                                                        ' 
+101 'NTB C  ' ' C1  C2                                                         ' 
+522 'NTJ N1 ' ' C1  C2                                                         ' 
+316 'NTO S17' ' O1A O19                                                        ' 
+317 'NTO S3H' ' O3K O3J                                                        ' 
+564 'NTP S17' ' O1A O19                                                        ' 
+565 'NTP S3B' ' O3C O3E                                                        ' 
+566 'NTP S3H' ' O3K O3J                                                        ' 
+567 'NTP S4B' ' O4D O4E                                                        ' 
+568 'NTP S55' ' O56 O57                                                        ' 
+569 'NTP S5H' ' O5J O5K                                                        ' 
+101 'NU5 S1 ' ' O2  O3                                                         ' 
+264 'NVP CA ' ' CB  CC                                                         ' 
+101 'NWA N1 ' ' C8  C9                                                         ' 
+101 'O1C C25' ' C26 C27                                                        ' 
+101 'O25 C48' ' F49 F50                                                        ' 
+101 'O29 C20' ' F21 F23                                                        ' 
+227 'O62 C6 ' ' C7  C8                                                         ' 
+499 'O75 C18' ' F19 F21                                                        ' 
+101 'O8A C8 ' ' F1  F3                                                         ' 
+325 'OAF C2 ' ' O3  O4                                                         ' 
+326 'OAF C3 ' ' F1  F2                                                         ' 
+101 'OCC C25' ' C26 C27                                                        ' 
+10  'OCS SG ' ' OD1 OD3                                                        ' 
+101 'OCV C32' ' C33 C37                                                        ' 
+100 'OHH C21' ' C22 C25 C23 C24                                                ' 
+100 'OHH N2 ' ' C22 C25 C23 C24                                                ' 
+101 'OHO C1 ' ' C2  C6  C3  C5                                                 ' 
+101 'OHT N24' ' C25 C26                                                        ' 
+101 'OMN C5 ' ' F1  F2                                                         ' 
+101 'OMP P  ' ' O2P O3P                                                        ' 
+101 'OMT SD ' ' OD1 OD2                                                        ' 
+101 'ONA PG ' ' O1G O2G                                                        ' 
+273 'OPC NAF' ' CAA CAE                                                        ' 
+638 'OPI CPB' ' CPD CPE                                                        ' 
+639 'OPI CT2' ' CT3 CT4                                                        ' 
+423 'ORP P  ' ' O2P O3P                                                        ' 
+100 'OSE S  ' ' O1  O2                                                         ' 
+100 'OSP S1 ' ' O1  O2                                                         ' 
+101 'OX6 C10' ' C11 C13                                                        ' 
+101 'OX7 C10' ' C13 C14                                                        ' 
+101 'OX7 C15' ' C16 C17                                                        ' 
+101 'OXN C1 ' ' C3  C4                                                         ' 
+385 'OXT C31' ' C33 C34                                                        ' 
+390 'P1A C25' ' C26 C27                                                        ' 
+101 'P27 C17' ' F18 F19                                                        ' 
+101 'P2M S  ' ' O1  O2                                                         ' 
+322 'P34 N  ' ' CAA CAB                                                        ' 
+384 'P3S PA ' ' O2A O3A                                                        ' 
+267 'P43 C10' ' C11 C15 C12 C14                                                ' 
+267 'P43 N13' ' C11 C15 C12 C14                                                ' 
+370 'P51 N2 ' ' C11 C13 C12 C14                                                ' 
+642 'P8S C1 ' ' F1A F1B                                                        ' 
+642 'P8S C2 ' ' F2A F2B                                                        ' 
+642 'P8S C3 ' ' F3A F3B                                                        ' 
+645 'P8S S1 ' ' O2  O3                                                         ' 
+451 'PAF C3 ' ' C4  C5                                                         ' 
+100 'PAJ C13' ' C14 C15                                                        ' 
+73  'PAU C1 ' ' C3  C4                                                         ' 
+194 'PAV C8 ' ' O1  O13                                                        ' 
+256 'PAZ C1 ' ' C3  C4                                                         ' 
+101 'PB9 S22' ' O24 O25                                                        ' 
+717 'PBE N  ' ' CE  CF                                                         ' 
+478 'PC  N1 ' ' C3  C4                                                         ' 
+534 'PC1 N  ' ' C13 C14                                                        ' 
+369 'PC9 N  ' ' C7  C8                                                         ' 
+58  'PCF N  ' ' C13 C14                                                        ' 
+371 'PCK N  ' ' C7  C8                                                         ' 
+673 'PCW N  ' ' C6  C7                                                         ' 
+260 'PD5 CBE' ' CAA CAB                                                        ' 
+101 'PDX S  ' ' O1S O2S                                                        ' 
+101 "PDX S' " ' O1X O2X                                                        ' 
+101 'PED P  ' ' O2P O3P                                                        ' 
+PEQ 'PEQ P  ' ' O2P O3P                                                        ' 
+101 'PFD C1 ' ' C3  C4  O8  O10 N7  N9                                         ' 
+100 'PFL C7 ' ' C8  C9                                                         ' 
+100 'PFL C10' ' C11 C12                                                        ' 
+101 'PFY S11' ' O12 O13                                                        ' 
+101 'PG1 C2 ' ' C9  C10                                                        ' 
+101 'PH1 C48' ' C49 C50                                                        ' 
+101 'PH1 C18' ' C19 C20                                                        ' 
+223 'PI0 S1 ' ' O3  O4                                                         ' 
+101 'PI4 C35' ' C37 C38                                                        ' 
+101 'PI9 S  ' ' O5  O6                                                         ' 
+101 'PIB P3 ' ' O31 O33                                                        ' 
+101 'PID C25' ' CM6 CM7                                                        ' 
+714 'PIN N1 ' " C3  C4  C4' C3'                                                " 
+714 "PIN N1'" " C3  C4  C4' C3'                                                " 
+663 'PIN S1 ' ' O1  O2                                                         ' 
+663 "PIN S1'" " O1' O2'                                                        " 
+104 'PIO P4 ' ' O41 O42                                                        ' 
+104 'PIO P5 ' ' O53 O52                                                        ' 
+638 'PLC N  ' ' C6  C7                                                         ' 
+434 'PM4 C29' ' C30 C31                                                        ' 
+101 'PM5 C29' ' C30 C31                                                        ' 
+101 'PM8 C29' ' C30 C31                                                        ' 
+101 'PMG P  ' ' OP2 OP3                                                        ' 
+101 "PMT C6'" " C9' C8'                                                        " 
+100 'PN1 C6 ' ' C1  C16                                                        ' 
+224 'PN5 CPB' ' CPD CPE                                                        ' 
+225 'PN5 CT2' ' CT3 CT4                                                        ' 
+227 'PNM C2 ' ' C9  C10                                                        ' 
+481 'PNN C2 ' ' C9  C10                                                        ' 
+138 'PNS C29' ' C30 C31                                                        ' 
+350 'PO1 S1 ' ' O1  O2                                                         ' 
+101 'PO3 P  ' ' O2  O3                                                         ' 
+264 'POF S1 ' ' O1  O2                                                         ' 
+101 'POO C16' ' C18 C17 C19 C20                                                ' 
+695 'PP2 C22' ' C23 C24                                                        ' 
+101 'PPE P  ' ' OP2 OP3                                                        ' 
+516 'PPS S2 ' ' OS2 OS3                                                        ' 
+123 'PRZ C22' ' C23 C24                                                        ' 
+72  'PSC N  ' ' C06 C07                                                        ' 
+101 'PTI N1 ' ' C3  C15 C6  C12                                                ' 
+632 'PTK SBC' ' OAA OAI                                                        ' 
+633 'PTK SBD' ' OAD OAJ                                                        ' 
+634 'PTK SBE' ' OAE OAF                                                        ' 
+634 'PTK SBF' ' OAG OAH                                                        ' 
+459 'PVB C13' ' C14 C16                                                        ' 
+303 'PVS S  ' ' O1  O2                                                         ' 
+101 'PX4 N1 ' ' C3  C4                                                         ' 
+101 'PXB S12' ' O14 O16                                                        ' 
+231 'PXI N1 ' ' C13 C14                                                        ' 
+11  'PXN CAM' ' CAC CAN OAD OAO CAE CAP CAF CAQ CAA CAX OAG OAR                ' 
+101 'PY3 C32' ' C33 C34                                                        ' 
+101 'PYN N22' ' C21 C23 C24 C25                                                ' 
+101 'PYN N27' ' C26 C28 C29 C30                                                ' 
+101 'PYV S  ' ' O1  O2                                                         ' 
+101 'Q4I SDS' ' OAL OAM                                                        ' 
+101 'Q4I CDR' ' CAA CAB                                                        ' 
+100 'QLE N  ' ' C15 C16                                                        ' 
+101 'QLG CG2' ' CD1 CD2                                                        ' 
+189 'QN1 S8 ' ' O10 O41                                                        ' 
+168 'QN2 S9 ' ' O11 O40                                                        ' 
+191 'QN3 S9 ' ' O11 O40                                                        ' 
+101 'QSI S  ' ' O1S O2S                                                        ' 
+101 'R02 C1F' ' C2F C3F                                                        ' 
+101 'R1B C2 ' ' C8  C9                                                         ' 
+536 'R1F C5 ' ' C6  C7                                                         ' 
+102 'R36 C6 ' ' C7  C11                                                        ' 
+256 'R4A NNG' ' CM1 CM2                                                        ' 
+261 'R5B NNG' ' CM1 CM2                                                        ' 
+262 'R6A NNG' ' CM1 CM2                                                        ' 
+139 'R7A C2 ' ' C8  C9                                                         ' 
+140 'R7A C5 ' ' C6  C7                                                         ' 
+276 'R7U NNG' ' CM1 CM2                                                        ' 
+488 'R86 C29' ' C30 C31                                                        ' 
+101 'R88 C1E' ' C2E C3E                                                        ' 
+101 'R99 C23' ' C24 C25                                                        ' 
+277 'R9A NNG' ' CM1 CM2                                                        ' 
+101 'RA2 C13' ' C14 C21 C15 C23                                                ' 
+101 'RA2 C29' ' C38 C42 O39 O43                                                ' 
+419 'RAL N26' ' C27 C31 C28 C30                                                ' 
+345 'RC8 C9 ' ' C10 C11                                                        ' 
+111 'RCP C20' ' C17 C19 C16 C18                                                ' 
+401 'RCS S1 ' ' O5  O6                                                         ' 
+82  'RDF CG ' ' CD1 CD2                                                        ' 
+177 'REA C1 ' ' C16 C17                                                        ' 
+100 'REM C39' ' C42 C43                                                        ' 
+60  'RET C1 ' ' C16 C17                                                        ' 
+130 'RFP N3 ' ' C40 C41 C39 C42                                                ' 
+130 'RFP N4 ' ' C40 C41 C39 C42                                                ' 
+739 'RFX C12' ' F13 F14                                                        ' 
+101 'RG1 C1 ' ' CM1 CM2                                                        ' 
+101 'RID S1 ' ' O2  O5                                                         ' 
+101 'RIL C30' ' C34 C38                                                        ' 
+65  'RIT C85' ' C86 C90                                                        ' 
+564 'RIT C62' ' C64 C68                                                        ' 
+101 'RLT CBF' ' CAC CAD                                                        ' 
+181 'RO2 N5 ' ' C22 C23 C21 C24                                                ' 
+155 'RO2 N6 ' ' C22 C23 C21 C24                                                ' 
+673 'RO3 S2 ' ' O2  O3                                                         ' 
+674 'RO5 S2 ' ' O2  O3                                                         ' 
+142 'ROC CD ' ' C11 C22                                                        ' 
+485 'ROF C16' ' F17 F18                                                        ' 
+396 'ROF C21' ' C22 C23                                                        ' 
+101 'RR1 S36' ' O38 O41                                                        ' 
+101 'RR1 S85' ' O90 O92                                                        ' 
+768 'RTL C1 ' ' C16 C17                                                        ' 
+101 'RYU N20' ' C21 C25 C22 C24                                                ' 
+101 'RYU C23' ' C21 C25 C22 C24                                                ' 
+482 'S1S C22' ' C23 C24 O   O3  O1  O2                                         ' 
+482 'S1S C31' ' C32 C36 C33 C35                                                ' 
+397 'S48 SBL' ' OAE OAF                                                        ' 
+101 'S58 C4 ' ' F1  F2                                                         ' 
+101 'SAF N2 ' ' C7  C8                                                         ' 
+100 'SB4 CA6' ' CA1 CA5 CA2 CA4                                                ' 
+101 'SBC S22' ' O23 O24                                                        ' 
+247 'SC0 CAW' ' PAY PAX OAG OAE OAH OAF                                        ' 
+101 'SCA CPA' ' CP8 CP9                                                        ' 
+101 'SCK N17' ' C19 C20                                                        ' 
+77  'SCR S2 ' ' O22 O23                                                        ' 
+78  'SCR S3 ' ' O32 O33                                                        ' 
+78  'SCR S4 ' ' O42 O43                                                        ' 
+63  'SCR S6 ' ' O62 O63                                                        ' 
+80  'SCR S11' ' O82 O83                                                        ' 
+81  'SCR S12' ' O92 O93                                                        ' 
+82  'SCR S13' ' O72 O73                                                        ' 
+83  'SCR S14' ' O52 O53                                                        ' 
+101 'SCU N17' ' C19 C20                                                        ' 
+672 'SCV C12' ' C13 C14                                                        ' 
+463 'SDA S1 ' ' O11 O12                                                        ' 
+251 'SDS S  ' ' O4  O1S                                                        ' 
+245 'SDX CQ1' ' CQ3 CQ4                                                        ' 
+763 'SE4SE  ' ' O2  O3                                                         ' 
+428 'SEB SD ' ' OD1 OD2                                                        ' 
+786 'SEH S19' ' O20 O21                                                        ' 
+100 'SEL CA ' ' C   CB  OXT OG                                                 ' 
+301 'SEN N1 ' ' C1  C2                                                         ' 
+101 'SEP P  ' ' O2P O3P                                                        ' 
+314 'SFC CBP' ' CEP CDP                                                        ' 
+315 'SFC C10' ' C11 C12                                                        ' 
+101 'SFP S4 ' ' O11 O13                                                        ' 
+101 'SFT S  ' ' O2S O3S                                                        ' 
+771 'SFX C12' ' F13 F14                                                        ' 
+714 'SGA S  ' ' O1S O2S                                                        ' 
+140 'SGB C2 ' ' C3  C4                                                         ' 
+154 'SGN S1 ' ' O1S O2S                                                        ' 
+155 'SGN S2 ' ' O4S O5S                                                        ' 
+206 'SIE S27' ' O27 O28                                                        ' 
+207 'SIE SS7' ' OS8 OS9                                                        ' 
+101 'SIM C19' ' C22 C23                                                        ' 
+602 'SK2 S1 ' ' O4  O5                                                         ' 
+100 'SLA C13' ' C14 C15                                                        ' 
+229 'SLF S  ' ' O12 O13                                                        ' 
+776 'SLU S17' ' O18 O19                                                        ' 
+101 'SM5 C18' ' C19 C23 C20 C22                                                ' 
+27  'SMK CBH' ' CBC CBD CAM CAP CAI CAL CAG CAH CAJ CAK CAN CAO                ' 
+101 'SMS C7 ' ' C8  C9                                                         ' 
+101 'SMS S1 ' ' O6  O7                                                         ' 
+101 'SMS S2 ' ' O9  O10                                                        ' 
+101 'SNH S11' ' O12 O13                                                        ' 
+91  'SO3 S  ' ' O3  O2                                                         ' 
+28  'SO4 S  ' ' O1  O2                                                         ' 
+101 'SOP CP8' ' CPA CPB                                                        ' 
+408 'SP0 S18' ' O19 O20                                                        ' 
+408 'SP3 S12' ' O13 O14                                                        ' 
+100 'SPF CBP' ' CDP CEP                                                        ' 
+207 'SPN C1 ' ' CM1 CM2                                                        ' 
+121 'SPO C1 ' ' C2  C3                                                         ' 
+100 'SPV S  ' ' O1S O3S                                                        ' 
+101 'SQA N2 ' ' C1  C25                                                        ' 
+410 'SQD S  ' ' O7  O9                                                         ' 
+511 'SQU C28' ' C29 C30                                                        ' 
+100 'SR2 N63' ' C65 C67                                                        ' 
+226 'SRG C4 ' ' C5  C6                                                         ' 
+226 'SRG C12' ' C13 C14                                                        ' 
+226 'SRG C23' ' C24 C25                                                        ' 
+288 'SRT C2 ' ' C2  C3  C1  C4  O2  O3  O1  O4  O11 O41                        ' 
+288 'SRT C3 ' ' C2  C3  C1  C4  O2  O3  O1  O4  O11 O41                        ' 
+764 'SSA S1 ' ' O1S O2S                                                        ' 
+696 'SSD S9 ' ' O12 O13                                                        ' 
+132 'STA CG ' ' CD1 CD2                                                        ' 
+536 'STC S13' ' O16 O17                                                        ' 
+89  'STI N48' ' C49 C53 C50 C52                                                ' 
+89  'STI N51' ' C49 C53 C50 C52                                                ' 
+100 'STT SBN' ' OAC OAD                                                        ' 
+101 'STX C6 ' ' C7  C8                                                         ' 
+548 'SUF C1 ' ' P1  P2  O4  O1  O5  O3  O6  O7                                 ' 
+549 'SUF S  ' ' C3  C4                                                         ' 
+322 'SUN N1 ' ' C1  C2                                                         ' 
+475 'SVE C1 ' ' C2  C3                                                         ' 
+475 "SVE C1'" " C2' C3'                                                        " 
+729 'SVR S17' ' O23 O24                                                        ' 
+730 'SVR S21' ' O28 O29                                                        ' 
+731 'SVR S31' ' O35 O36                                                        ' 
+732 'SVR S73' ' O77 O78                                                        ' 
+733 'SVR S75' ' O80 O81                                                        ' 
+734 'SVR S83' ' O84 O86                                                        ' 
+565 'SVY C1 ' ' C2  C3                                                         ' 
+565 "SVY C1'" " C2' C3'                                                        " 
+477 'SVZ C5 ' ' C6  C7                                                         ' 
+475 'SXE C1 ' ' C2  C3                                                         ' 
+701 'SZH C13' ' F25 F27                                                        ' 
+702 'SZH P28' ' O16 O17                                                        ' 
+101 'T13 SAX' ' OAB OAC                                                        ' 
+101 'T1C C93' ' C95 C96                                                        ' 
+101 'T1C N4 ' ' C42 C43                                                        ' 
+101 'T1D S  ' ' O1  O2                                                         ' 
+101 'T2M C7 ' ' C8  C9                                                         ' 
+390 'T30 C11' ' C16 C17                                                        ' 
+391 'T30 C26' ' F27 F29                                                        ' 
+746 'T3Y S4 ' ' O11 O12                                                        ' 
+291 'T55 CAE' ' CAD CAF                                                        ' 
+654 'T5C C3 ' ' C10 C11                                                        ' 
+655 'T5C S35' ' O36 O38                                                        ' 
+656 'T5C S39' ' O41 O42                                                        ' 
+657 'T5C S47' ' O48 O49                                                        ' 
+206 'T5M C2 ' ' C1  C19                                                        ' 
+262 'TAC N4 ' ' C42 C43                                                        ' 
+73  'TAM C  ' ' C2  C3  C5  C6  O5  O6                                         ' 
+844 'TAN C2 ' ' C1  C3                                                         ' 
+344 'TAR C2 ' ' C2  C3  C1  C4  O2  O3  O1  O4  O11 O41                        ' 
+344 'TAR C3 ' ' C2  C3  C1  C4  O2  O3  O1  O4  O11 O41                        ' 
+101 'TASAS  ' ' O1  O2                                                         ' 
+101 'TAT PG ' ' O1A O3G                                                        ' 
+101 'TAU S  ' ' O1  O3                                                         ' 
+640 'TAY CAG' ' CAB CAC                                                        ' 
+167 'TB0 C2 ' ' C3  C4                                                         ' 
+588 'TBA N1 ' ' C11 C21 C12 C22 C13 C23 C14 C24                                ' 
+504 'TBE S1 ' ' O12 O13                                                        ' 
+100 'TBG CB ' ' CG1 CG2                                                        ' 
+678 'TBL S1 ' ' O3  O4                                                         ' 
+29  'TBU C  ' ' C1  C2                                                         ' 
+341 'TCE P  ' ' C1  C2  C4  C5  C11 C14 O12 O15 O13 O16                        ' 
+146 'TCH S26' ' O1S O2S                                                        ' 
+101 'TCO CB ' ' CG1 CG2 CD1 CD2                                                ' 
+101 'TDB S15' ' O15 O16                                                        ' 
+99  'TDC N4 ' ' C42 C43                                                        ' 
+632 'TDE C18' ' C20 C21                                                        ' 
+100 'TF4 C1 ' ' CL1 CL2                                                        ' 
+29  'TFA C2 ' ' F1  F2                                                         ' 
+101 'TFC C11' ' F1  F2                                                         ' 
+261 'TFG C5 ' ' O2  O3                                                         ' 
+240 'TFP C21' ' F1  F2                                                         ' 
+240 'TFP N2 ' ' C16 C19 C17 C18                                                ' 
+240 'TFP N3 ' ' C16 C19 C17 C18                                                ' 
+65  'THJ S1 ' ' O1  O2                                                         ' 
+647 'THY PB ' ' O2B O3B                                                        ' 
+100 'TIT C17' ' C18 C19                                                        ' 
+100 'TIT C30' ' C31 C32                                                        ' 
+559 'TK1 S34' ' O31 O32                                                        ' 
+214 'TKL CG ' ' CD1 CD2                                                        ' 
+890 'TMA N1 ' ' C1  C4                                                         ' 
+291 'TMO NAC' ' CAB CAD                                                        ' 
+546 'TNK C14' ' C15 C16                                                        ' 
+526 'TOL C1 ' ' F2  F3                                                         ' 
+101 'TON C5 ' ' C7  C8                                                         ' 
+101 'TON C9 ' ' C11 C12                                                        ' 
+101 'TPF C1 ' ' C2  C5  N1  N4  N3  N6  C4  C7  N2  N5  C3  C6                 ' 
+632 'TPO P  ' ' O2P O3P                                                        ' 
+130 'TPV C39' ' F40 F41                                                        ' 
+73  'TRS C  ' ' C2  C3  O2  O3                                                 ' 
+474 'TRT C1 ' ' C2  C4                                                         ' 
+475 'TRT C6 ' ' C7  C8                                                         ' 
+101 'TSB S1 ' ' O1S O2S                                                        ' 
+553 'TSF C19' ' F1  F2                                                         ' 
+101 'TSL C2 ' ' C14 C20                                                        ' 
+101 'TSN N2 ' ' C16 C17                                                        ' 
+101 'TUD S27' ' O28 O29                                                        ' 
+628 'TUN N  ' ' C3  C5  C4  C6                                                 ' 
+386 'TVN CAW' ' CAX CAY                                                        ' 
+101 'TXT C15' ' C16 C17                                                        ' 
+20  'TYS S  ' ' O1  O2                                                         ' 
+434 'TZT N2 ' ' C1  C3                                                         ' 
+435 'TZT C12' ' C13 C14                                                        ' 
+662 'TZY C21' ' C23 C24                                                        ' 
+444 'U15 C48' ' C51 C53                                                        ' 
+445 'U16 C9 ' ' C14 C15                                                        ' 
+446 'U16 C49' ' C52 C53                                                        ' 
+101 'U19 C7 ' ' F1  F2                                                         ' 
+101 'U32 S16' ' O2  O1                                                         ' 
+101 'U73 C6 ' ' C7  C8                                                         ' 
+101 'UA1 S14' ' O16 O17                                                        ' 
+101 'UAP S  ' ' O2S O3S                                                        ' 
+101 'UFP P  ' ' O2P O3P                                                        ' 
+861 'UI3 S34' ' O35 O36                                                        ' 
+101 'UIB C15' ' C13 C14                                                        ' 
+100 'UIR C18' ' C41 C42                                                        ' 
+101 'UN3 S1 ' ' O1  O2                                                         ' 
+101 'UN5 S2 ' ' O6  O7                                                         ' 
+101 'UN6 S1 ' ' O5  O6                                                         ' 
+101 'UN6 S2 ' ' O2  O3                                                         ' 
+101 'UN7 S33' ' O51 O52                                                        ' 
+657 'USQ S  ' ' O1S O3S                                                        ' 
+863 'UWN N1 ' ' CAU CAV CAM CAN                                                ' 
+864 'UWN N5 ' ' C7  C8  C10 C9                                                 ' 
+662 'V21 S9 ' ' O11 O12                                                        ' 
+315 'V2H CAW' ' CAB CAW                                                        ' 
+16  'VAL CB ' ' CG1 CG2                                                        ' 
+307 'VD3 C25' ' C26 C27                                                        ' 
+326 'VDB C25' ' C26 C27 C29 C28                                                ' 
+100 'VD4 C25' ' C26 C27                                                        ' 
+379 'VDN N14' ' C15 C19 C16 C18                                                ' 
+379 'VDN N17' ' C15 C19 C16 C18                                                ' 
+101 'VDX C25' ' C26 C27                                                        ' 
+724 'VGG C19' ' C21 C22                                                        ' 
+101 'VGH C20' ' C8  C9  C10 C11                                                ' 
+887 'VIA N17' ' C16 C18 C15 C19                                                ' 
+888 'VIA N14' ' C16 C18 C15 C19                                                ' 
+101 'VIA S10' ' O11 O12                                                        ' 
+689 'VIN C25' ' C26 C27                                                        ' 
+101 'VLM CB ' ' CG1 CG2                                                        ' 
+101 'VMS CB ' ' CG1 CG2                                                        ' 
+101 'VMS SBD' ' OAZ OBC                                                        ' 
+560 'VRA S19' ' O20 O21                                                        ' 
+607 'VS1 S26' ' O35 O36                                                        ' 
+101 'VSC S34' ' O36 O37                                                        ' 
+383 'VX2 C1 ' ' F1  F3                                                         ' 
+347 'VX6 N1 ' ' C2  C6  C3  C5                                                 ' 
+347 'VX6 N4 ' ' C2  C6  C3  C5                                                 ' 
+101 'VX6 C33' ' C34 C35                                                        ' 
+101 'VYR C22' ' C21 C23 C20 C24                                                ' 
+101 'VYR N19' ' C21 C23 C20 C24                                                ' 
+499 'W7E C30' ' C31 C34 O32 O35 O33 O36                                        ' 
+389 'WAN S2 ' ' O3  O4                                                         ' 
+403 'WCC S1 ' 'FE3 FE4                                                         ' 
+403 'WCC S2 ' 'FE3 FE4                                                         ' 
+101 'WIN C2C' ' C1D C1E                                                        ' 
+748 'WOW S15' ' O17 O18                                                        ' 
+80  'WRA C1 ' ' CM1 CM2                                                        ' 
+862 'WSA S  ' ' O1S O2S                                                        ' 
+443 'WYQ S1 ' ' O3  O4                                                         ' 
+62  'WZB SBC' ' OAE OAF                                                        ' 
+101 'X24 C2 ' ' C3  C4                                                         ' 
+101 'X4Z N30' ' C34 C35                                                        ' 
+440 'XAV CAU' ' FAC FAD                                                        ' 
+518 'XC2 N5 ' ' C1  C4  C2  C34                                                ' 
+519 'XC2 C22' ' C30 C31                                                        ' 
+490 'XE4 C23' ' C24 C25                                                        ' 
+101 'XED N3 ' ' C1  C5  C2  C6                                                 ' 
+101 'XED N4 ' ' C1  C5  C2  C6                                                 ' 
+364 'XNA C21' ' C22 C23                                                        ' 
+101 'XX5 C6 ' ' C7  C8                                                         ' 
+68  'XX6 C18' ' C19 C20 O4  O3                                                 ' 
+436 'XXG S9 ' ' O11 O12                                                        ' 
+344 'YAM C8 ' ' F27 F28                                                        ' 
+101 'Y3  S11' ' O12 O13                                                        ' 
+101 'Y3  S19' ' O20 O21                                                        ' 
+754 'YDP S9 ' ' O11 O40                                                        ' 
+564 'YE1 C11' ' C13 C14                                                        ' 
+760 'YES C2 ' ' C1  C3  O1  O3                                                 ' 
+299 'YPP CAH' ' CAM CAN                                                        ' 
+318 'YR3 C7 ' ' C9  C10 C12 C11                                                ' 
+299 'YSA SBI' ' OAD OAE                                                        ' 
+61  'Z79 S1 ' ' O1  O2                                                         ' 
+773 'ZAR C14' ' F16 F17                                                        ' 
+807 'ZEC S11' ' O12 O13                                                        ' 
+101 'ZEN C10' ' C9  C11 C8  C12                                                ' 
+101 'ZEN N7 ' ' C9  C11 C8  C12                                                ' 
+639 'ZIG S36' ' O31 O32                                                        ' 
+524 'ZIO N1 ' ' C28 C29                                                        ' 
+490 'ZIT N3A' ' C7A C8A                                                        ' 
+793 'ZK1 CAZ' ' FAG FAH                                                        ' 
+717 'ZLD N19' ' C20 C24 C21 C23                                                ' 
+359 'ZMO C29' ' C30 C31                                                        ' 
+360 'ZMP C18' ' C19 C20                                                        ' 
+359 'ZMQ C29' ' C30 C31                                                        ' 
+98  'ZOL C8 ' ' P9  P14 O10 O16 O11 O17 O12 O15                                ' 
+100 'ZST C19' ' F1  F2                                                         ' 
+335 'ZU3 C45' ' C76 C78                                                        ' 
+341 'ZU5 C42' ' C44 C46                                                        ' 
+341 'ZU5 C62' ' C64 C66                                                        ' 
+854 'ZY0 C8 ' ' F1  F3                                                         ' 
+763 'ZY1 S60' ' O79 O80                                                        ' 
+564 'ZYX S  ' ' O1  O2                                                         ' 
+19  'ZZ7 C6 ' ' C1  C16                                                        ' 
+644 'ZZP SAI' ' OAH OAJ                                                        ' 
+#End of fixable atoms
+
+#Residues without any additional chiral atoms that can be fixed by chiron 
+loop_
+_res_nonfix_chiron.id 
+017
+114
+12U
+147
+165
+180
+1AH
+1TP
+1WQ
+217
+28W
+2AA
+2AH
+2FA
+2MC
+2NV
+2OP
+2PG
+2SA
+2TY
+3AA
+3AG
+3GV
+3GR
+3IH
+3LG
+3O0
+3OL
+3PG
+3PI
+3PZ
+3TL
+413
+469
+488
+48Z
+4AH
+4AX
+4CO
+4HD
+4IP
+4PT
+4QB
+4ZN
+52V
+5AD
+5EY
+5GP
+5MU
+5OP
+5QC
+5SV
+6HE
+6MI
+741
+757
+778
+7E8
+7HE
+7ME
+8M0
+8OG
+A  
+A1A
+A23
+A2G
+A3D
+A43
+AAD
+AAH
+AB2
+ABA
+ABL
+ACF
+ACO
+ACP
+ACR
+ADA
+ADN
+ADP
+AE2
+AGL
+AGS
+AI8
+AKN
+AKV
+AKY
+ALA
+ALB
+ALE
+ALY
+AM1
+AMG
+AMU
+ANP
+ANU
+ANY
+AO1
+AP0
+AP8
+APR
+ARD
+ARG
+AS1
+ASC
+ASG
+ASL
+ASN
+ASP
+ATP
+ATR
+AZ7
+B12
+B2Q
+B3D
+B3P
+BBC
+BCB
+BCD
+BCL
+BES
+BG6
+BGC
+BGL
+BHI
+BI2
+BLB
+BLD
+BM3
+BMA
+BN1
+BNG
+BOG
+BPB
+BPH
+BT5
+BZS
+C  
+C3A
+C44
+C49
+C5P
+C6G
+CAO
+CB3
+CB9
+CBI
+CBR
+CBS
+CDL
+CDP
+CE6
+CE8
+CFL
+CFN
+CGP
+CGU
+CHD
+CHL
+CHO
+CKP
+CLA
+CLF
+CLM
+CM8
+CNA
+COA
+COB
+COD
+COK
+COZ
+CP2
+CPS
+CR9
+CSC
+CSD
+CSF
+CSI
+CSY
+CTR
+CTS
+CTT
+CUZ
+CXN
+CXR
+CYC
+CYS
+D15
+D18
+D19
+DA 
+DAD
+DAF
+DAL
+DAR
+DBS
+DC 
+DG 
+DGD
+DGT
+DGX
+DHE
+DHF
+DHK
+DIH
+DLY
+DMM
+DMS
+DMU
+DND
+DO3
+DOM
+DPB
+DR7
+DRA
+DRQ
+DSN
+DSS
+DT 
+DTT
+DTU
+DTY
+DVT
+DXP
+E64
+EAD
+EBG
+ECQ
+EDC
+EIP
+ENT
+EPE
+EPH
+EPY
+ESG
+ETS
+EV6
+F24
+F2P
+F3S
+F42
+F43
+F4S
+FA1
+FAB
+FAD
+FAO
+FCA
+FEC
+FHP
+FLL
+FLP
+FMN
+FPE
+FRE
+FSG
+FSO
+FSX
+FTT
+FUA
+FUC
+FUL
+G  
+G16
+G1P
+G1R
+G2F
+G30
+G3H
+G3P
+G6P
+G7M
+GAC
+GAL
+GAR
+GC2
+GCN
+GCU
+GD7
+GDM
+GDP
+GF1
+GG6
+GGL
+GL0
+GLA
+GLC
+GLD
+GLN
+GLU
+GLY
+GMA
+GMH
+GMP
+GNB
+GP4
+GSF
+GSH
+GTG
+GTP
+GTR
+GU0
+GU6
+GUD
+GUP
+GXL
+GYC
+GYP
+H4B
+H4Z
+HCT
+HEM
+HIS
+HLT
+HMS
+HPY
+HSG
+HSH
+HTO
+HUP
+HYP
+I  
+IAD
+ICT
+IDR
+IDS
+IDU
+IHP
+ILE
+IMH
+IMP
+INS
+IP2
+IPD
+IU5
+JEF
+JN3
+JNH
+KAR
+KCQ
+KDO
+KEG
+KEU
+KSG
+KT5
+KYN
+L2D
+L2M
+L9M
+L9N
+L9X
+LAC
+LAK
+LBV
+LBY
+LDY
+LEU
+LGU
+LI1
+LIL
+LIP
+LMT
+LMU
+LNC
+LNR
+LNV
+LPA
+LRD
+LRG
+LYS
+M13
+M3L
+M7G
+M8C
+MA8
+MAD
+MAL
+MAN
+MAV
+MCO
+MDM
+MER
+MES
+MET
+MFN
+MHO
+MLC
+MLG
+MLR
+MLT
+MLY
+MM1
+MMA
+MMP
+MO7
+MP7
+MPD
+MRD
+MRU
+MSE
+MSL
+MSO
+MTT
+MTX
+MU2
+MVA
+MYA
+N  
+N32
+NAD
+NAG
+NAJ
+NAP
+NCN
+NDE
+NDG
+NDP
+NGA
+NGC
+NGY
+NGZ
+NHO
+NLC
+NMQ
+NRG
+OAD
+OAR
+OCQ
+OGK
+OHS
+OMP
+ONA
+OPM
+ORP
+P3S
+PAD
+PC1
+PCA
+PCW
+PED
+PEE
+PEQ
+PEV
+PGO
+PGT
+PH1
+PHE
+PHO
+PIB
+PII
+PIO
+PLL
+PM5
+PMG
+PNG
+POG
+PPE
+PRE
+PRO
+PSF
+PSU
+PX4
+PXI
+PY0
+PY3
+R02
+R04
+R4A
+R5B
+R6A
+R7U
+R9A
+RAR
+RAZ
+RG1
+RIB
+RMO
+ROC
+RSA
+RSH
+RUA
+S1S
+SAH
+SAM
+SAU
+SAZ
+SB2
+SEP
+SER
+SF4
+SFC
+SFG
+SGN
+SKM
+SM8
+SMA
+SMB
+SME
+SMX
+SO4
+SPH
+SPN
+SPS
+SQD
+SQU
+SRY
+SSB
+SSD
+SUC
+SUZ
+SXC
+TAT
+TBZ
+TCH
+TDI
+TGG
+THG
+THP
+THR
+THU
+THY
+TI1
+TKL
+TMI
+TMP
+TPO
+TQD
+TRP
+TSL
+TSN
+TYR
+TYS
+U  
+UD1
+UDH
+UFG
+UFP
+UIR
+UMP
+UMQ
+UNF
+UPG
+VAL
+VBP
+VDX
+VLB
+VLM
+W72
+WSQ
+WY2
+XBO
+X  
+XCR
+XLS
+XPX
+XUL
+XYA
+XYP
+XYS
+YLL
+YLY
+Z99
+ZDP
+ZDR
+ZID
+#End of non-fixable residues
+
+#List of residues that should not be subjected to the O1-fix for glycosidic linkages
+loop_
+_res_nonfix_O1.id 
+0E5
+3CU
+ADH
+ARI
+ASC
+BEZ
+CCN
+CDR
+CEQ
+COI
+EDO
+ERI
+GCN
+GCT
+GOL
+LG9
+MBN
+NBU
+NBZ
+TAR
+VO4
+XDL
+
+#Residues with atoms that can only have chirality fixes if both atoms are flagged
+loop_
+_res_couples.id 
+_res_couples.resatoms 
+119 '07J N31 N34' 
+101 '0WF N5  C14' 
+355 '1N1 N5  N6 ' 
+101 '20M C27 N24' 
+101 '21R C04 N07' 
+101 '274 N4  N5 ' 
+981 '4MC N3  N4 ' 
+101 '598 C29 N32' 
+918 '626 N19 N22' 
+355 '627 N17 N20' 
+861 '7CP N1W C1Y' 
+128 'A58 C2  C5 ' 
+101 'B11 C10 N13' 
+101 'B5U N29 N32' 
+101 'CCX C17 N20' 
+356 'CIQ CBH NBK' 
+101 'CP0 N2  C24' 
+101 'CPJ C3  C6 ' 
+101 'CPK C3  C6 ' 
+101 'CPK C23 C26' 
+101 'CRL C8  S1 ' 
+101 'CT9 C1  C4 ' 
+101 'D31 N8  C3 ' 
+101 'D42 N3  N6 ' 
+672 'DAI C10 C13' 
+849 'DB8 NBI NBH' 
+101 'DT4 C1  C4 ' 
+357 'EPE N1  N4 ' 
+777 'FRA C12 C15' 
+101 'GEQ N1C N4C' 
+119 'GLL C2  C3 ' 
+854 'GUI N22 N25' 
+101 'H8H N2  N5 ' 
+358 'HT  N5  N6 ' 
+101 'HQL C6  N1 ' 
+106 'IA  N6  N7 ' 
+352 'IB  N6  N7 ' 
+101 'IHE N06 N03' 
+101 'IIA C12 N15' 
+101 'IIB C12 N15' 
+101 'IIB C12 N15' 
+101 'IID C13 N1 ' 
+101 'L1G C10 C19' 
+101 'L3G N7  C10' 
+447 'M02 N6  CAM' 
+451 'M05 N1  C5 ' 
+117 'MHT N1  C4 ' 
+101 'MPZ N07 NP2' 
+756 'NN3 C1  C4 ' 
+101 'OHH N2  C21' 
+586 'P43 C10 N13' 
+134 "PIN N1  N1'" 
+101 'RFP N3  N4 ' 
+353 'RO2 N5  N6 ' 
+101 'RYU C23 N20' 
+631 'SF4 S1  S4 ' 
+631 'SF4 S2  S3 ' 
+506 'SRT C2  C3 ' 
+89  'STI N48 N51' 
+590 'TAR C2  C3 ' 
+405 'TFP N2  N3 ' 
+613 'VDN N17 N14' 
+329 'VIA N14 N17' 
+564 'VX6 N1  N4 ' 
+101 'VYR N19 C22' 
+644 'WCC S1  S2 ' 
+101 'XED N3  N4 ' 
+101 'ZEN C10 N7 ' 
+#End of coupled atoms
+
+#Residues with atoms for which fixing is mutually exclusive
+#Fixing the first atom is preferred
+loop_
+_atom_exclusive.res 
+_atom_exclusive.atom_root 
+_atom_exclusive.atom_branches 
+44B ' C33' ' C34 C38' 
+C5D ' C25' ' C26 C27' 
+CBQ ' C1 ' ' P1  P2 ' 
+JZS ' C14' ' C15 C16' 
+ZOL ' C8 ' ' P9  P14' 
+#End of mutually exclusive atoms
+
+#List of hetero compounds to be ignored for validation
+loop_
+_res_hetero_ignore.name 
+0QE 
+15P 
+1PG 
+2HP 
+2PE 
+3CO 
+ACE 
+ACN 
+ACT 
+ACY 
+AF3 
+AG  
+AL  
+ALF 
+AR  
+ARS 
+AU  
+AU3 
+AUC 
+AZI 
+BA  
+BCT 
+BEF 
+BME 
+BR  
+BU1 
+BU3 
+CA  
+CAC 
+CAD 
+CCN 
+CD  
+CE  
+CL  
+CMO 
+CO  
+CO3 
+CR  
+CS  
+CU  
+CU1 
+CUA 
+CYN 
+D12 
+DIO 
+DMF 
+DMS 
+DOD 
+DUM 
+EDO 
+EMC 
+EOH 
+EPE 
+EU  
+F   
+FE  
+FE2 
+FEO 
+FMT 
+GA  
+GD  
+GOL 
+H2S 
+HEX 
+HEZ 
+HG  
+HO  
+HOH 
+IOD 
+IPA 
+IPH 
+IR  
+IRI 
+IUM 
+K   
+KR  
+LA  
+LI  
+LU  
+MES 
+MG  
+MN  
+MN3 
+MO  
+MOH 
+MOO 
+NA  
+NCO 
+NH2 
+NH4 
+NI  
+NO  
+NO2 
+NO3 
+O   
+OEC 
+OH  
+OHX 
+OS  
+OXL 
+OXY 
+P33 
+PB  
+PD  
+PE4
+PEG
+PEO 
+PER 
+PG4 
+PG6 
+PI  
+PO4 
+PR  
+PT  
+RB  
+RE  
+RH  
+RH3
+RU
+RU2
+SB  
+SCN 
+SE  
+SE4 
+SM  
+SO3 
+SO4 
+SR  
+SX  
+TB  
+TBU 
+TE  
+TL  
+TRS 
+U1  
+UNX 
+VO4 
+W   
+WAT 
+WO2 
+WO4 
+XE  
+Y1  
+YB  
+YT3 
+ZN  
+#End of residues to be ignored
+
+#List of LINKs that should be removed
+loop_
+_link_remove.atom_1
+_link_remove.residue_1
+_link_remove.atom_2
+_link_remove.residue_2
+C   GLY C7  NAG 
+C   GLY C8  NAG 
+C   GLY N2  NAG 
+CA  GLY C7  NAG 
+CA  GLY C7  NAG 
+CA  GLY N2  NAG 
+CA  GLY O7  NAG 
+CG  ASN C1  NAG 
+CG  ASN C8  NAG 
+CG  ASN O1  NAG 
+K   K   K   K   
+K   K   N   ASP 
+K   K   N   LYS 
+K   K   N2  G   
+K   K   N7  G   
+K   K   ND2 ASN 
+K   K   NE  ARG 
+K   K   NE2 GLN 
+K   K   NH2 ARG 
+N   GLY C7  NAG 
+N   GLY C8  NAG 
+ND2 ASN C2  NAG 
+ND2 ASN C3  NAG 
+ND2 ASN O1  NAG 
+ND2 ASN O5  NAG 
+NE2 HIS CD1 TYR 
+NE2 HIS CD2 TYR 
+NE2 HIS CE1 TYR 
+NE2 HIS CE2 TYR 
+NE2 HIS SG  CYS
+O   GLY N2  NAG 
+O   TYR O7  NAG 
+O4  NAG C4  NAG 
+O4  NAG O5  MAN 
+O5  MAN O6  MAN 
+OE1 GLU C1  GLC 
+OE2 GLU C1  GLC 
+OG  SER O1  NTJ 
+OG  SER O5  NGA 
+CA  CA  ND2 ASN 
+CA  CA  NE2 GLN 
+CO  CO  CD  GLU 
+CO  CO  CE1 HIS 
+FE  HEM N   CYN 
+MG  MG  CB  SER 
+MG  MG  CD  GLU 
+MG  MG  CG  ASP 
+MG  MG  N   ALA 
+MG  MG  N   ARG 
+MG  MG  N   ASN 
+MG  MG  N   ASP 
+MG  MG  N   GLN 
+MG  MG  N   GLU 
+MG  MG  N   GLY 
+MG  MG  N   HIS 
+MG  MG  N   ILE 
+MG  MG  N   LEU 
+MG  MG  N   LYS 
+MG  MG  N   MET 
+MG  MG  N   PHE 
+MG  MG  N   PRO 
+MG  MG  N   SER 
+MG  MG  N   THR 
+MG  MG  N   TRP 
+MG  MG  N   TYR 
+MG  MG  N   VAL 
+MG  MG  N3B GNP 
+MG  MG  N7  G   
+MG  MG  ND1 HIS 
+MG  MG  ND2 ASN 
+MG  MG  NE  ARG 
+MG  MG  NE2 GLN 
+MG  MG  NE2 HIS 
+MG  MG  NH1 ARG 
+MG  MG  NH2 ARG 
+MG  MG  NZ  LYS 
+MG  MG  SD  MET 
+MG  MG  K   K   
+MG  MG  MG  MG  
+NA  NA  ND2 ASN 
+NA  NA  NE2 GLN 
+NI  NI  CD2 HIS 
+ZN  ZN  CB  CYS 
+ZN  ZN  CD2 HIS 
+ZN  ZN  CE1 HIS 
+ZN  ZN  S   SO4 
+#End of list of LINKs
+
+#List of LINKs that should have their counterparts swapped
+loop_
+_link_swap.atom_id_1
+_link_swap.comp_id_1
+_link_swap.atom_id_2
+_link_swap.comp_id_2
+C1  AMU O4  NAG
+C1  BDP O3  NAG
+C1  BGC O3  BGC
+C1  BGC O3  GLC
+C1  BGC O4  BGC
+C1  BGC O4  BMA
+C1  BGC O4  MAN
+C1  BMA O4  BMA
+C1  BMA O4  NAG
+C1  FUC O3  NAG
+C1  FUC O4  NAG
+C1  FUC O6  NAG
+C1  FUC OG1 THR
+C1  G6S O4  NAG
+C1  GAL O3  A2G
+C1  GAL O3  NAG
+C1  GAL O3  NGA
+C1  GAL O4  BGC
+C1  GAL O4  NAG
+C1  GAL O4  NGS
+C1  GC4 O3  NAG
+C1  GCD O3  NAG
+C1  GLA O2  MAN
+C1  GLA O3  NAG
+C1  GLA O3  NDG
+C1  GLA O4  GAL
+C1  GLC O3  BGC
+C1  GLC O4  GLA
+C1  GLC O4  GLC
+C1  MAN O2  MAN
+C1  MAN O2  MMA
+C1  MAN O3  BMA
+C1  MAN O3  MAN
+C1  MAN O4  MMA
+C1  MAN O4  RAM
+C1  MAN O6  BMA
+C1  MAN O6  H1M
+C1  MAN O6  MMA
+C1  NA1 O4  NAG
+C1  NAG O2  MAN
+C1  NAG O2  RAM
+C1  NAG O3  A2G
+C1  NAG O3  FUC
+C1  NAG O3  GAL
+C1  NAG O3  NGA
+C1  NAG O4  4NN
+C1  NAG O4  AMU
+C1  NAG O4  AMV
+C1  NAG O4  BDP
+C1  NAG O4  BMA 
+C1  NAG O4  GCU
+C1  NAG O4  GDL
+C1  NAG O4  MU2
+C1  NAG O4  NAG
+C1  NAG O4  NDG
+C1  NAG O4  NM6
+C1  NAG O4  NM9
+C1  NAG O6  GAL
+C1  NDG O2  MAN
+C1  NM6 O4  NAG
+C1  RAM O2  RAM
+C1  RAM O3  GLA
+C1  RAM O3  NAG
+C1  RAM O6  GLC
+C1  SGA O4  MAG
+C1  SGA O4  NAG
+C2  SIA O3  GAL
+C3  CDR OGL CDR
+ND1 HIS ZN  ZN
+ND2 ASN C1  NAG
+NE  ORN C   LYS
+NE2 HIS ZN  ZN
+O1  EDO C2  EDO
+O1  PO4 P   PO4
+P   DOC "O3'" DT
+#End of list of LINKs
+
+#List of LINKs that get a Refmac LINKid assigned
+loop_
+_link_label.atom_id_1
+_link_label.comp_id_1
+_link_label.atom_id_2
+_link_label.comp_id_2
+_link_label.refmac 
+C   ASP NE  ORN PEP-ORN  
+C   GLU NE  ORN PEP-ORN  
+C   LYS NE  ORN PEP-ORN 
+C1  NAG ND2 ASN pyr-ASN 
+C1B XYP O4B XYP XYPa-XYP 
+O2  BGC C1  MAN ALPHA1-2 
+O2  BHG C1  FUC BETA1-2  
+O2  BMA C1  BGC BETA1-2  
+O2  BMA C1  XYP BETA1-2
+O2  GAL C1  NAG BETA1-2  
+O2  GLC C1  GLC ALPHA1-2
+O2  GLC C1  MAN ALPHA1-2 
+O2  MAN C1  ARB ALPHA1-2 
+O2  MAN C1  BGC BETA1-2  
+O2  MAN C1  BMA BETA1-2  
+O2  MAN C1  GCU ALPHA1-2 
+O2  MAN C1  GLA ALPHA1-2 
+O2  MAN C1  GUP BETA1-2  
+O2  MAN C1  M6D BETA1-2  
+O2  MAN C1  MAN ALPHA1-2 
+O2  MAN C1  NAG BETA1-2  
+O2  MAN C1  XYS ALPHA1-2 
+O2  MMA C1  MAN ALPHA1-2 
+O2  RAM C1  NAG BETA1-2  
+O2  RAM C1  RAM BETA1-2  
+O2  XYS C1  GAL BETA1-2  
+O3  A2G C1  GAL BETA1-3  
+O3  A2G C1  NAG BETA1-3  
+O3  BGC C1  BGC BETA1-3  
+O3  BGC C1  BMA BETA1-3  
+O3  BGC C1  GLC ALPHA1-3 
+O3  BMA C1  BMA BETA1-3  
+O3  BMA C1  MAN ALPHA1-3 
+O3  BMA C1  XYS ALPHA1-3 
+O3  FUC C1  NAG BETA1-3  
+O3  GAL C1  NAG BETA1-3  
+O3  GAL C2  SIA BETA2-3  
+O3  GLA C1  NAG BETA1-3  
+O3  GLA C1  RAM BETA1-3  
+O3  GLC C1  BGC BETA1-3  
+O3  GLC C1  GAL BETA1-3  
+O3  GLC C1  GLA ALPHA1-3 
+O3  GLC C1  GLC ALPHA1-3
+O3  GLC C1  MAN ALPHA1-3 
+O3  GMH C1  GPH BETA1-3  
+O3  GPH C1  GLC ALPHA1-3 
+O3  GS1 C1  BGC BETA1-3  
+O3  H1M C1  MAN ALPHA1-3 
+O3  MAG C1  FUC BETA1-3  
+O3  MAN C1  BMA BETA1-3  
+O3  MAN C1  GLC ALPHA1-3 
+O3  MAN C1  MAN ALPHA1-3 
+O3  MAN C1  NAG BETA1-3  
+O3  MAN C1  PZU ALPHA1-3 
+O3  MMA C1  MAN ALPHA1-3 
+O3  NAG C1  BDP BETA1-3  
+O3  NAG C1  BMA BETA1-3  
+O3  NAG C1  FCA ALPHA1-3 
+O3  NAG C1  FUC BETA1-3  
+O3  NAG C1  FUL ALPHA1-3 
+O3  NAG C1  GAL BETA1-3  
+O3  NAG C1  GC4 BETA1-3  
+O3  NAG C1  GCD BETA1-3  
+O3  NAG C1  GLA ALPHA1-3 
+O3  NAG C1  GTR BETA1-3  
+O3  NAG C1  M6D BETA1-3  
+O3  NAG C1  NAA BETA1-3  
+O3  NAG C1  NAG BETA1-3  
+O3  NAG C1  RAM BETA1-3  
+O3  NDG C1  GLA ALPHA1-3 
+O3  NDG C1  NAG BETA1-3  
+O3  NGA C1  GAL BETA1-3  
+O3  NGA C1  NAG BETA1-3  
+O3  NGS C1  FUC BETA1-3  
+O3  OPM C1  MAN ALPHA1-3 
+O3  XYS C1  MAN ALPHA1-3 
+O4  4NN C1  NAG BETA1-4  
+O4  AMU C1  NAG BETA1-4  
+O4  AMV C1  NAG BETA1-4  
+O4  BDP C1  NAG BETA1-4  
+O4  BGC C1  BGC BETA1-4  
+O4  BGC C1  BMA BETA1-4  
+O4  BGC C1  GAL BETA1-4  
+O4  BGC C1  MAN ALPHA1-4 
+O4  BMA C1  BGC BETA1-4  
+O4  BMA C1  BMA BETA1-4  
+O4  BMA C1  MAN ALPHA1-4 
+O4  BMA C1  NAG BETA1-4  
+O4  G2F C1  NAG BETA1-4  
+O4  GAL C1  GLA ALPHA1-4 
+O4  GCU C1  NAG BETA1-4  
+O4  GDL C1  NAG BETA1-4  
+O4  GLA C1  GLC ALPHA1-4 
+O4  GLC C1  GLC ALPHA1-4 
+O4  HSQ C1  NAG BETA1-4  
+O4  M6D C1  NAG BETA1-4  
+O4  MAG C1  NAG BETA1-4  
+O4  MAG C1  SGA BETA1-4  
+O4  MAN C1  BGC BETA1-4  
+O4  MAN C1  BMA BETA1-4  
+O4  MAN C1  MAN ALPHA1-4 
+O4  MAN C1  NAG BETA1-4  
+O4  MAN C1  RAM BETA1-4  
+O4  MMA C1  MAN ALPHA1-4 
+O4  MMA C1  NAG BETA1-4  
+O4  MU2 C1  NAG BETA1-4  
+O4  NAG C1  AMU BETA1-4  
+O4  NAG C1  BMA BETA1-4  
+O4  NAG C1  BDP BETA1-4  
+O4  NAG C1  FUC BETA1-4  
+O4  NAG C1  G6S BETA1-4  
+O4  NAG C1  GAL BETA1-4  
+O4  NAG C1  GCD BETA1-4  
+O4  NAG C1  GLA ALPHA1-4 
+O4  NAG C1  GLC ALPHA1-4 
+O4  NAG C1  GUP BETA1-4  
+O4  NAG C1  NA1 BETA1-4  
+O4  NAG C1  NAG BETA1-4  
+O4  NAG C1  NDG ALPHA1-4 
+O4  NAG C1  NGK ALPHA1-4 
+O4  NAG C1  SGA BETA1-4  
+O4  NDG C1  BGC BETA1-4  
+O4  NDG C1  BMA BETA1-4  
+O4  NDG C1  NAG BETA1-4  
+O4  NDG C1  NDG ALPHA1-4 
+O4  NDG C1  NGZ ALPHA1-4 
+O4  NGS C1  GAL BETA1-4  
+O4  NGZ C1  MAN ALPHA1-4 
+O4  RAM C1  MAN ALPHA1-4 
+O6  BGC C1  BGC BETA1-6 
+O6  BGC C1  MAN ALPHA1-6 
+O6  BGC C1  RAM BETA1-6  
+O6  BGC C1  XYS ALPHA1-6 
+O6  BMA C1  BMA BETA1-6  
+O6  BMA C1  GLA ALPHA1-6 
+O6  BMA C1  MAN ALPHA1-6 
+O6  GAL C1  NAG BETA1-6 
+O6  GAL C2  SIA ALPHA2-6
+O6  GLC C1  GAL BETA1-6  
+O6  GLC C1  GLA ALPHA1-6 
+O6  GLC C1  MAN ALPHA1-6 
+O6  GLC C1  RAM BETA1-6  
+O6  H1M C1  MAN ALPHA1-6 
+O6  MAN C1  GAL BETA1-6  
+O6  MAN C1  MAN ALPHA1-6 
+O6  MAN C1  NAG BETA1-6  
+O6  MAN C1  SGA BETA1-6  
+O6  MMA C1  MAN ALPHA1-6 
+O6  MMA C1  NAG BETA1-6  
+O6  NAG C1  BMA BETA1-6  
+O6  NAG C1  GLC ALPHA1-6 
+O6  NAG C1  FCA ALPHA1-6 
+O6  NAG C1  FUC BETA1-6  
+O6  NAG C1  FUL ALPHA1-6 
+O6  NAG C1  MAN ALPHA1-6 
+O6  NAG C1  NAG BETA1-6  
+O6  NDG C1  GLC ALPHA1-6 
+OG1 THR C1  FUC FUC-THR  
+P   PO4 O1  PO4 PO4-PO41 
+ZN  ZN  ND1 HIS ZN-HISND 
+ZN  ZN  NE2 HIS ZN-HISNE 
+#End of list of LINKs that get a Refmac LINKid assigned
+
+#List of compounds with carbohydrate substructures that should not be renamed
+loop_
+_carb_rename_ignore.from_comp_id 
+_carb_rename_ignore.to_comp_id 
+147 FUC 
+3DR ORP
+3SA BGC
+A1Q MAN
+ACR AC1
+ACR AGL
+ACR BGC
+ACR GL0
+AMG MAN
+AMV AMU
+APR HSX
+APR RP5
+APX RP5
+ASN BMA
+BGC ASO
+BGC BDP
+BGC XYP
+BHG BGC
+BOG BMA
+BOG MAN
+CBI GLC
+CM5 BMA
+CTR BGC
+CTT BGC
+CTT BMA
+CTT GAL
+DAF AGL
+DGD GLA
+DMU ALL
+DMU GL0
+DMU MAN
+FMF MBF
+G6D AGL
+GCD GC4
+GDL NAG
+GDL NDG
+GDU GL1
+GLC AGL
+LAK BMA
+LAT ASO
+LAT GL0
+LAT GLC
+LMD GLC
+LMT AFD
+LMT ASO
+LMT GL0
+LMT MAN
+MAG NAG
+MAL BGC
+MAL G6D
+MDM BMA
+MTT ASO
+NAG 5AX
+NAG BMA
+NAG NDG
+NDG 5AX
+NG6 G6S
+NGA ASG
+NLC NAG
+OPM BMA
+RG1 BGC
+SLT GAL
+SLT SIA
+SMD MAN
+UD1 GN1
+UPG G1P
+UPG GL1
+ZDM GLA
+#End of list of compounds with carbohydrate substructures 
+
+#A list of compounds that are each others epimers around a particular atom
+loop_
+_carb_epimer.center 
+_carb_epimer.residues 
+" C1'" LATLBT 
+' C4 ' BHGJZR 
+' C4 ' MPDMRD 
+#End of list of epimers
+
+#List of compounds that should be shown as one of 20 natural amino acids in a FASTA sequence
+loop_
+_monomer.name_3 
+_monomer.name_1 
+004 G
+00C C
+00I Q
+01W A
+02K A
+02Y A
+03Y C
+04Q G
+05N P
+05O Y
+060 C
+07O C
+08M A
+0A1 Y
+0A8 C
+0A9 F
+0AF W
+0AR R
+0CS A
+0E5 T
+0EA Y
+0LF P
+0QL C
+0TD D
+0UO W
+0WZ Y
+0Y8 P
+11Q P
+143 C
+19W A
+1AC A
+1C3 P
+1E3 A
+1IP N
+1JM F
+1MH A
+1OP Y
+1PA F
+1TQ W
+1TX A
+1TY Y
+1X6 S
+200 F
+23P A
+28J I
+2AS D
+2CO C
+2DO A
+2GX F
+2HF H
+2JG S
+2JH A
+2KK K
+2KP K
+2KY P
+2L5 F
+2LT Y
+2ML L
+2MR R 
+2RA A
+2RX S
+2SO H
+2TL T
+2TY Y
+2ZC S
+30F U
+30V C
+31Q C
+33X A
+34E V
+3AH H
+3BY P
+3CF F
+3CT Y
+3EG A
+3FG A
+3GL E
+3MY Y
+3PX P
+3QN K
+3TY A
+3WX P
+3YM Y
+3ZH H
+3ZL K
+41H F
+41Q N
+432 S
+45W P
+4AF F
+4AK K
+4AR R
+4AW W
+4BF F 
+4CF F
+4CY M
+4DB A
+4DP W
+4FB P
+4FO A
+4FW W
+4GJ C
+4HH S
+4HL Y
+4HT W
+4II F
+4IN W
+4J2 A
+4J5 R
+4KY P
+4L0 P
+4LZ Y
+4MM M
+4N7 P
+4N8 P
+4N9 P
+4OG W
+4OU F
+4OV S
+4PH F
+4PQ W
+4WQ A
+51T Y
+54C W
+55I F
+562 A
+56A H
+56C R
+5CS C
+5CT K
+5DW F
+5GG K
+5GM I
+5MW K
+5OH A
+5OL K
+5OM A
+5OW K
+5PG G
+5R5 S
+5T3 K
+5VV N
+5XU A
+60F C
+66C F
+66D I
+66E V
+6BR T
+6CL K
+6CV A
+6CW W
+6DU F
+6FL L
+6G4 K
+6KM C
+6M6 C
+6V1 C
+6WK C
+73C S
+73N R
+73O Y
+73P K
+74P K
+7N8 F
+7O5 A
+7OZ A
+7QK K
+7T2 F
+7TK D
+7VN A
+7VU F
+7W2 F
+7WC D
+7XC F
+81R A
+81S A
+823 N
+85G Q
+85J Q
+85L C
+8JB C
+8LJ P
+8RE K
+99Y F
+9E7 K
+9EV K
+9KK A
+9KP K
+9MN K
+9OW C
+9PR P
+9R1 A
+9R4 Q
+9R7 Q
+9WV A
+A1D64 C
+A1LWV K
+A30 Y
+A3U F
+A5N N
+A8E V
+AA4 A
+AAR R
+ABA A
+ACB D
+AEA C
+AEI T
+AGD A
+AGM R
+AGQ Y
+AGT C
+AHB N
+AHO A
+AHP A
+AIB A 
+AKZ D
+ALC A
+ALN A
+ALO T
+ALS A
+ALV A
+ALY K
+AME M
+AN6 L
+API K
+APK K
+AR7 R
+ARM R
+ASA D
+ASB D
+ASL D
+AYA A
+AZH A
+AZK K
+B27 T
+B2A A
+B2F F
+B2V V
+B3A A
+B3D D
+B3E E
+B3K K
+B3S S
+B3X N
+B3Y Y
+B8R A
+BB8 F
+BBC C
+BCS C
+BF7 F
+BFD D 
+BG1 S
+BH2 D
+BIF F
+BLE L
+BMT T
+BOR R
+BP5 A
+BPE C
+BSE S
+BTK K
+BUC C
+BW5 A
+BWV R
+BXT S
+BYR Y
+BZK L
+C1X K
+C3Y C
+C4R C
+CAF C
+CAS C
+CCS C
+CE7 N
+CG6 C
+CGA E
+CGU E
+CGV C
+CIR R
+CLB A
+CLD A
+CME C
+CMH C
+CML C
+CMT C
+CR5 G
+CS1 C
+CS3 C
+CS4 C
+CSA C
+CSD C 
+CSJ C
+CSK C
+CSO C   
+CSP C
+CSR C
+CSS C
+CSU C
+CSX C
+CSZ C
+CTH T
+CUD A
+CWR S
+CXM M 
+CY0 C
+CY1 C
+CY3 C
+CY4 C
+CYD C
+CYF C
+CYG C
+CYJ K
+CYQ C
+CYR C
+CZ2 C
+CZS A
+CZZ C
+D0C F
+D11 T
+D3P G
+DA2 R
+DAB A
+DAH Y 
+DAL A
+DAR R
+DAS D
+DBB T
+DBY Y
+DBZ A
+DCY C
+DDE H
+DDZ S 
+DFF F
+DGL E
+DGN Q
+DHI H
+DI7 Y
+DIL I
+DIV V
+DJD F
+DLE L
+DLS K
+DLY K
+DM0 K
+DNE L
+DNP A
+DNW A
+DPL P
+DPN F
+DPP A
+DPQ Y
+DPR P
+DSE S
+DSG N
+DSN S
+DTH T
+DTR W
+DTY Y
+DV7 A
+DV9 E
+DVA V
+DYJ P
+DYL A
+DYS C
+E03 W
+E9M W
+ECC Q
+EJA C
+ELY K
+EME E
+EO2 A
+ESB Y
+ETA G
+EXA K
+EXL W
+F2F F
+F2Y Y
+F7P W
+F7S I
+F7V A
+F7W W
+F93 Y
+F9D A
+FAK K
+FC0 F
+FCL F
+FDL K
+FF9 K
+FGA E
+FGL G
+FGP S
+FH7 K
+FHL K
+FHO K
+FIO R
+FL6 D
+FLT Y
+FME M
+FOD A
+FP9 P
+FQA K
+FT6 W
+FTR W
+FTY Y
+FVA V
+FY2 Y
+FY3 Y
+FZN K
+G1X Y
+GAU E
+GFT S
+GGB A
+GGL E
+GHG Q
+GHP G
+GL3 G
+GLJ E
+GLK E
+GLZ G
+GMA E
+GME E
+GNC Q
+GPL K
+GQI C
+GVL S
+GZB G
+GZJ A
+H14 F
+H5M P
+H7V A
+HAR R
+HCS A
+HGL A
+HIA H
+HIC H
+HIP H
+HIQ H
+HIX A
+HJV Q
+HJY F
+HL2 L
+HLU L
+HLX A
+HLY K
+HMF F
+HMR R
+HNC C
+HOX F
+HP9 F
+HPE F
+HPH F
+HQA A
+HR7 R
+HRG R
+HS8 H
+HS9 H
+HSE S
+HSK H
+HSV H
+HT7 W
+HTI C
+HTR W
+HTY Y
+HVA V
+HY3 P
+HYP P 
+HZP P
+I2F K
+I2M I
+I4O H
+I7F S
+IAE F
+IAS D
+IC0 G
+IIL I
+ILM I
+ILX I
+IML I
+IOY F
+IYR Y 
+IZO M
+J2F Y
+J9A A
+JJJ C
+JJK C
+JJL C
+JLP K
+K5H C
+K5L S
+KBE K
+KCJ A
+KCR K
+KCX K 
+KFP K
+KGC K
+KHB K
+KJW L
+KKD D
+KPF K
+KPI K
+KPY K
+KST K
+KYN W
+KYQ K
+L3O L
+L5P K
+LA2 K
+LAL A
+LAY L
+LBZ K
+LCK K
+LDH K
+LE1 V
+LED L
+LEF L
+LEI I
+LEN L
+LET K
+LGY K
+LHC A
+LLO K
+LLP K
+LLY K
+LOU A
+LP6 K
+LPD P
+LPH A
+LRK K
+LSO K
+LTU W
+LV8 A
+LVN V
+LWI F
+LYF K
+LYK K
+LYN K
+LYO K
+LYR K
+LYV A
+LYX K
+LYZ K
+M0H C
+M2L K
+M3L K 
+MAA A
+MBQ Y
+MCS C
+MDF Y
+ME0 M
+MEA F
+MED M
+MEN N
+MEQ Q
+MGN Q 
+MH6 S
+MHO M
+MHS H
+MHU F
+MIR S
+MIS S
+MK8 L
+MKF S
+ML3 K
+MLE L
+MLL L
+MLU L
+MLY K 
+MLZ K
+MME M
+MP8 P
+MPQ G
+MSE M 
+MSO M
+MTY Y
+MV9 V
+MVA V
+MYK K
+MYN R
+N0A F
+N2C C
+N65 K
+N7P P
+N80 P
+N9P A
+NA8 A
+NAL A
+NBQ Y
+NC1 S
+NCB A
+NCY C 
+NEP H 
+NFA F
+NIY Y
+NLB L
+NLE L
+NLW L
+NLY G
+NMM R
+NPH C
+NRG R
+NVA V
+NYS C
+NZC T
+NZH H
+O12 A
+O2E S
+O7D W
+O7G V
+OAR R
+OAS S 
+OBF A
+OBS K
+OCS C  
+OCY C
+OGC H
+OHI H
+OHS D
+OIC P
+OLD H
+OLT T
+OMH S
+OMT M
+OMX Y
+OMY Y
+OMZ Y
+ONL A
+OPR R
+ORN A
+ORQ R
+OSE S
+OTH T
+OTY Y
+OYL H
+OZ3 G
+OZT P
+OZW F
+P1L C
+P2Q Y
+P3Q Y
+P4E A
+P9S C
+PAQ Y
+PAT W
+PBF F
+PCA E 
+PCS F
+PDW P
+PF5 F
+PFF F 
+PG9 G
+PH6 P
+PH8 A
+PHA F
+PHD D
+PHI F 
+PHL F
+PLJ P
+PM3 F
+POK R
+POM P
+PPN F
+PR3 C
+PR4 P
+PR7 P
+PR9 P
+PRK K
+PRS P
+PRV G
+PSA F
+PSH H
+PSW U
+PTH Y
+PTM Y
+PTR Y
+PXU P
+PYX C
+Q2E W
+Q3P K
+Q3S A
+Q75 A
+Q78 A
+Q8X C
+QCI Q
+QCS C
+QM8 A
+QMB A
+QMM Q
+QNQ C
+QNT C
+QNW C
+QO2 C
+QO5 C
+QO8 C
+QPA C
+QQ8 Q
+QVA C
+QX7 A
+R0K E
+R1A C
+RE0 W
+RE3 W
+RF9 K
+RGL R
+RPI R
+RVX S
+SAC S  
+SAR G
+SBD A
+SBL S
+SC2 C
+SCH C
+SCS C
+SCY C
+SDP S
+SE7 U
+SEB S
+SEC C 
+SEE S
+SEL S
+SEM S
+SEN S
+SEP S
+SET S
+SGB S
+SLL K
+SLZ K
+SMC C
+SME M
+SMF F
+SNC C
+SNM S
+SNN N
+SRZ S
+SUN S
+SVV S
+SVX S
+SVY S
+SVZ S
+SWW S
+SXE S
+SYS U
+T0I Y
+T79 A
+T8L T
+T9E T
+TBG V
+TCQ Y
+TDF F
+TGH W
+TH5 T
+TH6 T
+THC T
+THZ R
+TIH A
+TIS S
+TLY K
+TNQ W
+TOQ W
+TOX W
+TPO T   
+TPQ Y
+TQQ W
+TQZ C
+TRF W
+TRN W
+TRO W
+TRQ W
+TRW W
+TRX W
+TS9 I
+TSQ F
+TSY C
+TTQ W
+TTS Y
+TY2 Y
+TY5 Y
+TYB Y
+TYC Y
+TYE Y
+TYI Y
+TYJ Y
+TYN Y
+TYO Y
+TYQ Y
+TYS Y
+TYT Y
+TYW Y
+TYX C
+TYY Y
+U2M A
+U2X Y
+U3X F
+UB4 A
+UF0 S
+UJR C
+UKD A
+UKY A
+UMA A
+UN1 A
+UU4 A
+UU5 A
+UX8 W
+UXQ F
+V1C F
+V3C P
+V44 C
+V61 F
+V6W W
+V7T K
+VAD V
+VAH V
+VAI V
+VDE K
+VHF E
+VI3 C
+VLL A
+VME V
+VPV K
+VR0 R
+WCM A
+WFP F
+WLU L
+WPA F
+WRP W
+WVL V
+WZJ I
+X5H G
+XA6 F
+XC0 A
+XCN C
+XFW Q
+XOK K
+XPL K
+XPR P
+XSN N
+XW1 A
+XX1 K
+XXA T
+XYC A
+Y1V L
+Y57 K
+YCM C
+YHA K
+YNM Y
+YOF Y
+YPZ Y
+YTH T
+YYA T
+Z3E T
+ZAE F
+ZAI K
+ZAL A
+ZBZ C
+ZCL F
+ZDJ Y
+ZNY P
+ZPO P
+ZSX G
+ZT6 Y
+ZTG Y
+ZTK A
+ZYJ P
+ZYK P
+ZZJ A
+# 
+loop_
+_res_hetero_TLS.append   
+ZN
+HEC
+# 
