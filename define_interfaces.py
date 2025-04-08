@@ -11,7 +11,8 @@ from src.module.domain_clustering import domain_clustering
 from src.module.parsers import MMCIFPARSER, HSSPPARSER, alphafold_msa
 #from src.module.conservation_score import CONSERVATION_SCORE
 from src.module.interface_identification import interface_identification
-#from src.module.ribbon_diagram import RIBBON_DIAGRAM
+from src.module.ribbon_diagram import RIBBON_DIAGRAM
+from src.module.output import output
 
 import argparse 
 
@@ -104,13 +105,11 @@ def define_interfaces(in_dir, mode):
                                                                                 plotting=True).run_domain_clustering()
     
     
-    #elements = np.linspace(0.4, 1, 40).tolist()
-    
-    #contact_threshold_list = [round(x, 3) for x in elements]
-    contact_threshold_list = [0.5, 0.75, 0.9]
+    elements = np.linspace(0.4, 1, 61).tolist()
+    contact_threshold_list = [round(x, 3) for x in elements]
+
+
     interactions_list = []
-    
-    
     for contact_threshold in contact_threshold_list:
 
         INTERFACE_IDENTIFICATION = interface_identification(coevolutionary_cluster_dict, 
@@ -125,31 +124,26 @@ def define_interfaces(in_dir, mode):
 
         interactions_dict= INTERFACE_IDENTIFICATION.extract_interfaces()
         interactions_list.append(interactions_dict)
-    
-        biomolecule_interface_dict= INTERFACE_IDENTIFICATION.map_info_interfaces(interactions_dict)
-    
-        #interface_info_df = INTERFACE_IDENTIFICATION.get_interface_info_dataframes(interactions_dict)
-    
-    
-        # ribbon_diagram = RIBBON_DIAGRAM(
-        #                 interactions_dict,
-        #                 biomolecule_interface_dict,
-        #                 chain_info_dict,
-        #                 contact_threshold,
-        #                 outdir=outdir,
-        #                 boolean_modified_non_poly_length= True)
-        #ribbon_diagram.plot_ribbon_diagram()
-        
 
+
+        biomolecule_interface_dict= INTERFACE_IDENTIFICATION.map_info_interfaces(interactions_dict)
+
+        if contact_threshold  in [0.5, 0.75,0.9]:
+        
+            ribbon_diagram = RIBBON_DIAGRAM(
+                                interactions_dict,
+                                biomolecule_interface_dict,
+                                chain_info_dict,
+                                contact_threshold,
+                                outdir=outdir,
+                                boolean_modified_non_poly_length= True)
+                
+            ribbon_diagram.plot_ribbon_diagram()
 
     structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_dict, job_id_name)
 
-    #structure_info_df = INTERFACE_IDENTIFICATION.get_structure_info_dataframes(structure_score_dict)
-
-    alphabridge_dict = {
-        "structure": [structure_score_dict],
-        "interactions" : interactions_list
-    }
+    alphabridge_dict = output(structure_score_dict,interactions_list).get_alphabridge_dict()
+        
 
 
     with open(f"{outdir}/alphabridge_data.json", "w") as file:
