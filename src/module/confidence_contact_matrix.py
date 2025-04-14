@@ -177,9 +177,13 @@ class FEATURE_MATRIX:
 
 class CCM_AF3(FEATURE_MATRIX):
     
-    def __init__(self, in_dir):
+    def __init__(self, 
+                 in_dir, 
+                 sample: int = 0):
         
         super().__init__(in_dir)
+        
+        self.sample = sample
     
     def check_alphafold_dialect(self):
         
@@ -202,6 +206,7 @@ class CCM_AF3(FEATURE_MATRIX):
     def extract_feature_filepath(self):
         
         folder_path = self.in_dir
+        sample = self.sample
         
         if self.check_if_path_exist(folder_path):
         
@@ -214,10 +219,10 @@ class CCM_AF3(FEATURE_MATRIX):
             
             else:
         
-                feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
-                structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
-                job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
-                summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
+                feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
+                structure_path = list(Path(folder_path).glob( f"*model_{sample}.cif"))[0]
+                job_request_path = list(Path(folder_path).glob(f"*job_request.json"))[0]
+                summary_request_path = list(Path(folder_path).glob(f"*summary_confidences_{sample}.json"))[0]
         
             return feature_path, structure_path, job_request_path, summary_request_path
     

@@ -18,6 +18,7 @@ import argparse
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
+choices = [1,2,3,4,5]
 
 def parse_args():
     #####################
@@ -38,6 +39,9 @@ def parse_args():
     
     parser.add_argument('-c', dest='config_dir', default='',
                         help='path to a directory where input folder are stored')
+
+    parser.add_argument('-s','--sample',type=str, dest='sample', choices= [str(num) for num in choices], default= '1',
+                        help='define which diffusion sample to use. Options: 1,2,3,4,5, all. Default: 1')
     
     parser.add_argument('-m','--mode', dest='mode', choices=['AF3', 'AF2', 'ColabFold'] , default='AF3',
                         help='output from different AlphaFold Version. Options: AF3, AF2, ColabFold')
@@ -71,18 +75,13 @@ def write_dataframe(df, filename, outdir_path):
 
 
 
-def define_interfaces(in_dir, mode):
-        
-        
-    outdir = os.path.join(in_dir, 'AlphaBridge')
-
-    if not os.path.isdir(outdir):
-        os.makedirs(outdir)
-            
-
+def define_interfaces(in_dir,outdir,mode,sample):
+    
+    sample = int(sample) - 1
+    
     if mode == 'AF3':
         
-            FEATURE_OBJECT = CCM_AF3(in_dir)
+            FEATURE_OBJECT = CCM_AF3(in_dir, sample)
             
             feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
             chain_info_dict, sequence_info_dict = FEATURE_OBJECT.extract_chain_info_dict()
@@ -157,9 +156,16 @@ def main():
     
     in_dir = args.in_dir
     mode = args.mode
+    sample = args.sample
+    
+    outdir = os.path.join(in_dir, 'AlphaBridge')
+
+    if not os.path.isdir(outdir):
+        os.makedirs(outdir)
     #contact_threshold = args.contact_threshold
     
-    define_interfaces(in_dir, mode)
+    
+    define_interfaces(in_dir,outdir,mode,sample)
     
     print('finished')
     
