@@ -92,16 +92,21 @@ class INTERACTIVE_NETWORK:
             
             df, label2auth, df_pairwise_interaction, auth2label = self.from_json_to_df(threshold)
             
-            j_not_merged = no_merg.get_protein_network_no_merging(df,label2auth)
-            j_proteins = protein_net.get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2label)
+            if not df.empty:
             
-            # Combine them into a single dictionary
-            combined_networks = {"cut-off": threshold,
-                "network_not_merged": j_not_merged,
-            # "network_merged": j_merged,
-                "protein_network": j_proteins 
-            }
-            #combine everything
+                j_not_merged = no_merg.get_protein_network_no_merging(df,label2auth)
+                j_proteins = protein_net.get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2label)
+                
+                # Combine them into a single dictionary
+                combined_networks = {"cut-off": threshold,
+                    "network_not_merged": j_not_merged,
+                # "network_merged": j_merged,
+                    "protein_network": j_proteins 
+                }
+                #combine everything
+            else:
+                combined_networks = {}
+            
             all_threshold[f"network at {threshold}"] = combined_networks
         
         return all_threshold
