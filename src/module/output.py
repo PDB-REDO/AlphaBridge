@@ -2,7 +2,7 @@ from itertools import chain, repeat, count, islice
 from collections import Counter
 
 
-class output:
+class OUTPUT:
     
     def __init__(self, structure_score_dict, interactions_list):
         self.structure_score_dict = structure_score_dict

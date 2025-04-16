@@ -12,7 +12,9 @@ from src.module.parsers import MMCIFPARSER, HSSPPARSER, alphafold_msa
 #from src.module.conservation_score import CONSERVATION_SCORE
 from src.module.interface_identification import interface_identification
 from src.module.ribbon_diagram import RIBBON_DIAGRAM
-from src.module.output import output
+from src.module.output import OUTPUT
+
+from src.network.network_int  import INTERACTIVE_NETWORK
 
 import argparse 
 
@@ -141,12 +143,17 @@ def define_interfaces(in_dir,outdir,mode,sample):
 
     structure_score_dict = INTERFACE_IDENTIFICATION.get_structure_score_dict(chain_info_dict, job_id_name)
 
-    alphabridge_dict = output(structure_score_dict,interactions_list).get_alphabridge_dict()
-        
+    alphabridge_dict = OUTPUT(structure_score_dict,interactions_list).get_alphabridge_dict()
+    
+    network_info = INTERACTIVE_NETWORK(alphabridge_dict).get_network_info()
+
 
 
     with open(f"{outdir}/alphabridge_data.json", "w") as file:
         file.write(json.dumps(alphabridge_dict, indent=4))
+    
+    with open(f"{outdir}/network_data.json", "w") as file:
+        file.write(json.dumps(network_info, indent=4))
     
     #write_dataframe(structure_info_df, 'structure_scores', outdir )
         
