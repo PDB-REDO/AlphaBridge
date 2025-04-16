@@ -105,7 +105,7 @@ class domain_clustering():
                 for protein, acclen, fasta_len in zip(label_asym_list, acclen_list, length_list):
                     
                     protein_start = acclen - fasta_len
-                    protein_end = acclen - 1
+                    protein_end = acclen 
                     
                     entity_region_dict[protein] = (protein_start,protein_end)
                         
@@ -120,6 +120,10 @@ class domain_clustering():
                                 
                                 protein_range = range(protein_start,protein_end)
                                 cluster_range = range(group_index_start, group_index_end)
+                                print(protein_range, cluster_range)
+                                
+                                print(protein_start,protein_end)
+                                print(group_index_start,group_index_end)
                                 overlapping_range = (max(protein_range[0], cluster_range[0]), min(protein_range[-1], cluster_range[-1])+1)
                                 
                                 if not protein in coevultionary_cluster_dict[cluster_group_name]['overlap_complex']:
