@@ -111,39 +111,3 @@ class INTERACTIVE_NETWORK:
         
         return all_threshold
 
-
-'''MAIN FUNCTION FOR OBTANING BOTH NETWORK: WITHOUT MERGING (MORE NODES) AND WITH MERGIN (LESS NODES)'''
-
-
-'''    in_dir = args.in_dir
-    threshold = [float(t) for t in args.threshold]
-    if not os.path.exists(args.o_dir):
-        os.makedirs(args.o_dir)
-    all_threshold = {}
-    #iterate for every possible threshold
-    for th in threshold:
-        #print(f"th:{th}")
-        # funtion that creates the df that will be used as an inpt for the next fuction
-        df, label2auth, df_pairwise_interaction, auth2label = from_json_to_df(in_dir, th)
-        #function --> INFORMATION FOR THE NETWORK WITH MORE NODES(NO MERGED)
-        j_not_merged = no_merg.get_protein_network_no_merging(df,label2auth)
-        print("FINISHED THE NOT MERGED NETWORK")
-        #function --> INFORMATION FOR THE NETWORK WITH LESS NODES(MERGED)
-        #j_merged = merg.get_protein_network_merging(df)
-        #print("FINISHED THE MERGED NETWORK")
-        #function --> INFORMATION FOR THE NETWORK WHERE NOES == PROTEIN
-        j_proteins = protein_net.get_protein_network(df,label2auth,df_pairwise_interaction,th,auth2label)
-        print("FINISHED THE WHOLE PROTEIN NETWORK")
-        # Combine them into a single dictionary
-        combined_networks = {"cut-off": th,
-            "network_not_merged": j_not_merged,
-        # "network_merged": j_merged,
-            "protein_network": j_proteins 
-        }
-        #combine everything
-        all_threshold[f"network at {th}"] = combined_networks
-
-    # Save to a JSON file
-    with open(f"{args.o_dir}/combined_networks.json", "w") as f:
-        json.dump(all_threshold, f, indent=4)'''
-
