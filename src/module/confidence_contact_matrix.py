@@ -231,7 +231,7 @@ class CCM_AF3(FEATURE_MATRIX):
         request_file = read_json_file(job_request_path)
         
         if self.check_alphafold_dialect():
-
+            #print(structure_sequence_list)
             rec_list = RECORD_AF3(request_file, structure_sequence_list, feature_dict).process_record_file()
         else:
             rec_list = RECORD_SERVER(request_file, structure_sequence_list, feature_dict).process_record_file()
