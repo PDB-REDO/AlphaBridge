@@ -93,7 +93,7 @@ class interface_identification():
                             #distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             #confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             
-                            print(distance_submatrix,protA_range,protB_range)
+                            #print(distance_submatrix,protA_range,protB_range)
                             #dont consider non polymer chains in the calculation for general scores
                             #bolean value True if there is non_polymer in the binary interactoin
                             non_poly_bool = bool( {protA,protB} & set(non_polymer_chains_set))
@@ -362,7 +362,7 @@ def map_residue_range(protein_region, submatrix_range, iteraction_range):
     delta_index = submatrix_range[0] - protein_region[0]
    
     start = iteraction_range.start + delta_index + 1
-    end = iteraction_range.stop  +  delta_index + 1
+    end = iteraction_range.stop  +  delta_index 
     
     return start, end
 
