@@ -639,6 +639,7 @@ def get_monomer_info_dict(chain_info_dict):
                         monomer_name_len_dict[auth_asym_id]['entity_length'] = entity_length
                     else:
                         entity_length = len(rec['atoms'])
+                        #print(entity_length)
                         poly_bolean = True
                         
                         monomer_name_len_dict[auth_asym_id]['entity_length'] = None
