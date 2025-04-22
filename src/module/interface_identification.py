@@ -85,11 +85,15 @@ class interface_identification():
                     for protA_range in protA_range_list:
                         for protB_range in protB_range_list:
                             
-                             
-                            distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
-                            confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             
+                            distance_submatrix = select_submatrix(contact_matrix,protA_range,protB_range)
+                            confidence_submatrix = select_submatrix(confidence_matrix,protA_range,protB_range)
                             
+
+                            #distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            #confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            
+                            print(distance_submatrix,protA_range,protB_range)
                             #dont consider non polymer chains in the calculation for general scores
                             #bolean value True if there is non_polymer in the binary interactoin
                             non_poly_bool = bool( {protA,protB} & set(non_polymer_chains_set))
@@ -98,7 +102,6 @@ class interface_identification():
                             if not non_poly_bool:
                                 probability_structure_list.append(distance_submatrix)
                                 pmc_structure_list.append(confidence_submatrix)
-                            
                             interfaces, interface_range_list = find_interfaces(distance_submatrix, self.threshold)
                             
                             if not len(interface_range_list) == 0:
@@ -626,6 +629,29 @@ def convert_sets_to_lists(data):
         return list(data)
     else:  # For all other types, return as is
         return data
+def select_submatrix(matrix, row_range, col_range):
+    """
+    Safely selects a submatrix, handling single indices and ranges correctly.
+    
+    Parameters:
+        matrix (np.ndarray or np.matrix): Input matrix.
+        row_range (tuple): (row_start, row_end) (inclusive).
+        col_range (tuple): (col_start, col_end) (inclusive).
+    
+    Returns:
+        np.ndarray or np.matrix: The selected submatrix.
+    """
+    row_start, row_end = row_range
+    col_start, col_end = col_range
 
-    
-    
+    # Handle rows
+    if row_end < row_start:
+        raise ValueError("row_end must be >= row_start")
+    row_slice = slice(row_start, row_end + 1)  # +1 to include row_end
+
+    # Handle columns
+    if col_end < col_start:
+        raise ValueError("col_end must be >= col_start")
+    col_slice = slice(col_start, col_end + 1)  # +1 to include col_end
+
+    return matrix[row_slice, col_slice]
