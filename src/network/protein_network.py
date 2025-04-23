@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 from networkx.readwrite import json_graph;
+import src.network.obtaining_colors as col
 
 #FUCNTION USED IN NETWORK WITH NOT MERGIN NODES AND THE PROTEIN==NODE NETWORK
 
@@ -61,6 +62,7 @@ def create_new_column_interface_intervals_no_merge(df):
 
  #STEP1--> HAVING THE DF WITH ALL POSSIBLE INFORMATION
 def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2label):
+    label_color_dict = col.get_label_color_dict(label2auth)
     df['prot_1_lab'] = df['prot_1']
     df['prot_2_lab'] = df['prot_2']
     for column in ['prot_1_lab', 'prot_2_lab']:
@@ -161,10 +163,23 @@ def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2lab
 
     #COLORS 
     # Generate as many unique colors as the number of protein groups
-    cmap = plt.get_cmap("rainbow") 
-    colors = [mcolors.rgb2hex(cmap(i)) for i in np.linspace(0, 1, number_of_nodes)]
+    #cmap = plt.get_cmap("rainbow") 
+    #colors = [mcolors.rgb2hex(cmap(i)) for i in np.linspace(0, 1, number_of_nodes)]
         
     # Assign colors to graph nodes
+    colors = []
+
+    for v in g.vs:
+        label = v["label"]
+        found_color = "gray"  #dafault color
+
+        for key_letter, color in label_color_dict.items():
+            if label.startswith(key_letter):
+                found_color = color
+                break 
+
+        colors.append(found_color)
+
     g.vs["color"] = colors
 
     #print(f"node colors{colors}")
@@ -212,7 +227,7 @@ def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2lab
             edge_id = g.get_eid(source_index, target_index)
             interface_ids = unique_id_dict[edge_key]
 
-            g.es[edge_id]["type"] = ",".join(interface_ids)
+            g.es[edge_id]["interaction"] = ",".join(interface_ids)
 
     #print(unique_id_dict)
     #g.es["label"] = "physical interaction"
@@ -241,7 +256,7 @@ def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2lab
     #informaton for the json file
     jobs = json_graph.node_link_data(g_networkx)
     for link in jobs['links']:
-        link['type'] = link['type'].split(",")
+        link['interaction'] = link['interaction'].split(",")
 
     return jobs
 

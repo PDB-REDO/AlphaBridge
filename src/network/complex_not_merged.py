@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 from networkx.readwrite import json_graph;
+import src.network.obtaining_colors as col
 
 #FUCNTION USED IN NETWORK WITH MERGING NODES AND NOT MERGIN NODES
 
@@ -68,18 +69,24 @@ def create_new_column_interface_intervals_no_merge(df):
 
     return df
 
+#FUNCTION FOR EXTRACTNG ASYM_ID
+
+def extract_asym_id(s):
+    return s.split(' ')[0]
+
+
 '''MAIN FUNCTION!!!'''
-def get_protein_network_no_merging(df,dit):
+def get_protein_network_no_merging(df,label2auth, auth2label):
 
     #STEP1--> HAVING THE DF WITH ALL POSSIBLE INFORMATION
     #df_interfaces --> DF THAT IS USED FOR OBTAINING THE NO MERGED ETWORK (==MORE NODES)
     # .apply(lambda x: ...) to convert lists to space-separated strings.
-
+    label_color_dict = col.get_label_color_dict(label2auth)
     df_interfaces = create_new_column_interface_intervals_no_merge(df)
     df['prot_1_lab'] = df['prot_1']
     df['prot_2_lab'] = df['prot_2']
     for column in ['prot_1_lab', 'prot_2_lab']:
-        df[column]= df[column].replace(dit)
+        df[column]= df[column].replace(label2auth)
     # Save the DataFrame with the updated protein names
     df_interfaces["interface_intervals_1_labels"] = df["prot_1_lab"]+" "+ df_interfaces["interface_intervals_1"].apply(lambda x: " ".join(map(str, x)) if isinstance(x, list) else str(x)).astype(str)
     df_interfaces["interface_intervals_1_labels"] = df_interfaces["interface_intervals_1_labels"].apply(formatting_labels)
@@ -174,6 +181,7 @@ def get_protein_network_no_merging(df,dit):
         for interval_aa_str in value:
             labels.append(interval_aa_str)
 
+
     #print(f"labels: {labels}")
     #print(f"number of nodes:{number_of_nodes}")
     
@@ -182,23 +190,43 @@ def get_protein_network_no_merging(df,dit):
     
     #assign labels to each node (the order follow the dictionary protein_nodes_sorted)order
     g.vs['label'] = labels
+
+    #asym_id
+    for vertex in g.vs:
+        vertex['asym_id'] =extract_asym_id(vertex['label'])
+
     #for vertex in g.vs:     
-     #   print(f"ID: {vertex.index}, Label: {vertex['label']}")
+       #print(f"ID: {vertex.index}, Label: {vertex['label']}, asym_id: {vertex['asym_id']}")
+
 
 
     #COLORS 
     # Generate as many unique colors as the number of protein groups
-    num_proteins = len(nodes_for_each_protein)
-    cmap = plt.get_cmap("rainbow") 
-    colors = [mcolors.rgb2hex(cmap(i)) for i in np.linspace(0, 1, num_proteins)]
+    #num_proteins = len(nodes_for_each_protein)
+    #cmap = plt.get_cmap("rainbow") 
+    #colors = [mcolors.rgb2hex(cmap(i)) for i in np.linspace(0, 1, num_proteins)]
     
     # Assign colors to nodes based on their protein group
-    node_colors = []
-    for protein_index, size in enumerate(nodes_for_each_protein):
-        node_colors.extend([colors[protein_index]] * size) 
+    #node_colors = []
+    #for protein_index, size in enumerate(nodes_for_each_protein):
+    #    node_colors.extend([colors[protein_index]] * size) 
         
     # Assign colors to graph nodes
-    g.vs["color"] = node_colors
+    colors = []
+
+    for v in g.vs:
+        label = v["label"]
+        found_color = "gray"  #dafault color
+
+        for key_letter, color in label_color_dict.items():
+            if label.startswith(key_letter):
+                found_color = color
+                break 
+
+        colors.append(found_color)
+
+    g.vs["color"] = colors
+
    # print(f"node colors{node_colors}")
 
     
@@ -278,12 +306,59 @@ def get_protein_network_no_merging(df,dit):
     
     #second legend
     #ax.legend(handles=edge_patches, loc="upper left", title=r"$\bf{Interfaces}$")
+    unique_id_dict = {}
+
+    for _, row in df.iterrows():
+        from_prefix_df = row['interface_intervals_1_labels']
+        to_prefix_df = row['interface_intervals_2_labels']
+        unique_identifier = row['interface_id']
+
+        key = (from_prefix_df, to_prefix_df)
+
+        if key not in unique_id_dict:
+            unique_id_dict[key] = []
+
+        if unique_identifier not in unique_id_dict[key]:  # avoid duplicates
+            unique_id_dict[key].append(unique_identifier)
+
+    for edge in edges_diff:  
+        source_index, target_index = edge
+
+        source_label_raw = g.vs[source_index]['label']
+        #print(source_label_raw)
+        target_label_raw = g.vs[target_index]['label']
+
+        #source_label = auth2label.get(source_label_raw, source_label_raw)
+        #target_label = auth2label.get(target_label_raw, target_label_raw)
+
+        edge_key = (source_label_raw, target_label_raw)
+        #print(edge_key)
+
+        if edge_key in unique_id_dict:
+            edge_id = g.get_eid(source_index, target_index)
+            #print(edge_id)
+            interface_ids = unique_id_dict[edge_key]
+
+            g.es[edge_id]["interaction"] = ",".join(interface_ids)
+            #print(f"Assigned type(s) {interface_ids} to edge from {source_label_raw} to {target_label_raw} (mapped as {edge_key})")
+            
 
     #network in network x
     g_networkx = g.to_networkx()
     
     #informaton for the json file
     jobs = json_graph.node_link_data(g_networkx)
+    #print(jobs)
+
+    #adding iknterface IDs
+    for link in jobs['links']:
+        if link['interaction'] is None:
+            source_index = link['source']
+            asym_id_value = jobs['nodes'][source_index]['asym_id']
+            
+            del link['interaction']
+            link['asym_id'] = asym_id_value
+
 
     return jobs
 

@@ -94,7 +94,7 @@ class INTERACTIVE_NETWORK:
             
             if not df.empty:
             
-                j_not_merged = no_merg.get_protein_network_no_merging(df,label2auth)
+                j_not_merged = no_merg.get_protein_network_no_merging(df,label2auth,auth2label)
                 j_proteins = protein_net.get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2label)
                 
                 # Combine them into a single dictionary
