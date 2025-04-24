@@ -1,6 +1,6 @@
-# Running the script find_interface
+# Running the script  find_interface
 
-`find_interface` is a Python script that analyzes AlphaFold3 output to identify and visualize protein-protein interaction interfaces through comprehensive plots and data files.
+find_interface is a script that using the output provided by Alphafold3, provides different plots and files useful for the identification of interacting interfaces
 
 ## Installation
 
@@ -36,16 +36,12 @@ The output will be saved inside a folder called Alphabrige, placed inside in the
 
 The following files will be saved inside the input folder:
 
-input_folder/
-└── Alphabridge/
-    ├── alphabridge_data.json
-    ├── Confidence-contact_plot.png
-    ├── Confidence_matrix.png
-    ├── pae.png
-    ├── contact_matrix.png
-    └── 0.5_ribbon_plot.png
-    └── 0.75_ribbon_plot.png
-    └── 0.9_ribbon_plot.png
+1. alphabridge_data.json
+2. Confidance-contact_plot.png
+3. Confidence matrix.png
+4. pae.png
+5. contact_matrix.png
+6. ribbon_plot.png
 
 alphabridge_data.json
 
