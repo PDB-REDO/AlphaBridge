@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
 from networkx.readwrite import json_graph;
-import src.network.obtaining_colors as col
+import  src.network.obtaining_colors as col
 
 #FUCNTION USED IN NETWORK WITH NOT MERGIN NODES AND THE PROTEIN==NODE NETWORK
 
@@ -57,6 +57,9 @@ def create_new_column_interface_intervals_no_merge(df):
     df["interface_intervals_2"] = interface_intervals_2
 
     return df
+
+def extract_asym_id(s):
+    return s.split(' ')[0]
 
 '''MAIN FUNCTION!!!'''
 
@@ -157,6 +160,12 @@ def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2lab
         labels.append(value)
 
     g.vs['label'] = labels
+
+    for vertex in g.vs:
+        auth_asym_id = extract_asym_id(vertex['label'])
+        label_id_value = auth2label.get(auth_asym_id) 
+        #vertex['asym_id'] = asym_id
+        vertex['label_asym_id'] = label_id_value
 
     #for vertex in g.vs:     
     #    print(f"ID: {vertex.index}, Label: {vertex['label']}")
