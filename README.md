@@ -1,6 +1,6 @@
-# Running the script  find_interface
+# Running the script find_interface
 
-find_interface is a script that using the output provided by Alphafold3, provides  different plots and files useful for the identification of interacting interfaces
+`find_interface` is a Python script that analyzes AlphaFold3 output to identify and visualize protein-protein interaction interfaces through comprehensive plots and data files.
 
 ## Installation
 
@@ -9,9 +9,9 @@ Packages required to run the find_interface script are listed in the conda envir
 Conda environment can be activated with the instruction:
 
 ```console
-conda env create -f environment.yml
+conda env create -f environment.yml --name alphabridge
 
-conda activate AlphaBridge
+conda activate alphabridge
 ```
 
 ## How to run the script
@@ -30,28 +30,43 @@ python3 define_interfaces.py -i path-to-AlphaFold3-folder
 python3 define_interfaces.py -i /data/AF3/fold_1a02
 ```
 
-The output will be saved in the same folder provided as an input.
+The output will be saved inside a folder called Alphabrige, placed inside in the same path provided as an input.
 
 ## OUTPUT FILES
 
 The following files will be saved inside the input folder:
 
-1. Confidance-contact_plot.png
-2. Binding_interfaces.csv
-3. interface_df_per_token.csv
-4. matrix_info.json
+input_folder/
+└── Alphabridge/
+    ├── alphabridge_data.json
+    ├── Confidence-contact_plot.png
+    ├── Confidence_matrix.png
+    ├── pae.png
+    ├── contact_matrix.png
+    └── 0.5_ribbon_plot.png
+    └── 0.75_ribbon_plot.png
+    └── 0.9_ribbon_plot.png
 
-Confidance-contact_plot
-PNG image with The Confidence-Contact Integration (CCI) plot (name subject to change). A two-dimensional graph where each token is represented along both the x and y axes. The plot is bisected diagonally into two sections. The upper section presents data on the overall confidence in the local structure and the relative positions of two tokens. The lower section of the Confidence-Contact Integration (CCI) plot illustrates the closeness of pairwise contacts between two tokens in the predicted structure.
+alphabridge_data.json
 
-Binding_interfaces
+File in json format with all information regarding the predicted structure used as an input, and all interacting interfaces identified by a specific cut-off contact threshold.
 
-CSV file where all interfaces are listed, along with the involved entities involved in the interaction
+Confidance-contact_plot.png
 
-Interface_df_per_token
+PNG image with a combination of the Predicted Merged Confidence (PMC) matrix (upper right half) and the Predicted Distance Error (PDE) matrix (lower left half). This two-dimensional graph where each token is represented along both the x and y axes. The upper section presents data on the overall confidence in the local structure and the relative positions of two tokens combining the PAE and pLDDT information. The lower section of the plot illustrates the closeness of pairwise contacts between two tokens in the predicted structure using the PDE matrix.
 
-CSV file with per-token level information 
+Confidence matrix.png
 
-matrix_info
+PNG image with a combination of the PAE and pLDDT information, in a new matrix we call the Predicted Merged Confidence (PMC)
 
-Json file with all information used to run this script. 
+pae.png
+
+PNG image with Predicted Aligned Error (PAE) matrix
+
+contact_matrix.png
+
+PNG image with Predicted Distance Error (PDE) matrix 
+
+ribbon_plot.png
+
+PNG image displaying a circular layout showing all assigned interfaces and contact links under a specific threshold
