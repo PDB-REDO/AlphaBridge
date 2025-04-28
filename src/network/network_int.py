@@ -83,7 +83,7 @@ class INTERACTIVE_NETWORK:
         #print(df)
         return df, label2auth, df_pairwise_interaction, auth2label
     
-    def get_network_info(self):
+    def get_network_info(self, label_asym_id_list):
         
         all_threshold = {}
         threshold_list = [0.5, 0.75, 0.9]
@@ -108,6 +108,8 @@ class INTERACTIVE_NETWORK:
                 combined_networks = {}
             
             all_threshold[f"network at {threshold}"] = combined_networks
+        
+        all_threshold["label_asym_ids"] = label_asym_id_list
         
         return all_threshold
 
