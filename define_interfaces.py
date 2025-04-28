@@ -12,6 +12,7 @@ from src.module.parsers import MMCIFPARSER, HSSPPARSER, alphafold_msa
 #from src.module.conservation_score import CONSERVATION_SCORE
 from src.module.interface_identification import interface_identification
 from src.module.ribbon_diagram import RIBBON_DIAGRAM
+
 from src.module.output import OUTPUT
 
 from src.network.network_int  import INTERACTIVE_NETWORK
