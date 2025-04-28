@@ -118,9 +118,11 @@ class domain_clustering():
                     
                             if group_index_start < protein_end and protein_start < group_index_end:
                                 
-                                protein_range = range(protein_start,protein_end)
-                                cluster_range = range(group_index_start, group_index_end)
-                                overlapping_range = (max(protein_range[0], cluster_range[0]), min(protein_range[-1], cluster_range[-1])+1)
+                                protein_range = (protein_start,protein_end)
+                                cluster_range = (group_index_start, group_index_end)
+                                
+                                overlapping_range = find_overlap(protein_range,cluster_range)
+                                #print(overlapping_range,protein_range,cluster_range)
                                 
                                 if not protein in coevultionary_cluster_dict[cluster_group_name]['overlap_complex']:
                                     coevultionary_cluster_dict[cluster_group_name]['overlap_complex'][protein] = []
@@ -356,4 +358,13 @@ def plot_joined_matrix(matrix_dict,sequence_info_dict, outdir):
     plt.show
     plt.savefig(f"{outdir}/feature_matrix.png",dpi=300)
     
-    
+
+def find_overlap(range1, range2):
+    start1, end1 = range1
+    start2, end2 = range2
+    overlap_start = max(start1, start2)
+    overlap_end = min(end1, end2)
+    if overlap_start <= overlap_end:
+        return (overlap_start, overlap_end)
+    else:
+        return None  # No overlap
