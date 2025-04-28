@@ -49,8 +49,9 @@ def parse_args():
     parser.add_argument('-m','--mode', dest='mode', choices=['AF3', 'AF2', 'ColabFold'] , default='AF3',
                         help='output from different AlphaFold Version. Options: AF3, AF2, ColabFold')
     
-    #parser.add_argument('-t','--threshold', dest='contact_threshold' , default=0.7, type=restricted_float,
-                        #help='contact threshold to detect a contact-link in the contact_proability matrix')
+    parser.add_argument('-p','--plotting', dest='plot' , default=False, type=bool,
+                        help='plotting the alphabridge diagram. Default: False')
+          
     
     # parser.add_argument(?)
     # parser.add_argument(?)
@@ -78,8 +79,8 @@ def write_dataframe(df, filename, outdir_path):
 
 
 
-def define_interfaces(in_dir,outdir,mode,sample):
-    
+def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
+    #print(plotting)
     sample = int(sample) - 1
     
     if mode == 'AF3':
@@ -130,7 +131,7 @@ def define_interfaces(in_dir,outdir,mode,sample):
 
         biomolecule_interface_dict= INTERFACE_IDENTIFICATION.map_info_interfaces(interactions_dict)
 
-        if contact_threshold  in [0.5, 0.75,0.9]:
+        if contact_threshold  in [0.5, 0.75,0.9] and plotting == True:
         
             ribbon_diagram = RIBBON_DIAGRAM(
                                 interactions_dict,
@@ -165,6 +166,7 @@ def main():
     in_dir = args.in_dir
     mode = args.mode
     sample = args.sample
+    plotting = args.plot
     
     outdir = os.path.join(in_dir, 'AlphaBridge')
 
@@ -173,7 +175,7 @@ def main():
     #contact_threshold = args.contact_threshold
     
     
-    define_interfaces(in_dir,outdir,mode,sample)
+    define_interfaces(in_dir,outdir,mode,sample,plotting)
     
     print('finished')
     
