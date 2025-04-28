@@ -16,6 +16,7 @@ import time
 import numpy as np
 
 
+
 module_dir = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -273,15 +274,16 @@ class RIBBON_DIAGRAM:
         
         
 def get_interface2color(interfaces_list):
-
         interface_nr = len(interfaces_list)
-        cmap = colormaps['tab20']  # matplotlib color palette name, n colors
+
+        cmap = get_distinct_colors(interface_nr)
+        #cmap = colormaps['tab20']  # matplotlib color palette name, n colors
         #cmap = distinctipy.get_colors(interface_nr)    
-        color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
-        reord_color_list = color_list[::2] + color_list[1::2]
-        #color_list = [rgb2hex(rgb) for rgb in cmap]
-        interface2color = {name:reord_color_list[index]  for index,name in enumerate(interfaces_list)}
-        #interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
+        #color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
+        #reord_color_list = color_list[::2] + color_list[1::2]
+        color_list = [rgb2hex(rgb) for rgb in cmap]
+        #interface2color = {name:reord_color_list[index]  for index,name in enumerate(interfaces_list)}
+        interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
         return interface2color
              
         
@@ -323,3 +325,13 @@ def extract_bridge(interaction, label2auth,monomer_length_dict,poly_type_dict, b
     
     
     return auth_asym_id, start, end
+
+
+def get_distinct_colors(n):
+    """Generate n visually distinct colors using HSV color space."""
+    hues = np.linspace(0, 1, n, endpoint=False)
+    saturation = 0.9  # Constant saturation
+    value = 0.9  # Constant value/brightness
+    hsv_colors = np.column_stack([hues, np.full(n, saturation), np.full(n, value)])
+    rgb_colors = plt.cm.hsv(hsv_colors[:, 0])
+    return rgb_colors
