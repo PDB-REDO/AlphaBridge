@@ -145,7 +145,7 @@ def define_interfaces(in_dir,outdir,mode,sample):
 
     alphabridge_dict = OUTPUT(structure_score_dict,interactions_list).get_alphabridge_dict()
     
-    network_info = INTERACTIVE_NETWORK(alphabridge_dict).get_network_info()
+    network_info = INTERACTIVE_NETWORK(alphabridge_dict).get_network_info(sequence_info_dict['label_asym_id'])
 
 
 

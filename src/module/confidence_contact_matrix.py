@@ -695,3 +695,6 @@ def get_monomer_info_dict(chain_info_dict):
         monomer_name_len_dict[key]['entity_degree'] = (value['entity_length'] * 360) / entity_sum_length
                    
     return monomer_name_len_dict, poly_type_dict   
+
+
+                    
