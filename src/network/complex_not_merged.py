@@ -255,7 +255,7 @@ def get_protein_network_no_merging(df,label2auth, auth2label):
     #print(f"edges sapython3 define_interfaces.py -i path-to-AlphaFold3-folderme:{edges_same}")
     g.add_edges(edges_same)
     #g.es['weight'] =[500.0] *g.ecount()
-    g.es['weight'] = 500
+    g.es['weight'] = 3
     g.es['color'] = "black"
     g.es["width"] = 1.5
     #g.es["label"] = "interface"
@@ -269,7 +269,7 @@ def get_protein_network_no_merging(df,label2auth, auth2label):
         # take the actual color of the node
         node_color = g.vs[source_index]["color"]
         
-        g.es[edges_id]["weight"] = 3
+        g.es[edges_id]["weight"] = 1
         g.es[edges_id]["color"] = node_color  #we give for each edge the color of his node
         g.es[edges_id]["width"] = 0.5
         #g.es[edges_id]["label"] = "intraface"
