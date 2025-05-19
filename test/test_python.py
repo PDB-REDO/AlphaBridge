@@ -1,44 +1,32 @@
 import unittest
 import os
-from io import StringIO
-from unittest.mock import patch
+import shutil
+import tempfile
+import sys
+from pathlib import Path
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(f"Parent directory: {parent_dir}")
 
-class TestDefineInterfaces(unittest.TestCase):
-    """Test cases for define_interfaces.py"""
-    
+class TestTemp(unittest.TestCase):
     def setUp(self):
-        """Create temporary files for testing"""
+        self.temp_dir = tempfile.mkdtemp()
+        print(f"\nTEMPDIR: {self.temp_dir}")  # Will show if run correctly
         
-    
-    def tearDown(self):
-        """Clean up temporary files"""
-        self.temp_dir.cleanup()
-    
-    def test_argument_parsing(self):
-        """Test that the script correctly parses input arguments"""
-        # Test with short option
+        test_path = Path(os.path.join(parent_dir, 'test'))
+        self.source_dirs = [item for item in test_path.iterdir() if item.is_dir() and item.name != '__pycache__']
+        
+        self.copied_dirs = []
+        for folder in self.source_dirs:
+            dest_folder = os.path.join(self.temp_dir, folder.name)
+            shutil.copytree(folder, dest_folder)
+            shutil.rmtree(os.path.join(dest_folder, 'AlphaBridge'))
+            self.copied_dirs.append(dest_folder)
+            
+    def test_example(self):
+        self.assertTrue(os.path.exists(self.temp_dir))
 
-        
-        # Test with long option
- 
-    
-    def test_missing_input_argument(self):
-        """Test behavior when input argument is missing"""
-        
-    def test_nonexistent_file(self):
-        """Test behavior with non-existent input file"""
-      
-
-    
-    def test_file_processing(self):
-        """Test the core file processing logic"""
-        # Mock the file content and test processing
-     
-    
-    @patch('define_interfaces.process_file_content')
-    def test_main_integration(self, mock_process):
-        """Test the main function integration"""
-      
+    #def tearDown(self):
+        #shutil.rmtree(self.temp_dir)
 
 if __name__ == '__main__':
     unittest.main()
