@@ -89,6 +89,7 @@ class interface_identification():
                             distance_submatrix = select_submatrix(contact_matrix,protA_range,protB_range)
                             confidence_submatrix = select_submatrix(confidence_matrix,protA_range,protB_range)
                             
+                           
 
                             #distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             #confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
@@ -109,7 +110,6 @@ class interface_identification():
                                 for interface_range in interface_range_list:
                                     
                                     #interaction_dimension = interfaces[interface_range].shape
-                                    
                                     protA_start, protA_end = map_residue_range(entity_region_dict[protA], protA_range, interface_range[0])
                                     protB_start, protB_end = map_residue_range(entity_region_dict[protB], protB_range, interface_range[1])
                                     
@@ -217,6 +217,7 @@ class interface_identification():
                         }
                         
                         coord_link = map_link2coord(link, [biomolecule_1, biomolecule_2], entity_region_dict)
+                        
                         matrix_probability_link, link_probability = scoring.calculate_probability_contact_link(coord_link,contact_matrix)
                         matrix_pmc_link, pmc_link = scoring.calculate_pmc_link(coord_link, confidence_matrix)
 
