@@ -1,0 +1,1362 @@
+{
+    "network at 0.5": {
+        "cut-off": 0.5,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (1-7) (59-61) (83-84)",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "A (182-183) (670-673) (723-737) (752-770) (783-787) (825-855) (881-897) (901-913) (926-928)",
+                    "color": "#8000ff",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "A (446-458) (474-478) (576-592)",
+                    "color": "#8000ff",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "A (527-535) (544-545) (549-550)",
+                    "color": "#8000ff",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "A (638-654) (670-679) (781-782) (802-803) (813-817)",
+                    "color": "#8000ff",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "B (447-449) (468-477) (532-534)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "B (1297-1358) (1188-1203) (1217-1235) (1135-1138) (1248-1252) (577-578)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "B (328-344)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 7,
+                    "id": 7
+                },
+                {
+                    "label": "B (990-1000)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 8,
+                    "id": 8
+                },
+                {
+                    "label": "B (1109-1110)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 9,
+                    "id": 9
+                },
+                {
+                    "label": "B (429-433) (462-463)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 10,
+                    "id": 10
+                },
+                {
+                    "label": "B (432-433) (452-453) (460-463)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 11,
+                    "id": 11
+                },
+                {
+                    "label": "lig_C (1-27)",
+                    "color": "#80ffb4",
+                    "_igraph_index": 12,
+                    "id": 12
+                },
+                {
+                    "label": "lig_C (21-22)",
+                    "color": "#80ffb4",
+                    "_igraph_index": 13,
+                    "id": 13
+                },
+                {
+                    "label": "DNA_E (19-23)",
+                    "color": "#ffb360",
+                    "_igraph_index": 14,
+                    "id": 14
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "color": "#ffb360",
+                    "_igraph_index": 15,
+                    "id": 15
+                },
+                {
+                    "label": "DNA_F (21-24)",
+                    "color": "#ff0000",
+                    "_igraph_index": 16,
+                    "id": 16
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "color": "#ff0000",
+                    "_igraph_index": 17,
+                    "id": 17
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 5
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 9,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 10,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 11,
+                    "source": 0,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 12,
+                    "source": 0,
+                    "target": 4
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 13,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 14,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 15,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 2,
+                    "source": 2,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 16,
+                    "source": 2,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 17,
+                    "source": 2,
+                    "target": 4
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 3,
+                    "source": 3,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 18,
+                    "source": 3,
+                    "target": 4
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 4,
+                    "source": 4,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 19,
+                    "source": 5,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 20,
+                    "source": 5,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 21,
+                    "source": 5,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 22,
+                    "source": 5,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 23,
+                    "source": 5,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 24,
+                    "source": 5,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 25,
+                    "source": 6,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 26,
+                    "source": 6,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 27,
+                    "source": 6,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 28,
+                    "source": 6,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 29,
+                    "source": 6,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 30,
+                    "source": 7,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 31,
+                    "source": 7,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 32,
+                    "source": 7,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 33,
+                    "source": 7,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 34,
+                    "source": 8,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 35,
+                    "source": 8,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 36,
+                    "source": 8,
+                    "target": 11
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 5,
+                    "source": 9,
+                    "target": 13
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 37,
+                    "source": 9,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 38,
+                    "source": 9,
+                    "target": 11
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 6,
+                    "source": 10,
+                    "target": 14
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 39,
+                    "source": 10,
+                    "target": 11
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 7,
+                    "source": 11,
+                    "target": 16
+                },
+                {
+                    "weight": 3,
+                    "color": "#80ffb4",
+                    "width": 0.5,
+                    "_igraph_index": 40,
+                    "source": 12,
+                    "target": 13
+                },
+                {
+                    "weight": 3,
+                    "color": "#ffb360",
+                    "width": 0.5,
+                    "_igraph_index": 41,
+                    "source": 14,
+                    "target": 15
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 8,
+                    "source": 15,
+                    "target": 17
+                },
+                {
+                    "weight": 3,
+                    "color": "#ff0000",
+                    "width": 0.5,
+                    "_igraph_index": 42,
+                    "source": 16,
+                    "target": 17
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "color": "#00b5eb",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "lig_C",
+                    "color": "#80ffb4",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_E",
+                    "color": "#ffb360",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_F",
+                    "color": "#ff0000",
+                    "_igraph_index": 4,
+                    "id": 4
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "type": [
+                        "I1",
+                        "I2",
+                        "I3",
+                        "I4"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I5"
+                    ],
+                    "label": 0.84,
+                    "_igraph_index": 1,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I6"
+                    ],
+                    "label": 0.53,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I7"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 3,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I8"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 4,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I9"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 5,
+                    "source": 3,
+                    "target": 4
+                }
+            ]
+        }
+    },
+    "network at 0.75": {
+        "cut-off": 0.75,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (1-5) (83-84)",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "A (449-454) (475-476) (576-589)",
+                    "color": "#8000ff",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "A (527-531) (544-545)",
+                    "color": "#8000ff",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "A (671-672) (723-737) (752-770) (783-787) (825-853)",
+                    "color": "#8000ff",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "A (884-897) (905-913) (927-928)",
+                    "color": "#8000ff",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "A (650-652) (672-678) (815-816)",
+                    "color": "#8000ff",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "B (447-449) (468-473)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "B (329-343)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 7,
+                    "id": 7
+                },
+                {
+                    "label": "B (996-1000)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 8,
+                    "id": 8
+                },
+                {
+                    "label": "B (1190-1203) (1217-1235) (1136-1138) (1297-1325) (1248-1251) (577-578)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 9,
+                    "id": 9
+                },
+                {
+                    "label": "B (1329-1341) (1354-1358) (1345-1346)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 10,
+                    "id": 10
+                },
+                {
+                    "label": "B (429-433)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 11,
+                    "id": 11
+                },
+                {
+                    "label": "B (432-433) (452-453) (460-463)",
+                    "color": "#00b5eb",
+                    "_igraph_index": 12,
+                    "id": 12
+                },
+                {
+                    "label": "lig_C (1-27)",
+                    "color": "#80ffb4",
+                    "_igraph_index": 13,
+                    "id": 13
+                },
+                {
+                    "label": "DNA_E (19-23)",
+                    "color": "#ffb360",
+                    "_igraph_index": 14,
+                    "id": 14
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "color": "#ffb360",
+                    "_igraph_index": 15,
+                    "id": 15
+                },
+                {
+                    "label": "DNA_F (21-24)",
+                    "color": "#ff0000",
+                    "_igraph_index": 16,
+                    "id": 16
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "color": "#ff0000",
+                    "_igraph_index": 17,
+                    "id": 17
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 9,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 10,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 11,
+                    "source": 0,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 12,
+                    "source": 0,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 13,
+                    "source": 0,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 14,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 15,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 16,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 17,
+                    "source": 1,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 2,
+                    "source": 2,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 18,
+                    "source": 2,
+                    "target": 3
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 19,
+                    "source": 2,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 20,
+                    "source": 2,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 3,
+                    "source": 3,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 21,
+                    "source": 3,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 22,
+                    "source": 3,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 4,
+                    "source": 4,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 23,
+                    "source": 4,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 5,
+                    "source": 5,
+                    "target": 13
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 24,
+                    "source": 6,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 25,
+                    "source": 6,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 26,
+                    "source": 6,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 27,
+                    "source": 6,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 28,
+                    "source": 6,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 29,
+                    "source": 6,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 30,
+                    "source": 7,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 31,
+                    "source": 7,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 32,
+                    "source": 7,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 33,
+                    "source": 7,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 34,
+                    "source": 7,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 35,
+                    "source": 8,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 36,
+                    "source": 8,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 37,
+                    "source": 8,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 38,
+                    "source": 8,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 39,
+                    "source": 9,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 40,
+                    "source": 9,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 41,
+                    "source": 9,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 42,
+                    "source": 10,
+                    "target": 11
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 43,
+                    "source": 10,
+                    "target": 12
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 6,
+                    "source": 11,
+                    "target": 14
+                },
+                {
+                    "weight": 3,
+                    "color": "#00b5eb",
+                    "width": 0.5,
+                    "_igraph_index": 44,
+                    "source": 11,
+                    "target": 12
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 7,
+                    "source": 12,
+                    "target": 16
+                },
+                {
+                    "weight": 3,
+                    "color": "#ffb360",
+                    "width": 0.5,
+                    "_igraph_index": 45,
+                    "source": 14,
+                    "target": 15
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 8,
+                    "source": 15,
+                    "target": 17
+                },
+                {
+                    "weight": 3,
+                    "color": "#ff0000",
+                    "width": 0.5,
+                    "_igraph_index": 46,
+                    "source": 16,
+                    "target": 17
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "color": "#00b5eb",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "lig_C",
+                    "color": "#80ffb4",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_E",
+                    "color": "#ffb360",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_F",
+                    "color": "#ff0000",
+                    "_igraph_index": 4,
+                    "id": 4
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "type": [
+                        "I1",
+                        "I2",
+                        "I3",
+                        "I4",
+                        "I5"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I6"
+                    ],
+                    "label": 0.84,
+                    "_igraph_index": 1,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I7"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I8"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 3,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I9"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 4,
+                    "source": 3,
+                    "target": 4
+                }
+            ]
+        }
+    },
+    "network at 0.9": {
+        "cut-off": 0.9,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (671-672) (725-737) (754-770) (783-784) (825-852)",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B (1190-1202) (1218-1235) (1299-1325) (1248-1250)",
+                    "color": "#2adddd",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "B (429-433)",
+                    "color": "#2adddd",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "B (432-433) (462-463)",
+                    "color": "#2adddd",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_E (20-22)",
+                    "color": "#d4dd80",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "color": "#d4dd80",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "DNA_F (21-24)",
+                    "color": "#ff0000",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "color": "#ff0000",
+                    "_igraph_index": 7,
+                    "id": 7
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "weight": 3,
+                    "color": "#2adddd",
+                    "width": 0.5,
+                    "_igraph_index": 4,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "weight": 3,
+                    "color": "#2adddd",
+                    "width": 0.5,
+                    "_igraph_index": 5,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 1,
+                    "source": 2,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#2adddd",
+                    "width": 0.5,
+                    "_igraph_index": 6,
+                    "source": 2,
+                    "target": 3
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 2,
+                    "source": 3,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#d4dd80",
+                    "width": 0.5,
+                    "_igraph_index": 7,
+                    "source": 4,
+                    "target": 5
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "_igraph_index": 3,
+                    "source": 5,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#ff0000",
+                    "width": 0.5,
+                    "_igraph_index": 8,
+                    "source": 6,
+                    "target": 7
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "color": "#2adddd",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "DNA_E",
+                    "color": "#d4dd80",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_F",
+                    "color": "#ff0000",
+                    "_igraph_index": 3,
+                    "id": 3
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "type": [
+                        "I1"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I2"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I3"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "type": [
+                        "I4"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 3,
+                    "source": 2,
+                    "target": 3
+                }
+            ]
+        }
+    }
+}

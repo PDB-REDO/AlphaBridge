@@ -1,0 +1,2507 @@
+{
+    "structure": [
+        {
+            "PDE": 0.9919047619047616,
+            "PMC": 0.8777421589392894,
+            "iptm": 0.93,
+            "contact_iptm": 0.9224714285714284,
+            "AB_score": 0.8706366271764473,
+            "chains": [
+                {
+                    "auth_asym_id": "A",
+                    "label_asym_id": "A",
+                    "residues": [
+                        {
+                            "seq_id": 1,
+                            "comp_id": "GLY",
+                            "plddt": 85.5325
+                        },
+                        {
+                            "seq_id": 2,
+                            "comp_id": "ARG",
+                            "plddt": 82.68181818181819
+                        },
+                        {
+                            "seq_id": 3,
+                            "comp_id": "SER",
+                            "plddt": 95.73666666666666
+                        },
+                        {
+                            "seq_id": 4,
+                            "comp_id": "ARG",
+                            "plddt": 80.98
+                        },
+                        {
+                            "seq_id": 5,
+                            "comp_id": "LEU",
+                            "plddt": 96.5
+                        },
+                        {
+                            "seq_id": 6,
+                            "comp_id": "LEU",
+                            "plddt": 97.65625
+                        },
+                        {
+                            "seq_id": 7,
+                            "comp_id": "GLU",
+                            "plddt": 90.23444444444445
+                        },
+                        {
+                            "seq_id": 8,
+                            "comp_id": "ASP",
+                            "plddt": 96.135
+                        },
+                        {
+                            "seq_id": 9,
+                            "comp_id": "PHE",
+                            "plddt": 97.31272727272727
+                        },
+                        {
+                            "seq_id": 10,
+                            "comp_id": "ARG",
+                            "plddt": 89.14999999999999
+                        },
+                        {
+                            "seq_id": 11,
+                            "comp_id": "ASN",
+                            "plddt": 92.89125
+                        },
+                        {
+                            "seq_id": 12,
+                            "comp_id": "ASN",
+                            "plddt": 89.3775
+                        },
+                        {
+                            "seq_id": 13,
+                            "comp_id": "ARG",
+                            "plddt": 84.89
+                        },
+                        {
+                            "seq_id": 14,
+                            "comp_id": "PHE",
+                            "plddt": 91.19272727272727
+                        },
+                        {
+                            "seq_id": 15,
+                            "comp_id": "PRO",
+                            "plddt": 91.69857142857143
+                        },
+                        {
+                            "seq_id": 16,
+                            "comp_id": "ASN",
+                            "plddt": 86.67750000000001
+                        },
+                        {
+                            "seq_id": 17,
+                            "comp_id": "LEU",
+                            "plddt": 95.16375
+                        },
+                        {
+                            "seq_id": 18,
+                            "comp_id": "GLN",
+                            "plddt": 90.00888888888888
+                        },
+                        {
+                            "seq_id": 19,
+                            "comp_id": "LEU",
+                            "plddt": 95.97749999999999
+                        },
+                        {
+                            "seq_id": 20,
+                            "comp_id": "ARG",
+                            "plddt": 79.96727272727273
+                        },
+                        {
+                            "seq_id": 21,
+                            "comp_id": "ASP",
+                            "plddt": 95.39625
+                        },
+                        {
+                            "seq_id": 22,
+                            "comp_id": "LEU",
+                            "plddt": 95.9375
+                        },
+                        {
+                            "seq_id": 23,
+                            "comp_id": "ILE",
+                            "plddt": 92.84
+                        },
+                        {
+                            "seq_id": 24,
+                            "comp_id": "GLY",
+                            "plddt": 97.1425
+                        },
+                        {
+                            "seq_id": 25,
+                            "comp_id": "HIS",
+                            "plddt": 93.911
+                        },
+                        {
+                            "seq_id": 26,
+                            "comp_id": "ILE",
+                            "plddt": 97.23125
+                        },
+                        {
+                            "seq_id": 27,
+                            "comp_id": "VAL",
+                            "plddt": 98.37285714285714
+                        },
+                        {
+                            "seq_id": 28,
+                            "comp_id": "GLU",
+                            "plddt": 95.77444444444444
+                        },
+                        {
+                            "seq_id": 29,
+                            "comp_id": "PHE",
+                            "plddt": 97.95727272727272
+                        },
+                        {
+                            "seq_id": 30,
+                            "comp_id": "SER",
+                            "plddt": 98.46833333333332
+                        },
+                        {
+                            "seq_id": 31,
+                            "comp_id": "GLN",
+                            "plddt": 94.49777777777778
+                        },
+                        {
+                            "seq_id": 32,
+                            "comp_id": "ASP",
+                            "plddt": 97.48125
+                        },
+                        {
+                            "seq_id": 33,
+                            "comp_id": "GLN",
+                            "plddt": 93.16666666666667
+                        },
+                        {
+                            "seq_id": 34,
+                            "comp_id": "HIS",
+                            "plddt": 90.642
+                        },
+                        {
+                            "seq_id": 35,
+                            "comp_id": "GLY",
+                            "plddt": 98.265
+                        },
+                        {
+                            "seq_id": 36,
+                            "comp_id": "SER",
+                            "plddt": 98.21833333333332
+                        },
+                        {
+                            "seq_id": 37,
+                            "comp_id": "ARG",
+                            "plddt": 88.02090909090909
+                        },
+                        {
+                            "seq_id": 38,
+                            "comp_id": "PHE",
+                            "plddt": 97.58727272727273
+                        },
+                        {
+                            "seq_id": 39,
+                            "comp_id": "ILE",
+                            "plddt": 97.84625
+                        },
+                        {
+                            "seq_id": 40,
+                            "comp_id": "GLN",
+                            "plddt": 96.27666666666667
+                        },
+                        {
+                            "seq_id": 41,
+                            "comp_id": "GLN",
+                            "plddt": 87.86222222222221
+                        },
+                        {
+                            "seq_id": 42,
+                            "comp_id": "LYS",
+                            "plddt": 93.68777777777778
+                        },
+                        {
+                            "seq_id": 43,
+                            "comp_id": "LEU",
+                            "plddt": 95.18
+                        },
+                        {
+                            "seq_id": 44,
+                            "comp_id": "GLU",
+                            "plddt": 87.77333333333334
+                        },
+                        {
+                            "seq_id": 45,
+                            "comp_id": "ARG",
+                            "plddt": 78.8690909090909
+                        },
+                        {
+                            "seq_id": 46,
+                            "comp_id": "ALA",
+                            "plddt": 94.646
+                        },
+                        {
+                            "seq_id": 47,
+                            "comp_id": "THR",
+                            "plddt": 94.0657142857143
+                        },
+                        {
+                            "seq_id": 48,
+                            "comp_id": "PRO",
+                            "plddt": 94.44000000000001
+                        },
+                        {
+                            "seq_id": 49,
+                            "comp_id": "ALA",
+                            "plddt": 95.866
+                        },
+                        {
+                            "seq_id": 50,
+                            "comp_id": "GLU",
+                            "plddt": 92.88555555555556
+                        },
+                        {
+                            "seq_id": 51,
+                            "comp_id": "ARG",
+                            "plddt": 87.45727272727272
+                        },
+                        {
+                            "seq_id": 52,
+                            "comp_id": "GLN",
+                            "plddt": 94.69555555555556
+                        },
+                        {
+                            "seq_id": 53,
+                            "comp_id": "MET",
+                            "plddt": 91.22125
+                        },
+                        {
+                            "seq_id": 54,
+                            "comp_id": "VAL",
+                            "plddt": 97.90285714285714
+                        },
+                        {
+                            "seq_id": 55,
+                            "comp_id": "PHE",
+                            "plddt": 98.17818181818183
+                        },
+                        {
+                            "seq_id": 56,
+                            "comp_id": "ASN",
+                            "plddt": 95.28999999999999
+                        },
+                        {
+                            "seq_id": 57,
+                            "comp_id": "GLU",
+                            "plddt": 96.64333333333333
+                        },
+                        {
+                            "seq_id": 58,
+                            "comp_id": "ILE",
+                            "plddt": 90.9875
+                        },
+                        {
+                            "seq_id": 59,
+                            "comp_id": "LEU",
+                            "plddt": 96.51375
+                        },
+                        {
+                            "seq_id": 60,
+                            "comp_id": "GLN",
+                            "plddt": 86.49
+                        },
+                        {
+                            "seq_id": 61,
+                            "comp_id": "ALA",
+                            "plddt": 97.91
+                        },
+                        {
+                            "seq_id": 62,
+                            "comp_id": "ALA",
+                            "plddt": 98.158
+                        },
+                        {
+                            "seq_id": 63,
+                            "comp_id": "TYR",
+                            "plddt": 96.1075
+                        },
+                        {
+                            "seq_id": 64,
+                            "comp_id": "GLN",
+                            "plddt": 90.97888888888889
+                        },
+                        {
+                            "seq_id": 65,
+                            "comp_id": "LEU",
+                            "plddt": 98.39625
+                        },
+                        {
+                            "seq_id": 66,
+                            "comp_id": "MET",
+                            "plddt": 98.21625
+                        },
+                        {
+                            "seq_id": 67,
+                            "comp_id": "THR",
+                            "plddt": 97.47571428571429
+                        },
+                        {
+                            "seq_id": 68,
+                            "comp_id": "ASP",
+                            "plddt": 98.225
+                        },
+                        {
+                            "seq_id": 69,
+                            "comp_id": "VAL",
+                            "plddt": 97.53714285714285
+                        },
+                        {
+                            "seq_id": 70,
+                            "comp_id": "PHE",
+                            "plddt": 98.1509090909091
+                        },
+                        {
+                            "seq_id": 71,
+                            "comp_id": "GLY",
+                            "plddt": 98.72749999999999
+                        },
+                        {
+                            "seq_id": 72,
+                            "comp_id": "ASN",
+                            "plddt": 98.16875
+                        },
+                        {
+                            "seq_id": 73,
+                            "comp_id": "TYR",
+                            "plddt": 98.03250000000001
+                        },
+                        {
+                            "seq_id": 74,
+                            "comp_id": "VAL",
+                            "plddt": 98.45142857142856
+                        },
+                        {
+                            "seq_id": 75,
+                            "comp_id": "ILE",
+                            "plddt": 98.11
+                        },
+                        {
+                            "seq_id": 76,
+                            "comp_id": "GLN",
+                            "plddt": 96.88555555555556
+                        },
+                        {
+                            "seq_id": 77,
+                            "comp_id": "LYS",
+                            "plddt": 91.66777777777777
+                        },
+                        {
+                            "seq_id": 78,
+                            "comp_id": "PHE",
+                            "plddt": 97.2990909090909
+                        },
+                        {
+                            "seq_id": 79,
+                            "comp_id": "PHE",
+                            "plddt": 97.5909090909091
+                        },
+                        {
+                            "seq_id": 80,
+                            "comp_id": "GLU",
+                            "plddt": 88.67666666666668
+                        },
+                        {
+                            "seq_id": 81,
+                            "comp_id": "PHE",
+                            "plddt": 81.11181818181818
+                        },
+                        {
+                            "seq_id": 82,
+                            "comp_id": "GLY",
+                            "plddt": 94.6125
+                        },
+                        {
+                            "seq_id": 83,
+                            "comp_id": "SER",
+                            "plddt": 95.98166666666667
+                        },
+                        {
+                            "seq_id": 84,
+                            "comp_id": "LEU",
+                            "plddt": 95.38375
+                        },
+                        {
+                            "seq_id": 85,
+                            "comp_id": "ASP",
+                            "plddt": 93.275
+                        },
+                        {
+                            "seq_id": 86,
+                            "comp_id": "GLN",
+                            "plddt": 96.89777777777778
+                        },
+                        {
+                            "seq_id": 87,
+                            "comp_id": "LYS",
+                            "plddt": 95.75555555555555
+                        },
+                        {
+                            "seq_id": 88,
+                            "comp_id": "LEU",
+                            "plddt": 97.43375
+                        },
+                        {
+                            "seq_id": 89,
+                            "comp_id": "ALA",
+                            "plddt": 98.358
+                        },
+                        {
+                            "seq_id": 90,
+                            "comp_id": "LEU",
+                            "plddt": 97.62125
+                        },
+                        {
+                            "seq_id": 91,
+                            "comp_id": "ALA",
+                            "plddt": 98.41600000000001
+                        },
+                        {
+                            "seq_id": 92,
+                            "comp_id": "THR",
+                            "plddt": 95.53428571428572
+                        },
+                        {
+                            "seq_id": 93,
+                            "comp_id": "ARG",
+                            "plddt": 91.77727272727272
+                        },
+                        {
+                            "seq_id": 94,
+                            "comp_id": "ILE",
+                            "plddt": 97.94
+                        },
+                        {
+                            "seq_id": 95,
+                            "comp_id": "ARG",
+                            "plddt": 89.11090909090909
+                        },
+                        {
+                            "seq_id": 96,
+                            "comp_id": "GLY",
+                            "plddt": 97.4675
+                        },
+                        {
+                            "seq_id": 97,
+                            "comp_id": "HIS",
+                            "plddt": 93.94
+                        },
+                        {
+                            "seq_id": 98,
+                            "comp_id": "VAL",
+                            "plddt": 98.45857142857143
+                        },
+                        {
+                            "seq_id": 99,
+                            "comp_id": "LEU",
+                            "plddt": 98.08875
+                        },
+                        {
+                            "seq_id": 100,
+                            "comp_id": "PRO",
+                            "plddt": 98.17857142857143
+                        },
+                        {
+                            "seq_id": 101,
+                            "comp_id": "LEU",
+                            "plddt": 98.49249999999999
+                        },
+                        {
+                            "seq_id": 102,
+                            "comp_id": "ALA",
+                            "plddt": 98.764
+                        },
+                        {
+                            "seq_id": 103,
+                            "comp_id": "LEU",
+                            "plddt": 98.36
+                        },
+                        {
+                            "seq_id": 104,
+                            "comp_id": "GLN",
+                            "plddt": 96.55111111111111
+                        },
+                        {
+                            "seq_id": 105,
+                            "comp_id": "MET",
+                            "plddt": 92.96625
+                        },
+                        {
+                            "seq_id": 106,
+                            "comp_id": "TYR",
+                            "plddt": 98.15499999999999
+                        },
+                        {
+                            "seq_id": 107,
+                            "comp_id": "GLY",
+                            "plddt": 98.73
+                        },
+                        {
+                            "seq_id": 108,
+                            "comp_id": "CYS",
+                            "plddt": 98.09333333333332
+                        },
+                        {
+                            "seq_id": 109,
+                            "comp_id": "ARG",
+                            "plddt": 94.42181818181817
+                        },
+                        {
+                            "seq_id": 110,
+                            "comp_id": "VAL",
+                            "plddt": 98.61285714285714
+                        },
+                        {
+                            "seq_id": 111,
+                            "comp_id": "ILE",
+                            "plddt": 96.92999999999999
+                        },
+                        {
+                            "seq_id": 112,
+                            "comp_id": "GLN",
+                            "plddt": 97.09555555555556
+                        },
+                        {
+                            "seq_id": 113,
+                            "comp_id": "LYS",
+                            "plddt": 92.96555555555557
+                        },
+                        {
+                            "seq_id": 114,
+                            "comp_id": "ALA",
+                            "plddt": 98.45599999999999
+                        },
+                        {
+                            "seq_id": 115,
+                            "comp_id": "LEU",
+                            "plddt": 97.895
+                        },
+                        {
+                            "seq_id": 116,
+                            "comp_id": "GLU",
+                            "plddt": 93.55666666666667
+                        },
+                        {
+                            "seq_id": 117,
+                            "comp_id": "SER",
+                            "plddt": 95.68666666666667
+                        },
+                        {
+                            "seq_id": 118,
+                            "comp_id": "ILE",
+                            "plddt": 97.73375
+                        },
+                        {
+                            "seq_id": 119,
+                            "comp_id": "SER",
+                            "plddt": 95.67166666666667
+                        },
+                        {
+                            "seq_id": 120,
+                            "comp_id": "SER",
+                            "plddt": 94.56833333333333
+                        },
+                        {
+                            "seq_id": 121,
+                            "comp_id": "ASP",
+                            "plddt": 90.26875
+                        },
+                        {
+                            "seq_id": 122,
+                            "comp_id": "GLN",
+                            "plddt": 94.19333333333333
+                        },
+                        {
+                            "seq_id": 123,
+                            "comp_id": "GLN",
+                            "plddt": 88.37111111111112
+                        },
+                        {
+                            "seq_id": 124,
+                            "comp_id": "VAL",
+                            "plddt": 96.46285714285715
+                        },
+                        {
+                            "seq_id": 125,
+                            "comp_id": "ILE",
+                            "plddt": 96.33
+                        },
+                        {
+                            "seq_id": 126,
+                            "comp_id": "SER",
+                            "plddt": 93.77666666666666
+                        },
+                        {
+                            "seq_id": 127,
+                            "comp_id": "GLU",
+                            "plddt": 94.94444444444444
+                        },
+                        {
+                            "seq_id": 128,
+                            "comp_id": "MET",
+                            "plddt": 96.385
+                        },
+                        {
+                            "seq_id": 129,
+                            "comp_id": "VAL",
+                            "plddt": 97.71285714285715
+                        },
+                        {
+                            "seq_id": 130,
+                            "comp_id": "LYS",
+                            "plddt": 85.48111111111112
+                        },
+                        {
+                            "seq_id": 131,
+                            "comp_id": "GLU",
+                            "plddt": 97.45444444444445
+                        },
+                        {
+                            "seq_id": 132,
+                            "comp_id": "LEU",
+                            "plddt": 97.49875
+                        },
+                        {
+                            "seq_id": 133,
+                            "comp_id": "ASP",
+                            "plddt": 95.83375
+                        },
+                        {
+                            "seq_id": 134,
+                            "comp_id": "GLY",
+                            "plddt": 97.5775
+                        },
+                        {
+                            "seq_id": 135,
+                            "comp_id": "HIS",
+                            "plddt": 95.113
+                        },
+                        {
+                            "seq_id": 136,
+                            "comp_id": "VAL",
+                            "plddt": 98.34571428571428
+                        },
+                        {
+                            "seq_id": 137,
+                            "comp_id": "LEU",
+                            "plddt": 97.52375
+                        },
+                        {
+                            "seq_id": 138,
+                            "comp_id": "LYS",
+                            "plddt": 92.22
+                        },
+                        {
+                            "seq_id": 139,
+                            "comp_id": "CYS",
+                            "plddt": 98.71
+                        },
+                        {
+                            "seq_id": 140,
+                            "comp_id": "VAL",
+                            "plddt": 98.55571428571429
+                        },
+                        {
+                            "seq_id": 141,
+                            "comp_id": "LYS",
+                            "plddt": 94.44888888888889
+                        },
+                        {
+                            "seq_id": 142,
+                            "comp_id": "ASP",
+                            "plddt": 98.34125
+                        },
+                        {
+                            "seq_id": 143,
+                            "comp_id": "GLN",
+                            "plddt": 91.34666666666666
+                        },
+                        {
+                            "seq_id": 144,
+                            "comp_id": "ASN",
+                            "plddt": 97.33
+                        },
+                        {
+                            "seq_id": 145,
+                            "comp_id": "GLY",
+                            "plddt": 98.78
+                        },
+                        {
+                            "seq_id": 146,
+                            "comp_id": "ASN",
+                            "plddt": 98.29625
+                        },
+                        {
+                            "seq_id": 147,
+                            "comp_id": "HIS",
+                            "plddt": 97.53999999999999
+                        },
+                        {
+                            "seq_id": 148,
+                            "comp_id": "VAL",
+                            "plddt": 98.69714285714285
+                        },
+                        {
+                            "seq_id": 149,
+                            "comp_id": "VAL",
+                            "plddt": 98.69571428571429
+                        },
+                        {
+                            "seq_id": 150,
+                            "comp_id": "GLN",
+                            "plddt": 97.82333333333332
+                        },
+                        {
+                            "seq_id": 151,
+                            "comp_id": "LYS",
+                            "plddt": 95.82444444444444
+                        },
+                        {
+                            "seq_id": 152,
+                            "comp_id": "CYS",
+                            "plddt": 98.29333333333334
+                        },
+                        {
+                            "seq_id": 153,
+                            "comp_id": "ILE",
+                            "plddt": 98.51875
+                        },
+                        {
+                            "seq_id": 154,
+                            "comp_id": "GLU",
+                            "plddt": 96.40333333333334
+                        },
+                        {
+                            "seq_id": 155,
+                            "comp_id": "CYS",
+                            "plddt": 97.45
+                        },
+                        {
+                            "seq_id": 156,
+                            "comp_id": "VAL",
+                            "plddt": 97.37857142857142
+                        },
+                        {
+                            "seq_id": 157,
+                            "comp_id": "GLN",
+                            "plddt": 85.91555555555556
+                        },
+                        {
+                            "seq_id": 158,
+                            "comp_id": "PRO",
+                            "plddt": 96.42142857142858
+                        },
+                        {
+                            "seq_id": 159,
+                            "comp_id": "GLN",
+                            "plddt": 83.90555555555555
+                        },
+                        {
+                            "seq_id": 160,
+                            "comp_id": "SER",
+                            "plddt": 95.545
+                        },
+                        {
+                            "seq_id": 161,
+                            "comp_id": "LEU",
+                            "plddt": 96.66250000000001
+                        },
+                        {
+                            "seq_id": 162,
+                            "comp_id": "GLN",
+                            "plddt": 95.78
+                        },
+                        {
+                            "seq_id": 163,
+                            "comp_id": "PHE",
+                            "plddt": 98.00545454545454
+                        },
+                        {
+                            "seq_id": 164,
+                            "comp_id": "ILE",
+                            "plddt": 97.87875
+                        },
+                        {
+                            "seq_id": 165,
+                            "comp_id": "ILE",
+                            "plddt": 97.02
+                        },
+                        {
+                            "seq_id": 166,
+                            "comp_id": "ASP",
+                            "plddt": 97.20750000000001
+                        },
+                        {
+                            "seq_id": 167,
+                            "comp_id": "ALA",
+                            "plddt": 98.34
+                        },
+                        {
+                            "seq_id": 168,
+                            "comp_id": "PHE",
+                            "plddt": 96.24181818181819
+                        },
+                        {
+                            "seq_id": 169,
+                            "comp_id": "LYS",
+                            "plddt": 89.9011111111111
+                        },
+                        {
+                            "seq_id": 170,
+                            "comp_id": "GLY",
+                            "plddt": 97.84
+                        },
+                        {
+                            "seq_id": 171,
+                            "comp_id": "GLN",
+                            "plddt": 93.63444444444445
+                        },
+                        {
+                            "seq_id": 172,
+                            "comp_id": "VAL",
+                            "plddt": 98.57285714285715
+                        },
+                        {
+                            "seq_id": 173,
+                            "comp_id": "PHE",
+                            "plddt": 98.23
+                        },
+                        {
+                            "seq_id": 174,
+                            "comp_id": "VAL",
+                            "plddt": 95.74000000000001
+                        },
+                        {
+                            "seq_id": 175,
+                            "comp_id": "LEU",
+                            "plddt": 98.31375
+                        },
+                        {
+                            "seq_id": 176,
+                            "comp_id": "SER",
+                            "plddt": 98.53166666666668
+                        },
+                        {
+                            "seq_id": 177,
+                            "comp_id": "THR",
+                            "plddt": 98.07857142857142
+                        },
+                        {
+                            "seq_id": 178,
+                            "comp_id": "HIS",
+                            "plddt": 97.00899999999999
+                        },
+                        {
+                            "seq_id": 179,
+                            "comp_id": "PRO",
+                            "plddt": 98.15714285714286
+                        },
+                        {
+                            "seq_id": 180,
+                            "comp_id": "TYR",
+                            "plddt": 98.35916666666667
+                        },
+                        {
+                            "seq_id": 181,
+                            "comp_id": "GLY",
+                            "plddt": 98.85249999999999
+                        },
+                        {
+                            "seq_id": 182,
+                            "comp_id": "CYS",
+                            "plddt": 98.30166666666666
+                        },
+                        {
+                            "seq_id": 183,
+                            "comp_id": "ARG",
+                            "plddt": 91.68727272727273
+                        },
+                        {
+                            "seq_id": 184,
+                            "comp_id": "VAL",
+                            "plddt": 98.82000000000001
+                        },
+                        {
+                            "seq_id": 185,
+                            "comp_id": "ILE",
+                            "plddt": 97.135
+                        },
+                        {
+                            "seq_id": 186,
+                            "comp_id": "GLN",
+                            "plddt": 96.76222222222222
+                        },
+                        {
+                            "seq_id": 187,
+                            "comp_id": "ARG",
+                            "plddt": 94.00636363636363
+                        },
+                        {
+                            "seq_id": 188,
+                            "comp_id": "ILE",
+                            "plddt": 98.545
+                        },
+                        {
+                            "seq_id": 189,
+                            "comp_id": "LEU",
+                            "plddt": 98.5575
+                        },
+                        {
+                            "seq_id": 190,
+                            "comp_id": "GLU",
+                            "plddt": 95.09777777777778
+                        },
+                        {
+                            "seq_id": 191,
+                            "comp_id": "HIS",
+                            "plddt": 95.543
+                        },
+                        {
+                            "seq_id": 192,
+                            "comp_id": "CYS",
+                            "plddt": 98.41000000000001
+                        },
+                        {
+                            "seq_id": 193,
+                            "comp_id": "THR",
+                            "plddt": 97.64714285714285
+                        },
+                        {
+                            "seq_id": 194,
+                            "comp_id": "ALA",
+                            "plddt": 97.856
+                        },
+                        {
+                            "seq_id": 195,
+                            "comp_id": "GLU",
+                            "plddt": 87.34444444444445
+                        },
+                        {
+                            "seq_id": 196,
+                            "comp_id": "GLN",
+                            "plddt": 97.77666666666667
+                        },
+                        {
+                            "seq_id": 197,
+                            "comp_id": "THR",
+                            "plddt": 96.75
+                        },
+                        {
+                            "seq_id": 198,
+                            "comp_id": "LEU",
+                            "plddt": 94.0375
+                        },
+                        {
+                            "seq_id": 199,
+                            "comp_id": "PRO",
+                            "plddt": 97.88142857142857
+                        },
+                        {
+                            "seq_id": 200,
+                            "comp_id": "ILE",
+                            "plddt": 97.19375
+                        },
+                        {
+                            "seq_id": 201,
+                            "comp_id": "LEU",
+                            "plddt": 98.2725
+                        },
+                        {
+                            "seq_id": 202,
+                            "comp_id": "GLU",
+                            "plddt": 90.14777777777778
+                        },
+                        {
+                            "seq_id": 203,
+                            "comp_id": "GLU",
+                            "plddt": 97.27666666666667
+                        },
+                        {
+                            "seq_id": 204,
+                            "comp_id": "LEU",
+                            "plddt": 97.96125
+                        },
+                        {
+                            "seq_id": 205,
+                            "comp_id": "HIS",
+                            "plddt": 96.848
+                        },
+                        {
+                            "seq_id": 206,
+                            "comp_id": "GLN",
+                            "plddt": 90.16333333333334
+                        },
+                        {
+                            "seq_id": 207,
+                            "comp_id": "HIS",
+                            "plddt": 93.481
+                        },
+                        {
+                            "seq_id": 208,
+                            "comp_id": "THR",
+                            "plddt": 96.94285714285715
+                        },
+                        {
+                            "seq_id": 209,
+                            "comp_id": "GLU",
+                            "plddt": 90.28
+                        },
+                        {
+                            "seq_id": 210,
+                            "comp_id": "GLN",
+                            "plddt": 91.55888888888889
+                        },
+                        {
+                            "seq_id": 211,
+                            "comp_id": "LEU",
+                            "plddt": 98.56125
+                        },
+                        {
+                            "seq_id": 212,
+                            "comp_id": "VAL",
+                            "plddt": 98.17
+                        },
+                        {
+                            "seq_id": 213,
+                            "comp_id": "GLN",
+                            "plddt": 95.2088888888889
+                        },
+                        {
+                            "seq_id": 214,
+                            "comp_id": "ASP",
+                            "plddt": 98.5975
+                        },
+                        {
+                            "seq_id": 215,
+                            "comp_id": "GLN",
+                            "plddt": 94.61666666666666
+                        },
+                        {
+                            "seq_id": 216,
+                            "comp_id": "TYR",
+                            "plddt": 98.46
+                        },
+                        {
+                            "seq_id": 217,
+                            "comp_id": "GLY",
+                            "plddt": 98.92
+                        },
+                        {
+                            "seq_id": 218,
+                            "comp_id": "ASN",
+                            "plddt": 98.56375
+                        },
+                        {
+                            "seq_id": 219,
+                            "comp_id": "TYR",
+                            "plddt": 98.5025
+                        },
+                        {
+                            "seq_id": 220,
+                            "comp_id": "VAL",
+                            "plddt": 98.78142857142858
+                        },
+                        {
+                            "seq_id": 221,
+                            "comp_id": "ILE",
+                            "plddt": 98.7325
+                        },
+                        {
+                            "seq_id": 222,
+                            "comp_id": "GLN",
+                            "plddt": 97.92333333333333
+                        },
+                        {
+                            "seq_id": 223,
+                            "comp_id": "HIS",
+                            "plddt": 96.654
+                        },
+                        {
+                            "seq_id": 224,
+                            "comp_id": "VAL",
+                            "plddt": 98.82285714285715
+                        },
+                        {
+                            "seq_id": 225,
+                            "comp_id": "LEU",
+                            "plddt": 98.74
+                        },
+                        {
+                            "seq_id": 226,
+                            "comp_id": "GLU",
+                            "plddt": 93.37777777777778
+                        },
+                        {
+                            "seq_id": 227,
+                            "comp_id": "HIS",
+                            "plddt": 94.692
+                        },
+                        {
+                            "seq_id": 228,
+                            "comp_id": "GLY",
+                            "plddt": 98.235
+                        },
+                        {
+                            "seq_id": 229,
+                            "comp_id": "ARG",
+                            "plddt": 87.31363636363636
+                        },
+                        {
+                            "seq_id": 230,
+                            "comp_id": "PRO",
+                            "plddt": 97.53714285714285
+                        },
+                        {
+                            "seq_id": 231,
+                            "comp_id": "GLU",
+                            "plddt": 89.58111111111111
+                        },
+                        {
+                            "seq_id": 232,
+                            "comp_id": "ASP",
+                            "plddt": 97.945
+                        },
+                        {
+                            "seq_id": 233,
+                            "comp_id": "LYS",
+                            "plddt": 94.2811111111111
+                        },
+                        {
+                            "seq_id": 234,
+                            "comp_id": "SER",
+                            "plddt": 96.50166666666667
+                        },
+                        {
+                            "seq_id": 235,
+                            "comp_id": "LYS",
+                            "plddt": 94.00777777777779
+                        },
+                        {
+                            "seq_id": 236,
+                            "comp_id": "ILE",
+                            "plddt": 98.66875
+                        },
+                        {
+                            "seq_id": 237,
+                            "comp_id": "VAL",
+                            "plddt": 98.56142857142858
+                        },
+                        {
+                            "seq_id": 238,
+                            "comp_id": "SER",
+                            "plddt": 95.82166666666666
+                        },
+                        {
+                            "seq_id": 239,
+                            "comp_id": "GLU",
+                            "plddt": 91.33999999999999
+                        },
+                        {
+                            "seq_id": 240,
+                            "comp_id": "ILE",
+                            "plddt": 96.36375
+                        },
+                        {
+                            "seq_id": 241,
+                            "comp_id": "ARG",
+                            "plddt": 85.72727272727273
+                        },
+                        {
+                            "seq_id": 242,
+                            "comp_id": "GLY",
+                            "plddt": 96.38
+                        },
+                        {
+                            "seq_id": 243,
+                            "comp_id": "LYS",
+                            "plddt": 91.37
+                        },
+                        {
+                            "seq_id": 244,
+                            "comp_id": "VAL",
+                            "plddt": 97.85571428571428
+                        },
+                        {
+                            "seq_id": 245,
+                            "comp_id": "LEU",
+                            "plddt": 96.495
+                        },
+                        {
+                            "seq_id": 246,
+                            "comp_id": "ALA",
+                            "plddt": 97.568
+                        },
+                        {
+                            "seq_id": 247,
+                            "comp_id": "LEU",
+                            "plddt": 98.44624999999999
+                        },
+                        {
+                            "seq_id": 248,
+                            "comp_id": "SER",
+                            "plddt": 98.46
+                        },
+                        {
+                            "seq_id": 249,
+                            "comp_id": "GLN",
+                            "plddt": 95.01777777777778
+                        },
+                        {
+                            "seq_id": 250,
+                            "comp_id": "HIS",
+                            "plddt": 96.09400000000001
+                        },
+                        {
+                            "seq_id": 251,
+                            "comp_id": "LYS",
+                            "plddt": 94.87666666666667
+                        },
+                        {
+                            "seq_id": 252,
+                            "comp_id": "PHE",
+                            "plddt": 98.62818181818183
+                        },
+                        {
+                            "seq_id": 253,
+                            "comp_id": "ALA",
+                            "plddt": 98.92
+                        },
+                        {
+                            "seq_id": 254,
+                            "comp_id": "SER",
+                            "plddt": 98.65166666666666
+                        },
+                        {
+                            "seq_id": 255,
+                            "comp_id": "ASN",
+                            "plddt": 97.13
+                        },
+                        {
+                            "seq_id": 256,
+                            "comp_id": "VAL",
+                            "plddt": 98.80857142857143
+                        },
+                        {
+                            "seq_id": 257,
+                            "comp_id": "VAL",
+                            "plddt": 98.86
+                        },
+                        {
+                            "seq_id": 258,
+                            "comp_id": "GLU",
+                            "plddt": 96.13111111111112
+                        },
+                        {
+                            "seq_id": 259,
+                            "comp_id": "LYS",
+                            "plddt": 95.23444444444445
+                        },
+                        {
+                            "seq_id": 260,
+                            "comp_id": "CYS",
+                            "plddt": 98.71666666666665
+                        },
+                        {
+                            "seq_id": 261,
+                            "comp_id": "VAL",
+                            "plddt": 98.55999999999999
+                        },
+                        {
+                            "seq_id": 262,
+                            "comp_id": "THR",
+                            "plddt": 97.46571428571428
+                        },
+                        {
+                            "seq_id": 263,
+                            "comp_id": "HIS",
+                            "plddt": 95.837
+                        },
+                        {
+                            "seq_id": 264,
+                            "comp_id": "ALA",
+                            "plddt": 97.742
+                        },
+                        {
+                            "seq_id": 265,
+                            "comp_id": "SER",
+                            "plddt": 97.68666666666667
+                        },
+                        {
+                            "seq_id": 266,
+                            "comp_id": "ARG",
+                            "plddt": 82.38636363636364
+                        },
+                        {
+                            "seq_id": 267,
+                            "comp_id": "ALA",
+                            "plddt": 97.90599999999999
+                        },
+                        {
+                            "seq_id": 268,
+                            "comp_id": "GLU",
+                            "plddt": 95.80888888888889
+                        },
+                        {
+                            "seq_id": 269,
+                            "comp_id": "ARG",
+                            "plddt": 94.56636363636363
+                        },
+                        {
+                            "seq_id": 270,
+                            "comp_id": "ALA",
+                            "plddt": 97.87
+                        },
+                        {
+                            "seq_id": 271,
+                            "comp_id": "LEU",
+                            "plddt": 95.66625
+                        },
+                        {
+                            "seq_id": 272,
+                            "comp_id": "LEU",
+                            "plddt": 97.86500000000001
+                        },
+                        {
+                            "seq_id": 273,
+                            "comp_id": "ILE",
+                            "plddt": 97.1925
+                        },
+                        {
+                            "seq_id": 274,
+                            "comp_id": "ASP",
+                            "plddt": 89.69
+                        },
+                        {
+                            "seq_id": 275,
+                            "comp_id": "GLU",
+                            "plddt": 95.31444444444445
+                        },
+                        {
+                            "seq_id": 276,
+                            "comp_id": "VAL",
+                            "plddt": 93.05857142857143
+                        },
+                        {
+                            "seq_id": 277,
+                            "comp_id": "CYS",
+                            "plddt": 92.64666666666666
+                        },
+                        {
+                            "seq_id": 278,
+                            "comp_id": "CYS",
+                            "plddt": 85.60000000000001
+                        },
+                        {
+                            "seq_id": 279,
+                            "comp_id": "GLN",
+                            "plddt": 74.0788888888889
+                        },
+                        {
+                            "seq_id": 280,
+                            "comp_id": "ASN",
+                            "plddt": 72.45
+                        },
+                        {
+                            "seq_id": 281,
+                            "comp_id": "ASP",
+                            "plddt": 73.71125
+                        },
+                        {
+                            "seq_id": 282,
+                            "comp_id": "GLY",
+                            "plddt": 77.27
+                        },
+                        {
+                            "seq_id": 283,
+                            "comp_id": "PRO",
+                            "plddt": 76.88285714285715
+                        },
+                        {
+                            "seq_id": 284,
+                            "comp_id": "HIS",
+                            "plddt": 72.556
+                        },
+                        {
+                            "seq_id": 285,
+                            "comp_id": "SER",
+                            "plddt": 84.75333333333333
+                        },
+                        {
+                            "seq_id": 286,
+                            "comp_id": "ALA",
+                            "plddt": 93.952
+                        },
+                        {
+                            "seq_id": 287,
+                            "comp_id": "LEU",
+                            "plddt": 92.98375
+                        },
+                        {
+                            "seq_id": 288,
+                            "comp_id": "TYR",
+                            "plddt": 90.47666666666667
+                        },
+                        {
+                            "seq_id": 289,
+                            "comp_id": "THR",
+                            "plddt": 94.05285714285715
+                        },
+                        {
+                            "seq_id": 290,
+                            "comp_id": "MET",
+                            "plddt": 96.4625
+                        },
+                        {
+                            "seq_id": 291,
+                            "comp_id": "MET",
+                            "plddt": 94.89750000000001
+                        },
+                        {
+                            "seq_id": 292,
+                            "comp_id": "LYS",
+                            "plddt": 87.03
+                        },
+                        {
+                            "seq_id": 293,
+                            "comp_id": "ASP",
+                            "plddt": 96.4825
+                        },
+                        {
+                            "seq_id": 294,
+                            "comp_id": "GLN",
+                            "plddt": 92.15777777777777
+                        },
+                        {
+                            "seq_id": 295,
+                            "comp_id": "TYR",
+                            "plddt": 98.17666666666666
+                        },
+                        {
+                            "seq_id": 296,
+                            "comp_id": "ALA",
+                            "plddt": 98.138
+                        },
+                        {
+                            "seq_id": 297,
+                            "comp_id": "ASN",
+                            "plddt": 97.02875
+                        },
+                        {
+                            "seq_id": 298,
+                            "comp_id": "TYR",
+                            "plddt": 97.30416666666667
+                        },
+                        {
+                            "seq_id": 299,
+                            "comp_id": "VAL",
+                            "plddt": 98.63142857142857
+                        },
+                        {
+                            "seq_id": 300,
+                            "comp_id": "VAL",
+                            "plddt": 97.5
+                        },
+                        {
+                            "seq_id": 301,
+                            "comp_id": "GLN",
+                            "plddt": 94.91888888888889
+                        },
+                        {
+                            "seq_id": 302,
+                            "comp_id": "LYS",
+                            "plddt": 92.85666666666667
+                        },
+                        {
+                            "seq_id": 303,
+                            "comp_id": "MET",
+                            "plddt": 97.505
+                        },
+                        {
+                            "seq_id": 304,
+                            "comp_id": "ILE",
+                            "plddt": 95.7925
+                        },
+                        {
+                            "seq_id": 305,
+                            "comp_id": "ASP",
+                            "plddt": 94.15625
+                        },
+                        {
+                            "seq_id": 306,
+                            "comp_id": "MET",
+                            "plddt": 94.96375
+                        },
+                        {
+                            "seq_id": 307,
+                            "comp_id": "ALA",
+                            "plddt": 96.162
+                        },
+                        {
+                            "seq_id": 308,
+                            "comp_id": "GLU",
+                            "plddt": 88.96222222222224
+                        },
+                        {
+                            "seq_id": 309,
+                            "comp_id": "PRO",
+                            "plddt": 92.81285714285715
+                        },
+                        {
+                            "seq_id": 310,
+                            "comp_id": "ALA",
+                            "plddt": 93.926
+                        },
+                        {
+                            "seq_id": 311,
+                            "comp_id": "GLN",
+                            "plddt": 91.80222222222223
+                        },
+                        {
+                            "seq_id": 312,
+                            "comp_id": "ARG",
+                            "plddt": 87.33909090909091
+                        },
+                        {
+                            "seq_id": 313,
+                            "comp_id": "LYS",
+                            "plddt": 83.3488888888889
+                        },
+                        {
+                            "seq_id": 314,
+                            "comp_id": "ILE",
+                            "plddt": 91.075
+                        },
+                        {
+                            "seq_id": 315,
+                            "comp_id": "ILE",
+                            "plddt": 93.35625
+                        },
+                        {
+                            "seq_id": 316,
+                            "comp_id": "MET",
+                            "plddt": 83.57
+                        },
+                        {
+                            "seq_id": 317,
+                            "comp_id": "HIS",
+                            "plddt": 81.586
+                        },
+                        {
+                            "seq_id": 318,
+                            "comp_id": "LYS",
+                            "plddt": 85.76888888888888
+                        },
+                        {
+                            "seq_id": 319,
+                            "comp_id": "ILE",
+                            "plddt": 92.13875
+                        },
+                        {
+                            "seq_id": 320,
+                            "comp_id": "ARG",
+                            "plddt": 76.58272727272727
+                        },
+                        {
+                            "seq_id": 321,
+                            "comp_id": "PRO",
+                            "plddt": 91.51571428571428
+                        },
+                        {
+                            "seq_id": 322,
+                            "comp_id": "HIS",
+                            "plddt": 89.002
+                        },
+                        {
+                            "seq_id": 323,
+                            "comp_id": "ILE",
+                            "plddt": 90.03
+                        },
+                        {
+                            "seq_id": 324,
+                            "comp_id": "THR",
+                            "plddt": 90.00428571428571
+                        },
+                        {
+                            "seq_id": 325,
+                            "comp_id": "THR",
+                            "plddt": 88.53857142857143
+                        },
+                        {
+                            "seq_id": 326,
+                            "comp_id": "LEU",
+                            "plddt": 92.19624999999999
+                        },
+                        {
+                            "seq_id": 327,
+                            "comp_id": "ARG",
+                            "plddt": 82.22454545454546
+                        },
+                        {
+                            "seq_id": 328,
+                            "comp_id": "LYS",
+                            "plddt": 84.38333333333334
+                        },
+                        {
+                            "seq_id": 329,
+                            "comp_id": "TYR",
+                            "plddt": 85.25916666666667
+                        },
+                        {
+                            "seq_id": 330,
+                            "comp_id": "THR",
+                            "plddt": 88.67285714285715
+                        },
+                        {
+                            "seq_id": 331,
+                            "comp_id": "TYR",
+                            "plddt": 91.82
+                        },
+                        {
+                            "seq_id": 332,
+                            "comp_id": "GLY",
+                            "plddt": 93.54249999999999
+                        },
+                        {
+                            "seq_id": 333,
+                            "comp_id": "LYS",
+                            "plddt": 86.01
+                        },
+                        {
+                            "seq_id": 334,
+                            "comp_id": "HIS",
+                            "plddt": 88.986
+                        },
+                        {
+                            "seq_id": 335,
+                            "comp_id": "ILE",
+                            "plddt": 90.62375
+                        },
+                        {
+                            "seq_id": 336,
+                            "comp_id": "LEU",
+                            "plddt": 90.54875
+                        },
+                        {
+                            "seq_id": 337,
+                            "comp_id": "ALA",
+                            "plddt": 90.688
+                        },
+                        {
+                            "seq_id": 338,
+                            "comp_id": "LYS",
+                            "plddt": 85.96
+                        },
+                        {
+                            "seq_id": 339,
+                            "comp_id": "LEU",
+                            "plddt": 86.5675
+                        },
+                        {
+                            "seq_id": 340,
+                            "comp_id": "GLU",
+                            "plddt": 79.83
+                        },
+                        {
+                            "seq_id": 341,
+                            "comp_id": "LYS",
+                            "plddt": 72.98444444444445
+                        },
+                        {
+                            "seq_id": 342,
+                            "comp_id": "TYR",
+                            "plddt": 77.39083333333333
+                        },
+                        {
+                            "seq_id": 343,
+                            "comp_id": "TYR",
+                            "plddt": 59.66166666666666
+                        },
+                        {
+                            "seq_id": 344,
+                            "comp_id": "LEU",
+                            "plddt": 52.926249999999996
+                        },
+                        {
+                            "seq_id": 345,
+                            "comp_id": "LYS",
+                            "plddt": 50.99666666666666
+                        },
+                        {
+                            "seq_id": 346,
+                            "comp_id": "ASN",
+                            "plddt": 50.4025
+                        },
+                        {
+                            "seq_id": 347,
+                            "comp_id": "SER",
+                            "plddt": 48.751666666666665
+                        },
+                        {
+                            "seq_id": 348,
+                            "comp_id": "PRO",
+                            "plddt": 42.15428571428571
+                        },
+                        {
+                            "seq_id": 349,
+                            "comp_id": "ASP",
+                            "plddt": 39.14875
+                        },
+                        {
+                            "seq_id": 350,
+                            "comp_id": "LEU",
+                            "plddt": 39.09
+                        },
+                        {
+                            "seq_id": 351,
+                            "comp_id": "GLY",
+                            "plddt": 38.966
+                        }
+                    ]
+                },
+                {
+                    "auth_asym_id": "RNA_B",
+                    "label_asym_id": "B",
+                    "residues": [
+                        {
+                            "seq_id": 1,
+                            "comp_id": "U",
+                            "plddt": 67.56666666666668
+                        },
+                        {
+                            "seq_id": 2,
+                            "comp_id": "U",
+                            "plddt": 90.074
+                        },
+                        {
+                            "seq_id": 3,
+                            "comp_id": "G",
+                            "plddt": 95.77347826086957
+                        },
+                        {
+                            "seq_id": 4,
+                            "comp_id": "U",
+                            "plddt": 96.8375
+                        },
+                        {
+                            "seq_id": 5,
+                            "comp_id": "A",
+                            "plddt": 96.5409090909091
+                        },
+                        {
+                            "seq_id": 6,
+                            "comp_id": "G",
+                            "plddt": 96.17347826086956
+                        },
+                        {
+                            "seq_id": 7,
+                            "comp_id": "A",
+                            "plddt": 95.91954545454546
+                        },
+                        {
+                            "seq_id": 8,
+                            "comp_id": "U",
+                            "plddt": 95.69
+                        },
+                        {
+                            "seq_id": 9,
+                            "comp_id": "A",
+                            "plddt": 91.76636363636364
+                        },
+                        {
+                            "seq_id": 10,
+                            "comp_id": "U",
+                            "plddt": 75.11749999999999
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "interactions": [
+        {
+            "cut-off": 0.5,
+            "interfaces": [
+                {
+                    "interface_id": "I0",
+                    "interface_name": "interface 0",
+                    "PDE": 0.9919047619047616,
+                    "PMC": 0.9312908055528298,
+                    "contact_iptm_score": 0.9224714285714284,
+                    "ABi_score": 0.9237517847459733,
+                    "links": [
+                        {
+                            "link_id": "L1",
+                            "PDE": 0.12125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 33,
+                                    "end": 33
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L2",
+                            "PDE": 0.123125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 36,
+                                    "end": 37
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L3",
+                            "PDE": 0.1395,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 69,
+                                    "end": 73
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L4",
+                            "PDE": 0.12675,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 105,
+                                    "end": 109
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L5",
+                            "PDE": 0.10825,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 143,
+                                    "end": 147
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L6",
+                            "PDE": 0.11725,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 179,
+                                    "end": 183
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L7",
+                            "PDE": 0.12450000000000001,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 215,
+                                    "end": 219
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L8",
+                            "PDE": 0.13475,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 251,
+                                    "end": 255
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L9",
+                            "PDE": 0.12925,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 294,
+                                    "end": 298
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L10",
+                            "PDE": 0.10875,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 330,
+                                    "end": 331
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L11",
+                            "PDE": 0.1225,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 334,
+                                    "end": 334
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cut-off": 0.75,
+            "interfaces": [
+                {
+                    "interface_id": "I0",
+                    "interface_name": "interface 0",
+                    "PDE": 0.9919047619047616,
+                    "PMC": 0.9304104063642448,
+                    "contact_iptm_score": 0.9224714285714284,
+                    "ABi_score": 0.9228785125984387,
+                    "links": [
+                        {
+                            "link_id": "L1",
+                            "PDE": 0.12125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 33,
+                                    "end": 33
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L2",
+                            "PDE": 0.123125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 36,
+                                    "end": 37
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L3",
+                            "PDE": 0.1395,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 69,
+                                    "end": 73
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L4",
+                            "PDE": 0.12675,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 105,
+                                    "end": 109
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L5",
+                            "PDE": 0.1225,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 144,
+                                    "end": 144
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L6",
+                            "PDE": 0.23125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 147,
+                                    "end": 147
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L7",
+                            "PDE": 0.120625,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 180,
+                                    "end": 183
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L8",
+                            "PDE": 0.12450000000000001,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 215,
+                                    "end": 219
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L9",
+                            "PDE": 0.13475,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 251,
+                                    "end": 255
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L10",
+                            "PDE": 0.12925,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 294,
+                                    "end": 298
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L11",
+                            "PDE": 0.10875,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 330,
+                                    "end": 331
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L12",
+                            "PDE": 0.1225,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 334,
+                                    "end": 334
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cut-off": 0.9,
+            "interfaces": [
+                {
+                    "interface_id": "I0",
+                    "interface_name": "interface 0",
+                    "PDE": 0.9919047619047616,
+                    "PMC": 0.9320129685909736,
+                    "contact_iptm_score": 0.9224714285714284,
+                    "ABi_score": 0.9244681017023797,
+                    "links": [
+                        {
+                            "link_id": "L1",
+                            "PDE": 0.12125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 33,
+                                    "end": 33
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L2",
+                            "PDE": 0.123125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 36,
+                                    "end": 37
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L3",
+                            "PDE": 0.1395,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 69,
+                                    "end": 73
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L4",
+                            "PDE": 0.12675,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 105,
+                                    "end": 109
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L5",
+                            "PDE": 0.1225,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 144,
+                                    "end": 144
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L6",
+                            "PDE": 0.23125,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 147,
+                                    "end": 147
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L7",
+                            "PDE": 0.120625,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 180,
+                                    "end": 183
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L8",
+                            "PDE": 0.12450000000000001,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 215,
+                                    "end": 219
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L9",
+                            "PDE": 0.13475,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 251,
+                                    "end": 255
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L10",
+                            "PDE": 0.12925,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 294,
+                                    "end": 298
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L11",
+                            "PDE": 0.12,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 331,
+                                    "end": 331
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        },
+                        {
+                            "link_id": "L12",
+                            "PDE": 0.1225,
+                            "first": {
+                                "asym_id": "A",
+                                "link_range": {
+                                    "start": 334,
+                                    "end": 334
+                                }
+                            },
+                            "second": {
+                                "asym_id": "B",
+                                "link_range": {
+                                    "start": 2,
+                                    "end": 9
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
