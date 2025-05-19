@@ -1,0 +1,12 @@
+interface,prot_1,start_1,end_1,prot_2,start_2,end_2
+Interface_1,A,33,33,RNA_B,2,9
+Interface_1,A,36,37,RNA_B,2,9
+Interface_1,A,69,73,RNA_B,2,9
+Interface_1,A,105,109,RNA_B,2,9
+Interface_1,A,143,147,RNA_B,2,9
+Interface_1,A,180,183,RNA_B,2,9
+Interface_1,A,215,219,RNA_B,2,9
+Interface_1,A,251,255,RNA_B,2,9
+Interface_1,A,294,298,RNA_B,2,9
+Interface_1,A,330,331,RNA_B,2,9
+Interface_1,A,334,334,RNA_B,2,9
