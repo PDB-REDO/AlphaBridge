@@ -13,10 +13,11 @@ class RECORD():
         self.record_file = record_file 
         self.structure_sequence_list = structure_sequence_list
         self.feature_dict = feature_dict
-        
+    
     def map_asym_id(self, rec_list):
         
         structure_sequence_list = self.structure_sequence_list
+        
         feature_dict = self.feature_dict
         
         used_indices = set()
@@ -43,6 +44,8 @@ class RECORD():
         sorted_rec_list = sorted(rec_list, key=lambda x: token_chain_ids.index(x['label_asym_id']))
     
         return sorted_rec_list
+        
+    
 
 class RECORD_AF3(RECORD):
 
@@ -65,7 +68,9 @@ class RECORD_AF3(RECORD):
         for macromolecule in record_file['sequences']:
             macromolecule_type  = list(macromolecule.keys())[0]
             
-            for asym_id in macromolecule[macromolecule_type]['id']:
+            asym_id_list = [macromolecule[macromolecule_type]['id']] if isinstance(macromolecule[macromolecule_type]['id'], str) else macromolecule[macromolecule_type]['id']
+
+            for asym_id in asym_id_list:
                 
                 if macromolecule_type == 'protein':
                 
@@ -83,13 +88,15 @@ class RECORD_AF3(RECORD):
                     
                     rec_list += nucleotide_rec_info
 
-                elif macromolecule_type in ['ligand', 'ion']:
-                    
-                    record = macromolecule[macromolecule_type]
+                elif macromolecule_type  == 'ligand':
+                                    
+                    record = transform_rec(macromolecule[macromolecule_type], macromolecule_type, asym_id)
                     
                     non_poly_rec_info = NON_POLYMER(macromolecule_type, record).get_rec_info()
                     
                     rec_list += non_poly_rec_info
+                else:
+                    raise ValueError(f"Macromolecule type {macromolecule_type} is not supported")
         
         rec_list = self.map_asym_id(rec_list)
                   
@@ -150,6 +157,8 @@ class RECORD_SERVER(RECORD):
                     non_poly_rec_info = NON_POLYMER(macromolecule_name_dict[macromolecule_type], record).get_rec_info()
                     
                     rec_list += non_poly_rec_info
+                else:
+                    raise ValueError(f"Macromolecule type {macromolecule_type} is not supported")
         
         rec_list = self.map_asym_id(rec_list)
                   
@@ -306,6 +315,7 @@ class NON_POLYMER():
             'rec_type' : 'non_polymer',
             'macromolecule_type': self.macromolecule_type,
             'non_poly_entity' : self.non_poly_entity,
+            'smiles' : str(),
             'entity_degree' : int(),
             'auth_asym_id' : str(),
             'label_asym_id' : str()
@@ -314,12 +324,24 @@ class NON_POLYMER():
         return non_polymer_dict
 
     def get_rec_info(self):
-        
-        rec_info = []
-        polymer_rec_dict = self.create_rec_dict()
-
-        rec_info.append(polymer_rec_dict)
-
+        rec_dict = self.create_rec_dict()
+        if 'smiles' in self.record:
+            rec_dict['smiles'] = self.record['smiles']
+            
+        rec_info = [rec_dict]
+       
         return rec_info
     
+def transform_rec(rec,macromolecule_type, asym_id):
+    
+    if not 'smiles' in rec:
+        raise NotImplemented("No CCD key support (yet) for non-polymer entities in local AlphaFold3 version")
+    else:
+        ligand_rec = f'LIG_{asym_id}'
+        rec_transformed ={
+                            macromolecule_type: ligand_rec,
+                            'smiles': rec['smiles'],
+                            'count': 1
+                        }
         
+    return rec_transformed

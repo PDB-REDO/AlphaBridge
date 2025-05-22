@@ -1,0 +1,1527 @@
+{
+    "network at 0.5": {
+        "cut-off": 0.5,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (1-6) (59-60) (83)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "A (182) (670-672) (723-736) (752-769) (783-786) (825-854) (881-892) (896) (901-912) (926-930)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "A (446-453) (457) (474-477) (576-591)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "A (527-534) (544) (549)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "A (638-653) (670-678) (781) (802) (813-816)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "B (447-448) (468-476) (532-533)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "B (1297-1357) (1188-1202) (1217-1234) (1135-1137) (1248-1251) (577)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "B (328-343)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 7,
+                    "id": 7
+                },
+                {
+                    "label": "B (990-999)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 8,
+                    "id": 8
+                },
+                {
+                    "label": "B (1109)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 9,
+                    "id": 9
+                },
+                {
+                    "label": "B (429-432) (462)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 10,
+                    "id": 10
+                },
+                {
+                    "label": "B (432) (452) (460-462)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 11,
+                    "id": 11
+                },
+                {
+                    "label": "lig_C (1-27)",
+                    "label_asym_id": "C",
+                    "color": "#ff964f",
+                    "_igraph_index": 12,
+                    "id": 12
+                },
+                {
+                    "label": "lig_C (21)",
+                    "label_asym_id": "C",
+                    "color": "#ff964f",
+                    "_igraph_index": 13,
+                    "id": 13
+                },
+                {
+                    "label": "DNA_E (19-22)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 14,
+                    "id": 14
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 15,
+                    "id": 15
+                },
+                {
+                    "label": "DNA_F (21-23)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 16,
+                    "id": 16
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 17,
+                    "id": 17
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I1",
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 5
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 9,
+                    "source": 0,
+                    "target": 1,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 10,
+                    "source": 0,
+                    "target": 2,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 11,
+                    "source": 0,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 12,
+                    "source": 0,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I2",
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 13,
+                    "source": 1,
+                    "target": 2,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 14,
+                    "source": 1,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 15,
+                    "source": 1,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I3",
+                    "_igraph_index": 2,
+                    "source": 2,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 16,
+                    "source": 2,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 17,
+                    "source": 2,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I4",
+                    "_igraph_index": 3,
+                    "source": 3,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 18,
+                    "source": 3,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I5",
+                    "_igraph_index": 4,
+                    "source": 4,
+                    "target": 12
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 19,
+                    "source": 5,
+                    "target": 6,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 20,
+                    "source": 5,
+                    "target": 7,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 21,
+                    "source": 5,
+                    "target": 8,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 22,
+                    "source": 5,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 23,
+                    "source": 5,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 24,
+                    "source": 5,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 25,
+                    "source": 6,
+                    "target": 7,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 26,
+                    "source": 6,
+                    "target": 8,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 27,
+                    "source": 6,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 28,
+                    "source": 6,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 29,
+                    "source": 6,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 30,
+                    "source": 7,
+                    "target": 8,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 31,
+                    "source": 7,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 32,
+                    "source": 7,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 33,
+                    "source": 7,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 34,
+                    "source": 8,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 35,
+                    "source": 8,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 36,
+                    "source": 8,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I6",
+                    "_igraph_index": 5,
+                    "source": 9,
+                    "target": 13
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 37,
+                    "source": 9,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 38,
+                    "source": 9,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I7",
+                    "_igraph_index": 6,
+                    "source": 10,
+                    "target": 14
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 39,
+                    "source": 10,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I8",
+                    "_igraph_index": 7,
+                    "source": 11,
+                    "target": 16
+                },
+                {
+                    "weight": 3,
+                    "color": "#ff964f",
+                    "width": 0.5,
+                    "_igraph_index": 40,
+                    "source": 12,
+                    "target": 13,
+                    "label_asym_id": "C"
+                },
+                {
+                    "weight": 3,
+                    "color": "#4df3ce",
+                    "width": 0.5,
+                    "_igraph_index": 41,
+                    "source": 14,
+                    "target": 15,
+                    "label_asym_id": "E"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I9",
+                    "_igraph_index": 8,
+                    "source": 15,
+                    "target": 17
+                },
+                {
+                    "weight": 3,
+                    "color": "#b2f396",
+                    "width": 0.5,
+                    "_igraph_index": 42,
+                    "source": 16,
+                    "target": 17,
+                    "label_asym_id": "F"
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "lig_C",
+                    "label_asym_id": "C",
+                    "color": "#ff964f",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_E",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_F",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 4,
+                    "id": 4
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I1",
+                        "I2",
+                        "I3",
+                        "I4"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I5"
+                    ],
+                    "label": 0.84,
+                    "_igraph_index": 1,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I6"
+                    ],
+                    "label": 0.53,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I7"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 3,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I8"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 4,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I9"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 5,
+                    "source": 3,
+                    "target": 4
+                }
+            ]
+        }
+    },
+    "network at 0.75": {
+        "cut-off": 0.75,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (1-4) (83)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "A (449-453) (475) (576-588)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "A (527-530) (544)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "A (671) (723-736) (752-769) (783-786) (825-852)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "A (884-892) (896) (905-912) (927-930)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "A (650-651) (672-677) (815)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "B (447-448) (468-472)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "B (333-342) (329)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 7,
+                    "id": 7
+                },
+                {
+                    "label": "B (996-999)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 8,
+                    "id": 8
+                },
+                {
+                    "label": "B (1190-1202) (1217-1234) (1136-1137) (1297-1324) (1248-1250) (577)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 9,
+                    "id": 9
+                },
+                {
+                    "label": "B (1329-1340) (1354-1357) (1345)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 10,
+                    "id": 10
+                },
+                {
+                    "label": "B (429-432)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 11,
+                    "id": 11
+                },
+                {
+                    "label": "B (432) (452) (460-462)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 12,
+                    "id": 12
+                },
+                {
+                    "label": "lig_C (1-27)",
+                    "label_asym_id": "C",
+                    "color": "#ff964f",
+                    "_igraph_index": 13,
+                    "id": 13
+                },
+                {
+                    "label": "DNA_E (19-22)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 14,
+                    "id": 14
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 15,
+                    "id": 15
+                },
+                {
+                    "label": "DNA_F (21-23)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 16,
+                    "id": 16
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 17,
+                    "id": 17
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I1",
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 9,
+                    "source": 0,
+                    "target": 1,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 10,
+                    "source": 0,
+                    "target": 2,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 11,
+                    "source": 0,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 12,
+                    "source": 0,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 13,
+                    "source": 0,
+                    "target": 5,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I2",
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 14,
+                    "source": 1,
+                    "target": 2,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 15,
+                    "source": 1,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 16,
+                    "source": 1,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 17,
+                    "source": 1,
+                    "target": 5,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I3",
+                    "_igraph_index": 2,
+                    "source": 2,
+                    "target": 8
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 18,
+                    "source": 2,
+                    "target": 3,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 19,
+                    "source": 2,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 20,
+                    "source": 2,
+                    "target": 5,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I4",
+                    "_igraph_index": 3,
+                    "source": 3,
+                    "target": 9
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 21,
+                    "source": 3,
+                    "target": 4,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 22,
+                    "source": 3,
+                    "target": 5,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I5",
+                    "_igraph_index": 4,
+                    "source": 4,
+                    "target": 10
+                },
+                {
+                    "weight": 3,
+                    "color": "#8000ff",
+                    "width": 0.5,
+                    "_igraph_index": 23,
+                    "source": 4,
+                    "target": 5,
+                    "label_asym_id": "A"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I6",
+                    "_igraph_index": 5,
+                    "source": 5,
+                    "target": 13
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 24,
+                    "source": 6,
+                    "target": 7,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 25,
+                    "source": 6,
+                    "target": 8,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 26,
+                    "source": 6,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 27,
+                    "source": 6,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 28,
+                    "source": 6,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 29,
+                    "source": 6,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 30,
+                    "source": 7,
+                    "target": 8,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 31,
+                    "source": 7,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 32,
+                    "source": 7,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 33,
+                    "source": 7,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 34,
+                    "source": 7,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 35,
+                    "source": 8,
+                    "target": 9,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 36,
+                    "source": 8,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 37,
+                    "source": 8,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 38,
+                    "source": 8,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 39,
+                    "source": 9,
+                    "target": 10,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 40,
+                    "source": 9,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 41,
+                    "source": 9,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 42,
+                    "source": 10,
+                    "target": 11,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 43,
+                    "source": 10,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I7",
+                    "_igraph_index": 6,
+                    "source": 11,
+                    "target": 14
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 44,
+                    "source": 11,
+                    "target": 12,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I8",
+                    "_igraph_index": 7,
+                    "source": 12,
+                    "target": 16
+                },
+                {
+                    "weight": 3,
+                    "color": "#4df3ce",
+                    "width": 0.5,
+                    "_igraph_index": 45,
+                    "source": 14,
+                    "target": 15,
+                    "label_asym_id": "E"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I9",
+                    "_igraph_index": 8,
+                    "source": 15,
+                    "target": 17
+                },
+                {
+                    "weight": 3,
+                    "color": "#b2f396",
+                    "width": 0.5,
+                    "_igraph_index": 46,
+                    "source": 16,
+                    "target": 17,
+                    "label_asym_id": "F"
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "lig_C",
+                    "label_asym_id": "C",
+                    "color": "#ff964f",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_E",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_F",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 4,
+                    "id": 4
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I1",
+                        "I2",
+                        "I3",
+                        "I4",
+                        "I5"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I6"
+                    ],
+                    "label": 0.84,
+                    "_igraph_index": 1,
+                    "source": 0,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I7"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I8"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 3,
+                    "source": 1,
+                    "target": 4
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I9"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 4,
+                    "source": 3,
+                    "target": 4
+                }
+            ]
+        }
+    },
+    "network at 0.9": {
+        "cut-off": 0.9,
+        "network_not_merged": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A (671) (725-736) (754-769) (783) (825-851)",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B (1190-1201) (1218-1234) (1299-1324) (1248-1249)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "B (429-432)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "B (432) (462)",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 3,
+                    "id": 3
+                },
+                {
+                    "label": "DNA_E (20-21)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 4,
+                    "id": 4
+                },
+                {
+                    "label": "DNA_E (2-40)",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 5,
+                    "id": 5
+                },
+                {
+                    "label": "DNA_F (21-23)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 6,
+                    "id": 6
+                },
+                {
+                    "label": "DNA_F (2-40)",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 7,
+                    "id": 7
+                }
+            ],
+            "links": [
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I1",
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 4,
+                    "source": 1,
+                    "target": 2,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 5,
+                    "source": 1,
+                    "target": 3,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I2",
+                    "_igraph_index": 1,
+                    "source": 2,
+                    "target": 4
+                },
+                {
+                    "weight": 3,
+                    "color": "#1996f3",
+                    "width": 0.5,
+                    "_igraph_index": 6,
+                    "source": 2,
+                    "target": 3,
+                    "label_asym_id": "B"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I3",
+                    "_igraph_index": 2,
+                    "source": 3,
+                    "target": 6
+                },
+                {
+                    "weight": 3,
+                    "color": "#4df3ce",
+                    "width": 0.5,
+                    "_igraph_index": 7,
+                    "source": 4,
+                    "target": 5,
+                    "label_asym_id": "E"
+                },
+                {
+                    "weight": 500,
+                    "color": "black",
+                    "width": 1.5,
+                    "interaction": "I4",
+                    "_igraph_index": 3,
+                    "source": 5,
+                    "target": 7
+                },
+                {
+                    "weight": 3,
+                    "color": "#b2f396",
+                    "width": 0.5,
+                    "_igraph_index": 8,
+                    "source": 6,
+                    "target": 7,
+                    "label_asym_id": "F"
+                }
+            ]
+        },
+        "protein_network": {
+            "directed": false,
+            "multigraph": false,
+            "graph": {},
+            "nodes": [
+                {
+                    "label": "A",
+                    "label_asym_id": "A",
+                    "color": "#8000ff",
+                    "_igraph_index": 0,
+                    "id": 0
+                },
+                {
+                    "label": "B",
+                    "label_asym_id": "B",
+                    "color": "#1996f3",
+                    "_igraph_index": 1,
+                    "id": 1
+                },
+                {
+                    "label": "DNA_E",
+                    "label_asym_id": "E",
+                    "color": "#4df3ce",
+                    "_igraph_index": 2,
+                    "id": 2
+                },
+                {
+                    "label": "DNA_F",
+                    "label_asym_id": "F",
+                    "color": "#b2f396",
+                    "_igraph_index": 3,
+                    "id": 3
+                }
+            ],
+            "links": [
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I1"
+                    ],
+                    "label": 0.98,
+                    "_igraph_index": 0,
+                    "source": 0,
+                    "target": 1
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I2"
+                    ],
+                    "label": 0.9,
+                    "_igraph_index": 1,
+                    "source": 1,
+                    "target": 2
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I3"
+                    ],
+                    "label": 0.92,
+                    "_igraph_index": 2,
+                    "source": 1,
+                    "target": 3
+                },
+                {
+                    "color": "black",
+                    "interaction": [
+                        "I4"
+                    ],
+                    "label": 0.99,
+                    "_igraph_index": 3,
+                    "source": 2,
+                    "target": 3
+                }
+            ]
+        }
+    },
+    "label_asym_ids": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F"
+    ]
+}

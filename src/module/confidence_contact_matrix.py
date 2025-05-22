@@ -177,9 +177,13 @@ class FEATURE_MATRIX:
 
 class CCM_AF3(FEATURE_MATRIX):
     
-    def __init__(self, in_dir):
+    def __init__(self, 
+                 in_dir, 
+                 sample: int = 0):
         
         super().__init__(in_dir)
+        
+        self.sample = sample
     
     def check_alphafold_dialect(self):
         
@@ -202,6 +206,7 @@ class CCM_AF3(FEATURE_MATRIX):
     def extract_feature_filepath(self):
         
         folder_path = self.in_dir
+        sample = self.sample
         
         if self.check_if_path_exist(folder_path):
         
@@ -214,10 +219,10 @@ class CCM_AF3(FEATURE_MATRIX):
             
             else:
         
-                feature_path = list(Path(folder_path).glob( "*full_data_0.json"))[0]
-                structure_path = list(Path(folder_path).glob( "*model_0.cif"))[0]
-                job_request_path = list(Path(folder_path).glob("*job_request*.json"))[0]
-                summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
+                feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
+                structure_path = list(Path(folder_path).glob( f"*model_{sample}.cif"))[0]
+                job_request_path = list(Path(folder_path).glob(f"*job_request.json"))[0]
+                summary_request_path = list(Path(folder_path).glob(f"*summary_confidences_{sample}.json"))[0]
         
             return feature_path, structure_path, job_request_path, summary_request_path
     
@@ -226,7 +231,7 @@ class CCM_AF3(FEATURE_MATRIX):
         request_file = read_json_file(job_request_path)
         
         if self.check_alphafold_dialect():
-
+            #print(structure_sequence_list)
             rec_list = RECORD_AF3(request_file, structure_sequence_list, feature_dict).process_record_file()
         else:
             rec_list = RECORD_SERVER(request_file, structure_sequence_list, feature_dict).process_record_file()
@@ -634,6 +639,7 @@ def get_monomer_info_dict(chain_info_dict):
                         monomer_name_len_dict[auth_asym_id]['entity_length'] = entity_length
                     else:
                         entity_length = len(rec['atoms'])
+                        #print(entity_length)
                         poly_bolean = True
                         
                         monomer_name_len_dict[auth_asym_id]['entity_length'] = None
@@ -689,3 +695,6 @@ def get_monomer_info_dict(chain_info_dict):
         monomer_name_len_dict[key]['entity_degree'] = (value['entity_length'] * 360) / entity_sum_length
                    
     return monomer_name_len_dict, poly_type_dict   
+
+
+                    
