@@ -16,6 +16,7 @@ import time
 import numpy as np
 
 
+
 module_dir = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -58,6 +59,7 @@ class RIBBON_DIAGRAM:
                     entity_length = len(rec['residues'])
                 else:
                     entity_length = len(rec['atoms'])
+                    
                 
                 monomer_name_len_dict[auth_asym_id] = entity_length
                             
@@ -103,7 +105,7 @@ class RIBBON_DIAGRAM:
             sectors, poly_type_dict =  self.get_monomer_info_dict()
         else:
             monomer_info_dict, poly_type_dict =  get_monomer_info_dict(chain_info_dict)
-        
+
             sectors = {key: value['entity_length']  for key, value in monomer_info_dict.items()}
         
         interfaces_list = [interface['interface_id'] for interface in interactions_dict['interfaces']]
@@ -189,10 +191,8 @@ class RIBBON_DIAGRAM:
                         #check if label_asym id is a ligand or an ion, and boolean_modified_non_poly_length
                         if poly_type in ['Ligand' , 'Ion', 'Glycan'] and self.boolean_modified_non_poly_length:
                             
-                            interface_range = [1, sectors[auth_asym_id]]
+                            interface_range = [1, sectors[auth_asym_id] + 1]
                             
-
-
                             degree_range = [degrees(sector.x_to_rad(residue_number - 1)) for residue_number in interface_range] 
                             circos.rect(r_lim=(75, 85), deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
                            
@@ -274,10 +274,11 @@ class RIBBON_DIAGRAM:
         
         
 def get_interface2color(interfaces_list):
-
         interface_nr = len(interfaces_list)
+
+        cmap = get_distinct_colors(interface_nr)
         #cmap = colormaps['tab20']  # matplotlib color palette name, n colors
-        cmap = distinctipy.get_colors(interface_nr)    
+        #cmap = distinctipy.get_colors(interface_nr)    
         #color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
         #reord_color_list = color_list[::2] + color_list[1::2]
         color_list = [rgb2hex(rgb) for rgb in cmap]
@@ -317,10 +318,20 @@ def extract_bridge(interaction, label2auth,monomer_length_dict,poly_type_dict, b
     if poly_type_dict[auth_asym_id] in ['Ligand', 'Ion', 'Glycan'] and boolean_modified_non_poly_length:
         
         start = 0
-        end = monomer_length_dict[auth_asym_id] - 1
+        end = monomer_length_dict[auth_asym_id]
     else:    
         start = interaction['link_range']['start'] - 1
         end = interaction['link_range']['end'] - 1
     
     
     return auth_asym_id, start, end
+
+
+def get_distinct_colors(n):
+    """Generate n visually distinct colors using HSV color space."""
+    hues = np.linspace(0, 1, n, endpoint=False)
+    saturation = 0.9  # Constant saturation
+    value = 0.9  # Constant value/brightness
+    hsv_colors = np.column_stack([hues, np.full(n, saturation), np.full(n, value)])
+    rgb_colors = plt.cm.hsv(hsv_colors[:, 0])
+    return rgb_colors

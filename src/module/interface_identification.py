@@ -85,11 +85,16 @@ class interface_identification():
                     for protA_range in protA_range_list:
                         for protB_range in protB_range_list:
                             
-                             
-                            distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
-                            confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
                             
+                            distance_submatrix = select_submatrix(contact_matrix,protA_range,protB_range)
+                            confidence_submatrix = select_submatrix(confidence_matrix,protA_range,protB_range)
                             
+                           
+
+                            #distance_submatrix = contact_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            #confidence_submatrix = confidence_matrix[protA_range[0]:protA_range[1], protB_range[0]:protB_range[1]]
+                            
+                            #print(distance_submatrix,protA_range,protB_range)
                             #dont consider non polymer chains in the calculation for general scores
                             #bolean value True if there is non_polymer in the binary interactoin
                             non_poly_bool = bool( {protA,protB} & set(non_polymer_chains_set))
@@ -98,7 +103,6 @@ class interface_identification():
                             if not non_poly_bool:
                                 probability_structure_list.append(distance_submatrix)
                                 pmc_structure_list.append(confidence_submatrix)
-                            
                             interfaces, interface_range_list = find_interfaces(distance_submatrix, self.threshold)
                             
                             if not len(interface_range_list) == 0:
@@ -106,7 +110,6 @@ class interface_identification():
                                 for interface_range in interface_range_list:
                                     
                                     #interaction_dimension = interfaces[interface_range].shape
-                                    
                                     protA_start, protA_end = map_residue_range(entity_region_dict[protA], protA_range, interface_range[0])
                                     protB_start, protB_end = map_residue_range(entity_region_dict[protB], protB_range, interface_range[1])
                                     
@@ -214,6 +217,7 @@ class interface_identification():
                         }
                         
                         coord_link = map_link2coord(link, [biomolecule_1, biomolecule_2], entity_region_dict)
+                        
                         matrix_probability_link, link_probability = scoring.calculate_probability_contact_link(coord_link,contact_matrix)
                         matrix_pmc_link, pmc_link = scoring.calculate_pmc_link(coord_link, confidence_matrix)
 
@@ -258,96 +262,7 @@ class interface_identification():
             
        
         return biomolecule_interface_dict
-    
-
-    '''def map_info_interfaces(self, interactions_dict):
-        
-        contact_df, probability_structure_list, pmc_structure_list = self.extract_contacts()
-        chain_dict = self.chain_dict
-        entity_region_dict = self.entity_region_dict
-        rec_sequence_list = self.rec_sequence_list
-        confidence_matrix = self.confidence_matrix
-        contact_matrix = self.contact_matrix
-        
-        iptm = self.iptm 
-        chain_pair_iptm_matrix = self.chain_pair_iptm_matrix 
-        sequence_names = self.sequence_info_dict[0]
-        
-        
-        interaction_link_dict = {}
-        for fasta_name, seq in rec_sequence_list:
-            if not fasta_name in interaction_link_dict:
-                interaction_link_dict[fasta_name] = []
-                
-        
-        interface_dict = {}
-        protein_interface_dict = {}
-        interface_count = 1
-        interface_group = contact_df.groupby(['interfaces'])
-        
-        
-                
-        for interface, interface_link in zip(interface_list, interface_link_list):
-            matrix_probability_interface = []
-            matrix_pmc_interface = []
-            link_count = 0
-            
-            interface_name = f'interface {interface_count}'
-            interface_id = f'I{interface_count}'
-            interface_count += 1
-            
-            if not interface_name in interface_dict:
-                interface_dict[interface_name] = {'prot_1':{'accesion_id':biomolecule_1, 'chain' : chain_dict[biomolecule_1], 'interface_range':interface[0]},
-                                            'prot_2':{'accesion_id':biomolecule_2, 'chain' : chain_dict[biomolecule_2], 'interface_range':interface[1]},
-                                            'links':interface_link,
-                                            'interface_id' : interface_id,
-                                            'interface_prob': float(),
-                                            'interface_pmc':float(),
-                                            'interface_score_iptm':float(),
-                                            'interface_score_pmc':float()}
-
-            for link in interface_link:
-                link_count +=1
-                link_id = f'L{link_count}'
-                
-                coord_link = map_link2coord(link, proteins_involved, entity_region_dict)
-                matrix_probability_link, link_probability = scoring.calculate_probability_contact_link(coord_link,contact_matrix)
-                matrix_pmc_link, pmc_link = scoring.calculate_pmc_link(coord_link, confidence_matrix)
-                
-                matrix_probability_interface.append(matrix_probability_link)
-                matrix_pmc_interface.append(matrix_pmc_link)
-                
-                for residue_range, prot in zip(link,proteins_involved):
-                    if not prot in interaction_link_dict:
-                        interaction_link_dict[prot]= []
-                    
-                    link_data = (residue_range, interface_name, link_count, link_id, link_probability)
-                    interaction_link_dict[prot].append(link_data)
-            
-            chain_pair_iptm = get_chain_pair_iptm_value(biomolecule_1, biomolecule_2, chain_pair_iptm_matrix, sequence_names)
-            
-            probability_contact_interface, contact_nr ,flatten_matrix_probability_interface = scoring.calculate_probability_contact_interface(matrix_probability_interface)
-            pmc_interface , flatten_matrix_pmc_interface = scoring.calculate_pmc_interface(matrix_pmc_interface)
-            interface_score_iptm, interface_score_pmc = scoring.calculate_interface_scores(probability_contact_interface, pmc_interface, chain_pair_iptm)
-            
-            interface_dict[interface_name]['interface_prob'] = probability_contact_interface
-            interface_dict[interface_name]['interface_pmc'] = pmc_interface
-            interface_dict[interface_name]['interface_score_iptm'] =interface_score_iptm
-            interface_dict[interface_name]['interface_score_pmc'] = interface_score_pmc
-            #scoring.plot_probability_histplot(probability_contact_interface,flatten_matrix_probability_interface)
-            
-            for index, protein_involved in enumerate(proteins_involved):
-                if not protein_involved in protein_interface_dict:
-                    protein_interface_dict[protein_involved] = {}
-                if not interface_name in protein_interface_dict[protein_involved]:
-                    protein_interface_dict[protein_involved][interface_name] = {'interface_range':interface[index]}
-            
-            
-        
-        return interface_dict, protein_interface_dict, interaction_link_dict'''
-    
-         
-        
+                 
     def get_interface_info_dataframes(self, interactions_dict):
         
         '''rec_sequence_list = self.rec_sequence_list
@@ -448,7 +363,7 @@ def map_residue_range(protein_region, submatrix_range, iteraction_range):
     delta_index = submatrix_range[0] - protein_region[0]
    
     start = iteraction_range.start + delta_index + 1
-    end = iteraction_range.stop  +  delta_index + 1
+    end = iteraction_range.stop  +  delta_index 
     
     return start, end
 
@@ -715,6 +630,29 @@ def convert_sets_to_lists(data):
         return list(data)
     else:  # For all other types, return as is
         return data
+def select_submatrix(matrix, row_range, col_range):
+    """
+    Safely selects a submatrix, handling single indices and ranges correctly.
+    
+    Parameters:
+        matrix (np.ndarray or np.matrix): Input matrix.
+        row_range (tuple): (row_start, row_end) (inclusive).
+        col_range (tuple): (col_start, col_end) (inclusive).
+    
+    Returns:
+        np.ndarray or np.matrix: The selected submatrix.
+    """
+    row_start, row_end = row_range
+    col_start, col_end = col_range
 
-    
-    
+    # Handle rows
+    if row_end < row_start:
+        raise ValueError("row_end must be >= row_start")
+    row_slice = slice(row_start, row_end + 1)  # +1 to include row_end
+
+    # Handle columns
+    if col_end < col_start:
+        raise ValueError("col_end must be >= col_start")
+    col_slice = slice(col_start, col_end + 1)  # +1 to include col_end
+
+    return matrix[row_slice, col_slice]

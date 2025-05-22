@@ -4,6 +4,5 @@
 data
 output
 runs
-test
 notebooks
 notebooks/*.ipynb
