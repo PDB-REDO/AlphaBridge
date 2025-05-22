@@ -7,14 +7,14 @@
             "graph": {},
             "nodes": [
                 {
-                    "label": "A (33-37) (69-73) (105-109) (143-147) (179-183) (215-219) (251-255) (294-298) (330-334)",
+                    "label": "A (np.int64(33)-np.int64(37)) (np.int64(69)-np.int64(73)) (np.int64(105)-np.int64(109)) (np.int64(143)-np.int64(147)) (np.int64(179)-np.int64(183)) (np.int64(215)-np.int64(219)) (np.int64(251)-np.int64(255)) (np.int64(294)-np.int64(298)) (np.int64(330)-np.int64(334))",
                     "label_asym_id": "A",
                     "color": "#8000ff",
                     "_igraph_index": 0,
                     "id": 0
                 },
                 {
-                    "label": "RNA_B (2-9)",
+                    "label": "RNA_B (np.int64(2)-np.int64(9))",
                     "label_asym_id": "B",
                     "color": "#ff0000",
                     "_igraph_index": 1,
@@ -75,14 +75,14 @@
             "graph": {},
             "nodes": [
                 {
-                    "label": "A (33-37) (69-73) (105-109) (144-147) (180-183) (215-219) (251-255) (294-298) (330-334)",
+                    "label": "A (np.int64(33)-np.int64(37)) (np.int64(69)-np.int64(73)) (np.int64(105)-np.int64(109)) (np.int64(144)-np.int64(147)) (np.int64(180)-np.int64(183)) (np.int64(215)-np.int64(219)) (np.int64(251)-np.int64(255)) (np.int64(294)-np.int64(298)) (np.int64(330)-np.int64(334))",
                     "label_asym_id": "A",
                     "color": "#8000ff",
                     "_igraph_index": 0,
                     "id": 0
                 },
                 {
-                    "label": "RNA_B (2-9)",
+                    "label": "RNA_B (np.int64(2)-np.int64(9))",
                     "label_asym_id": "B",
                     "color": "#ff0000",
                     "_igraph_index": 1,
@@ -143,14 +143,14 @@
             "graph": {},
             "nodes": [
                 {
-                    "label": "A (33-37) (69-73) (105-109) (144-147) (180-183) (215-219) (251-255) (294-298) (331-334)",
+                    "label": "A (np.int64(33)-np.int64(37)) (np.int64(69)-np.int64(73)) (np.int64(105)-np.int64(109)) (np.int64(144)-np.int64(147)) (np.int64(180)-np.int64(183)) (np.int64(215)-np.int64(219)) (np.int64(251)-np.int64(255)) (np.int64(294)-np.int64(298)) (np.int64(331)-np.int64(334))",
                     "label_asym_id": "A",
                     "color": "#8000ff",
                     "_igraph_index": 0,
                     "id": 0
                 },
                 {
-                    "label": "RNA_B (2-9)",
+                    "label": "RNA_B (np.int64(2)-np.int64(9))",
                     "label_asym_id": "B",
                     "color": "#ff0000",
                     "_igraph_index": 1,

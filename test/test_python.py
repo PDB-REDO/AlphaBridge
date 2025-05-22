@@ -19,14 +19,22 @@ class TestTemp(unittest.TestCase):
         for folder in self.source_dirs:
             dest_folder = os.path.join(self.temp_dir, folder.name)
             shutil.copytree(folder, dest_folder)
-            shutil.rmtree(os.path.join(dest_folder, 'AlphaBridge'))
+            alpha_bridge_path = os.path.join(dest_folder, 'AlphaBridge')
+            
+            if os.path.exists(alpha_bridge_path):
+                shutil.rmtree(alpha_bridge_path)
+            
             self.copied_dirs.append(dest_folder)
+        
+        self.addCleanup(self.cleanup)
             
     def test_example(self):
         self.assertTrue(os.path.exists(self.temp_dir))
+        print(self.copied_dirs)
 
-    #def tearDown(self):
-        #shutil.rmtree(self.temp_dir)
+    def cleanup(self):
+        if self.temp_dir.exists():
+            shutil.rmtree(self.temp_dir)
 
 if __name__ == '__main__':
     unittest.main()
