@@ -13,51 +13,6 @@ import  src.network.obtaining_colors as col
 
 #FUCNTION USED IN NETWORK WITH NOT MERGIN NODES AND THE PROTEIN==NODE NETWORK
 
-#formatting labels --> display the label nodes as "protein name (form aa,to aa) (form aa,to aa)""
-
-def formatting_labels(s):
-    parts = s.split(" ")
-    result = [parts[0]]  
-    temp_list = []
-
-    for part in parts[1:]:  
-        temp_list.append(part[:-1])
-    for i in range(len(temp_list)-1):
-        if i%2 == 0:
-            temp_list[i]=temp_list[i].strip("(")
-            if temp_list[i] == temp_list[i+1]:
-                result.append(f"({temp_list[i] })")
-            else:
-                result.append(f"({temp_list[i]}-{temp_list[i+1]})")
-    return " ".join(result)
-
-#all the intervals that belong to the same interface --> togheter
-
-def create_new_column_interface_intervals_no_merge(df):
-    grouped = df.groupby(["interface"])
-    
-    # List for intervals for each interface (start_1, end_1)
-    interface_intervals_1 = [None] * len(df)
-    for _, group in grouped:
-        # Convert to a list of tuples
-        intervals = [tuple(x) for x in group[["start_1", "end_1"]].drop_duplicates().values]
-        for idx in group.index:
-            interface_intervals_1[idx] = intervals
-    df["interface_intervals_1"] = interface_intervals_1
-
-    grouped = df.groupby(["interface"])
-    
-    # List for intervals for each interface (start_2, end_2)
-    interface_intervals_2 = [None] * len(df)
-    for _, group in grouped:
-        # Convert to a list of tuples
-        intervals = [tuple(x) for x in group[["start_2", "end_2"]].drop_duplicates().values]
-        for idx in group.index:
-            interface_intervals_2[idx] = intervals
-    df["interface_intervals_2"] = interface_intervals_2
-
-    return df
-
 def extract_asym_id(s):
     return s.split(' ')[0]
 
