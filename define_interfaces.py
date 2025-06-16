@@ -96,7 +96,7 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
     
     matrix_dict = FEATURE_OBJECT.extract_matrix_dict()
     contact_matrix =  matrix_dict['contact_matrix']
-    confidance_matrix = matrix_dict['pae_plddt']
+    confidence_matrix = matrix_dict['pae_plddt']
     iptm = matrix_dict['iptm']
     chain_pair_iptm_matrix = matrix_dict['chain_pair_iptm'] 
 
@@ -121,7 +121,7 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
                                                             sequence_info_dict,
                                                             iptm,
                                                             chain_pair_iptm_matrix,
-                                                            confidance_matrix,
+                                                            confidence_matrix,
                                                             contact_matrix,
                                                             contact_threshold)
 
