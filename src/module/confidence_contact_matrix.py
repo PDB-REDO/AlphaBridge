@@ -185,6 +185,18 @@ class CCM_AF3(FEATURE_MATRIX):
         
         self.sample = sample
     
+    def check_if_alphabridge_server(self):
+        
+        folder_path = self.in_dir
+        
+        server_source_path = os.path.join(folder_path, 'server_source')
+
+        # Check if server source file exists
+        if not os.path.isfile(server_source_path):
+            return False
+        else:
+            return True
+    
     def check_alphafold_dialect(self):
         
         folder_path = self.in_dir
@@ -209,61 +221,74 @@ class CCM_AF3(FEATURE_MATRIX):
         sample = self.sample
         
         if self.check_if_path_exist(folder_path):
-        
-            if self.check_alphafold_dialect():
-                
-                feature_path = [file  for file in list(Path(folder_path).glob( "*_confidences.json")) if not'_summary_confidences' in str(file)][0]
-                structure_path = list(Path(folder_path).glob( "*model.cif"))[0]
-                job_request_path = list(Path(folder_path).glob("*data.json"))[0]
-                summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
             
+            if not self.check_if_alphabridge_server():
+        
+                if self.check_alphafold_dialect():
+                    
+                    feature_path = [file  for file in list(Path(folder_path).glob( "*_confidences.json")) if not'_summary_confidences' in str(file)][0]
+                    structure_path = list(Path(folder_path).glob( "*model.cif"))[0]
+                    job_request_path = list(Path(folder_path).glob("*data.json"))[0]
+                    summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
+                    alphafold_dialect = 'AlphaFold_local'
+                    
+                else:
+            
+                    feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
+                    structure_path = list(Path(folder_path).glob( f"*model_{sample}.cif"))[0]
+                    job_request_path = list(Path(folder_path).glob(f"*job_request.json"))[0]
+                    summary_request_path = list(Path(folder_path).glob(f"*summary_confidences_{sample}.json"))[0]
+                    alphafold_dialect = 'AlphaFold_server'
             else:
-        
-                feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
-                structure_path = list(Path(folder_path).glob( f"*model_{sample}.cif"))[0]
+                
+                server_source_path = os.path.join(folder_path, 'server_source')
+                
+                feature_path = list(Path(folder_path).glob( f"*confidence_metrics.json"))[0]
+                structure_path = list(Path(folder_path).glob( f"*structure.cif"))[0]
                 job_request_path = list(Path(folder_path).glob(f"*job_request.json"))[0]
-                summary_request_path = list(Path(folder_path).glob(f"*summary_confidences_{sample}.json"))[0]
-        
-            return feature_path, structure_path, job_request_path, summary_request_path
+                summary_request_path = list(Path(folder_path).glob(f"*summary_metrics.json"))[0]
+                
+                with open(server_source_path, 'r') as file:
+                    alphafold_dialect = file.read().strip()
+                
+            return feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect
     
-    def extract_rec_list(self, job_request_path, structure_sequence_list, feature_dict):
+    def extract_rec_list(self, job_request_path, structure_sequence_list, feature_dict, alphafold_dialect):
 
         request_file = read_json_file(job_request_path)
-        
-        if self.check_alphafold_dialect():
+        if alphafold_dialect == 'AlphaFold_local':
             #print(structure_sequence_list)
             rec_list = RECORD_AF3(request_file, structure_sequence_list, feature_dict).process_record_file()
-        else:
+        elif alphafold_dialect == 'AlphaFold_server':
             rec_list = RECORD_SERVER(request_file, structure_sequence_list, feature_dict).process_record_file()
+        else:
+            raise NotImplementedError('Format File not Valid')
                        
         return rec_list
     
-    def extract_job_id_name(self, job_request_path):
+    def extract_job_id_name(self, job_request_path, alphafold_dialect):
         
         request_file = read_json_file(job_request_path)
         
-        if self.check_alphafold_dialect():
-            
-            job_id_name = job_id_name = request_file['name']
+        if alphafold_dialect == 'AlphaFold_local':
+            job_id_name = request_file['name']
         
-        else:
-            
+        elif alphafold_dialect == 'AlphaFold_server':
             job_id_name = request_file[0]['name']
-        
+
         return job_id_name
-            
-        
+
     def extract_sequence_info(self):
-        
-        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
-        
+
+        feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect = self.extract_feature_filepath()
+
         structure = MMCIFPARSER(structure_path)
         
         feature_dict = read_json_file(feature_path)
         
         structure_sequence_list = structure.get_sequence_list()
         
-        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict)
+        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict, alphafold_dialect)
         
         sequence_info_dict = self.extract_sequence_info_dict(feature_dict, rec_list)
      
@@ -335,7 +360,7 @@ class CCM_AF3(FEATURE_MATRIX):
     
     def get_plddt_dict(self):
         #will need to be changed again
-        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
+        feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect = self.extract_feature_filepath()
         
         structure = MMCIFPARSER(structure_path) 
         
@@ -408,7 +433,7 @@ class CCM_AF3(FEATURE_MATRIX):
     
     def get_feature_info(self):                                                                                                                                                                                                                                    
         
-        feature_path, structure_path, job_request_path, summary_request_path = self.extract_feature_filepath()
+        feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect = self.extract_feature_filepath()
         
         structure = MMCIFPARSER(structure_path)
         
@@ -416,7 +441,7 @@ class CCM_AF3(FEATURE_MATRIX):
         
         feature_dict = read_json_file(feature_path)
         
-        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict)
+        rec_list = self.extract_rec_list(job_request_path, structure_sequence_list, feature_dict, alphafold_dialect)
         
         summary_request_dict =  read_json_file(summary_request_path)
 
