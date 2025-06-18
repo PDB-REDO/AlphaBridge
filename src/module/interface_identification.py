@@ -235,14 +235,13 @@ class interface_identification():
                     interface_dict['PDE'] = probability_contact_interface
                     interface_dict['PMC'] = pmc_interface
                     interface_dict['contact_iptm_score'] = interface_score_iptm
-                    interface_dict['ABi_score'] = interface_score_pmc
+                    interface_dict['PICS_score'] = interface_score_pmc
                     interactions_dict['interfaces'].append(interface_dict)
-                    
-            
+
         return interactions_dict
-    
+
     def map_info_interfaces(self, interactions_dict):
-        
+
         biomolecule_interface_dict = {}
         for interface in interactions_dict['interfaces']:
             interface_id = interface['interface_id']
@@ -303,6 +302,7 @@ class interface_identification():
             'PMC':float(),
             'iptm': float(),
             'contact_iptm':float(),
+            'PICS':float(),
             'AB_score':float(),
             'chains': chain_info_dict
             }
@@ -313,7 +313,7 @@ class interface_identification():
         scores_structure_dict['PDE'] = probability_contact_structure
         scores_structure_dict['iptm'] = iptm
         scores_structure_dict['contact_iptm'] = structure_score_iptm
-        scores_structure_dict['AB_score'] = structure_score_pmc
+        scores_structure_dict['PICS'] = structure_score_pmc
         
 
         #structure_scores_df = get_structure_scores_df(scores_structure_dict)
