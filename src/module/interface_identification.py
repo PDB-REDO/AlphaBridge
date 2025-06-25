@@ -189,7 +189,7 @@ class interface_identification():
                         "PDE": float(),
                         "PMC":  float(),
                         "contact_iptm_score": float() ,
-                        "ABi_score": float() ,
+                        #"ABi_score": float() ,
                         'links' : []
                             }
                     
