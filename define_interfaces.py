@@ -87,9 +87,9 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
         
             FEATURE_OBJECT = CCM_AF3(in_dir, sample)
             
-            feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
+            feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect = FEATURE_OBJECT.extract_feature_filepath()
             chain_info_dict, sequence_info_dict = FEATURE_OBJECT.extract_chain_info_dict()
-            job_id_name = FEATURE_OBJECT.extract_job_id_name(job_request_path)
+            job_id_name = FEATURE_OBJECT.extract_job_id_name(job_request_path, alphafold_dialect)
             
     else:
         raise  NotImplementedError("Output from AF2 or ColabFold not implemented yet")

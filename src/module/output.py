@@ -1,6 +1,7 @@
 from itertools import chain, repeat, count, islice
 from collections import Counter
-
+import numpy as np
+import math
 
 class OUTPUT:
     
@@ -62,10 +63,30 @@ class OUTPUT:
         
         return pairwise_combination_list
     
+    def calculate_alphabridge_score(self, combination_list):
+        """
+        Calculate the AlphaBridge score based on the pairwise score.
+        This is a placeholder for the actual scoring logic.
+        """
+        
+        alphabridge_score = float()
+        pairwise_scores = [combination['pairwise_score'] for combination in combination_list]
+        
+        if not pairwise_scores:
+            alphabridge_score = float()
+        else:
+            alphabridge_score = math.prod(pairwise_scores) ** (1/len(pairwise_scores))
+
+        # Example scoring logic (to be replaced with actual logic)
+        return alphabridge_score
+
+
     def get_alphabridge_dict(self):
+        pairwise_scores = self.get_pairwise_scores()
         
-        self.structure_score_dict['pairwise_interaction'] = self.get_pairwise_scores()
-        
+        self.structure_score_dict['pairwise_interaction'] = pairwise_scores
+        self.structure_score_dict['AB_score'] = self.calculate_alphabridge_score(pairwise_scores)
+
         alphabridge_dict = {
         "structure": [self.structure_score_dict],
         "interactions" : self.interactions_list

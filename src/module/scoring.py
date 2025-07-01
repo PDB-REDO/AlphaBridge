@@ -49,9 +49,9 @@ def calculate_pmc_interface(matrix_pmc_interface):
     
 def calculate_interface_scores(interface_probability, pmc_interface, chain_pair_iptm):
     
-    interface_score_iptm = interface_probability * chain_pair_iptm
-    interface_score_pmc = interface_probability * pmc_interface
-    
+    interface_score_iptm = np.sqrt(interface_probability * chain_pair_iptm)
+    interface_score_pmc =  np.sqrt(interface_probability * pmc_interface)
+
     return interface_score_iptm, interface_score_pmc
 
 def calculate_scores_stucture(probability_structure_list, pmc_structure_list, iptm):
@@ -79,8 +79,8 @@ def calculate_scores_stucture(probability_structure_list, pmc_structure_list, ip
         
         pmc_structure = np.mean(flattened_pmc_structure_list)
         
-        structure_score_iptm = probability_contact_structure * iptm
-        structure_score_pmc = probability_contact_structure * pmc_structure
+        structure_score_iptm = np.sqrt(probability_contact_structure * iptm)
+        structure_score_pmc = np.sqrt(probability_contact_structure * pmc_structure)
         
     #plot_probability_histplot(quantile,probability_contact_structure, flattened_probability_structure, flattened_pmc_structure_list)
     
