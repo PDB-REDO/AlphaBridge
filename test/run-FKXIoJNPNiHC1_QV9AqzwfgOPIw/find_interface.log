@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/maarten/projects/find_interface-test//define_interfaces.py", line 185, in <module>
+    main()
+  File "/home/maarten/projects/find_interface-test//define_interfaces.py", line 178, in main
+    define_interfaces(in_dir,outdir,mode,sample,plotting)
+  File "/home/maarten/projects/find_interface-test//define_interfaces.py", line 90, in define_interfaces
+    feature_path, structure_path, job_request_path, summary_request_path = FEATURE_OBJECT.extract_feature_filepath()
+  File "/home/maarten/projects/find_interface-test/src/module/confidence_contact_matrix.py", line 222, in extract_feature_filepath
+    feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
+IndexError: list index out of range
