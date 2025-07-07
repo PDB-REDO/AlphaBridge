@@ -63,29 +63,16 @@ class OUTPUT:
         
         return pairwise_combination_list
     
-    def calculate_alphabridge_score(self, combination_list):
-        """
-        Calculate the AlphaBridge score based on the pairwise score.
-        This is a placeholder for the actual scoring logic.
-        """
-        
-        alphabridge_score = float()
-        pairwise_scores = [combination['pairwise_score'] for combination in combination_list]
-        
-        if not pairwise_scores:
-            alphabridge_score = float()
-        else:
-            alphabridge_score = math.prod(pairwise_scores) ** (1/len(pairwise_scores))
-
-        # Example scoring logic (to be replaced with actual logic)
-        return alphabridge_score
-
+    
 
     def get_alphabridge_dict(self):
+        
+        label_asym_id_list = [chain['label_asym_id'] for polymer_type in self.structure_score_dict['chains'] for chain in self.structure_score_dict['chains'][polymer_type]]
+        
         pairwise_scores = self.get_pairwise_scores()
         
         self.structure_score_dict['pairwise_interaction'] = pairwise_scores
-        self.structure_score_dict['AB_score'] = self.calculate_alphabridge_score(pairwise_scores)
+        self.structure_score_dict['AB_score'] = calculate_alphabridge_score(pairwise_scores, label_asym_id_list)
 
         alphabridge_dict = {
         "structure": [self.structure_score_dict],
@@ -120,3 +107,30 @@ def unique_combinations_from_value_counts(values, counts, r):
 def unique_combinations(iterable, r):
     values, counts = zip(*Counter(iterable).items())
     return unique_combinations_from_value_counts(values, counts, r)
+
+def calculate_alphabridge_score(combination_list, label_asym_id_list):
+    """
+    Calculate the AlphaBridge score based on the pairwise score.
+    This is a placeholder for the actual scoring logic.
+    """
+    alphabridge_score = float()
+        
+    if not combination_list:
+        return alphabridge_score
+
+    else:
+        interacting_partners = [combination for combination in combination_list if combination['pairwise_score'] > 0]
+
+        interacting_asym_id_list = []
+        for interacting_partner in interacting_partners:
+            interacting_asym_id_list.append(interacting_partner['first'])
+            interacting_asym_id_list.append(interacting_partner['second'])
+
+        non_interacting_asym_id_list = list(set(label_asym_id_list) - set(interacting_asym_id_list))
+        
+        if not non_interacting_asym_id_list:
+            
+            pairwise_scores = [combination['pairwise_score'] for combination in interacting_partners]
+            alphabridge_score = math.prod(pairwise_scores) ** (1/len(pairwise_scores))
+            
+    return alphabridge_score
