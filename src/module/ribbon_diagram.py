@@ -249,7 +249,7 @@ class RIBBON_DIAGRAM:
         
         outdir = self.outdir
         contact_threshold = self.contact_threshold
-        filename = f'{outdir}/{contact_threshold}_ribbon_plot.png'
+        filename = f'{outdir}/{contact_threshold}_ribbon_plot.pdf'
         
         fig = circos.plotfig()
         plddt_color_list = ['#0053d6','#65cbf3','#ffdb13', '#ff7d45']
@@ -279,9 +279,9 @@ def get_interface2color(interfaces_list):
         cmap = get_distinct_colors(interface_nr)
         #cmap = colormaps['tab20']  # matplotlib color palette name, n colors
         #cmap = distinctipy.get_colors(interface_nr)    
-        #color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
+        color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
         #reord_color_list = color_list[::2] + color_list[1::2]
-        color_list = [rgb2hex(rgb) for rgb in cmap]
+        #color_list = [rgb2hex(rgb) for rgb in cmap]
         #interface2color = {name:reord_color_list[index]  for index,name in enumerate(interfaces_list)}
         interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
         return interface2color
