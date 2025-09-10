@@ -296,15 +296,15 @@ class NUCLEOTIDE(POLYMER):
         
         if 'modifications' in self.record:
             
-            raise NotImplementedError("FOUND MODIFIED NUCLEOTIDE; Modified nucleotides are not yet supported")
-        
+            if self.record['modifications']:
+                raise NotImplementedError("FOUND MODIFIED NUCLEOTIDE; Modified nucleotides are not yet supported")
+
         return rec_info
-            
-            
+
 class NON_POLYMER():
-    
+
     def __init__(self, macromolecule_type, record):
-    
+
         self.macromolecule_type = macromolecule_type
         self.record = record
         self.non_poly_entity = record[macromolecule_type].replace('CCD_', '') if record[macromolecule_type].startswith('CCD_') else record[macromolecule_type]  
