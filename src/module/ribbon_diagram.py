@@ -95,6 +95,8 @@ class RIBBON_DIAGRAM:
         chain_info_dict = self.chain_info_dict
         biomolecule_interface_dict = self.biomolecule_interface_dict
         interactions_dict = self.interactions_dict
+        
+        interface_interaction_chain = {}
        
         plddt_dict = self.get_plddt_dict()
         label2auth = get_label2auth(chain_info_dict)
@@ -110,6 +112,10 @@ class RIBBON_DIAGRAM:
         
         interfaces_list = [interface['interface_id'] for interface in interactions_dict['interfaces']]
         
+        for interface in interactions_dict['interfaces']:
+            chain_interaction = interface['links'][0]['first']['asym_id'] + interface['links'][0]['second']['asym_id']
+            interface_interaction_chain[interface['interface_id']] = chain_interaction
+        
         
         #biomolecule_interface_dict = self.biomolecule_interface_dict
         #interface_dict = self.interface_dict
@@ -124,7 +130,7 @@ class RIBBON_DIAGRAM:
         sm_conservation = plt.cm.ScalarMappable(cmap=cmap_conservation, norm=norm_conservation)    
         
         start_time = time.time()
-        interface2color = get_interface2color(interfaces_list)
+        interface2color = get_interface2color(interfaces_list, interface_interaction_chain)
         
         end_time = time.time()
         elapsed_time = end_time - start_time
@@ -141,7 +147,7 @@ class RIBBON_DIAGRAM:
             
             poly_type = poly_type_dict[auth_asym_id]
             
-            tracks_position_list = [(75, 85), (88,93), (95, 100)]
+            tracks_position_list = [(69, 79), (82,90), (90, 100)]
             
             plddt_list = plddt_dict[auth_asym_id]
             
@@ -194,7 +200,7 @@ class RIBBON_DIAGRAM:
                             interface_range = [1, sectors[auth_asym_id] + 1]
                             
                             degree_range = [degrees(sector.x_to_rad(residue_number - 1)) for residue_number in interface_range] 
-                            circos.rect(r_lim=(75, 85), deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
+                            circos.rect(r_lim=tracks_position_list[0], deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
                            
                         else:
                             
@@ -203,7 +209,7 @@ class RIBBON_DIAGRAM:
                             for interface_range in interface_range_list:
                                 
                                 degree_range = [degrees(sector.x_to_rad(residue_number - 1)) for residue_number in interface_range] 
-                                circos.rect(r_lim=(75, 85), deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
+                                circos.rect(r_lim=tracks_position_list[0], deg_lim=(degree_range[0], degree_range[1]),fc=interface2color[interface_id], ec="black", lw=0.5)
                                
 
             
@@ -229,9 +235,13 @@ class RIBBON_DIAGRAM:
                                                      poly_type_dict, 
                                                      self.boolean_modified_non_poly_length) for interaction in (interaction_1, interaction_2))
                                 
-                
-                circos.link(bridge_1,bridge_2, 
-                            color=color, alpha = 0.25)
+                chain_interaction = biomolecule_1 + biomolecule_2
+                if chain_interaction in ['AC', 'BC']:
+                    circos.link(bridge_1,bridge_2, 
+                                color=color, alpha = 0.55)
+                else:
+                    circos.link(bridge_1,bridge_2, 
+                                color=color, alpha = 0.07)
         
         return circos
     
@@ -249,7 +259,7 @@ class RIBBON_DIAGRAM:
         
         outdir = self.outdir
         contact_threshold = self.contact_threshold
-        filename = f'{outdir}/{contact_threshold}_ribbon_plot.png'
+        filename = f'{outdir}/{contact_threshold}_ribbon_plot.pdf'
         
         fig = circos.plotfig()
         plddt_color_list = ['#0053d6','#65cbf3','#ffdb13', '#ff7d45']
@@ -273,17 +283,32 @@ class RIBBON_DIAGRAM:
         
         
         
-def get_interface2color(interfaces_list):
+def get_interface2color(interfaces_list, interface_interaction_chain):
         interface_nr = len(interfaces_list)
 
         cmap = get_distinct_colors(interface_nr)
+        
         #cmap = colormaps['tab20']  # matplotlib color palette name, n colors
         #cmap = distinctipy.get_colors(interface_nr)    
         #color_list = [rgb2hex(cmap(i)[:3]) for i in range(cmap.N)]
         #reord_color_list = color_list[::2] + color_list[1::2]
-        color_list = [rgb2hex(rgb) for rgb in cmap]
+        #color_list = [rgb2hex(rgb) for rgb in cmap]
         #interface2color = {name:reord_color_list[index]  for index,name in enumerate(interfaces_list)}
-        interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
+        
+        #interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
+        
+        #interface2color = {name:color_list[index]  for index,name in enumerate(interfaces_list)}
+        interface2color = {}
+        for index,name in enumerate(interfaces_list):
+            
+            if interface_interaction_chain[name] == 'AC':
+                interface2color[name] = "#258836" #green
+            elif interface_interaction_chain[name] == 'BC':
+                interface2color[name] = "#6c3d8b" #purple
+            else:
+                interface2color[name] = "#d2d2d288"
+                
+        
         return interface2color
              
         
