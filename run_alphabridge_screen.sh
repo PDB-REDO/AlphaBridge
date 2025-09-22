@@ -46,7 +46,7 @@ while [[ $# -gt 0 ]]; do
             shift 2
             ;;
         --skip-existing)
-            SKIP_EXISTING=false
+            SKIP_EXISTING=true
             shift
             ;;
         --plot)
