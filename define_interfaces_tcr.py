@@ -18,10 +18,10 @@ from src.module.output import OUTPUT
 from src.network.network_int  import INTERACTIVE_NETWORK
 
 import argparse 
-
+import time
 working_dir = os.path.dirname(os.path.realpath(__file__))
 
-
+choices = [1,2,3,4,5]
 
 def parse_args():
     #####################
@@ -83,12 +83,12 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
     #print(plotting)
     samples = [0,1,2,3,4]
     seeds = [1,2,3,4,5]
-    
+    start_time = time.perf_counter()
     full_alphabridge_dict = {}
     
     for seed in seeds:
         for sample in samples:
-    
+            print(seed, sample)
             if mode == 'AF3':
                 
                     FEATURE_OBJECT = CCM_AF3(in_dir, sample=sample, seed=seed)
@@ -111,10 +111,10 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
                                                                                         sequence_info_dict,
                                                                                         alphafold_version=mode,
                                                                                         outdir = outdir, 
-                                                                                        plotting=True).run_domain_clustering()
-            
-            start, stop, step = 0.4, 1.0, 0.001
-            num = int(round((stop - start) / step)) + 1  
+                                                                                        plotting=False).run_domain_clustering()
+
+            start, stop, step = 0.4, 1.0, 0.01
+            num = int(round((stop - start) / step)) + 1
             elements = np.linspace(start, stop, num).tolist()
             contact_threshold_list = [round(x, 3) for x in elements]
 
@@ -161,7 +161,10 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
 
     with open(f"{outdir}/tcr_alphabridge_data.json", "w") as file:
         file.write(json.dumps(full_alphabridge_dict, indent=4))
-    
+
+    end_time = time.perf_counter()
+    elapsed = end_time - start_time
+    #print(f"Double loop finished in {elapsed:.6f} seconds")
     #with open(f"{outdir}/network_data.json", "w") as file:
         #file.write(json.dumps(network_info, indent=4))
     
