@@ -175,33 +175,50 @@ class FEATURE_MATRIX:
                                    )
                         )
 
+
 class CCM_AF3(FEATURE_MATRIX):
-    
-    def __init__(self, 
-                 in_dir, 
-                 sample: int = 0):
-        
+    """
+    CCM_AF3 extends FEATURE_MATRIX to provide functionality for handling samples.
+
+    Parameters
+    ----------
+    in_dir : str | Path
+        Input directory path.
+    sample : int, optional
+        Explicit sample index to use (mutually exclusive with sample_mode).
+    sample_mode : str, optional
+        Currently only supports "best".
+        Defaults to 'best' if neither is provided.
+    seed : int, optional
+        Optional seed used for local samples.
+    """
+
+    def __init__(self, in_dir: str, sample: int | None = None, sample_mode: str | None = None, seed: int | None = None):
         super().__init__(in_dir)
-        
+
+        # Ensure mutual exclusivity
+        if sample is not None and sample_mode is not None:
+            raise ValueError("Cannot set both 'sample' and 'sample_mode'. Pick one.")
+
+        # Default mode
+        if sample is None and sample_mode is None:
+            sample_mode = "best"
+
+        if sample_mode is not None and sample_mode != "best":
+            raise ValueError("Currently only 'best' sample_mode is supported.")
+
         self.sample = sample
+        self.sample_mode = sample_mode
+        self.seed = seed
+
     
     def check_if_alphabridge_server(self):
-        
-        folder_path = self.in_dir
-        
-        server_source_path = os.path.join(folder_path, 'server_source')
-
-        # Check if server source file exists
-        if not os.path.isfile(server_source_path):
-            return False
-        else:
-            return True
+        server_source_path = Path(self.in_dir) / "server_source"
+        return server_source_path.is_file()
     
     def check_alphafold_dialect(self):
         
-        folder_path = self.in_dir
-        
-        job_request_path = list(Path(folder_path).glob( "*_data.json"))
+        job_request_path = list(Path(self.in_dir).glob("*_data.json"))
         
         if not job_request_path:
             return False
@@ -213,12 +230,89 @@ class CCM_AF3(FEATURE_MATRIX):
                 return True
             else:
                 raise NotImplementedError('Format File not Valid')
-
     
     def extract_feature_filepath(self):
+        folder_path = Path(self.in_dir)
+
+        if not folder_path.exists():
+            raise FileNotFoundError(f"Input directory does not exist: {folder_path}")
+
+        if self.check_if_alphabridge_server():
+            return self._server_feature_paths(folder_path)
+        else:
+            return self._local_feature_paths(folder_path)
+    
+    def _local_feature_paths(self, folder_path: Path):
+        # Determine dialect
+        if self.check_alphafold_dialect():
+            dialect = "AlphaFold_local"
+
+            if self.sample_mode is not None:
+                # Example: handle "best" mode
+                if self.sample_mode == "best":
+                    feature_path = next((p for p in folder_path.glob("*_confidences.json") if "_summary_confidences" not in str(p)), None)
+                    structure_path = next(folder_path.glob("*model.cif"), None)
+                    job_request_path = next(folder_path.glob("*data.json"), None)
+                    summary_request_path = next(folder_path.glob("*summary_confidences*.json"), None)
+                else:
+                    raise NotImplementedError(f"Sample mode '{self.sample_mode}' not implemented for local dialect")
+            else:
+                if self.seed is None or self.sample is None:
+                    raise ValueError("Both 'seed' and 'sample' must be provided for explicit sample selection")
+                
+                folder_seed_path = folder_path / f"seed-{self.seed}_sample-{self.sample}"
+                feature_path = next(folder_seed_path.glob("confidences.json"), None)
+                structure_path = next(folder_seed_path.glob("model.cif"), None)
+                summary_request_path = next(folder_seed_path.glob("summary_confidences.json"), None)
+                job_request_path = next(folder_path.glob("*data.json"), None)
+                
+                
+        else:
+            dialect = "AlphaFold_server"
+            if self.seed is not None:
+                raise ValueError("Cannot set 'seed' when using 'AlphaFold_server' dialect")
+            
+            sample = self.sample if self.sample is not None else 0
+            feature_path = next(folder_path.glob(f"*full_data_{sample}.json"), None)
+            structure_path = next(folder_path.glob(f"*model_{sample}.cif"), None)
+            job_request_path = next(folder_path.glob("*job_request.json"), None)
+            summary_request_path = next(folder_path.glob(f"*summary_confidences_{sample}.json"), None)
+            
+            
+
+        # Check all files exist
+        for path, desc in [(feature_path, "feature"), (structure_path, "structure"),
+                           (job_request_path, "job_request"), (summary_request_path, "summary")]:
+            if path is None:
+                raise FileNotFoundError(f"{desc} file not found in {folder_path}")
+
+        return feature_path, structure_path, job_request_path, summary_request_path, dialect
+    
+    def _server_feature_paths(self, folder_path: Path):
+        dialect_file = folder_path / "server_source"
+        dialect = dialect_file.read_text().strip() if dialect_file.exists() else "Unknown"
+
+        feature_path = next(folder_path.glob("*confidence_metrics.json"), None)
+        structure_path = next(folder_path.glob("*structure.cif"), None)
+        job_request_path = next(folder_path.glob("*job_request.json"), None)
+        summary_request_path = next(folder_path.glob("*summary_metrics.json"), None)
+
+        for path, desc in [(feature_path, "feature"), (structure_path, "structure"),
+                           (job_request_path, "job_request"), (summary_request_path, "summary")]:
+            if path is None:
+                raise FileNotFoundError(f"{desc} file not found in server folder {folder_path}")
+
+        return feature_path, structure_path, job_request_path, summary_request_path, dialect
+
+        
+        
+    
+    '''def extract_feature_filepath(self):
         
         folder_path = self.in_dir
         sample = self.sample
+        sample_mode = self.sample_mode
+        seed = self.seed
         
         if self.check_if_path_exist(folder_path):
             
@@ -226,19 +320,47 @@ class CCM_AF3(FEATURE_MATRIX):
         
                 if self.check_alphafold_dialect():
                     
-                    feature_path = [file  for file in list(Path(folder_path).glob( "*_confidences.json")) if not'_summary_confidences' in str(file)][0]
-                    structure_path = list(Path(folder_path).glob( "*model.cif"))[0]
-                    job_request_path = list(Path(folder_path).glob("*data.json"))[0]
-                    summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
                     alphafold_dialect = 'AlphaFold_local'
                     
+                    if sample_mode is None:
+                        
+                        job_request_path = list(Path(folder_path).glob("*data.json"))[0]
+                        
+                        folder_seed_path = os.path.join(folder_path, f'seed-{seed}_sample-{sample}') 
+                        
+                        feature_path = list(Path(folder_seed_path).glob( "confidences.cif"))[0]
+                        structure_path = list(Path(folder_seed_path).glob( "model.cif"))[0]
+                        summary_request_path = list(Path(folder_seed_path).glob("summary_confidences*.json"))[0]
+                        
+                    
+                    elif sample_mode == 'best':
+                    
+                        feature_path = [file  for file in list(Path(folder_path).glob( "*_confidences.json")) if not'_summary_confidences' in str(file)][0]
+                        structure_path = list(Path(folder_path).glob( "*model.cif"))[0]
+                        job_request_path = list(Path(folder_path).glob("*data.json"))[0]
+                        summary_request_path = list(Path(folder_path).glob("*summary_confidences*.json"))[0]
+                        
+                    
                 else:
+                    
+                    alphafold_dialect = 'AlphaFold_server'
+                    
+                    if seed is not None:
+
+                        raise ValueError("Cannot set 'seed' when using 'AlphaFold_server' dialect.")
+
+                    if sample_mode is None:
+                        pass
+                    
+                    elif sample_mode == 'best':
+                        
+                        sample = 0
             
                     feature_path = list(Path(folder_path).glob( f"*full_data_{sample}.json"))[0]
                     structure_path = list(Path(folder_path).glob( f"*model_{sample}.cif"))[0]
                     job_request_path = list(Path(folder_path).glob(f"*job_request.json"))[0]
                     summary_request_path = list(Path(folder_path).glob(f"*summary_confidences_{sample}.json"))[0]
-                    alphafold_dialect = 'AlphaFold_server'
+                    
             else:
                 
                 server_source_path = os.path.join(folder_path, 'server_source')
@@ -251,7 +373,7 @@ class CCM_AF3(FEATURE_MATRIX):
                 with open(server_source_path, 'r') as file:
                     alphafold_dialect = file.read().strip()
                 
-            return feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect
+            return feature_path, structure_path, job_request_path, summary_request_path, alphafold_dialect'''
     
     def extract_rec_list(self, job_request_path, structure_sequence_list, feature_dict, alphafold_dialect):
 
