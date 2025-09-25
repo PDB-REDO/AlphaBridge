@@ -88,7 +88,7 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
     
     for seed in seeds:
         for sample in samples:
-            print(seed, sample)
+            #print(seed, sample)
             if mode == 'AF3':
                 
                     FEATURE_OBJECT = CCM_AF3(in_dir, sample=sample, seed=seed)
