@@ -4,5 +4,6 @@
 data
 output
 runs
+src/Components-rel-alt.cif
 notebooks
 notebooks/*.ipynb
