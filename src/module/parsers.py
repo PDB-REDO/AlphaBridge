@@ -297,6 +297,36 @@ class MMCIFPARSER:
     
     def get_3_to_1_protein_letters_dict(self):
         
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        
+        file_path = os.path.join(parent_dir, 'Components-rel-alt_mod.cif')
+        
+        protein_letters_3to1_extended = IUPACData.protein_letters_3to1_extended
+        
+        non_canonical_aa_3to1_list = CifFileReader().read(file_path)
+        
+        non_canonical_aa_3to1 = {}
+        
+        for _, item in non_canonical_aa_3to1_list.items():
+            chem_comp = item.get('_chem_comp', {})
+            three_letter = chem_comp.get('three_letter_code', '').upper()
+            one_letter = chem_comp.get('one_letter_code', '').upper()
+
+            # Replace unknown or missing codes with 'X'
+            if not one_letter or one_letter in {'?', '.'}:
+                one_letter = 'X'
+
+            if three_letter:
+                non_canonical_aa_3to1[three_letter] = one_letter
+
+        upper_protein_letters_3to1 = {k.upper():v.upper() for k,v in protein_letters_3to1_extended.items()}
+
+        upper_protein_letters_3to1_extended = {**upper_protein_letters_3to1, **non_canonical_aa_3to1}
+        
+        return upper_protein_letters_3to1_extended
+    
+    '''def get_3_to_1_protein_letters_dict(self):
+        
         
         parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         
@@ -312,7 +342,7 @@ class MMCIFPARSER:
         
         upper_protein_letters_3to1_extended = {**upper_protein_letters_3to1, **non_canonical_aa_3to1}
         
-        return upper_protein_letters_3to1_extended
+        return upper_protein_letters_3to1_extended'''
 
 class PDBPARSER:
         

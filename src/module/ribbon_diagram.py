@@ -249,7 +249,7 @@ class RIBBON_DIAGRAM:
         
         outdir = self.outdir
         contact_threshold = self.contact_threshold
-        filename = f'{outdir}/{contact_threshold}_ribbon_plot.png'
+        filename = f'{outdir}/{contact_threshold}_ribbon_plot.pdf'
         
         fig = circos.plotfig()
         plddt_color_list = ['#0053d6','#65cbf3','#ffdb13', '#ff7d45']

@@ -24,22 +24,31 @@ class RECORD():
         token_chain_ids = np.unique(feature_dict['token_chain_ids']).tolist()
         structure_sequence_list_ordered = sorted(structure_sequence_list, key=lambda x: token_chain_ids.index(x[0]))
         seq_types_symbols = {"protein": "", "rna": "RNA_", "dna": "DNA_", 'ligand':'lig_', 'ion':'Ion_', 'glycan': 'Glycan_'}
-
+        #print(structure_sequence_list_ordered)
+        #print(rec_list)
        
         for record in rec_list:
             entity = record['sequence'] if record['rec_type'] == 'polymer' else record['non_poly_entity']
+            #print(record)
+            #print(entity,structure_sequence_list_ordered)
             index_to_match = next(
                 (i for i, tup in enumerate(structure_sequence_list_ordered)
                 if tup[1] == entity and i not in used_indices),
                 None
             )
             macromolecule_type = record['macromolecule_type']
+
+            if index_to_match is not None:
+                used_indices.add(index_to_match)
+            else:     
+                print(f"⚠️ No match found for entity: {entity}")
+            
             
             record['auth_asym_id'] = seq_types_symbols[macromolecule_type] + structure_sequence_list_ordered[index_to_match][0]
             record['label_asym_id'] = structure_sequence_list_ordered[index_to_match][0]
             
-            if index_to_match is not None:
-                used_indices.add(index_to_match)
+            
+            
         
         sorted_rec_list = sorted(rec_list, key=lambda x: token_chain_ids.index(x['label_asym_id']))
     
@@ -296,15 +305,15 @@ class NUCLEOTIDE(POLYMER):
         
         if 'modifications' in self.record:
             
-            raise NotImplementedError("FOUND MODIFIED NUCLEOTIDE; Modified nucleotides are not yet supported")
-        
+            if self.record['modifications']:
+                raise NotImplementedError("FOUND MODIFIED NUCLEOTIDE; Modified nucleotides are not yet supported")
+
         return rec_info
-            
-            
+
 class NON_POLYMER():
-    
+
     def __init__(self, macromolecule_type, record):
-    
+
         self.macromolecule_type = macromolecule_type
         self.record = record
         self.non_poly_entity = record[macromolecule_type].replace('CCD_', '') if record[macromolecule_type].startswith('CCD_') else record[macromolecule_type]  
@@ -334,14 +343,23 @@ class NON_POLYMER():
     
 def transform_rec(rec,macromolecule_type, asym_id):
     
-    if not 'smiles' in rec:
-        raise NotImplemented("No CCD key support (yet) for non-polymer entities in local AlphaFold3 version")
-    else:
+    
+    if 'smiles' in rec:
         ligand_rec = f'LIG_{asym_id}'
         rec_transformed ={
                             macromolecule_type: ligand_rec,
                             'smiles': rec['smiles'],
                             'count': 1
                         }
+    elif 'ccdCodes' in rec:
+        ligand_rec = f'{asym_id}'
+        rec_transformed ={
+                            macromolecule_type: rec['ccdCodes'][0],
+                            'smiles': str(),
+                            'count': 1
+                        }
+        
+    else:
+        raise NotImplemented("No support (yet) for this type of non-polymer entities in local AlphaFold3 version")
         
     return rec_transformed
