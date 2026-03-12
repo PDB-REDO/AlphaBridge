@@ -104,11 +104,12 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
     coevolutionary_domains, coevolutionary_cluster_dict, entity_region_dict = domain_clustering(matrix_dict,
                                                                                 sequence_info_dict,
                                                                                 alphafold_version=mode,
-                                                                                outdir = outdir, 
+                                                                                outdir = outdir,
+                                                                                pae_only = True , 
                                                                                 plotting=True).run_domain_clustering()
     
     
-    elements = np.linspace(0.4, 1, 61).tolist()
+    elements = np.linspace(0, 1, 101).tolist()
     contact_threshold_list = [round(x, 3) for x in elements]
 
 
@@ -131,7 +132,7 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
 
         biomolecule_interface_dict= INTERFACE_IDENTIFICATION.map_info_interfaces(interactions_dict)
 
-        if contact_threshold  in [0.5, 0.75,0.9] and plotting == True:
+        if contact_threshold  in [0.1,0.5, 0.75,0.9] and plotting == True:
         
             ribbon_diagram = RIBBON_DIAGRAM(
                                 interactions_dict,
@@ -147,15 +148,15 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
 
     alphabridge_dict = OUTPUT(structure_score_dict,interactions_list).get_alphabridge_dict()
     
-    network_info = INTERACTIVE_NETWORK(alphabridge_dict).get_network_info(sequence_info_dict['label_asym_id'])
+    #network_info = INTERACTIVE_NETWORK(alphabridge_dict).get_network_info(sequence_info_dict['label_asym_id'])
 
 
 
     with open(f"{outdir}/alphabridge_data.json", "w") as file:
         file.write(json.dumps(alphabridge_dict, indent=4))
     
-    with open(f"{outdir}/network_data.json", "w") as file:
-        file.write(json.dumps(network_info, indent=4))
+    #with open(f"{outdir}/network_data.json", "w") as file:
+        #file.write(json.dumps(network_info, indent=4))
     
     #write_dataframe(structure_info_df, 'structure_scores', outdir )
         

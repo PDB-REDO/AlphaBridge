@@ -17,7 +17,7 @@ import itertools
 
 class domain_clustering():
     
-    def __init__(self, matrix_dict, sequence_info_dict, plotting: bool = True, bool_mask_clusters: bool = True, outdir: str = '' , alphafold_version: str = 'AF2'):
+    def __init__(self, matrix_dict, sequence_info_dict, plotting: bool = True, bool_mask_clusters: bool = True, pae_only: bool = False , outdir: str = '' , alphafold_version: str = 'AF2'):
         
         self.matrix_dict = matrix_dict
         self.sequence_info_dict = sequence_info_dict
@@ -25,6 +25,7 @@ class domain_clustering():
         self.outdir = outdir
         self.alphafold_version = alphafold_version
         self.bool_mask_clusters = bool_mask_clusters
+        self.pae_only = pae_only
         
     def run_domain_clustering(self):
         matrix_dict = self.matrix_dict
@@ -38,9 +39,7 @@ class domain_clustering():
         if self.alphafold_version == 'AF2':
             graph_resolution = 0.5
             matrix_cutoff = 2.6
-            cmap_confidence = 'RdPu_r'
-            cmap_contact = 'Blues_r'
-
+            
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)\
             
             coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
@@ -49,10 +48,15 @@ class domain_clustering():
             
         elif self.alphafold_version == 'AF3':
             
-            graph_resolution = 0.25
-            matrix_cutoff = 27
-            cmap_confidence =  'Blues_r'
-            cmap_contact = "RdPu"
+            if not self.pae_only:
+            
+                graph_resolution = 0.25
+                matrix_cutoff = 27
+            else :
+                graph_resolution = 2
+                matrix_cutoff = 25
+                matrix_input = matrix_dict['symmetric_pae']
+          
             
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)
             
@@ -64,6 +68,8 @@ class domain_clustering():
         if  self.plotting:
             plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,sequence_info_dict, self.outdir, self.alphafold_version)
             plot_separate_matrix(matrix_dict,sequence_info_dict, self.outdir)
+            if self.pae_only:    
+                plot_pae_matrix(coevolutionary_domains,matrix_input,interacting_mask_cluster,sequence_info_dict, self.outdir, self.alphafold_version)
         
         return coevolutionary_domains, coevultionary_cluster_dict, entity_region_dict
     
@@ -166,7 +172,7 @@ class domain_clustering():
 
 def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0.5, matrix_cutoff = 2.6 ):
 
-              
+        print(graph_resolution, pae_power, matrix_cutoff)
         weights = 1/matrix_input**pae_power
 
         g = igraph.Graph()
@@ -181,6 +187,78 @@ def get_coevolutionary_domains(matrix_input, pae_power = 1, graph_resolution = 0
         coevolutionary_domains = np.array(vc.membership)
         
         return coevolutionary_domains
+
+
+def plot_pae_matrix(coevolutionary_domains, confidence_matrix, interacting_mask_cluster ,sequence_info_dict, outdir, alphafold_version):
+        
+        t0 = time.time()
+        
+        labels = np.array(coevolutionary_domains)
+        label_data = np.tile(labels, (2,1))
+        
+        mask_data = np.tile(interacting_mask_cluster, (2,1))
+        
+        
+        label_asym_list = sequence_info_dict['label_asym_id']
+        acclen_list = sequence_info_dict['acclen']
+        centerticks_list =sequence_info_dict['centerticks']
+        length_list = sequence_info_dict['length']
+     
+        inv_fasta_acclen = [sum(length_list) - acclen for acclen in acclen_list]
+        inv_fasta_acclen.insert(0, sum(length_list) -1 )
+
+        length_list_names = [f'0 / {length}' if i != len(length_list)-1 else f'{length}' for i,length in enumerate(length_list)]
+
+        timestamp =  time.time() - t0 
+        #print(f'labels: {timestamp}')
+        t0 = time.time()
+        
+        fig, ax  = plt.subplots(figsize = (15,15))
+        
+        ax.set_xticks(acclen_list)
+        ax.set_xticklabels('')            
+        ax.set_xticks(centerticks_list,minor=True)
+        ax.set_xticklabels(label_asym_list, rotation=45, ha='right',va = 'center_baseline', fontsize=8,minor=True)
+        
+        ax.set_yticks(np.array(acclen_list))
+        ax.set_yticklabels(length_list_names)
+        #ax.plot([0, 1], [0, 1], transform=ax.transAxes) 
+        
+        divider = make_axes_locatable(ax)
+        cax1 = divider.append_axes("right", size="5%", pad=0.5)
+        cax3 = divider.append_axes("top", size="3%", pad=0.5) 
+        
+        sns.heatmap(label_data,mask= mask_data, ax=cax3 ,cbar= False ,cmap = sns.color_palette('tab20b') )
+        
+        for acclen in acclen_list:
+            
+            cax3.axvline(acclen, color = 'white', linewidth = 2)
+            ax.axvline(acclen, color = 'black', linewidth = 1)
+            ax.axhline(acclen , color = 'black', linewidth = 1)
+        
+        img1 = ax.imshow(confidence_matrix, cmap="Greens_r")
+        
+        
+        fig.colorbar(img1, orientation='vertical', cax = cax1)
+
+        
+        cax3.set(yticklabels=[])
+            
+        cax3.set_xticklabels('')            
+        cax3.set_xticks(centerticks_list,minor=True)
+        cax3.set_xticklabels(label_asym_list, va = 'center_baseline', fontsize=8,minor=True)
+        
+        cax3.tick_params(left = False, bottom =False, labelbottom=True) 
+        plt.subplots_adjust(hspace=0.05)
+
+        timestamp =  time.time() - t0 
+        #print(f'plotting: {timestamp}')
+        t0 = time.time()
+        plt.show
+        plt.savefig(f"{outdir}/pae_coevolution_plot.png", dpi=fig.dpi)
+        
+        #plt.close()
+
 
 
 def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_matrix, interacting_mask_cluster ,sequence_info_dict, outdir, alphafold_version):
@@ -256,8 +334,9 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
         timestamp =  time.time() - t0 
         #print(f'plotting: {timestamp}')
         t0 = time.time()
-
+        plt.show
         plt.savefig(f"{outdir}/Confidence-contact_plot.png", dpi=fig.dpi)
+        
         plt.close()
 
         timestamp =  time.time() - t0 
@@ -305,7 +384,7 @@ def plot_separate_matrix(matrix_dict,sequence_info_dict, outdir):
         
         fig.colorbar(img, orientation='vertical', cax= cax)
         plt.subplots_adjust(top = 0.96, bottom=0.1, hspace=0.7, wspace=0.2)
-        #plt.show
+        plt.show
         plt.savefig(f"{outdir}/{feature}.png", dpi=fig.dpi)
         plt.close()
     
