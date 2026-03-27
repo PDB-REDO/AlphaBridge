@@ -108,7 +108,9 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
                                                                                 plotting=True).run_domain_clustering()
     
     
-    elements = np.linspace(0.4, 1, 61).tolist()
+    start, stop, step = 0. , 1.0, 0.01
+    num = int(round((stop - start) / step)) + 1
+    elements = np.linspace(start, stop, num).tolist()
     contact_threshold_list = [round(x, 3) for x in elements]
 
 
