@@ -29,7 +29,7 @@ protein_letters_1to3 = IUPACData.protein_letters_1to3
 
 upper_protein_letters_1to3 = {k.upper():v.upper() for k,v in protein_letters_1to3.items()}
 
-upper_protein_letters_1to3
+upper_protein_letters_1to3['X'] = 'UNK'
 
 
 module_dir = os.path.dirname(os.path.realpath(__file__))
