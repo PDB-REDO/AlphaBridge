@@ -47,21 +47,22 @@ class domain_clustering():
             
             interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,coevultionary_cluster_dict, self.bool_mask_clusters)
             
-        elif self.alphafold_version == 'AF3':
-            
+        elif self.alphafold_version in ('AF3', 'Boltz2'):
+
             graph_resolution = 0.25
             matrix_cutoff = 27
             cmap_confidence =  'Blues_r'
             cmap_contact = "RdPu"
-            
+
             coevolutionary_domains = get_coevolutionary_domains(matrix_input, graph_resolution = graph_resolution, matrix_cutoff = matrix_cutoff)
-            
+
             coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
-            
+
             interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,coevultionary_cluster_dict, self.bool_mask_clusters)
             
             
-        if  self.plotting:
+        if self.plotting:
+            os.makedirs(self.outdir, exist_ok=True)
             plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,sequence_info_dict, self.outdir, self.alphafold_version)
             plot_separate_matrix(matrix_dict,sequence_info_dict, self.outdir)
         
@@ -235,7 +236,7 @@ def plot_combination_matrix(coevolutionary_domains, confidence_matrix, contact_m
             
             img2 = ax.imshow(contact_matrix, cmap="RdPu_r")
         
-        elif alphafold_version == 'AF3':
+        elif alphafold_version in ('AF3', 'Boltz2'):
             img2 = ax.imshow(contact_matrix, cmap="RdPu")
             
         img1 = ax.imshow(confidence_matrix, cmap="Blues_r")
