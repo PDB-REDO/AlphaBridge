@@ -218,11 +218,14 @@ class MMCIFPARSER:
                 type_list = type_poly_list + ['non_polymer'] * len(entity_non_poly_list)
                 
             for entity_id, strand_id, entity_type in zip(entity_id_list,pdbx_strand_id_list,type_list):
-                if not strand_id in entity_dict:
-                    entity_dict[strand_id] = {'entity_id': '' , 'entity_type': ''}
-                
-                entity_dict[strand_id]['entity_id'] = entity_id
-                entity_dict[strand_id]['entity_type'] = entity_type
+                # Boltz-2 (and some other tools) write comma-separated chain IDs
+                # in a single pdbx_strand_id field (e.g. 'A,B'). Expand them so
+                # that each individual chain ID gets its own entry.
+                for individual_strand_id in [s.strip() for s in strand_id.split(',')]:
+                    if individual_strand_id not in entity_dict:
+                        entity_dict[individual_strand_id] = {'entity_id': '', 'entity_type': ''}
+                    entity_dict[individual_strand_id]['entity_id'] = entity_id
+                    entity_dict[individual_strand_id]['entity_type'] = entity_type
 
             return entity_dict               
      
