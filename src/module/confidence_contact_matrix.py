@@ -134,11 +134,13 @@ class FEATURE_MATRIX:
         
         return symmetric_pae, pae_plddt, confidence_matrix , plddt_matrix
     
-    def get_feature_matrix_dict(self, pae, plddt, iptm, chain_pair_iptm ,plddt_matrix, pae_plddt , symmetric_pae, contact_matrix, confidence_matrix, masked_confidence_matrix, masked_contact_matrix ):
-        
+    def get_feature_matrix_dict(self, pae, plddt, iptm, chain_pair_iptm, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidence_matrix, masked_confidence_matrix, masked_contact_matrix, unfixed_pae, unfixed_contact_probability):
+
         matrix_dict = {}
-        
+
         matrix_dict['pae'] = pae
+        matrix_dict['unfixed_pae'] = unfixed_pae
+        matrix_dict['unfixed_contact_probability'] = unfixed_contact_probability
         matrix_dict['plddt'] = plddt
         matrix_dict['iptm'] = iptm
         matrix_dict['chain_pair_iptm'] = chain_pair_iptm
@@ -481,7 +483,7 @@ class CCM_AF3(FEATURE_MATRIX):
         return self._build_plddt_dict(structure.get_coordinates(), rec_list)
     
     def fix_matrix_size(self, feature_dict, rec_list):
-        
+
         pae = np.array(feature_dict['pae'])
         contact_probability = np.array(feature_dict['contact_probs'])
 
@@ -492,6 +494,8 @@ class CCM_AF3(FEATURE_MATRIX):
 
         mask = []
 
+        unfixed_pae = pae.copy()
+        unfixed_contact_probability = contact_probability.copy()
         fixed_pae = pae.copy()
         fixed_contact_probability = contact_probability.copy()
             
@@ -513,7 +517,7 @@ class CCM_AF3(FEATURE_MATRIX):
                     
                     token_chain_ids, token_res_ids = fix_token_lists(mask, token_chain_ids, token_res_ids)
             
-        return fixed_pae, fixed_contact_probability
+        return fixed_pae, fixed_contact_probability, unfixed_pae, unfixed_contact_probability
     
     def get_feature_info(self):                                                                                                                                                                                                                                    
         
@@ -537,9 +541,9 @@ class CCM_AF3(FEATURE_MATRIX):
         
         distance_matrix = self.get_distance_matrix(structure.get_ca_distances())
             
-        pae, contact_probability= self.fix_matrix_size(feature_dict, rec_list)
-        
-        return distance_matrix, pae, contact_probability, plddt, iptm , chain_pair_iptm
+        pae, contact_probability, unfixed_pae, unfixed_contact_probability = self.fix_matrix_size(feature_dict, rec_list)
+
+        return distance_matrix, pae, contact_probability, plddt, iptm, chain_pair_iptm, unfixed_pae, unfixed_contact_probability
     
     
     def _get_residue_comp_id(self, rec, residue, seq_id):
@@ -556,6 +560,26 @@ class CCM_AF3(FEATURE_MATRIX):
                     comp_id = upper_protein_letters_1to3[residue]
             return comp_id
         return residue
+
+    def extract_matrix_dict(self):
+
+        distance_matrix, pae, contact_probability, plddt, iptm, chain_pair_iptm, unfixed_pae, unfixed_contact_probability = self.get_feature_info()
+
+        symmetric_pae, pae_plddt, confidence_matrix, plddt_matrix = self.get_pae_plddt_matrix(pae, plddt)
+
+        contact_matrix = contact_probability
+
+        binary_contact = contact_probability > 0.5
+
+        mask_upper = np.triu(binary_contact, k=0)
+        masked_contact_matrix = np.ma.array(binary_contact, mask=mask_upper)
+
+        mask_lower = np.tri(pae_plddt.shape[0], k=0)
+        masked_confidence_matrix = np.ma.array(confidence_matrix, mask=mask_lower)
+
+        matrix_dict = self.get_feature_matrix_dict(pae, plddt, iptm, chain_pair_iptm, plddt_matrix, pae_plddt, symmetric_pae, contact_matrix, confidence_matrix, masked_confidence_matrix, masked_contact_matrix, unfixed_pae, unfixed_contact_probability)
+
+        return matrix_dict
 
     def extract_chain_info_dict(self):
         rec_list, sequence_info_dict = self.extract_sequence_info()
