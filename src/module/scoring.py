@@ -141,34 +141,36 @@ def calculate_ipsae(pae, chains_array, chain_ids, chain_type_dict, pae_cutoff=10
             pae_sub = pae[np.ix_(idx1, idx2)]   # (n1, n2)
             valid   = pae_sub < pae_cutoff       # bool (n1, n2)
 
-            # d0chn
-            d0chn  = calc_d0(len(idx1) + len(idx2), pair_type)
+            # d0chn — aggregate = max over chain1 residues (matches Dunbrack lab implementation)
+            d0chn   = calc_d0(len(idx1) + len(idx2), pair_type)
             ptm_chn = ptm_func(pae_sub, d0chn)
-            ipsae_d0chn = float(np.array([
+            byres_d0chn = np.array([
                 ptm_chn[k, valid[k]].mean() if valid[k].any() else 0.0
                 for k in range(len(idx1))
-            ]).mean())
+            ])
+            ipsae_d0chn = float(byres_d0chn.max())
 
             # d0dom
-            n0dom  = int(valid.any(axis=1).sum() + valid.any(axis=0).sum())
-            d0dom  = calc_d0(max(n0dom, 1), pair_type)
+            n0dom   = int(valid.any(axis=1).sum() + valid.any(axis=0).sum())
+            d0dom   = calc_d0(max(n0dom, 1), pair_type)
             ptm_dom = ptm_func(pae_sub, d0dom)
-            ipsae_d0dom = float(np.array([
+            byres_d0dom = np.array([
                 ptm_dom[k, valid[k]].mean() if valid[k].any() else 0.0
                 for k in range(len(idx1))
-            ]).mean())
+            ])
+            ipsae_d0dom = float(byres_d0dom.max())
 
             # d0res
             n0res       = valid.sum(axis=1).astype(float)
             d0res       = calc_d0_array(n0res, pair_type)
-            d0res_byres = np.zeros(len(idx1))
+            byres_d0res = np.zeros(len(idx1))
             for k in range(len(idx1)):
                 if valid[k].any():
-                    d0res_byres[k] = ptm_func(pae_sub[k], d0res[k])[valid[k]].mean()
-            ipsae_d0res = float(d0res_byres.mean())
+                    byres_d0res[k] = ptm_func(pae_sub[k], d0res[k])[valid[k]].mean()
+            ipsae_d0res = float(byres_d0res.max())
 
-            # iptm_d0chn (no cutoff)
-            iptm_d0chn = float(ptm_chn.mean())
+            # iptm_d0chn (no cutoff) — mean over all chain2 residues per chain1 residue, then max
+            iptm_d0chn = float(ptm_chn.mean(axis=1).max())
 
             results[(chain1, chain2)] = {
                 'ipsae_d0chn': ipsae_d0chn,
@@ -188,8 +190,8 @@ def calculate_actifptm(pae, contact_probs, chains_array, chain_ids, chain_type_d
     Returns {(chain1, chain2): float} for unique unordered pairs.
     """
     results = {}
-    n_total = len(chains_array)
-    inter_chain_mask = (chains_array[:, None] != chains_array[None, :]).astype(float)
+    # Use PAE matrix size for d0 (total tokens including non-polymer atoms)
+    n_total = pae.shape[0]
 
     for i, chain1 in enumerate(chain_ids):
         for j in range(i + 1, len(chain_ids)):
@@ -204,23 +206,139 @@ def calculate_actifptm(pae, contact_probs, chains_array, chain_ids, chain_type_d
             pair_type = _get_pair_type(chain1, chain2, chain_type_dict)
             d0 = calc_d0(max(n_total, 19), pair_type)
 
-            # Build full-size pair weight matrix for this interface only
-            pair_weights = np.zeros((n_total, n_total))
-            pair_weights[np.ix_(idx1, idx2)] = contact_probs[np.ix_(idx1, idx2)]
-            pair_weights[np.ix_(idx2, idx1)] = contact_probs[np.ix_(idx2, idx1)]
+            n1, n2 = len(idx1), len(idx2)
+
+            # Extract sub-matrices for this chain pair only — avoids any
+            # dimension mismatch between chains_array and the full PAE
+            pae_12   = pae[np.ix_(idx1, idx2)]            # (n1, n2)
+            pae_21   = pae[np.ix_(idx2, idx1)]            # (n2, n1)
+            cmap_12  = contact_probs[np.ix_(idx1, idx2)]  # (n1, n2)
+            cmap_21  = contact_probs[np.ix_(idx2, idx1)]  # (n2, n1)
+
+            # Combined (n1+n2) interface weight matrix, off-diagonal blocks only
+            pair_weights = np.zeros((n1 + n2, n1 + n2))
+            pair_weights[:n1, n1:] = cmap_12
+            pair_weights[n1:, :n1] = cmap_21
 
             total_weight = pair_weights.sum()
             if total_weight == 0.0:
                 results[(chain1, chain2)] = 0.0
                 continue
 
-            ptm_matrix    = ptm_func(pae, d0) * inter_chain_mask
+            # TM scores for both directions
+            ptm_combined = np.zeros((n1 + n2, n1 + n2))
+            ptm_combined[:n1, n1:] = ptm_func(pae_12, d0)
+            ptm_combined[n1:, :n1] = ptm_func(pae_21, d0)
+
             residue_weights = (pair_weights.sum(axis=1) > 0).astype(float)
-            residuewise   = (ptm_matrix * (pair_weights / total_weight)).sum(axis=1) * residue_weights
+            residuewise = (ptm_combined * (pair_weights / total_weight)).sum(axis=1) * residue_weights
 
             results[(chain1, chain2)] = float(residuewise.max())
 
     return results
+
+
+def calculate_ipsae_complex(pae, chains_array, chain_ids, chain_type_dict, pae_cutoff=10.0):
+    """
+    Complex-level ipSAE: all inter-chain pairs across all polymer chains are
+    considered simultaneously. For each residue i, the per-residue score is
+    the mean ptm over all valid inter-chain partners from ANY other chain
+    (pae < cutoff). The final score is the max over all polymer residues.
+
+    Three d0 variants are reported:
+      ipsae_d0chn  — d0 from total polymer residues in the complex
+      ipsae_d0dom  — d0 from residues that have at least one valid inter-chain pair
+      ipsae_d0res  — per-residue d0 from each residue's total valid inter-chain contacts
+    """
+    idx_list     = [np.where(chains_array == c)[0] for c in chain_ids]
+    all_idx      = np.concatenate(idx_list)
+    chain_labels = np.concatenate([[c] * len(ix) for c, ix in zip(chain_ids, idx_list)])
+    n_total      = len(all_idx)
+
+    if n_total == 0:
+        return {'ipsae_d0chn': 0.0, 'ipsae_d0dom': 0.0,
+                'ipsae_d0res': 0.0, 'iptm_d0chn': 0.0}
+
+    pair_type = 'nucleic_acid' if any(
+        chain_type_dict.get(c) == 'nucleic_acid' for c in chain_ids
+    ) else 'protein'
+
+    pae_sub = pae[np.ix_(all_idx, all_idx)]                         # (N, N)
+    inter   = chain_labels[:, None] != chain_labels[None, :]        # bool (N, N)
+    valid   = inter & (pae_sub < pae_cutoff)                        # bool (N, N)
+
+    # d0chn: d0 from total polymer residues
+    d0chn   = calc_d0(n_total, pair_type)
+    ptm_chn = ptm_func(pae_sub, d0chn)
+    byres_d0chn = np.array([
+        ptm_chn[k, valid[k]].mean() if valid[k].any() else 0.0
+        for k in range(n_total)
+    ])
+    ipsae_d0chn = float(byres_d0chn.max())
+
+    # d0dom: d0 from residues with at least one valid inter-chain pair
+    n0dom   = int(valid.any(axis=1).sum())
+    d0dom   = calc_d0(max(n0dom, 1), pair_type)
+    ptm_dom = ptm_func(pae_sub, d0dom)
+    byres_d0dom = np.array([
+        ptm_dom[k, valid[k]].mean() if valid[k].any() else 0.0
+        for k in range(n_total)
+    ])
+    ipsae_d0dom = float(byres_d0dom.max())
+
+    # d0res: per-residue d0 from each residue's total valid inter-chain contacts
+    n0res = valid.sum(axis=1).astype(float)
+    d0res = calc_d0_array(n0res, pair_type)
+    byres_d0res = np.zeros(n_total)
+    for k in range(n_total):
+        if valid[k].any():
+            byres_d0res[k] = ptm_func(pae_sub[k], d0res[k])[valid[k]].mean()
+    ipsae_d0res = float(byres_d0res.max())
+
+    # iptm_d0chn: no cutoff
+    iptm_d0chn = float((ptm_chn * inter).sum(axis=1).max() / max(inter.sum(axis=1).max(), 1))
+
+    return {
+        'ipsae_d0chn': ipsae_d0chn,
+        'ipsae_d0dom': ipsae_d0dom,
+        'ipsae_d0res': ipsae_d0res,
+        'iptm_d0chn':  iptm_d0chn,
+    }
+
+
+def calculate_actifptm_complex(pae, contact_probs, chains_array, chain_ids, chain_type_dict):
+    """
+    actifpTM for the whole complex: all inter-chain contacts across all polymer
+    chains are considered simultaneously.
+    Returns a single float.
+    """
+    idx_list     = [np.where(chains_array == c)[0] for c in chain_ids]
+    all_idx      = np.concatenate(idx_list)
+    chain_labels = np.concatenate([[c] * len(ix) for c, ix in zip(chain_ids, idx_list)])
+    n_complex    = len(all_idx)
+
+    if n_complex == 0:
+        return 0.0
+
+    pair_type = 'nucleic_acid' if any(
+        chain_type_dict.get(c) == 'nucleic_acid' for c in chain_ids
+    ) else 'protein'
+    d0 = calc_d0(max(pae.shape[0], 19), pair_type)
+
+    inter        = (chain_labels[:, None] != chain_labels[None, :]).astype(float)
+    pae_sub      = pae[np.ix_(all_idx, all_idx)]
+    cmap_sub     = contact_probs[np.ix_(all_idx, all_idx)]
+    pair_weights = cmap_sub * inter
+
+    total_weight = pair_weights.sum()
+    if total_weight == 0.0:
+        return 0.0
+
+    ptm_sub         = ptm_func(pae_sub, d0) * inter
+    residue_weights = (pair_weights.sum(axis=1) > 0).astype(float)
+    residuewise     = (ptm_sub * (pair_weights / total_weight)).sum(axis=1) * residue_weights
+
+    return float(residuewise.max())
 
 
 def plot_probability_histplot(quantile,probability_contact_structure,flattened_probability_structure, flattened_pmc_structure_list):

@@ -285,6 +285,9 @@ class FEATURE_MATRIX:
 
         Calls get_feature_info(), which each subclass must implement and which
         must return (distance_matrix, pae, contact_matrix, plddt, iptm, chain_pair_iptm).
+        Subclasses that perform PTM fixing (CCM_AF3) override this method to also
+        supply unfixed_pae and unfixed_contact_probability; here they default to
+        the same arrays since no fixing occurs.
         """
         _, pae, contact_matrix, plddt, iptm, chain_pair_iptm = self.get_feature_info()
 
@@ -303,6 +306,8 @@ class FEATURE_MATRIX:
             plddt_matrix, pae_plddt, symmetric_pae,
             contact_matrix, confidence_matrix,
             masked_confidence_matrix, masked_contact_matrix,
+            unfixed_pae=pae,
+            unfixed_contact_probability=contact_matrix,
         )
 
     def print_matrix_dict(self, matrix_dict):

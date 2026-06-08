@@ -3,7 +3,9 @@ from collections import Counter
 import numpy as np
 import math
 from src.module.scoring import (
-    build_chains_array, calculate_ipsae, calculate_actifptm
+    build_chains_array,
+    calculate_ipsae, calculate_actifptm,
+    calculate_ipsae_complex, calculate_actifptm_complex,
 )
 
 class OUTPUT:
@@ -81,8 +83,8 @@ class OUTPUT:
         chain_type_dict = _build_chain_type_dict(self.structure_score_dict['chains'])
         polymer_ids    = [rec['label_asym_id'] for rec in self.structure_score_dict['chains']['polymer']]
 
-        pae           = np.array(self.matrix_dict['unfixed_pae'])
-        contact_probs = np.array(self.matrix_dict['unfixed_contact_probability'])
+        pae           = np.array(self.matrix_dict['pae'])
+        contact_probs = np.array(self.matrix_dict['contact_matrix'])
 
         ipsae_results   = calculate_ipsae(pae, chains_array, polymer_ids, chain_type_dict)
         actifptm_results = calculate_actifptm(pae, contact_probs, chains_array, polymer_ids, chain_type_dict)
@@ -99,6 +101,11 @@ class OUTPUT:
             # actifpTM: symmetric pair
             combo['actifptm'] = actifptm_results.get((c1, c2)) or actifptm_results.get((c2, c1), 0.0)
 
+        complex_ipsae = calculate_ipsae_complex(pae, chains_array, polymer_ids, chain_type_dict)
+        self.structure_score_dict.update(complex_ipsae)
+        self.structure_score_dict['actifptm'] = calculate_actifptm_complex(
+            pae, contact_probs, chains_array, polymer_ids, chain_type_dict
+        )
         self.structure_score_dict['pairwise_interaction'] = pairwise_scores
         self.structure_score_dict['AB_score'] = calculate_alphabridge_score(pairwise_scores, label_asym_id_list)
 
