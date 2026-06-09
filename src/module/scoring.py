@@ -231,7 +231,9 @@ def calculate_actifptm(pae, contact_probs, chains_array, chain_ids, chain_type_d
             ptm_combined[n1:, :n1] = ptm_func(pae_21, d0)
 
             residue_weights = (pair_weights.sum(axis=1) > 0).astype(float)
-            residuewise = (ptm_combined * (pair_weights / total_weight)).sum(axis=1) * residue_weights
+            # Per-row normalization — matches predicted_tm_score_modified in ColabFold
+            normed     = pair_weights / (1e-8 + pair_weights.sum(axis=1, keepdims=True))
+            residuewise = (ptm_combined * normed).sum(axis=1) * residue_weights
 
             results[(chain1, chain2)] = float(residuewise.max())
 
@@ -330,13 +332,14 @@ def calculate_actifptm_complex(pae, contact_probs, chains_array, chain_ids, chai
     cmap_sub     = contact_probs[np.ix_(all_idx, all_idx)]
     pair_weights = cmap_sub * inter
 
-    total_weight = pair_weights.sum()
-    if total_weight == 0.0:
+    if pair_weights.sum() == 0.0:
         return 0.0
 
     ptm_sub         = ptm_func(pae_sub, d0) * inter
     residue_weights = (pair_weights.sum(axis=1) > 0).astype(float)
-    residuewise     = (ptm_sub * (pair_weights / total_weight)).sum(axis=1) * residue_weights
+    # Per-row normalization — matches predicted_tm_score_modified in ColabFold
+    normed      = pair_weights / (1e-8 + pair_weights.sum(axis=1, keepdims=True))
+    residuewise = (ptm_sub * normed).sum(axis=1) * residue_weights
 
     return float(residuewise.max())
 
