@@ -112,7 +112,7 @@ def define_interfaces(in_dir,outdir,mode,sample, plotting=False):
                                                                                 sequence_info_dict,
                                                                                 alphafold_version=mode,
                                                                                 outdir = outdir, 
-                                                                                plotting=True).run_domain_clustering()
+                                                                                plotting=plotting).run_domain_clustering()
     
     
     start, stop, step = 0. , 1.0, 0.01
