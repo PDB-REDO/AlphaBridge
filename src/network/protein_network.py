@@ -264,7 +264,7 @@ def get_protein_network(df,label2auth,df_pairwise_interaction,threshold,auth2lab
     
     #informaton for the json file
     jobs = json_graph.node_link_data(g_networkx)
-    for link in jobs['links']:
+    for link in jobs.get('links', jobs.get('edges', [])):
         link['interaction'] = link['interaction'].split(",")
 
     return jobs

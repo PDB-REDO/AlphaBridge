@@ -355,7 +355,7 @@ def get_protein_network_no_merging(df,label2auth, auth2label):
     #print(jobs)
 
     #adding iknterface IDs
-    for link in jobs['links']:
+    for link in jobs.get('links', jobs.get('edges', [])):
         if link['interaction'] is None:
             source_index = link['source']
             label_id_value = jobs['nodes'][source_index]['label_asym_id']
