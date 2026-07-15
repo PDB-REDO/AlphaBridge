@@ -59,8 +59,8 @@ class domain_clustering():
             coevultionary_cluster_dict, entity_region_dict = self.get_interacting_coevolutionary_domains(coevolutionary_domains)
 
             interacting_mask_cluster = self.get_interacting_mask_cluster(coevolutionary_domains,coevultionary_cluster_dict, self.bool_mask_clusters)
-            
-            
+
+
         if self.plotting:
             os.makedirs(self.outdir, exist_ok=True)
             plot_combination_matrix(coevolutionary_domains,masked_confidence_matrix,masked_contact_matrix,interacting_mask_cluster,sequence_info_dict, self.outdir, self.alphafold_version)

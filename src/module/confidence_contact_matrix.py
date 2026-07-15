@@ -486,7 +486,7 @@ class CCM_AF3(FEATURE_MATRIX):
         structure = MMCIFPARSER(structure_path)
         rec_list, _ = self.extract_sequence_info()
         return self._build_plddt_dict(structure.get_coordinates(), rec_list)
-    
+
     def fix_matrix_size(self, feature_dict, rec_list):
 
         pae = np.array(feature_dict['pae'])
@@ -764,7 +764,6 @@ class CCM_BOLTZ(FEATURE_MATRIX):
         plddt_dict = self.get_plddt_dict()
         chain_info_dict = self._build_chain_info_dict(rec_list, plddt_dict)
         return chain_info_dict, sequence_info_dict
-
 
 def read_json_file(json_file):
     
