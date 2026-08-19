@@ -49,10 +49,15 @@ class OUTPUT:
         for interactions in self.interactions_list:
 
             for interace in interactions['interfaces']:
-                interface_chain = (interace['links'][0]['first']['asym_id'] + interace['links'][0]['second']['asym_id'])
-
-                if not interface_chain in pairwise_score_dict:
-                    pairwise_score_dict[interface_chain] = 0
+                # Key on a sorted tuple, not on concatenated ids: the interface
+                # pair order comes from the per-cluster dict order, which need not
+                # match the global chain order used for pairwise_combination_list,
+                # and concatenation is ambiguous for multi-character asym_ids
+                # ("A" + "BC" == "AB" + "C").
+                interface_chain = tuple(sorted((
+                    interace['links'][0]['first']['asym_id'],
+                    interace['links'][0]['second']['asym_id'],
+                )))
 
                 pairwise_score_dict[interface_chain] =  interactions['cut-off']
 
@@ -60,7 +65,7 @@ class OUTPUT:
 
             biomolecule_1 = pairwise_combination['first']
             biomolecule_2 = pairwise_combination['second']
-            interface_chain = biomolecule_1 + biomolecule_2
+            interface_chain = tuple(sorted((biomolecule_1, biomolecule_2)))
 
             if interface_chain in pairwise_score_dict:
                 pairwise_combination['pairwise_score'] = pairwise_score_dict[interface_chain]
@@ -73,8 +78,6 @@ class OUTPUT:
 
 
     def get_alphabridge_dict(self):
-
-        label_asym_id_list = [chain['label_asym_id'] for polymer_type in self.structure_score_dict['chains'] for chain in self.structure_score_dict['chains'][polymer_type]]
 
         pairwise_scores = self.get_pairwise_scores()
 
@@ -107,7 +110,7 @@ class OUTPUT:
             pae, contact_probs, chains_array, polymer_ids, chain_type_dict
         )
         self.structure_score_dict['pairwise_interaction'] = pairwise_scores
-        self.structure_score_dict['AB_score'] = calculate_alphabridge_score(pairwise_scores, label_asym_id_list)
+        self.structure_score_dict['AB_score'] = calculate_alphabridge_score(pairwise_scores)
 
         alphabridge_dict = {
             "structure": [self.structure_score_dict],
@@ -154,30 +157,20 @@ def _build_chain_type_dict(chains_dict):
     return chain_type
 
 
-def calculate_alphabridge_score(combination_list, label_asym_id_list):
+def calculate_alphabridge_score(combination_list):
     """
-    Calculate the AlphaBridge score based on the pairwise score.
-    This is a placeholder for the actual scoring logic.
+    Calculate the AlphaBridge score as the geometric mean of the pairwise
+    scores of the interacting partners.
+
+    Chains without a detected interface are left out of the calculation
+    instead of zeroing the score of the whole complex.
     """
     alphabridge_score = float()
 
-    if not combination_list:
-        return alphabridge_score
+    pairwise_scores = [combination['pairwise_score'] for combination in combination_list if combination['pairwise_score'] > 0]
 
-    else:
-        interacting_partners = [combination for combination in combination_list if combination['pairwise_score'] > 0]
-
-        interacting_asym_id_list = []
-        for interacting_partner in interacting_partners:
-            interacting_asym_id_list.append(interacting_partner['first'])
-            interacting_asym_id_list.append(interacting_partner['second'])
-
-        non_interacting_asym_id_list = list(set(label_asym_id_list) - set(interacting_asym_id_list))
-
-        if not non_interacting_asym_id_list:
-
-            pairwise_scores = [combination['pairwise_score'] for combination in interacting_partners]
-            alphabridge_score = math.prod(pairwise_scores) ** (1/len(pairwise_scores))
+    if pairwise_scores:
+        alphabridge_score = math.prod(pairwise_scores) ** (1/len(pairwise_scores))
 
     return alphabridge_score
 
